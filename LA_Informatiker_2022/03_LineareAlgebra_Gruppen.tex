@@ -1,0 +1,820 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Gruppen
+	}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+\section{Verknüpfungen}
+%%%
+%
+\begin{frame}\frametitle{Verknüpfungen}
+	
+	Bisher:
+	\begin{itemize}
+		\item Mengen \& Mengenoperationen.
+		\item Relationen zwischen Mengen.
+	\end{itemize}
+	
+	\vfill
+	In diesem Teil der Vorlesung:
+	\begin{itemize}
+		\item Verknüpfungen zwischen Elementen einer Menge.
+		\item Einführung von \highlightDef{ Gruppen} als wichtige algebraische Objekte.
+	\end{itemize} 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition}
+
+	Sei $M$ eine Menge. Eine \highlightDef{ Verknüpfung} auf $M$ ist eine Abbildung
+	$$
+		\ast: M \times M \to M.
+	$$
+	Statt $\ast(m_1,m_2)$ schreibt man $m_1\ast m_2$ (\highlightDef{ Infixnotation}\footnote{statt Präfixnotation}).
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{enumerate}
+		\item $M = \R$ und $\ast=$ Multiplikation, d.h. $m_1\ast m_2 := m_1 \cdot m_2$.
+		\pause
+		\item $M=\R$ und $\ast=$ Addition, d.h. $m_1\ast m_2 := m_1 + m_2$.
+		\pause
+		\item $M=\N$ und $m_1\ast m_2 := m_1 + m_1\cdot m_2 + m_2$.
+		\pause
+		\item Sei $M$ eine beliebige Menge. Dann definiert 
+			$$
+				M_1\ast M_2 := M_1\cap M_2
+			$$ 
+			eine Verknüpfung auf der Potenzmenge ${\cal P}(M)$.
+		\pause
+		\item Sei $M$ die Menge aller Abbildungen auf $\R$. 
+		Dann ist die Verkettung $\circ$ eine Verknüpfung auf $M$, da mit $f$ und $g$ auch $f\circ g$  eine Abbildung auf $\R$ ist.
+	\end{enumerate}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Matrixmultiplikation}
+	
+	Sei 
+	$$
+		\R^{2\times 2} 
+		:=
+		\left\{
+			\begin{pmatrix}
+				a_{11}	&	a_{12}	\\
+				a_{21}	&	a_{22}
+			\end{pmatrix}
+			~ \Big| ~
+			a_{11}, a_{12}, a_{21}, a_{22} \in \R
+		\right\}
+	$$
+	die Menge der \highlightDef{ reellen $(2\times2)$-Matrizen}.\\
+	
+	\pause
+	\vspace{2mm}
+	Dann definiert
+	$$
+		\begin{pmatrix}
+			a_{11}	&	a_{12}	\\
+			a_{21}	&	a_{22}
+		\end{pmatrix}
+		\ast
+		\begin{pmatrix}
+			b_{11}	&	b_{12}	\\
+			b_{21}	&	b_{22}
+		\end{pmatrix}
+		:=
+	$$
+	$$
+		\begin{pmatrix}
+			a_{11}\cdot b_{11} + a_{12}\cdot b_{21}	&	a_{11}\cdot b_{12} + a_{12}\cdot b_{22}	\\
+			a_{21}\cdot b_{11} + a_{22}\cdot b_{21}	&	a_{21}\cdot b_{12} + a_{22}\cdot b_{22}	\\
+		\end{pmatrix}
+	$$
+	eine Verknüpfung auf $\R^{2\times 2}$. \\[1mm]
+	Schreibweise $A\cdot B = AB = A\ast B$ für $A,B \in \R^{2\times 2}$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verknüpfungen: Eigenschaften}
+
+	Sei $\ast$ eine Verknüpfung auf einer Menge $M$.
+	\begin{enumerate}
+		\item $\ast$ hei{\ss}t \highlightDef{ assoziativ}, wenn
+			$$
+				\forall m_1, m_2, m_3 \in M: (m_1\ast m_2) \ast m_3 = m_1 \ast(m_2\ast m_3).
+			$$
+			Da die Auswertungsreihenfolge in diesem Fall keine Rolle spielt,  ist die kürzere Schreibweise $m_1\ast m_2 \ast m_3$ hier legitim.
+		\pause
+		\item $\ast$ hei{\ss}t \highlightDef{ kommutativ}, wenn 
+			$$
+				\forall m_1, m_2 \in M: m_1 \ast m_2 = m_2 \ast m_1.
+			$$
+	\end{enumerate}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	\begin{enumerate}
+		\item Auf den Mengen $\N, \Z, \Q, \R$ sind $+$ und $\cdot$ jeweils assoziative und kommutative Verknüpfungen.
+		\pause
+		\item Die Matrizenmultiplikation von reellen $2\times 2$-Matrizen ist assoziativ aber nicht kommutativ. (\"Ubungsaufgabe)
+		\pause
+		\item Sei $M$ die Menge aller Abbildungen auf $\R$. 
+		Dann ist die Hintereinanderausführung $\circ$ eine assoziative Verknüpfung auf $M$:
+		$$
+			(f\circ g) \circ h = f\circ (g\circ h)
+		$$
+		Diese Verknüpfung ist aber nicht kommutativ:\\
+		Für $f: \R\to \R, x\mapsto 1$ und $g: \R\to \R, x\mapsto 2$ folgt:
+		$$
+			\forall x\in\R: f\circ g(x) = 1 \quad\text{und}\quad g\circ f(x) = 2.
+		$$
+		
+	\end{enumerate}
+	
+\end{frame}
+%
+%%%
+\section{Gruppen}
+%%%
+%
+%%%
+\subsection{Definition}
+%%%
+%
+\begin{frame}\frametitle{Definition}
+	
+	Seien $G$ eine Menge und $\ast$ eine Verknüpfung auf $G$.
+	Dann hei{\ss}t das Paar $(G,\ast)$ eine \highlightDef{ Gruppe}, wenn folgende Bedingungen erfüllt sind:
+	\begin{enumerate}
+		\item $\ast$ ist assoziativ. \pause
+		\item Es gibt ein Element $e\in G$, so dass
+			$$
+				\forall x\in G:\, x\ast e = e\ast x = x.
+			$$
+			Das Element $e$ nennt man \highlightDef{ neutrales Element} von $(G,\ast)$. Oft schreibt man $e_G$. \pause 
+		\item Zu jedem Element $x\in G$ gibt es ein \highlightDef{ inverses Element}:
+			$$
+				\forall x\in G\,\, \exists y\in G:\, x\ast y = y\ast x = e.
+			$$
+	\end{enumerate}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	\begin{enumerate}
+		\item $(\Z,+)$ ist eine Gruppe:\\
+			$+$ ist assoziativ, das neutrale Element ist $0$ und das zu $x\in\Z$ inverse Element ist $-x$.\\
+			NB: ,,$-$'' sollte hier nicht als Verknüpfung betrachtet werden, $x-y$ ist eine Kurzform für $x+(-y)$.
+		\pause
+		\item $(\Q,+), (\R,+)$ sind ebenfalls Gruppen. $(\N,+)$ nicht. Warum? 
+		\pause
+		\item Bezüglich Multiplikation  haben wir die Gruppen
+			$
+				(\Q\backslash\{0\}, \cdot)$ und $ (\R\backslash\{0\}, \cdot).
+			$
+			Das neutrale Element ist jeweils $e=1$ und das zu $x$ inverse Element ist $\frac{1}{x}$.
+		\pause
+		\item $(\Z\backslash\{0\},\cdot)$ ist keine Gruppe. Warum?
+	\end{enumerate}
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Gleichungen in Gruppen}
+Die Existenz von Inversen erlaubt es uns beim Lösen von Gleichungen Umformungen vorzunehmen ohne dabei den Wahrheitswert zu verändern.\\\pause
+Beispiel in $(\R\setminus \{0\}, \cdot)$:
+\begin{align*}
+&1/3 \cdot x &=&\ 4/3 \qquad & | \ 3 \cdot \ \text{ (von links)} \\
+\Leftrightarrow \quad& 3\cdot 1/3\cdot x &=&\ 3 \cdot 4/3 & \\
+\Leftrightarrow \quad& x &=&\ 4 &  \\
+\end{align*}
+(Da die Multiplikation mit $1/3$, dem Inversen zu $3$, die Umformung rückgängig macht, ist das eine \highlightDef{Äquivalenzumformung}.)
+\end{frame}
+%
+\begin{frame}\frametitle{Das neutrale Element ist eindeutig}
+	
+	Sei $(G,\ast)$ eine Gruppe und $e$ ein neutrales Element, d.h.
+	
+	\begin{equation}\label{l_neutralesElement_1}
+		\forall x\in G:\, x\ast e = e\ast x = x.
+	\end{equation}
+	
+	\pause
+	Angenommen, es gilt für $e_1\in G$ ebenfalls
+	
+	\begin{equation}\label{l_neutralesElement_2}
+		\forall x\in G:\, x\ast e_1 = e_1\ast x = x.
+	\end{equation}
+	
+	\pause
+	Dann folgt mit $x=e_1$ aus (1)
+	$$
+		e_1\ast e = e_1
+	$$\pause
+	und mit $x=e$ aus (2)
+	$$
+		e_1\ast e = e.
+	$$\pause
+	Somit:
+	$$
+		e_1 = e.
+	$$
+	\hfill$\qed$
+		
+\end{frame}
+%
+%%%
+\subsection{Die symmetrische Gruppe}
+%%%
+%
+\begin{frame}\frametitle{Die symmetrische Gruppe}
+
+	Sei $D$ eine endliche Menge und $Sym(D)$ die Menge aller bijektiven Abbildungen $f:D \to D$. Dann ist
+	$$
+		(Sym(D),\circ)
+	$$
+	eine Gruppe, die \highlightDef{ symmetrische Gruppe} von $D$. (Übungsaufgabe!)\\
+	\quad \pause\\
+	Sei $n$ die Kardinalität von $D$, dann können wir die Elemente von $D$ mit $1,2,3,...,n$ bezeichnen und man schreibt statt $Sym(D)$ auch kurz $S_n$. Jedes Element von $S_n$ ist eine \highlightDef{Permutation} der Elemente von $D$. Zum Beispiel gibt es für $n=3$ die folgenden Permutationen:
+		
+\end{frame}
+%
+%%
+\begin{frame}\frametitle{$S_3$}
+	Permutationen von $D=\{1,2,3\}$:
+	$$
+		\begin{array}{c | c|c|c}
+				& 1 & 2 & 3	\\ \hline
+			Id	& 1 & 2 & 3 \\
+			\zeta_1	& 2 & 3 & 1 \\
+			\zeta_2 & 3 & 1 & 2 \\
+			\tau_1 & 1 & 3 & 2 \\
+			\tau_2 & 3 & 2 & 1 \\
+			\tau_3 & 2 & 1 & 3
+		\end{array}
+	$$
+	\pause
+Jede Permutation läßt sich als ein Zyklus von Vertauschungen schreiben, z.B. \\$\zeta_1: \zeta_1(1)=2, \ \zeta_1(2)=3, \ \zeta_1(3)=1$ \quad oder\\
+$\zeta_2: \zeta_2(1)=3, \ \zeta_2(3)=2, \ \zeta_2(2)=1$. 	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Zykel und Transpositionen}
+Allgemeiner:
+\begin{itemize}
+	\item Es sei $D$ eine endliche Menge und $x_1,x_2,...,x_k \in D$ paarweise verschiedene Elemente. Dann wird durch
+	 $$
+	\zeta(x) :=\begin{cases}	
+							x_{i+1} & \text{wenn } x=x_i,\ i<k\\
+							x_1 & \text{wenn } x=x_k\\
+							x & \text{sonst}
+	\end{cases}
+	$$
+	wird eine bijektive Abbildung $\zeta:D\to D$ definiert. Man nennt sie einen \highlightDef{$k$-Zykel} und schreibt sie kurz als $\zeta=(x_1\ x_2\ ... x_k)$. \pause
+	\item Einen 2-Zykel $\tau=(x_1\ x_2)$ nennt man eine \highlightDef{Transposition}.
+\end{itemize}
+%
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Satz}
+	
+Es sei $\sigma \in S_n$. Dann gibt es ein $k \in \N$ und Transpositionen $\tau_1,\tau_2,...,\tau_k \in S_n$, sodass
+$$ \sigma=\tau_1 \circ \tau_2 \circ ... \circ \tau_k. $$
+\vfill \pause
+Beispiel
+\begin{itemize}
+\item $(2\ 3\ 1) = (2\ 3) \circ (3\ 1)$
+\end{itemize}
+\end{frame}
+%
+%%%%%%%%%%%%%
+%
+\begin{frame}\frametitle{Exkurs: Vollständige Induktion}
+
+	Die Vollständige Induktion ist ein Beweisverfahren, das verwendet werden kann, um nachzuweisen, dass Aussagen der Form
+	$$
+		\forall n\in\N : a(n)	
+	$$	
+	oder allgemeiner
+	$$
+		\forall n \in \N, n\ge N: a(n)
+	$$
+	wahr sind.
+	
+	\pause
+	\vspace{2mm}
+	\highlightDef{ Beispiel:} \\
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+	\vfill
+	{\scriptsize Bemerkung: $\displaystyle\sum_{k=0}^n a_k = a_0 + a_1 + a_2 + \ldots + a_n$} 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	Die Aussage
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}
+	$$	
+	kann für einzelne natürliche Zahlen $n$ überprüft werden: 
+	$$
+		\begin{array}{lcll}
+			n=1	&:& 0+1=1\quad \checkmark	&(a(1)\text{~ist wahr})		\\
+			n=2	&:& 0+1+2=3\quad \checkmark	&(a(2)\text{~ist wahr})	\\
+			...
+		\end{array}
+	$$
+	\pause
+	Damit kann man natürlich {\em nicht} zeigen, 
+	dass die Aussageform $a(n)$ {\em für alle} $n\in\N$ wahr ist - es gibt schlie{\ss}lich unendlich viele natürliche Zahlen.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Prinzip der vollständigen Induktion}
+	
+	Um nachzuweisen, dass eine Aussageform $a(n)$ für alle $n\geq N$ wahr ist, setzt man
+	$$
+		S := \{ n\in \N~|~ n\geq N \text{~und~} a(n)\text{~wahr} \}.
+	$$\pause
+	\vfill
+	Es genügt nun zu zeigen, dass
+	\begin{itemize}
+		\item $N\in S$ und
+		\item $\forall n\in S: n+1 \in S$.
+	\end{itemize}
+	Denn dann folgt
+	$$
+		S = \{N, N+1, N+2,\ldots\}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Prinzip der vollständigen Induktion}
+	
+	Das Prinzip der vollständigen Induktion wird oft auch folgenderma{\ss}en formuliert:\\
+	\vfill
+	Sei für alle $n\geq N$ die Aussageform $a(n)$ gegeben.\\[1mm]
+	
+	Falls\\[1mm]
+	
+	\highlightDef{ (1) Induktionsanfang:} $a(N)$ ist wahr.\\[1mm]  
+	und\\[1mm]
+	\highlightDef{ (2) Induktionsvoraussetzung:} $a(n)$ ist wahr.\\[1mm]  
+	und\\[1mm]
+	\highlightDef{ (3) Induktionsschluss:} Dann ist auch $a(n+1)$ wahr.\\[1mm]
+	
+	gilt, ist die Aussage 
+	$$
+		\forall n\in \N: n\geq N \rightarrow a(n).
+	$$	
+	wahr.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+\end{frame}
+%
+%
+\begin{frame}
+	
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+	\highlightDef{ (1) Induktionsanfang:} $a(1)$ ist wahr, da $1 = \frac{1}{2}\cdot 1 \cdot (1+1)$.
+	
+\end{frame}
+%
+%
+\begin{frame}
+
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \sum_{k=0}^n k = \frac{1}{2}n(n+1).
+	$$	
+	
+	\highlightDef{ (2) Induktionsvoraussetzung:} Es sei $a(n)$ wahr. \\\pause
+	\highlightDef{ (3) Induktionsschluss:}
+	\begin{align*}
+		\sum_{k=0}^{n+1} k	&= \sum_{k=0}^{n}k + (n+1)\\
+						&=  \frac{1}{2}n(n+1) + (n+1)\\
+						&=  \frac{1}{2}(n+1)(n+2),
+	\end{align*}
+	wobei im zweiten Schritt für  $\sum_{k=0}^{n} =  \frac{1}{2}n(n+1)$ die \highlightDef{ Induktionsvoraussetzung} 
+	``$a(n)$ ist wahr'' verwendet wurde.
+
+	
+\end{frame}
+%
+%
+\begin{frame}
+
+Es gilt also, unter der Annahme, dass $a(n)$ wahr ist, dass 
+	$$
+		\sum_{k=0}^{n+1} k =  \frac{1}{2}(n+1)(n+2).
+	$$
+	Somit ist in diesem Fall auch $a(n+1)$ wahr.\\[5mm]
+
+	
+	Damit ist die Aussage durch vollständige Induktion bewiesen. \qed
+	
+\end{frame}
+%
+
+%
+%
+\begin{frame}\frametitle{Satz}
+	
+Es sei $\sigma \in S_n$. Dann gibt es ein $k \in \N$ und Transpositionen $\tau_1,\tau_2,...,\tau_k \in S_n$, sodass
+$$ \sigma=\tau_1 \circ \tau_2 \circ ... \circ \tau_k. $$
+\vfill \pause
+Dies ist eigentlich eine Aussage der Form ``$\forall n \in \N \text{ gilt:}$'', denn für ein festes $n$ kann man alle Elemente von $S_n$ und ihre Transpositionszerlegung konkret aufschreiben.\pause
+\vfill 
+$\forall n \in \N \ \forall \sigma \in S_n \ \exists k \in \N \land \tau_1,\tau_2,...,\tau_k \in S_n:$
+$$ \sigma=\tau_1 \circ \tau_2 \circ ... \circ \tau_k. $$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweis}
+Wir machen eine vollständige Induktion nach $n$.\\\pause
+Wir beginnen mit $n=2$ (warum?) und $S_2$ hat nur zwei Elemente $Id$ und $(1\ 2)$.	\\\pause
+Sei also $n\ge 2$ und für alle kleineren Werte von $n$ sei die Behauptung bereits bewiesen.\\ \pause
+Wenn $\sigma(n)=n$ gilt, so ist $\sigma$ auch schon ein Element von $S_{n-1}$ und somit gibt es ein $l \in \N$ und  Transpositionen $\tau_1,\tau_2,...,\tau_l$ sodass $\sigma=\tau_1 \circ \tau_2 \circ ... \circ \tau_l$.\pause\\
+Wenn $a=\sigma(n) \ne n$ gilt, dann gilt mit der Transposition $\tau=(a\ n)$:
+$$(\tau \circ \sigma)(n)=\tau(a)=n$$
+und folglich ist $\tau \circ \sigma$ in $S_{n-1}$ und damit ein Produkt von Transpositionen.\pause Da nun auch $\tau^{-1} = \tau$ eine Transposition ist, läßt sich auch $\sigma=\tau^{-1} \circ (\tau \circ \sigma)$ also durch Transpositionen darstellen. \hfill $\square$
+
+	
+\end{frame}
+%
+%
+
+
+%
+%%%
+\subsection{Abel'sche Gruppen}
+%%%
+%
+%
+\begin{frame}\frametitle{Abel'sche Gruppen}
+
+	Eine Gruppe $(G,\ast)$ hei{\ss}t \highlightDef{ kommutativ} oder \highlightDef{ abelsch}\footnote{Niels Henrik Abel, 1802 - 1829},
+	wenn die Verknüpfung $\ast$ kommutativ ist, d.h., wenn für alle $a,b \in G$ gilt:
+	$$
+		a\ast b = b \ast a.
+	$$
+
+\end{frame}
+%
+
+\begin{frame}\frametitle{Abel'sche Gruppen: Beispiele}
+	
+	Die folgenden Gruppen sind abelsch:
+	\begin{enumerate}
+		\item $(\Z,+), (\Q,+), (\R,+),$\pause
+		\item $(\Q\backslash\{0\}, \cdot), (\R\backslash\{0\}, \cdot),$
+	\end{enumerate}
+	\vfill \pause
+	Sei
+	$$
+		G:= \{ A \in \R^{2\times 2}~|~ A \text{ invertierbar} \}.
+	$$
+	Dann ist $(G,\cdot)$ eine Gruppe, die \underline{nicht} abelsch ist.\\[1mm]
+	(\"Ubungsaufgabe)
+	
+	
+\end{frame}
+%
+\subsection{Untergruppen}
+%
+\begin{frame}\frametitle{Untergruppen}
+Es sei $(G,\ast)$ eine Gruppe und $H$ eine Teilmenge von $G$. Dann heißt $(H, \ast)$ eine \highlightDef{Untergruppe} von $(G,\ast)$, wenn
+\begin{itemize}
+\item[(i)] $e_G \in H$
+\item[(ii)] $\forall h_1,h_2 \in H: h_1\ast h_2 \in H$
+\item[(iii)] $\forall h \in H: h^{-1} \in H$.
+\end{itemize}
+\pause
+\vfill
+\highlightDef{Beispiele:}
+\begin{itemize}
+\item $(\Z,+)$ ist eine Untergruppe von $(\Q,+)$. \pause
+\item Für alle $n \in \N$ ist $n\Z:=\{nk \mid k \in \Z\}$ mit $+$ ein Untergruppe von $(\Z,+)$. \pause
+\item Für $E \subseteq D$ ist $Sym(E)$ eine Untergruppe von $Sym(D)$.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Untergruppenkriterium}
+Es sei $(G,\ast)$ eine Gruppe und $H \subset G$. $H$ ist genau dann eine Untergruppe von $G$, wenn gilt:
+$$
+H\ne \emptyset \text{  und  } \forall h_1,h_2 \in H: h_1 \ast h_2^{-1} \in H
+$$
+\vfill \pause
+Dieses Kriterium ist sehr praktisch um Untergruppen zu identifizieren.
+\end{frame}
+%%%
+\subsection{Homomorphismen von Gruppen}
+%%%
+%
+\begin{frame}\frametitle{Definition: Homomorphismus}
+	
+	Seien $(G_1,\ast)$ und $(G_2, \bullet)$ zwei Gruppen. Eine Abbildung 
+	$$
+		f: G_1 \to G_2
+	$$ 
+	hei{\ss}t \highlightDef{ (Gruppen-)Homomorphismus}, wenn
+	$$
+		\forall x,y \in G_1:\, f(x\ast y) = f(x)\bullet f(y).
+	$$
+	
+	\pause
+	\vfill
+	Homomorphismus: 
+	\begin{itemize}
+		\item Abbildung, die {\em verträglich} mit der algebraischen Strukur der jeweiligen Gruppen ist.
+		\item Strukturerhaltende Abbildung.
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	\begin{enumerate}
+		\item $(\R,+)$ und $( (0,\infty),\cdot)$ sind Gruppen und die Abbildung
+			$$
+				\exp: \R \to (0,\infty),\, x\mapsto \exp(x)
+			$$
+			ist ein Gruppenhomomorphismus, da
+			$$
+				\forall x,y \in\R:\, \exp(x+y) = \exp(x)\cdot\exp(y).
+			$$
+		\pause
+		\item Die Umkehrabbildung
+			$$
+				\log: (0,\infty) \to \R,\, x\mapsto \log(x)
+			$$
+			ist ebenfalls ein Gruppenhomomorphismus, da
+			$$
+				\forall x,y\in (0,\infty):\, \log(x \cdot y) = \log(x) + \log(y).
+			$$
+	\end{enumerate}
+	
+	\vfill
+	\pause
+	Bemerkung:\\
+	Einen bijektiven Homomorphismus nennt man \highlightDef{ Isomorphismus}.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften}
+
+	Seien $(G_1,\ast)$ und $(G_2,\bullet)$ Gruppen sowie $f: G_1\to G_2$ ein Homomorphismus.
+	Dann gilt:
+	\begin{itemize}
+		\item[(a)] $f(e_{G_1}) = e_{G_2}$. \pause
+		\item[(b)] $\forall x\in G_1:\, f(x^{-1}) = f(x)^{-1}$.\\
+				Hierbei bezeichnet $x^{-1}$ das zu $x$ inverse Element in $G_1$ und  $f(x)^{-1}$ das zu $f(x)$ inverse Element in $G_2$.\pause
+		\item[(c)] $f$ ist genau dann injektiv, wenn $f^{-1}(e_{G_2}) = \{e_{G_1}\}$.\\
+			Hierbei bezeichnet $f^{-1}(e_{G_2})$ die \highlightDef{ Urbildmenge} von $e_{G_2}$:
+			$$
+				f^{-1}(e_{G_2}) := \{x\in G_1~|~ f(x) = e_{G_2} \}.
+			$$
+	\end{itemize} 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften: Beweis}
+
+	\begin{itemize}
+		\item[(a)] $f(e_{G_1}) = e_{G_2}$:\\
+				Es gilt:
+				$$
+					f(e_{G_1}) = f(e_{G_1}\ast e_{G_1}) = f(e_{G_1})\bullet f(e_{G_1}).
+				$$\pause
+				Wenn wir diese Gleichung mit dem inversen Element  $f(e_{G_1})^{-1}$ von $f(e_{G_1})$ ``multiplizieren'', erhalten wir:
+				$$
+					f(e_{G_1})\bullet f(e_{G_1})^{-1} = e_{G_2}
+				$$\pause
+				und
+				$$
+					\Big(f(e_{G_1})\bullet f(e_{G_1})\Big) \bullet  f(e_{G_1})^{-1}  \pause= 
+						f(e_{G_1})\bullet \Big( f(e_{G_1}) \bullet  f(e_{G_1})^{-1} \Big) \pause= f(e_{G_1}).
+				$$
+
+	\end{itemize} 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften: Beweis}
+
+	\begin{itemize}
+		\item[(b)] $\forall x\in G_1:\, f(x^{-1}) = f(x)^{-1}$:\\
+				Es gilt:
+				$$
+					f(x)\bullet f(x^{-1}) \pause= f(x\ast x^{-1}) \pause= f(e_{G_1}) = e_{G_2}.
+				$$
+				D.h., $f(x^{-1})$ ist das zu $f(x)$ inverse Element in $G_2$.
+	\end{itemize} 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften: Beweis}
+	\begin{itemize}
+		\item[(c)] $f$ ist genau dann injektiv, wenn $f^{-1}(e_{G_2}) = \{e_{G_1}\}$:\\
+				\pause \vfill
+				\begin{itemize}
+					\item[(1)] Sei $f$ injektiv. 
+							\begin{itemize}
+								\item Aus (a) folgt: $e_{G_1} \in f^{-1}(e_{G_2})$.
+								\pause
+								\item Da $f$ injektiv ist, kann höchstens ein Element aus $G_1$ auf $e_{G_2}$ abgebildet werden.
+								\pause
+								\item Somit: $f^{-1}(e_{G_2}) = \{e_{G_1}\}$.
+							\end{itemize}
+					\pause		 \vfill
+					\item[(2)] Es gelte $f^{-1}(e_{G_2}) = \{e_{G_1}\}$.
+							\begin{itemize}
+								\item Seien $x,y \in G_1$ mit $f(x)=f(y)$. 
+								\pause
+								\item $e_{G_2} = f(y)\bullet f(y)^{-1} = f(x)\bullet f(y^{-1}) = f(x\ast y^{-1})$.
+								\pause
+								\item Somit: $x\ast y^{-1} = e_{G_1}$ bzw. $x=y$.
+							\end{itemize}
+							\hfill\qed
+				\end{itemize} 
+	\end{itemize} 
+\end{frame}
+%
+%
+%%%
+\section{Rechnen ohne Rechner: Logarithmentafeln}
+%%%
+%
+\begin{frame}\frametitle{Ein Anwendungsfall: Logarithmentafeln}
+
+	Tabellarische Darstellung von Logarithmen: 
+	$$
+		\log_{10}(6.006) \sim 0.7786.
+	$$
+
+	\includegraphics[scale=0.23]{Logarithmentafel.png}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Logarithmentafeln}
+
+	\begin{itemize}
+		\item John Napier (1550 - 1617) gilt als Erfinder der Logarithmentafeln.
+		\item Erleichterten die Multiplikation von Zahlen.
+		\item Wichtige Rechenhilfe über mehrere Jahrhunderte bis zur Einführung von Rechenmaschinen.
+		\item Im Schulunterricht verwendet bis in die 1970er Jahre.
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Multiplikation}
+	
+	$$
+		\begin{array}{ccccccccccc}
+ 			1	&2	&3	&4	&5	&\cdot	&5	&4	&3	&2	&1	\\\hline
+ 			6	&1	&7	&2	&5								\\
+   				& 4	&9	&3	&8	&0							\\
+   				&    	&3	&3	&0	&3	&5						\\
+   				&    	&   	&2	&4	&6	&9	&0					\\
+   				&    	&   	&  	&1	&2	&3	&4	&5				\\\hline
+   			6	&7	&0	&5	&9	&2	&7	&4	&5
+		\end{array}
+	$$
+	
+	\vfill
+	\begin{itemize}
+		\item Die schriftliche Multiplikation (Schulmethode) zweier Zahlen mit $n$ Ziffern benötigt $\sim n^2$ Rechenschritte 
+		(Additionen und Multiplikationen). 
+		\item Jeder Rechenschritt kostet Zeit und ist eine mögliche Fehlerursache.
+	\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Logarithmentafeln: Addition statt Multiplikation}
+
+	$$
+		\begin{CD}
+			(0,\infty) @> x \cdot y>> (0,\infty)\\
+			@V{\log}VV 	@AA{\exp}A\\
+			\R @> \log(x) + \log(y) >> \R
+		\end{CD}
+	$$
+	\pause
+	\begin{itemize}
+		\item Schlage die Logarithmen der beiden Faktoren nach:
+			$$
+				\log(12345) \sim 9.421006, \qquad \log(54321) \sim 10.902666
+			$$
+			(hier: Logarithmus zur Basis $e$) \pause
+		\item Addiere die Logarithmen:
+			$$
+				\log(12345) + \log(54321) \sim 20.3236. 
+			$$\pause
+		\item Schlage nach, welche Zahl den Logarithmus $20.323672$ hat:
+			$$
+				12345\cdot 54321 \sim \exp(20.323672) \sim 670592360.57.
+			$$
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Logarithmentafeln: Addition statt Multiplikation}
+
+	\begin{itemize}
+		\item Die Addition zweier Zahlen mit $n$ Ziffern benötigt nur $\sim n$ Rechenschritte.
+		\item Das Nachschlagen der Logarithmen entspricht einem Suchalgorithmus und benötigt $\sim \log(n)$ Schritte.
+	\end{itemize}
+	\pause
+	\vfill
+	Der Rechenaufwand wurde somit erheblich reduziert:
+	$$
+		\text{von~} \sim n^2 \text{~auf~} \sim n.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Zusammenfassung}
+	
+		$$
+		\begin{CD}
+			(0,\infty) @> x \cdot y>> (0,\infty)\\
+			@V{\log}VV 	@AA{\exp}A\\
+			\R @> \log(x) + \log(y) >> \R
+		\end{CD}
+	$$
+	
+	\begin{itemize}
+		\item Rechenaufgabe in der Gruppe $\Big( (0,\infty),\cdot\Big)$.
+		\item \"Ubersetzung mit dem Isomorphismus $\log$ in eine Rechenaufgabe in der Gruppe $(\R,+)$.
+		\item Lösen der Rechenaufgabe in $(\R,+)$.
+		\item \"Ubersetzung der Lösung mit dem Isomorphismus $\exp$ in eine Lösung in der Gruppe $\Big( (0,\infty),\cdot\Big)$.
+	\end{itemize}
+	
+\end{frame}
+%
+
+%
+\end{document}

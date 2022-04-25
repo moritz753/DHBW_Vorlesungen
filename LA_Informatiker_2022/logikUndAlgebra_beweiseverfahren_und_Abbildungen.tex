@@ -1,0 +1,743 @@
+\documentclass[
+				hyperref={pdftex,
+						breaklinks,
+						pdfauthor={Andreas Weber},
+						pdftitle={Logik und Algebra},
+						colorlinks=true,
+						urlcolor=blue,
+						linkcolor=		%Also color of header links		
+				},
+				xcolor=dvipsnames
+			]
+			{beamer}
+
+
+\usepackage{beamerthemesplit}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{stmaryrd} %\lightning
+
+\usepackage[ngerman]{babel}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Theme --------------------------------------------------------------------------------
+\usetheme{Malmoe}
+
+%---------- Colors 
+%\setbeamercolor*{palette primary}{fg=white,bg=black!95}
+%\setbeamercolor*{palette secondary}{fg=white,bg=black}
+%\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=black}
+%\setbeamercolor*{palette quaternary}{fg=white,bg=black!95}
+%
+%\usecolortheme[named=white]{structure}%RGB={072,118,255 }]{structure}%named=lightgray]{structure}%RGB={0,90,156}]{structure}
+%%\DefineNamedColor{named}{lightgrey}{RGB}{245,245,250}
+%\setbeamercolor{background canvas}{bg=gray}%lightgray!30}
+%\setbeamercolor{normal text}{fg=white}
+%\setbeamercolor{itemize item}{fg=blue!60}
+%---------- /Colors 
+
+
+\setbeamertemplate{navigation symbols}{}
+
+% page number at bottom right
+\setbeamertemplate{footline}{\color{gray} \hfill\insertframenumber\hspace{5mm}\vspace{2mm}}
+
+\setbeamertemplate{enumerate item}{(\theenumi)}
+\setbeamertemplate{itemize items}[circle]
+% No indention in itemize
+\settowidth{\leftmargini}{\usebeamertemplate{itemize item}} \addtolength{\leftmargini}{\labelsep}
+
+% Captions (Figures, Tables,...)
+\setbeamertemplate{caption}{\insertcaption}
+
+% blocks
+%\setbeamercolor{block body}{bg=structure!10}
+%\setbeamercolor{block title}{bg=structure!100,fg=structure!10}
+\setbeamercolor{block body alerted}{bg=alerted text.fg!10}
+\setbeamercolor{block title alerted}{bg=alerted text.fg!20}
+\setbeamercolor{block body example}{bg=green!15}
+\setbeamercolor{block title example}{bg=green!20}
+%\setbeamertemplate{blocks}[rounded][shadow]
+
+%----------------------------------------------------------------------------------------------------
+%--------- /Theme --------------------------------------------------------------------------------
+
+%--------- Color Definitions ------------------------------------------------------------
+\newcommand{\itemColor}{\usebeamercolor[fg]{itemize item}}
+%--------- /Color Definitions ------------------------------------------------------------
+
+
+%--------- Own definitions
+\include{macros}
+%--------- /Own definitions
+
+\newcommand{\comp}{\mathsf{c}}	%Complement
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+
+%%%%%%%%%%%%%%
+\title{Logik \& Algebra\\[3mm] 
+	\large Beweisverfahren \& Abbildungen
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2021}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+\AtBeginSubsection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection \\[2mm]
+		 \large \insertsubsection } 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+\section{Beweise}
+%%%
+%
+\begin{frame}
+
+	Sie fragen sich eventuell, wieso Beweise f\"ur Nicht-Mathematiker relevant sein k\"onnten.\\
+	\pause
+	
+	\begin{itemize}
+		\item Fragestellungen in der Informatik oder den Wirtschafts\-wissenschaften lassen sich oft in der Sprache der Mathematik ausdr\"ucken.
+		 	Deshalb sollte man nicht nur die mathematische Notation kennen, sondern auch mit logischen Schlussfolgerungen vertraut sein.
+		\item Algorithmus korrekt? (Ergebnis in allen F\"allen  korrekt?)
+		\item Bricht ein gegebener  Algorithmus immer in endlicher Zeit ab?
+		\item Grunds\"atzlich ist es eine gute Idee, Behauptungen nicht einfach zu glauben, sondern diese nachzuvollziehen. 
+		\item Der Beweis hilft oft die Aussage (besser) zu verstehen.
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweise}
+	
+	\begin{itemize}
+		\item Mathematische S\"atze bzw. Schlussfolgerungen sind Wenn-Dann-Aussagen.
+		\item Aus einer gegebenen Aussage $v$ (die Voraussetzung) wird mittels logischer Schlussfolgerungen eine andere Aussage 
+			$b$ (die Behauptung) abgeleitet:
+			$$
+				v \Rightarrow b.
+			$$
+		\item Der Schluss $v \Rightarrow b$ ist zul\"assig, wenn die Aussage $v\rightarrow b$ wahr ist.
+		\item Ein Beweis hat also das Ziel, mit Mitteln der Logik die Wahrheit der Aussage $v\rightarrow b$ zu zeigen.
+		\item Hierf\"ur gibt es verschiedene Methoden.
+	\end{itemize}
+	
+\end{frame}
+%
+%%%
+\section{Direkter Beweis}
+%%%
+%
+\begin{frame}\frametitle{Direkter Beweis}
+	
+	Aus einer Voraussetzung wird die Behauptung direkt bewiesen. \\[1mm]
+	Wir haben diese Methode schon beim Beweis der de Morgan'schen Regeln in der Elementaren Mengenlehre verwendet.
+	
+	
+	$$
+		v \Rightarrow a_1 \Rightarrow a_2 \Rightarrow\ldots\Rightarrow b
+	$$
+	
+\end{frame}
+%
+%%%
+\section{Indirekter Beweis}
+%%%
+%
+%%%
+\subsection{Beweis durch Kontraposition}
+%%%
+\begin{frame}\frametitle{Beweis durch Kontraposition}
+	
+	\begin{itemize}
+		\item Seien $v$ und $b$ Aussagen (Voraussetzung \& Behauptung). 
+		\item Wir erinnern uns an die Tatsache
+			$$
+				v\rightarrow b \equiv (\neg b)\rightarrow (\neg v).
+			$$
+		\item<2-> Die Implikation $v \Rightarrow b$ ist somit genau dann zul\"assig, wenn die Implikation 
+			$ (\neg  b) \Rightarrow (\neg v)$ zul\"assig ist. 
+		\item<2-> In der Logik nennt man die Aussage $(\neg b)\rightarrow (\neg v)$ die {\itemColor Kontraposition} 
+		der Aussage $v\rightarrow b$. 
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+
+	\begin{Satz}
+		Sind $m,n \in \N$, $n$ gerade mit $m = \sqrt{n}$, dann gilt: $m$ ist gerade.
+	\end{Satz}
+	\pause
+	\vfill
+	\begin{itemize}
+		\item {\itemColor Voraussetzung $v$}:  $(m,n \in \N)$ {\em und} ($n$ gerade) {\em und} ($m = \sqrt{n}$).
+		\item {\itemColor Behauptung $b$:} $m$ ist gerade.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+
+	\begin{itemize}
+		\item {\itemColor Voraussetzung $v$}:  $(m,n \in \N)$ {\em und} ($n$ gerade) {\em und} ($m = \sqrt{n}$).
+		\item {\itemColor Behauptung $b$:} $m$ ist gerade.
+	\end{itemize}
+	
+	\vspace{3mm}
+	Annahme: $m$ ist ungerade ($\neg b$ ist wahr).\\[1mm]
+	
+	Dann folgt:
+	\begin{itemize}
+		\item $m = 2k + 1$.
+		\pause
+		\item $n = m^2 = (2k+1)^2 = 4k^2 + 4k + 1= 2(2k^2+2k)+1$.\\
+			Damit ist $n$ eine ungerade Zahl, d.h. $\neg v$ ist wahr.\\
+			Man sagt auch: Dies ist ein Widerspruch zur Voraussetzung. (Symbolisch: $\lightning$).
+	\end{itemize}
+	\pause
+	\vfill
+	Wir haben also gezeigt: $(\neg b) \Rightarrow (\neg v)$. Somit gilt auch: $v \Rightarrow b$. \qed
+	
+\end{frame}
+%
+%%%
+\subsection{Beweis durch Widerspruch (Reductio ad absurdum)}
+%%%
+%
+\begin{frame}\frametitle{Beweis durch Widerspruch (Reductio ad absurdum)}
+	
+	\begin{itemize}
+		\item Man zeigt, dass sich aus der {\itemColor Annahme}, die Aussage
+			$$
+				v \land (\neg b)
+			$$
+			sei wahr, ein {\itemColor Widerspruch} ergibt.
+		\pause
+		\item In dem Fall muss dann die Aussage $v \land (\neg b)$ falsch sein und die Negation dieser Aussage, d.h.
+			$$
+				\neg \big( v \land (\neg b) \big) \equiv (\neg v) \lor b \equiv v \rightarrow b
+			$$
+			ist wahr.\footnote<2->{vgl. Aussagenlogik: de Morgan'sche Regel bzw. Aufgabe zur Subjunktion}
+		\pause
+		\item Genauer: Man zeigt, dass die Aussage
+			$$
+				\big( v \land (\neg b) \big) \rightarrow \big(c \land (\neg c) \big)
+			$$
+			f\"ur irgendeine Aussage $c$ wahr ist. Da  $c \land (\neg c)$ immer falsch ist, muss dann auch $v \land (\neg b)$ falsch sein.
+	\end{itemize}
+	\vspace{2mm}
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel Primzahlen}
+	
+	\begin{Satz}
+	Es gibt unendlich viele
+	Primzahlen.\footnote{Eine Zahl $p\in \mathbb{N} \backslash\{1\}$ hei{\ss}t Primzahl, wenn sie nur durch $1$ und $p$ teilbar ist.}
+	\end{Satz}
+	
+	\vfill
+	\pause
+	Was sind Voraussetzung $v$ und Behauptung $b$?
+	\pause
+	\begin{itemize}
+		\item {\itemColor Behauptung $b$:} Es gibt unendlich viele Primzahlen.
+		\pause
+		\item {\itemColor Voraussetzung $v$:} Die Peano\footnote<4->{Giuseppe Peano, 1858 - 1932}-Axiome, die die nat\"urlichen Zahlen charakterisieren.\\
+		Solche Voraussetzungen werden in mathematischen S\"atzen nicht aufgef\"uhrt sondern implizit angenommen, 
+		da die ganze Mathematik auf Axiomensystemen basiert. 
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Primzahlen: Widerspruchsbeweis nach Euklid\footnote{Euklid von Alexandria, ca. 300 v. Chr.} }
+	
+	{\itemColor Annahme ($\neg b$):}\\ 
+	Es gibt nur endlich viele Primzahlen $p_1, p_2, \ldots, p_n$.\\[3mm]
+	
+	\pause
+	Betrachte
+	$$	
+		p = p_1\cdot p_2 \cdot \ldots \cdot p_n + 1.
+	$$
+	\begin{itemize}
+		\item Da $p$ gr\"o{\ss}er als jede der Zahlen $p_1, \ldots, p_n$ ist, gilt insbesondere
+			$$
+				p \neq p_1, \ldots, p\neq p_n.
+			$$
+			$p$ ist also (aufgrund unserer Annahme) keine Primzahl.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Primzahlen: Widerspruchsbeweis nach Euklid}
+	
+	Betrachte
+	$$	
+		p = p_1\cdot p_2 \cdot \ldots \cdot p_n + 1.
+	$$
+	\begin{itemize}
+		\item Wenn $p$ keine Primzahl ist, muss sie durch eine Primzahl teilbar sein. (Primfaktorzerlegung)
+		\pause
+		\item Für alle $j$ l\"asst $p$ bei Teilung durch die Primzahlen $p_j$ den Rest $1$, 
+		d.h. $p$ ist durch keine der Zahlen $p_1,\ldots, p_n$ teilbar.
+		\pause
+		\item Wir haben somit einen Widerspruch:\\ 
+		\begin{center}
+			``$p$ ist durch eine der Zahlen $p_1,\ldots p_n$ teilbar'' \\
+			und \\
+			``$p$ ist durch keine der Zahlen $p_1,\ldots, p_n$ teilbar''.
+		\end{center}
+		\pause
+		\item Die Aussage $v \rightarrow b$ ist also wahr. \qed
+	\end{itemize}
+	
+\end{frame}
+%
+%
+%%%
+\section{Vollst\"andige Induktion}
+%%%
+%
+\begin{frame}\frametitle{Vollst\"andige Induktion}
+
+	Die Vollst\"andige Induktion ist ein Beweisverfahren, das verwendet werden kann, um nachzuweisen, dass Aussagen der Form
+	$$
+		\forall n\in\N : a(n)	
+	$$	
+	wahr sind.
+	
+	\pause
+	\vspace{2mm}
+	{\itemColor Beispiel:} \\
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+	\vfill
+	{\scriptsize Bemerkung: $\displaystyle\sum_{k=0}^n a_k = a_0 + a_1 + a_2 + \ldots + a_n$} 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	Die Aussage
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}
+	$$	
+	kann f\"ur einzelne nat\"urliche Zahlen $n$ \"uberpr\"uft werden: 
+	$$
+		\begin{array}{lcll}
+			n=0 	&:& 0=0\quad \checkmark		&(a(0)\text{~ist wahr})		\\
+			n=1	&:& 0+1=1\quad \checkmark	&(a(1)\text{~ist wahr})		\\
+			n=2	&:& 0+1+2=3\quad \checkmark	&(a(2)\text{~ist wahr})	
+		\end{array}
+	$$
+	\pause
+	Damit kann man nat\"urlich {\em nicht} zeigen, 
+	dass die Aussageform $a(n)$ {\em f\"ur alle} $n\in\N$ wahr ist - es gibt schlie{\ss}lich unendlich viele nat\"urliche Zahlen.
+\end{frame}
+%
+%
+%\begin{frame}\frametitle{Prinzip der vollst\"andigen Induktion}
+%
+%	\begin{itemize}
+%		\item[(1)] Sei $S\subset \N$ mit $S\neq \emptyset$.
+%				\begin{itemize}
+%					\item $S$ enth\"alt mindestens ein Element $n_0$, da  $S\neq \emptyset$.
+%					\item Da es nur endlich viele nat\"urlichen Zahlen gibt, die kleiner als $n_0$ sind, gibt es ein kleinstes Element $s_0\in S$.
+%				\end{itemize}
+%		\pause
+%		\item[(2)] Wir nehmen zus\"atzlich an, dass f\"ur jede Zahl $n\in S$ auch gilt: $n+1 \in S$.\\ 
+%				Dann folgt:
+%				$$
+%					\{s_0, s_0+1, s_0 +2, \ldots \} \subset S.
+%				$$
+%				Da es keine weiteren nat\"urlichen Zahlen gibt, die gr\"o{\ss}er als $s_0$ sind, gilt sogar:
+%				$$
+%					\{s_0, s_0+1, s_0 +2, \ldots \} = S.
+%				$$
+%	\end{itemize}
+%
+%\end{frame}
+%
+%
+\begin{frame}\frametitle{Prinzip der vollst\"andigen Induktion}
+	
+	Um nachzuweisen, dass eine Aussageform $a(n)$ f\"ur alle $n\geq N$ wahr ist, setzt man
+	$$
+		S := \{ n\in \N~|~ n\geq N \text{~und~} a(n)\text{~wahr} \}.
+	$$
+	\vfill
+	Es gen\"ugt nun zu zeigen, dass
+	\begin{itemize}
+		\item $N\in S$ und
+		\item $\forall n\in S: n+1 \in S$.
+	\end{itemize}
+	Denn dann folgt
+	$$
+		S = \{N, N+1, N+2,\ldots\}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Prinzip der vollst\"andigen Induktion}
+	
+	Das Prinzip der vollst\"andigen Induktion wird oft auch folgenderma{\ss}en formuliert:\\
+	\vfill
+	Sei f\"ur alle $n\geq N$ die Aussageform $a(n)$ gegeben.\\[1mm]
+	
+	Falls\\[1mm]
+	
+	{\itemColor (1) Induktionsanfang:} $a(N)$ ist wahr.\\[1mm]  
+	und\\[1mm]
+	{\itemColor (2) Induktionsvoraussetzung:} $a(n)$ ist wahr.\\[1mm]  
+	und\\[1mm]
+	{\itemColor (3) Induktionsschluss:} Dann ist auch $a(n+1)$ wahr.\\[1mm]
+	
+	gilt, ist die Aussage 
+	$$
+		\forall n\in \N: n\geq N \rightarrow a(n).
+	$$	
+	wahr.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+\end{frame}
+%
+%
+\begin{frame}
+	
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \underbrace{\sum_{k=0}^n k = \frac{1}{2}n(n+1)}_{a(n)}.
+	$$	
+	
+	{\itemColor (1) Induktionsanfang:} $a(0)$ ist wahr, da $0 = 0$.
+	
+\end{frame}
+%
+%
+\begin{frame}
+
+	Zeigen Sie, dass gilt
+	$$
+		\forall n\in \N:\quad  \sum_{k=0}^n k = \frac{1}{2}n(n+1).
+	$$	
+	
+	{\itemColor (2) Induktionsvoraussetzung:} Es sei $a(n)$ wahr. \\
+	{\itemColor (3) Induktionsschluss:}
+	\begin{align*}
+		\sum_{k=0}^{n+1} k	&= \sum_{k=0}^{n}k + (n+1)\\
+						&=  \frac{1}{2}n(n+1) + (n+1)\\
+						&=  \frac{1}{2}(n+1)(n+2),
+	\end{align*}
+	wobei im zweiten Schritt f\"ur  $\sum_{k=0}^{n} =  \frac{1}{2}n(n+1)$ die {\itemColor Induktionsvoraussetzung} 
+	``$a(n)$ ist wahr'' verwendet wurde.
+
+	
+\end{frame}
+%
+%
+\begin{frame}
+
+Es gilt also, unter der Annahme, dass $a(n)$ wahr ist, dass 
+	$$
+		\sum_{k=0}^{n+1} k =  \frac{1}{2}(n+1)(n+2).
+	$$
+	Somit ist in diesem Fall auch $a(n+1)$ wahr.\\[5mm]
+
+	
+	Damit ist die Aussage durch vollst\"andige Induktion bewiesen. \qed
+	
+\end{frame}
+%
+%
+%%%
+\section{Abbildungen}
+%%%
+%
+%%%
+\subsection{Definition}
+%%%
+%
+\begin{frame}\frametitle{Versuch einer Definition}
+
+	Eine {\itemColor Abbildung} 
+	$$
+		f:M\to N
+	$$ 
+	zwischen zwei Mengen $M$ und $N$ ist eine \textit{Vorschrift}, die jedem $m\in M$ genau ein $n \in N$ \textit{zuordnet}.
+	
+	\vfill
+	\pause
+	{\itemColor Problem}: Die Begriffe \textit{Vorschrift} und \textit{zuordnet} sind nicht definiert und somit ist deren Bedeutung unklar.\\
+	Deshalb: Definition \"uber die Mengenlehre.
+	
+\end{frame}
+%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Eine {\itemColor Abbildung} 
+		$$
+			f:M\to N
+		$$ 
+		zwischen zwei Mengen $M$ und $N$ ist eine Teilmenge 
+		$$
+			f \subset M\times N
+		$$ 
+		mit der Eigenschaft dass f\"ur alle $m\in M$ genau ein $n\in N$ existiert, so dass $(m,n)\in f$.\\
+		F\"ur dieses $n$ schreibt man $n = f(m)$.\\[2mm]
+		
+		\pause
+		$M$ hei{\ss}t {\itemColor Definitionsmenge}, $N$ {\itemColor Wertebereich} von $f$ und 
+		$f(M) := \{ f(m)~|~  m\in M \}$ {\itemColor Bildmenge}.\\[2mm]
+		
+		\pause
+		Schreibweise f\"ur Abbildungen:
+		\vspace{-2mm}
+		$$ 
+			f: M\to N, \quad m\mapsto f(m).
+		$$
+	\end{block}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item $M=N=\{0,1\}, f = \{(0,1),(1,1)\}$:
+			$$
+				f(0) = 1,\quad f(1)=1.
+			$$
+		\item<2-> $f: \R\to \R, x\mapsto x^2$:
+			$$
+				f = \{(x,x^2)~|~ x\in \R\}.
+			$$
+		\item<3-> $f: \N\to \R, x\mapsto x^2$.
+			$$
+				f = \{(x,x^2)~|~ x\in \N\}.
+			$$
+		\item<4-> Die Abbildung 
+			$$
+				\text{Id}_M: M\to M, \quad m\mapsto m
+			$$
+			hei{\ss}t {\itemColor Identit\"at} auf $M$.
+	\end{itemize}
+
+\end{frame}
+%
+%
+%%%
+\subsection{Eigenschaften}
+%%%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Eine Abbildung $f: M\to N$ hei{\ss}t 
+		\begin{itemize}
+			\item {\itemColor injektiv}, wenn f\"ur alle $m_1, m_2 \in M$ gilt:
+				$$	f(m_1) = f(m_2)	
+					\quad
+					\Rightarrow
+					\quad
+					m_1 = m_2.
+				$$
+			\item {\itemColor surjektiv}, wenn $f(M)=N$, d.h.:
+				$$
+					\forall n\in N\; \exists m\in M: f(m)=n.
+				$$
+			\item {\itemColor bijektiv}, wenn $f$ injektiv und surjektiv ist.
+		\end{itemize}
+	\end{block}
+	
+\end{frame}
+%
+%
+\begin{frame}
+	
+	{\itemColor Beispiele:}
+	\begin{itemize}
+		\item $f: \Z \to \Z,\, x\mapsto x+1$ 
+			\pause 
+			ist bijektiv.
+		\pause
+		\item $f: \N \to \N,\, x\mapsto x^2$ 
+			\pause
+			ist injektiv aber nicht surjektiv. 
+		\pause
+		\item $f:\Z \to \N,\, x\mapsto x^2$ 
+			\pause
+			ist weder injektiv noch surjektiv.
+	\end{itemize}
+	
+\end{frame}
+%
+%%%
+\subsection{Verkettung}
+%%%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Seien $f: A\to B$ und $g:B\to C$ Abbildungen. 
+		Die {\itemColor Verkettung} oder {\itemColor Komposition} von $f$ und $g$ ist die Abbildung
+		$$
+			g\circ f: A\to C,\; x\mapsto g\big( f(x) \big).
+		$$
+	\end{block}
+	
+	\pause
+	\vfill
+	{\itemColor Beispiel:} $f:\R\to\R,\, x\mapsto x^2$ und $g:\R\to\R,\, x\mapsto e^x$: 
+	\begin{align*}
+		g\circ f(x) 	&= g\big( f(x) \big) = g\big( x^2 \big) = e^{x^2},\\
+		f\circ g(x)	&= f\big( g(x) \big) = f\big( e^x\big) = (e^x)^2 = e^{2x}.
+	\end{align*}
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	\begin{block}{Umkehrabbildung}
+		Eine Abbildung $f: M\to N$ ist {\itemColor genau dann} bijektiv, {\itemColor wenn} 
+		eine Abbildung $g: N \to M$ existiert mit
+		$$
+			g\circ f = \text{id}_M
+			\qquad
+			\text{und}
+			\qquad
+			f\circ g = \text{id}_N.
+		$$  
+		
+		\pause
+		\vspace{2mm}
+		Die Abbildung $g$ hei{\ss}t {\itemColor Umkehrabbildung} von $f$. Statt $g$ schreibt man meist $f^{-1}$.
+	\end{block}
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	Eine Abbildung $f: M\to N$ ist {\itemColor genau dann} bijektiv, {\itemColor wenn} 
+	eine Abbildung $g: N \to M$ existiert mit
+	$$
+		g\circ f = \text{id}_M
+		\qquad
+		\text{und}
+		\qquad
+		f\circ g = \text{id}_N.
+	$$  
+	
+	{\itemColor Beweis $\Rightarrow$:}\\ 
+	Voraussetzung: $f$ ist bijektiv.\\[1mm]
+	$f$ surjektiv: $\forall n\in N\;  \exists m\in M: f(m) = n$.\\
+	\pause
+	Da $f$ injektiv, ist dieses $m$ eindeutig bestimmt.\\
+	\pause
+	Definition: $g:N\to M, g(n) = m$ f\"ur das eindeutige $m\in M$ mit $f(m) = n$.\\
+	\pause
+	Es folgt:
+	$$
+		g\circ f(m) = g\big( f(m) \big) = m, \qquad \text{d.h. } g\circ f = \text{id}_M
+	$$
+	und
+	$$
+		f\circ g(n) = f\big( g(n) \big) = n, \qquad \text{d.h. } f\circ g = \text{id}_N.
+	$$	
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	Eine Abbildung $f: M\to N$ ist {\itemColor genau dann} bijektiv, {\itemColor wenn} 
+	eine Abbildung $g: N \to M$ existiert mit
+	$$
+		g\circ f = \text{id}_M
+		\qquad
+		\text{und}
+		\qquad
+		f\circ g = \text{id}_N.
+	$$  
+	
+	{\itemColor Beweis $\Leftarrow$:} \\
+	Voraussetzung: Es gibt eine Abbildung $g: N \to M$ mit $g\circ f = \text{id}_M$ und $f\circ g = \text{id}_N$.\\[1mm]
+	\pause
+	$f$ ist surjektiv, denn: Sei $n\in N$. F\"ur $m=g(n) \in M$ folgt 
+	$$
+		f(m) = f\big(g(n)\big) = f\circ g(n) = n.
+	$$
+	\pause
+	$f$ ist injektiv, denn: Seien $m_1, m_2\in M$ mit $f(m_1)=f(m_2) = n \in N$. \\
+	\pause
+	Dann folgt:
+	$$
+		m_1 = g\circ f(m_1) =  g\big( f(m_1)\big) =g(n)= g\big( f(m_2)\big) = g\circ f(m_2) = m_2.
+	$$
+	\qed
+	
+\end{frame}
+%
+%%%
+\section{Literatur}
+%%%
+%
+\begin{frame}\frametitle{Literatur}
+
+	{\itemColor [Teschl]:}\\[2mm]
+	{\itemColor 2.3} Vollst\"andige Induktion\\
+	{\itemColor 5.2} Funktionen\\
+		
+\end{frame}
+%
+%
+\end{document}

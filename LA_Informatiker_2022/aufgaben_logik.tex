@@ -1,0 +1,124 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+\include{macros}
+
+%-------------------------------------------------------------------
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{ \"Ubungsaufgaben 1\\
+	 Logik
+}
+\date{}
+%-------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------
+%-------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+%-------------------------------------------------------------------
+%-------------------------------------------------------------------
+
+%%%
+\section{Subjunktion}
+%%%
+Seien $a,b$  Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(\neg a) \lor b.
+$$
+Vergleichen Sie die Wahrheitstafel mit der Wahrheitstafel der Subjunktion und schlie{\ss}en Sie
+$$
+	a \rightarrow b \equiv (\neg a) \lor b.
+$$
+
+
+%%%
+\section{Klammern *}
+%%%
+Seien $a,b,c$  Aussagen.
+Erstellen Sie Wahrheitstafeln f\"ur 
+$$
+	a\land (b \lor c)
+$$
+und
+$$
+	(a\land b) \lor c.
+$$
+
+%%%
+\section{De Morgan'sche Regeln}
+%%%
+Seien $a,b$ Aussagen.
+Erstellen Sie die Wahrheitstafeln f\"ur
+$$
+	\neg (a \lor b)
+$$
+und
+$$
+	(\neg a) \land (\neg b). 
+$$
+Folgern Sie, dass
+$$
+	\neg (a \lor b) \equiv (\neg a) \land (\neg b). 
+$$
+
+
+%%%
+\section{Wahrheitstafel}
+%%%
+Seien $a,b,c$ Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(a \rightarrow b) \lor (c \land \neg a).
+$$
+
+%%%
+\section{Quantoren}
+%%%
+Sind die folgenden Aussagen wahr?
+\begin{itemize}
+	\item[(a)] $\forall x\in \N: \exists y\in \N \text{~mit~} y = x+1.$
+	\item[(b)] $\exists y\in \N: \forall x\in \N \text{~mit~} y = x+1.$
+\end{itemize}
+
+%%%
+\section{Negation}
+%%%
+ Negieren Sie die folgenden Aussagen:
+ \begin{itemize}
+	\item[(a)] Alle Karlsruher fahren mit der S-Bahn oder mit dem Rad.
+ 	\item[(b)] Jede Entscheidung schafft Unzufriedene.
+ \end{itemize}
+ 
+
+
+\end{document}

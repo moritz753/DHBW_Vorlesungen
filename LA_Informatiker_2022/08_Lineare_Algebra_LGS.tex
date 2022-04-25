@@ -1,0 +1,1008 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Lineare Algebra}
+\subtitle{Lineare Gleichungssysteme}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Definition}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Lineare Gleichungssysteme}
+
+	Ein \highlightDef{Lineares Gleichungssystem (LGS)}	 mit $n$ Gleichungen und $m$ Unbekannten ist ein System
+	$$
+		\begin{array}{ccccccccc}
+			a_{11}x_1	&+	&a_{12}x_2	&+	&\cdots	&a_{1m}x_m	&=	& b_1 \\
+			a_{21}x_1	&+	&a_{22}x_2 	&+	&\cdots	&a_{2m}x_m	&=	& b_2 \\
+			\vdots	&	&\vdots		&	&\vdots	&\vdots		&	& \vdots\\
+			a_{n1}x_1	&+ 	&a_{n2}x_2 	&+	&\cdots	&a_{nm}x_m	&=	& b_n 
+		\end{array}
+	$$
+	mit Koeffizienten $a_{ij}\in\R$ und $b_j\in \R$, für das eine Lösung
+	$$	
+		x
+		=
+		\begin{pmatrix} 
+			x_1\\
+			x_2\\
+			\vdots\\
+			x_m
+		\end{pmatrix} 
+		\in \R^m
+	$$
+	gesucht wird.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lineare Gleichungssysteme}
+
+	Mit
+	$$
+		A 
+		=
+		\begin{pmatrix}
+			a_{11}	& a_{12}	&\cdots 	&a_{1m}\\
+			a_{21}	& a_{22}	&\cdots 	&a_{2m}\\
+			\vdots	& \vdots	&            	&\vdots \\
+			a_{n1}	& a_{n2}	&\cdots	&a_{nm}
+		\end{pmatrix}
+		\in \R^{n\times m}
+		\quad
+		\text{und}
+		\quad
+		b
+		=
+		\begin{pmatrix}
+			b_1\\
+			\vdots\\
+			b_n
+		\end{pmatrix}		
+		\in \R^n
+	$$
+	
+	\vspace{2mm}
+	können wir das LGS kompakter schreiben:
+	$$
+		A\cdot x = b.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Homogene/Inhomogene LGS}
+
+	Ein lineares Gleichungssystem
+	$$
+		A\cdot x = 0
+	$$
+	hei{\ss}t \highlightDef{homogen},\\[2mm]
+	
+	ein lineares Gleichungssystem
+	$$
+		A\cdot x = b
+	$$
+	für $b\neq 0$ hei{\ss}t \highlightDef{inhomogen}.
+	
+	\pause
+	\vspace{5mm}
+	Ist ein inhomogenes LGS 
+	$A\cdot x = b$ 
+	gegeben, so hei{\ss}t das LGS $A\cdot x = 0$ das zugehörige homogene LGS.
+	
+\end{frame}
+%
+
+%------------------------------------------------
+\section{Struktur der Lösungsmenge}
+%%%
+
+%------------------------------------------------
+\subsection{Die Lösungsmenge eines homogenen LGS}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Die Lösungsmenge eines homogenen LGS}
+
+	Seien $A\in\R^{n\times m}$, $a \in\R$ und $x^{(1)}, x^{(2)} \in \R^{m}$ Lösungen des \highlight{homogenen LGS}
+	$$
+		A\cdot x = 0.
+	$$
+	Dann sind auch
+	\begin{itemize}
+		\item $x^{(1)} + x^{(2)}$ und
+		\item $a\cdot x^{(1)}$  
+	\end{itemize}
+	Lösungen dieses LGS:\pause
+	
+	$$
+		A\cdot(x^{(1)} + x^{(2)}) \pause = A\cdot x^{(1)} + A\cdot x^{(2)}\pause =0+0= 0,
+	$$ 
+\pause
+	$$
+		A\cdot (a\cdot x^{(1)}) \pause= a\cdot (A\cdot x^{(1)})\pause =a\cdot 0= 0.
+	$$  
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Die Lösungsmenge eines homogenen LGS}
+
+	Die \highlight{Lösungsmenge}
+	$$
+		\mathcal{L} = \{ x \in \R^m ~|~ A\cdot x = 0\} \subseteq \R^m
+	$$ 
+	des LGS $A\cdot x=0$ ist somit abgeschlossen bezüglich 
+	\begin{itemize}
+		\item der Vektoraddition:\\ 
+			$x^{(1)}, x^{(2)}\in \mathcal{L} \Rightarrow x^{(1)} + x^{(2)}\in \mathcal{L}$,
+		\item der Multiplikation mit reellen Zahlen:\\ 
+			$a\in \R, x^{(1)}\in \mathcal{L} \Rightarrow a\cdot x^{(1)}\in \mathcal{L}$. 
+	\end{itemize}
+	
+	\pause
+	\vspace{6mm}
+	$(\mathcal{L},+,\cdot)$ erfüllt alle definierenden Eigenschaften eines Vektorraums.\\[2mm]
+	
+	Deshalb bildet
+	\highlightDef{$\mathcal{L} \subseteq \R^m$} einen \highlightDef{Untervektorraum} des Vektorraums $\R^m$. 
+	
+\end{frame}
+%
+%
+%------------------------------------------------
+\subsection{Die Lösungsmenge eines inhomogenen LGS}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Die Lösungsmenge eines inhomogenen LGS}
+
+	Seien $A\in\R^{n\times m}$, $b\in \R^n$ und $x^{(1)}, x^{(2)} \in \R^{m}$ Lösungen des \highlight{inhomogenen LGS}
+	$$
+		A\cdot x = b.
+	$$
+	
+	\pause
+	Dann gilt:
+	$$
+		A\cdot ( x^{(1)} - x^{(2)} ) 
+		=  
+		A\cdot x^{(1)} - A\cdot x^{(2)} 
+		= 
+		b - b 
+		= 0.
+	$$
+	
+	\pause
+	\vspace{5mm}
+	Der Vektor $x^{(1)} - x^{(2)}\in \R^{m}$  ist somit eine Lösung des zugehörigen homogenen LGS $A\cdot x=0$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Die Lösungsmenge eines inhomogenen LGS}
+
+	Ist andererseits \highlight{$x_{h} \in \R^m$} eine Lösung des zugehörigen \highlight{homogenen} LGS 
+	$$
+		A\cdot x=0,
+	$$ 
+	dann folgt:
+	$$
+		A\cdot ( x^{(1)} + x_{h}) =  A\cdot x^{(1)} + A\cdot x_{h} = b + 0 = b.
+	$$
+	
+	\pause
+	\vspace{5mm}
+	Der Vektor \highlight{$x^{(1)} + x_{h} \in \R^m$} ist somit ebenfalls eine Lösung des \highlight{inhomogenen} LGS $A\cdot x=b$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Die Struktur der Lösungsmenge}
+
+	Seien \highlight{$\mathcal{L}_{inh}$} die Lösungsmenge des inhomogenen LGS 
+	$$
+		A\cdot x = b,
+	$$
+	und
+	\highlight{$\mathcal{L}_{h}$} die Lösungsmenge des zugehörigen homogenen LGS 
+	$$
+		A\cdot x=0
+	$$ 
+	sowie \highlight{$x_{sp} \in \mathcal{L}_{inh}$} eine (spezielle) Lösung des inhomogenen LGS.	
+	
+	\pause
+	\vspace{5mm}
+	Dann gilt:
+	$$
+ 		\mathcal{L}_{inh} = \{ x_{sp} + x_h ~|~ x_h \in \mathcal{L}_{h} \}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Die Struktur der Lösungsmenge}
+
+	$$
+ 		\mathcal{L}_{inh} = \{ x_{sp} + x_h ~|~ x_h \in \mathcal{L}_{h} \}.
+	$$
+	
+	\vspace{5mm}
+	\highlight{Beweis}\\[1mm]
+	
+	\highlight{$\{ x_{sp} + x_h ~|~ x_h \in \mathcal{L}_{h} \} \subseteq \mathcal{L}_{inh}$:}\\[1mm] 
+	s.o.\\[2mm]
+	
+	\pause
+	
+	\highlight{$\mathcal{L}_{inh} \subseteq \{ x_{sp} + x_h ~|~ x_h \in \mathcal{L}_{h} \}$:}\\[2mm]
+	
+	Sei $x \in \mathcal{L}_{inh}$.\\
+	$\Rightarrow x_h := x - x_{sp} \in \mathcal{L}_{h}$ \quad (s.o.).\\
+	$\Rightarrow  x = x_{sp} + x_h.$ 
+	\qed
+	
+	\vfill
+	
+\end{frame}
+%
+%---------------------------------------
+\section{Gau{\ss}-Algorithmus}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Gau{\ss}-Algorithmus} 
+
+	Der \highlight{Gau{\ss}-Algorithmus}\footnote{Johann Carl Friedrich Gau{\ss} (1777-1855)}
+	ist ein Algorithmus zur Bestimmung der Lösungsmenge eines LGS
+	$$
+		Ax = b.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Invertierbare Matrizen}
+
+	Seien $A\in\R^{n\times m}$, $b\in \R^n$ und $C\in \R^{n\times n}$ invertierbar. 
+	Dann gilt:
+	$$
+		A\cdot x = b  \quad\Longleftrightarrow\quad C\cdot (A\cdot x) = C\cdot b. \vspace{5mm}
+	$$
+
+	\pause
+	\vspace{5mm}
+	Die Multiplikation mit einer invertierbaren Matrix $C$ ändert somit nicht die Lösungsmenge des LGS $A\cdot x=b$:
+	$$
+		\{ x \in \R^m ~|~ A\cdot x = b\}
+		=
+		\{ x \in \R^m ~|~ C\cdot A\cdot x = C\cdot b\}
+	$$
+	
+	\pause
+	\vspace{4mm}
+	\highlight{Iterationsschritte des Gau{\ss}-Algorithmus:} 
+	Multiplikationen eines LGS $A\cdot x = b$  mit speziellen invertierbaren Matrizen.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Erlaubte Operationen}
+
+	\begin{itemize}
+		\item[(1)] \highlight{Vertauschen zweier Gleichungen:}\\
+			Multiplikation von $A\cdot x=b$ mit einer Vertauschungsmatrix. \pause
+		\item[(2)] \highlight{Ersetzten einer Gleichung durch ihr $\alpha$-faches ($\alpha \neq 0$):}\\
+			Multiplikation von $A\cdot x=b$ mit einer Diagonalmatrix wie z.B. $$\begin{pmatrix}\alpha & 0  \\ 0 & 1 \end{pmatrix}.$$ \pause
+		\item[(3)] \highlight{Ersetzen der $i$-ten Gleichung durch die Summe der $i$-ten Gleichung mit dem 
+			$\alpha$-fachen der $j$-ten Gleichung:}\\
+			Multipikation von $A\cdot x=b$ mit einer Additionsmatrix. \pause
+	\end{itemize}
+	
+	\vspace{3mm}
+	Da diese Matrizen invertierbar sind, ändern diese Umformungen nicht die Lösungsmenge des LGS. 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Notation}
+
+	$A\cdot x = b$ notieren wir als\\[3mm]
+	
+	$$	
+		\left(
+		\begin{array}{cccc|c}
+			a_{11}	&a_{12}	&\cdots	&a_{1m}	&b_1\\
+			a_{21} 	&a_{22} 	&\cdots 	&a_{2m} 	&b_2\\
+			\vdots 	&\vdots   	&            	&\vdots   	&\vdots\\
+			a_{n1} 	&a_{n2} 	&\cdots 	&a_{nm} 	&b_n
+		\end{array}
+		\right).
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schritt 1: \"Uberführung in Zeilenstufenform}
+
+	Ist in der ersten Spalte ein Element $\neq 0$, 
+	so lässt es sich durch Vertauschen (1) und ggf. Multiplizieren (2) sowie Addieren von Zeilen (3) erreichen, 
+	dass das umgeformte LGS die folgende Form hat:\\[5mm]
+	
+	$$
+		\left(
+		\begin{array}{cccc | c}
+			1		&a'_{12}	&\cdots	&a'_{1m}	&b'_1\\
+			0 		&a'_{22}	&\cdots	&a'_{2m}	&b'_2\\
+			\vdots	&\vdots   	&            	&\vdots   	&\vdots\\
+			0 		&a'_{n2} 	&\cdots 	&a'_{nm} 	&b'_n
+		\end{array}
+		\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schritt 1: \"Uberführung in Zeilenstufenform}
+
+	Bestehen die ersten Spalten aus Nullen, 
+	so führen wir diesen Schritt für die erste Spalte, die nicht nur aus Nullen besteht, durch:\\[5mm]
+	
+	$$
+		\left(
+		\begin{array}{ccccccc | c}
+			0		&\cdots 	& 0 		& 1 		& a'_{1k} 	& \cdots 	& a'_{1m} 	& b'_1\\
+			\vdots 	& 		& \vdots 	& 0 		& a'_{2k} 	& \cdots 	& a'_{2m} & b'_2\\
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots\\
+			0		&\cdots 	& 0 		& 0 		& a'_{nk} 	& \cdots 	& a'_{nm} 	& b'_n
+		\end{array}
+		\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schritt 1: \"Uberführung in Zeilenstufenform}
+	
+	Diesen Schritt wiederholen wir für die nächste Spalte, die ab Zeile 2 nicht nur aus Nullen besteht, und erhalten: \\[5mm]
+	
+	$$
+		\left(
+		\begin{array}{ccccccccccc | c}
+			0		&\cdots 	& 0 		& 1 		& *		& \cdots 	& *		& *		& *		&  \cdots	& * 		& *\\
+			\vdots 	& 		& \vdots 	& 0 		& 0		& \cdots	& 0		& 1		& * 		& \cdots 	& * 		& *\\
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& *		& \cdots	& *		& *\\
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots	& \vdots	& 		& \vdots	& \vdots\\			
+			0		&\cdots 	& 0 		& 0 		& 0 		& \cdots 	& 0 		& 0		& *		& \cdots	& *		& *
+		\end{array}
+		\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schritt 1: \"Uberführung in Zeilenstufenform}
+
+	Diesen Schritt  wiederholen wir mit den nächsten Spalten bis wir bei der letzten Spalte angelangt sind:	
+	$$
+		\left(
+		\begin{array}{ccccccccccccccc|c}
+			0		&\cdots 	& 0 		& 1 		& *		& \cdots 	& *		& *		& *		&  \cdots	& *		& *		& *		& \cdots	& * 		& c_1\\
+			\vdots 	& 		& \vdots 	& 0 		& 0		& \cdots	& 0		& 1		& * 		& \cdots 	& * 		& *		& *		& \cdots	& *		& c_2\\
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& *		& \cdots	& *		& *		& *		& \cdots	& *		& c_3\\			
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots	& \vdots	& 		& \vdots	& \vdots	& \vdots	&		& \vdots	& \vdots\\		
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& 0		& \cdots	& 0		& 1 		& *		&		& *		& c_r\\	
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& 0		& 		& 0		& 0		& \cdots	& \cdots	& 0		& c_{r+1}\\	
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots	& \vdots	& 		&\vdots	& \vdots	& 		& 		& \vdots	& \vdots\\				
+			0		&\cdots 	& 0 		& 0 		& 0 		& \cdots 	& 0 		& 0		& 0		& \cdots	& 0		& 0		& \cdots	& \cdots	& 0		& c_n
+		\end{array}
+		\right)
+	$$
+	
+	\pause
+	\vspace{2mm}
+	Das LGS ist genau dann lösbar, wenn $c_{r+1} = \ldots c_n = 0$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schritt 2: Gau{\ss}-Normalform}
+
+	Durch weitere erlaubte Umformungen (Multiplizieren und Addieren von Zeilen) erreichen wir, dass oberhalb der Einsen ausschlie{\ss}lich Nullen stehen:
+	$$
+		\left(
+		\begin{array}{ccccccccccccccc|c}
+			0		&\cdots 	& 0 		& 1 		& *		& \cdots 	& *		& 0		& *		&  \cdots	& *		& 0		& *		& \cdots	& * 		& d_1\\
+			\vdots 	& 		& \vdots 	& 0 		& 0		& \cdots	& 0		& 1		& * 		& \cdots 	& * 		& 0		& *		& \cdots	& *		& d_2\\
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& 0		& \cdots	& *		& 0		& *		& \cdots	& *		& d_3\\			
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots	& \vdots	& 		& \vdots	& \vdots	& \vdots	&		& \vdots	& \vdots\\		
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& 0		& \cdots	& 0		& 1 		& *		&		& *		& d_r\\	
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& 0		& 0		& 		& 0		& 0		& \cdots	& \cdots	& 0		& d_{r+1}\\	
+			\vdots 	&  		&\vdots 	& \vdots  	& \vdots    & 	   	& \vdots	& \vdots	& \vdots	& 		&\vdots	& \vdots	& 		& 		& \vdots	& \vdots\\				
+			0		&\cdots 	& 0 		& 0 		& 0 		& \cdots 	& 0 		& 0		& 0		& \cdots	& 0		& 0		& \cdots	& \cdots	& 0		& d_n
+		\end{array}
+		\right)
+	$$
+	
+	\pause
+	\vspace{2mm}
+	An dieser \highlightDef{Gau{\ss}-Normalform} lässt sich sehr einfach die Lösungsmenge des LGS ablesen.
+	
+\end{frame}
+%
+%
+%---------------------------------------
+\subsection{Beispiel}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	$$
+		\begin{array}{rcrcrcrcl}
+			2x_1	&+	&4x_2	&+	&4x_3	&+	&2x_4	&= 4\\
+				&	&x_2		&+	&x_3		&+	&x_4       	&= 1\\
+			2x_1	&+	&5x_2	&+	&5x_3	&+	&3x_4 	&= 5	
+		\end{array}
+	$$
+	
+	\pause
+	\vspace{10mm}
+	$$
+		\begin{pmatrix}
+			2 & 4 & 4 & 2\\
+			0 & 1 & 1 & 1\\
+			2 & 5 & 5 & 3
+		\end{pmatrix}
+		\cdot 
+		\begin{pmatrix}
+			x_1\\
+			x_2\\
+			x_3\\
+			x_4
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			4\\ 
+			1\\
+			5
+		\end{pmatrix}
+	$$
+	\pause
+	\vspace{10mm}	
+	$$
+	\left(
+	\begin{array}{cccc|c}
+		2 & 4 & 4 & 2 & 4\\
+		0 & 1 & 1 & 1 & 1\\
+		2 & 5 & 5 & 3 & 5
+	\end{array}
+	\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+
+	$$
+		\left(
+		\begin{array}{cccc|c}
+			2 & 4 & 4 & 2 & 4\\
+			0 & 1 & 1 & 1 & 1\\
+			2 & 5 & 5 & 3 & 5
+		\end{array}
+		\right)
+	$$
+	
+	\pause
+	\vspace{5mm}
+	Multiplikation der ersten Zeile mit $1/2$ ergibt
+	$$
+		\sim>
+		\left(
+		\begin{array}{cccc|c}
+			1 & 2 & 2 & 1 & 2\\
+			0 & 1 & 1 & 1 & 1\\
+			2 & 5 & 5 & 3 & 5
+		\end{array}
+		\right)
+	$$
+	
+	\pause
+	\vspace{5mm}
+	Addition des $(-2)$-fachen der ersten Zeile zur dritten Zeile:
+	$$
+		\sim>
+		\left(
+		\begin{array}{cccc|c}
+			1 & 2 & 2 & 1 & 2\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 1 & 1 & 1 & 1
+		\end{array}
+		\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	\vspace{-3mm}
+	$$
+		\left(
+		\begin{array}{cccc|c}
+			1 & 2 & 2 & 1 & 2\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 1 & 1 & 1 & 1
+		\end{array}
+		\right)
+	$$
+	
+	\pause
+	\vspace{5mm}
+	Addition des $(-1)$-fachen der zweiten Zeile zur dritten Zeile:
+	$$
+		\sim>
+		\left(
+		\begin{array}{cccc|c}
+			1 & 2 & 2 & 1 & 2\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 0 & 0 & 0 & 0
+		\end{array}
+		\right)
+	$$
+
+	\pause
+	\vspace{5mm}
+	Addition des $(-2)$-fachen der zweiten Zeile zur ersten Zeile:
+	$$
+		\sim>
+		\left(
+		\begin{array}{cccc|c}
+			1 & 0 & 0 & -1 & 0\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 0 & 0 & 0 & 0
+		\end{array}
+		\right)
+	$$
+	
+	\vspace{5mm}
+	Gau{\ss}-Normalform mit Stufen in den Spalten 1 und 2.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	$$
+		\left(
+		\begin{array}{cccc|c}
+			1 & 0 & 0 & -1 & 0\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 0 & 0 & 0 & 0
+		\end{array}
+		\right)
+	$$
+	
+	Es folgt: \pause
+	\begin{itemize}
+		\item $x_3, x_4$ können beliebig in $\R$ gewählt werden\\ (Spalten 3 \& 4: Keine Stufen): \\
+			\highlight{Freie Variablen} $x_3 = t_1, x_4 = t_2 \in \R$, \pause
+		\item $x_1=x_4 = t_2$,	\pause	
+		\item $x_2 = 1 - x_3 - x_4 = 1- t_1 - t_2$. \pause
+	\end{itemize}
+	
+	\vspace{3mm}
+	Somit ist für alle $t_1, t_2 \in \R$
+	$$
+		\begin{pmatrix}
+			x_1\\
+			x_2\\
+			x_3\\
+			x_4
+		\end{pmatrix}		
+		=
+		\begin{pmatrix}
+			t_2\\
+			1-t_1-t_2\\
+			t_1\\
+			t_2
+		\end{pmatrix}
+		=		
+		\begin{pmatrix}
+			0\\
+			1\\
+			0\\
+			0
+		\end{pmatrix}
+		+
+		t_1
+		\cdot
+		\begin{pmatrix}
+			0\\
+			-1\\
+			1\\
+			0
+		\end{pmatrix}
+		+
+		t_2
+		\cdot
+		\begin{pmatrix}
+			1\\
+			-1\\
+			0\\
+			1
+		\end{pmatrix}		
+	$$
+	eine Lösung des LGS.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: Lösungsmenge}
+
+	$$
+		{\mathcal L} =
+		\left\{
+					\begin{pmatrix}
+						0\\
+						1\\
+						0\\
+						0
+					\end{pmatrix}
+					+
+					t_1
+					\cdot
+					\begin{pmatrix}
+						0\\
+						-1\\
+						1\\
+						0
+					\end{pmatrix}
+					+
+					t_2
+					\cdot
+					\begin{pmatrix}
+						1\\
+						-1\\
+						0\\
+						1
+					\end{pmatrix}	
+					~|~
+					t_1, t_2 \in \R
+		\right\}
+	$$
+
+\end{frame}
+%
+%
+%---------------------------------------
+\subsection{Der $(-1)$-Trick}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Satz}
+Es sei $T =(t_{ij}) \in \R^{m\times n}$ eine Matrix in Gauß-Normalform mit $r$ Stufen in den Spalten $s_1,...,s_r$. Dann ist für jedes $j \in J:=\{1,...,n\}\setminus\{s_1,...,s_r\}$ der Vektor
+$$
+F^{(j)}:=\left(\sum_{i=1}^r t_{ij} e_{s_i} \right) - e_j
+$$
+eine Lösung des homogenen LGS $T\cdot x = 0$.\\
+Außerdem gilt für die Lösungsmenge $\mathcal L$ des homogenen LGS $T\cdot x=0$
+$$
+\mathcal{L}=\langle \{F^{(j)} \mid j \in J\} \rangle
+$$
+\pause
+\vfill
+Die Vektoren $F^{(j)}$ nennt man die \highlightDef{Fundamentallösungen} des homogenen LGS.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweis}
+Zuerst zeigen wir, dass die Vektoren $F^{(j)}$ Lösungen des homogenen LGS sind. \\\vspace{2mm}\pause
+$
+T\cdot F^{(j)}=\left(\sum_{i=1}^r t_{ij}\cdot T \cdot e_{s_i} \right) - T\cdot e_j $\\
+\hspace{13.25mm}$= \pause \left(\sum_{i=1}^r t_{ij}\cdot e_i \right) - T\cdot e_j$\\
+\hspace{13.25mm}$= \pause \sum_{i=1}^r t_{ij} e_i  - \sum_{k=1}^r t_{kj} e_k$\\
+\hspace{13.25mm}$= \pause 0
+$\\ \vspace{2mm}
+Dadurch ist auch direkt die Inklusion $\mathcal{L} \supseteq \langle \{F^{(j)} \mid j \in J\} \rangle$ klar. Somit bleibt noch $\subseteq$ zu zeigen. 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweis (Fortsetzung)}
+Sei also $x \in \mathcal L$ beliebig. Da $\mathcal L$ ein Untervektorraum des $\R^n$ ist, gilt
+$$
+v=x + \sum_{j\in J} x_j F^{(j)} \in \mathcal L
+$$
+Dieser Vektor hat als Eintrag an der Stelle $j$ eine $0$. Durch Einsetzen in das LGS und Ausnutzen von $v \in \mathcal L$ kann man zeigen, dass auch alle anderen Einträge von $v$ null sind. Somit gilt 
+$$
+x= -\sum_{j\in J} x_j F^{(j)} 
+$$
+und damit auch $\subseteq$. \hfill $\square$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: Der $(-1)$-Trick}
+
+	Ergänze in 
+	$$
+		\left(
+		\begin{array}{cccc | c}
+			1 & 0 & 0 & -1 & 0\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 0 & 0 & 0 & 0
+		\end{array}
+		\right)
+	$$
+	
+	\vspace{4mm}
+	eine Nullzeile an den Stellen ohne Stufe:
+	$$
+	\left(
+		\begin{array}{cccc | c}
+			1 & 0 & 0 & -1 & 0\\
+			0 & 1 & 1 & 1 & 1\\
+			0 & 0 & 0 & 0 & 0\\
+			0 & 0 & 0 & 0 & 0
+		\end{array}
+	\right)
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: Der $(-1)$-Trick}
+	
+	\vspace{2mm}
+	Ersetzte Nullen auf der Diagonalen durch eine $(-1)$:
+	$$
+	\left(
+	\begin{array}{cccc | c}
+		1 & 0 & 0 & -1 & 0\\
+		0 & 1 & 1 & 1 & 1\\
+		0 & 0 & 0 & 0 & 0\\
+		0 & 0 & 0 & 0 & 0
+	\end{array}
+	\right)
+	\sim>
+	\left(
+	\begin{array}{cccc | c}
+		1 & 0 & 0 		           	& -1 			& 0\\
+		0 & 1 & 1 			   	& 1 			& 1\\
+		0 & 0 & \highlight{-1} 	& 0 			& 0\\
+		0 & 0 & 0 				& \highlight{-1} 	& 0
+	\end{array}
+	\right)
+	$$
+	
+	\pause
+	Die rechte Seite 
+	$
+		\begin{pmatrix}
+			0\\ 1\\0\\0
+		\end{pmatrix}
+	$
+	ist eine spezielle Lösung des inhomogenen LGS und die beiden Spalten mit den 
+	$(-1)$en erzeugen die Lösungsmenge des zugehörigen homogenen LGS:
+	
+	$$
+		\mathcal{L}_h = \left\{ 
+				t_1
+				\cdot
+				\begin{pmatrix}
+					0\\1\\-1\\0
+				\end{pmatrix}
+				+
+				t_2
+				\cdot
+				\begin{pmatrix}
+					-1\\1\\0\\-1
+				\end{pmatrix}
+				~|~
+				t_1,t_2 \in \R
+			 \right\}
+	$$	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: Der $(-1)$-Trick}
+
+	$$
+		\left(
+		\begin{array}{cccc | c}
+			1 & 0 & 0 		           	& -1 			& 0\\
+			0 & 1 & 1 			   	& 1 			& 1\\
+			0 & 0 & \highlight{-1} 	& 0 			& 0\\
+			0 & 0 & 0 				& \highlight{-1} 	& 0
+		\end{array}
+		\right)
+	$$
+	\vfill
+	$$
+		\mathcal{L} =   \left\{ 
+				\begin{pmatrix}
+				0\\ 1\\0\\0
+				\end{pmatrix}
+				+
+				t_1
+				\cdot
+				\begin{pmatrix}
+					0\\1\\-1\\0
+				\end{pmatrix}
+				+
+				t_2
+				\cdot
+				\begin{pmatrix}
+					-1\\1\\0\\-1
+				\end{pmatrix}
+				~|~
+				t_1,t_2 \in \R
+			 \right\}
+	$$
+	
+\end{frame}
+%
+%---------------------------------------
+\subsection{Inverse Matrix}
+\makeSectionDividerPage
+%%%
+
+%
+\begin{frame}\frametitle{Inverse Matrix}
+	
+	Sei $A\in\R^{n\times n}$ invertierbar. Dann gilt:
+	$$
+		A\cdot A^{-1} = E.
+	$$
+	D.h., die erste Spalte von $A^{-1}$ löst das LGS
+	$$
+		A\cdot x 
+		= 
+		\begin{pmatrix}
+			1 \\ 0 \\ \vdots \\ 0
+		\end{pmatrix}.
+	$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inverse Matrix}
+	
+	Die zweite Spalte von $A^{-1}$ löst das LGS
+	$$
+		A\cdot x 
+		= 
+		\begin{pmatrix}
+			0 \\ 1 \\0\\ \vdots \\ 0
+		\end{pmatrix},
+	$$
+	usw.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inverse Matrix}
+
+	Die Inverse Matrix $A^{-1}$ lä{\ss}t sich somit mit dem Gau{\ss}-Algorithmus durch (simultanes) Lösen der linearen Gleichungssysteme
+	
+	$$
+		\left(
+		\begin{array}{ccc|ccccc}
+			a_{11}	&\cdots	&a_{1n}	&1		&0		&0		&\cdots	&0 \\
+			a_{21} 	&\cdots	&a_{2n}	&0		&1		&0		&\cdots	&0\\
+			\vdots 	&            	&\vdots	&\vdots	& 		&\ddots	&		&\vdots \\
+			a_{n1} 	&\cdots 	&a_{nn} 	&0         	&\cdots 	&\cdots	& 		& 1   
+		\end{array}
+		\right)
+	$$
+	
+	berechnen.
+	
+\end{frame}
+%
+
+\begin{frame}\frametitle{Beispiel}
+Es sei $A=\begin{pmatrix}1 & 2 & 0 \\ 1 & 0&0 \\ 2 & 0 & 2  \end{pmatrix} \in \R^{3\times 3}$	\\
+\vfill\pause
+	$$
+		\left(
+		\begin{array}{ccc|ccc}
+			1&2&0 	&1&0&0\\
+			1&0&0	&0&1&0\\
+			2&0&2	&0&0&1
+		\end{array}
+		\right) \sim> \pause
+				\left(
+		\begin{array}{ccc|ccc}
+			1&2&0 	&1&0&0\\
+			0&-2&0	&-1&1&0\\
+			0&-4&2	&-2&0&1
+		\end{array}
+		\right)
+	$$	
+		$$
+		\sim> \pause\left(
+		\begin{array}{ccc|ccc}
+			1&2&0 	&1&0&0\\
+			0&1&0	&\frac{1}{2}&-\frac{1}{2}&0\\
+			0&0&2	&0&-2&1
+		\end{array}
+		\right) 	\sim>\pause
+		\left(
+		\begin{array}{ccc|ccc}
+			1&0&0 	&0&1&0\\
+			0&1&0	&\frac{1}{2}&-\frac{1}{2}&0\\
+			0&0&1	&0&-1&\frac{1}{2}
+		\end{array}
+		\right) 
+	$$\pause \vfill
+	Somit ist $A^{-1}=\begin{pmatrix}0&1&0 \\ \frac{1}{2}&-\frac{1}{2}&0 \\0&-1&\frac{1}{2}  \end{pmatrix}$
+\end{frame}
+%
+\begin{frame}\frametitle{Weiterer Anwendungsfall: Lineare Unabhängigkeit prüfen}
+Gegeben seien Vektoren $v_1,...,v_m \in \R^n$ (wobei $m \le n$). \\\vfill
+Die Lösungsmenge $\cal L$ des homogenen LGS
+$$
+a_1\cdot v_1 + a_2\cdot v_2 + ... +a_m\cdot v_m=0
+$$
+gibt darüber Aufschluss ob die Vektoren linear unabhängig sind:\\
+\begin{itemize}
+\item Ist $\cal L$ $=\{0\}$, so besitzt das LGS nur die triviale Lösung und die Vektoren sind linear unabhängig.
+\item Ist $\cal L$ $\ne\{0\}$, so besitzt das LGS eine nicht-triviale Lösung und die Vektoren sind linear abhängig.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Seien $v_1=\begin{pmatrix} 1\\0\\1\\0 \end{pmatrix},\ v_2=\begin{pmatrix} 1\\1\\1\\0 \end{pmatrix}, \ v_3=\begin{pmatrix} 0\\1\\0\\1 \end{pmatrix} \in \R^4$.\\\vfill \pause
+Dann betrachten wir das LGS\\\vfill
+		$\left(
+		\begin{array}{ccc|c}
+			1&1&0 	&0\\
+			0&1&1	&0\\
+			1&1&0	&0\\
+			0&0&1   &0
+		\end{array}
+		\right) \sim>\pause \left(
+		\begin{array}{ccc|c}
+			1&1&0 	&0\\
+			0&1&0	&0\\
+			0&0&0	&0\\
+			0&0&1   &0
+		\end{array}
+		\right) \sim>\pause\left(
+		\begin{array}{ccc|c}
+			1&0&0 	&0\\
+			0&1&0	&0\\
+			0&0&1	&0\\
+			0&0&0   &0
+		\end{array}
+		\right)$\\\vfill
+Damit gilt $\cal L$ $=\{0\}$ und die Vektoren sind linear unabhängig.
+\end{frame}
+%
+%%
+\end{document}

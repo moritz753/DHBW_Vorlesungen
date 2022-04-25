@@ -1,0 +1,802 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Zusammenfassung
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Disclaimer}
+Diese Folien geben ein Zusammenfassung der Inhalte der Vorlesung. Sie sind \underline{nicht} vollständig und es ist nicht ausgeschlossen, dass die Klausur Inhalte umfasst, die auf diesen Folien nicht erwähnt werden. Alle Aufgabenbeispiele sind Beispiele und geben nicht zwingend Auskunft über die Art der Aufgaben in der Klausur.
+\end{frame}
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+\section{Aussagen- und Prädikatenlogik}
+%%%
+%
+\begin{frame}\frametitle{Aussagenlogik}
+	
+	\begin{definition}
+		Eine \highlightDef{Aussage} ist ein Satz, der entweder wahr (w) oder falsch (f) ist.
+	\end{definition}\vfill \pause
+		Die \highlightDef{Negation} oder \highlightDef{Verneinung} der Aussage $a$.\\[1mm]
+	$\neg a$ ist genau dann wahr, wenn $a$ falsch ist.\\
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c}
+			a	& \neg a	\\ \hline
+			w	& f		\\
+			f	& w
+		\end{array}
+	$$
+\end{frame}
+%
+\begin{frame}\frametitle{Aussagenlogik}
+		
+	Seien $a, b$ zwei Aussagen. \pause
+
+		Die Aussage $a \land b$ ist genau dann wahr, wenn $a$ und $b$ wahr sind.
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\land b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& f		\\
+			f	& w	& f		\\
+			f	& f	& f	
+		\end{array}
+	$$\pause
+		Die Aussage $a \lor b$ ist genau dann wahr, wenn mindestens eine der beiden Aussagen $a, b$ wahr ist 
+	(nicht-ausschließendes oder).
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\lor b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& w		\\
+			f	& w	& w		\\
+			f	& f	& f	
+		\end{array}
+	$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Seien $a,b,c$  Aussagen.
+Erstellen Sie die Wahrheitstafel für 
+$$
+	a\land (b \lor c)
+$$\pause
+\highlightDef{Lösung:}\\
+$$
+	\begin{array}{c | c | c ||c|| c }
+		a	&b	&c	&b \lor c& a\land (b \lor c)		\\ \hline
+		w	&w	&w&w	& w							\\
+		w	&w	&f	&w& w							\\
+		w	&f	&w	&w& w							\\
+		f	&w	&w	&w&f							\\
+		f	&f	&w&w	&f						\\
+		f	&w	&f	&w&f							\\
+		w	&f	&f	&f& f							\\
+		f	&f	&f	&f& f							\\
+	\end{array}
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Prädikatenlogik}
+	Eine \highlightDef{Aussageform $a(x)$} entsteht, wenn man in einer Aussage eine Konstante durch eine Variable ersetzt.\\[3mm]\pause
+	Die Aussage 
+	\highlightDef{$
+		\forall x: a(x)
+	$}
+	genau dann wahr, wenn $a(x)$ \highlightDef{für alle} $x$ wahr ist.\\
+		Die Aussage 
+	\highlightDef{$
+		\exists x: a(x)
+	$}
+	genau dann wahr, wenn ein $x$ \highlightDef{existiert}, sodass $a(x)$ für dieses $x$ wahr ist.\\[3mm]\pause
+Die Aussagen
+	$$
+		\forall x\in M: a(x) \ \text{ und } \exists x \in M: a(x)
+	$$
+	sind kürzere Schreibweisen für die Aussagen
+	$
+		\forall x: \big(x\in M \rightarrow a(x) \big) $ bzw. $ \exists x: \big( (x\in M) \land a(x) \big)
+	$.\\\pause
+	Es gilt: \vspace{-3mm}
+	\begin{eqnarray*}
+		\neg( \forall x: a(x) ) 	&\equiv	& \exists x: \neg a(x)\\
+		\neg( \exists x: a(x) )	& \equiv	& \forall x: \neg a(x)
+	\end{eqnarray*}
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Negieren Sie $\forall x\in \N: \exists y\in \N \text{~mit~} y = x+1.$ \\\pause\vfill
+\highlightDef{Lösung:}\\
+\begin{align*}
+&\neg\left(\forall x\in \N: \exists y\in \N \text{~mit~} y = x+1 \right) \\
+&\quad \\
+&\quad \equiv \exists x\in \N: \neg \left(\exists y\in \N \text{~mit~} y = x+1 \right)\\
+&\quad \equiv \exists x\in \N:  \forall y\in \N \text{~mit~} \neg \left(y = x+1 \right)\\
+&\quad \hspace{1mm} \textcolor{teal}{\equiv \exists x\in \N:  \forall y\in \N \text{~mit~} y \ne x+1}
+\end{align*}
+\end{frame}
+%
+%
+\section{Mengentheorie}
+%
+\begin{frame}\frametitle{Mengen}
+
+	\begin{itemize}
+		\item Eine \highlightDef{ Menge} $M$ ist eine Ansammlung von Objekten.
+		\item Objekte der Menge werden \highlightDef{ Elemente} von $M$ genannt.
+		\item Ist $x$ Element der Menge $M$, so schreiben wir 
+			$
+				x\in M.
+			$
+		\item Ist $x$ nicht in $M$ enthalten, so schreibt man entweder $x \notin M$ oder (selten) $\neg(x\in M)$. 
+		\item Ein wichtiges Beispiel ist die \highlightDef{ leere Menge} $\emptyset$. Das ist die Menge, die kein Element enthält, 
+			d.h.
+			$
+				\forall x: x\notin \emptyset.
+			$
+		\item Die Anzahl der Elemente einer Menge $M$ hei{\ss}t \highlightDef{ Mächtigkeit} oder \highlightDef{ Kardinalität} von $M$.
+			Notation: $|M|$ oder auch $\#M$.
+		\item 	Eine Menge $A$ hei{\ss}t \highlightDef{ Teilmenge} der Menge $B$ (geschrieben $A \subseteq B$), wenn gilt:
+	$
+		\forall x\in A: x\in B.
+	$
+		\item Die \highlightDef{ Potenzmenge} ${\cal P}(M)$ einer Menge $M$ ist die Menge, 
+	die aus allen Teilmengen von $M$ besteht:
+	$
+		{\cal P}(M) := \{ A ~|~ A \subseteq M \}.
+	$
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Bestimmen Sie alle Elemente von 
+$$
+M:=\{x \in \N \mid x^2<10\}
+$$
+sowie die Potenzmenge ${\cal P}(M)$.\\\pause\vfill
+\highlightDef{Lösung:}\\
+Die Elemente von $M$ sind $1$, $2$ und $3$, da für $n,m \in \N$ mit $n < m$ auch $n^2 < m^2$ gilt und $3^2=9<10$ aber $4^2=16>10$.\\
+Die Potenzmenge ist 
+$$
+{\cal P}(M)={\cal P}(\{1,2,3\})=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},\{1,2,3\}\}
+$$
+\end{frame}
+%
+\section{Abbildungen}
+%
+
+\begin{frame}\frametitle{Definition}
+		Eine \highlightDef{ Abbildung} 
+		$$
+			f:M\to N
+		$$ 
+		zwischen zwei Mengen $M$ und $N$ ist eine Teilmenge 
+		$$
+			f \subseteq M\times N
+		$$ 
+		mit der Eigenschaft dass für alle $m\in M$ genau ein $n\in N$ existiert, so dass $(m,n)\in f$.\\
+		Für dieses $n$ schreibt man $n = f(m)$.\\[2mm]
+		
+		\pause
+		$M$ hei{\ss}t \highlightDef{ Definitionsmenge}, $N$ \highlightDef{ Wertebereich} von $f$ und 
+		$f(M) := \{ f(m)~|~  m\in M \}$ \highlightDef{ Bildmenge} (auch mit \highlightDef{$Bild(f)$} notiert).\\[2mm]
+		
+		Schreibweise für Abbildungen:
+		\vspace{-2mm}
+		$$ 
+			f: M\to N, \quad m\mapsto f(m).
+		$$
+
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definitionen zu Abbildungen}
+		\begin{itemize}
+			\item \highlightDef{ injektiv}, wenn für alle $m_1, m_2 \in M$ gilt:
+				$$	f(m_1) = f(m_2)	
+					\quad
+					\Rightarrow
+					\quad
+					m_1 = m_2.
+				$$ 
+			\item \highlightDef{ surjektiv}, wenn $f(M)=N$, d.h.:
+				$$
+					\forall n\in N\; \exists m\in M: f(m)=n.
+				$$
+			\item \highlightDef{ bijektiv}, wenn $f$ injektiv und surjektiv ist.\\\vspace{2mm}
+			\item 		Seien $f: A\to B$ und $g:B\to C$ Abbildungen. 
+		Die \highlightDef{ Verkettung} oder \highlightDef{ Komposition} von $f$ und $g$ ist die Abbildung
+		$$
+			g\circ f: A\to C,\; x\mapsto g\big( f(x) \big).
+		$$
+		\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Es seien die Abbildungen $f:\R \to \R^3, x \mapsto (-x, 0, 2x)$ und $g: \R^3 \to \R, (x,y,z) \mapsto x+y+z$ gegeben. 
+\begin{itemize}
+\item[(a)] Sind $f$ und $g$ injektiv? Begr\"unden Sie Ihre Antwort.
+\item[(b)] Sind $f$ und $g$ surjektiv? Begr\"unden Sie Ihre Antwort.
+\item[(c)] Bestimmen Sie $g \circ f$.
+\end{itemize}\pause\vfill
+\highlightDef{Lösung:}\\
+\begin{itemize}
+\item[(a)]
+\highlightDef{$f$ ist injektiv:} Seien $x_1, x_2 \in \R$ mit $f(x_1)=f(x_2)$. Dann folgt $(-x_1,0,2x_1)=(-x_2,0,2x_2) \ \text{ und damit }  x_1=x_2$ \\\pause
+\highlightDef{$g$ ist nicht injektiv:} Aus $g((x_1,y_1,z_1))=g((x_2,y_2,z_2))$ folgt nicht zwingend $(x_1,y_1,z_1)=(x_2,y_2,z_2)$, denn z.B. $g((1,0,0))=1=g((0,1,0))$.\pause 
+\item[(b)] 
+\highlightDef{$f$ ist nicht surjektiv:} Es gilt $Bild(f) \ne \R^3$, da z.B. $(0,1,0) \notin Bild(f)$. Damit ist $f$ nicht surjektiv.\\\pause
+\highlightDef{$g$ ist surjektiv:} Sei $a \in \R$, dann gilt: $(a,0,0) \in \R^3$ und $a=g((a,0,0))$. Somit ist $g$ surjektiv.\pause
+\item[(c)]
+Es ist
+$ g\circ f : \R \to \R, x \mapsto x$
+denn 
+$g(f(x))=g((-x,0,2x))=-x+0+2x=x$.
+\end{itemize}
+\end{frame}
+%
+\section{Gruppen}
+%
+%
+\begin{frame}\frametitle{Definition}
+
+	Sei $M$ eine Menge. Eine \highlightDef{ Verknüpfung} auf $M$ ist eine Abbildung
+	$$
+		\ast: M \times M \to M.
+	$$\pause
+Seien $G$ eine Menge und $\ast$ eine Verknüpfung auf $G$.
+	Dann hei{\ss}t das Paar $(G,\ast)$ eine \highlightDef{ Gruppe}, wenn folgende Bedingungen erfüllt sind:
+	\begin{enumerate}
+		\item $\ast$ ist assoziativ. 
+		\item Es gibt ein Element $e\in G$, so dass
+			$$
+				\forall x\in G:\, x\ast e = e\ast x = x.
+			$$
+			Das Element $e$ nennt man \highlightDef{ neutrales Element} von $(G,\ast)$. Oft schreibt man $e_G$. 
+		\item Zu jedem Element $x\in G$ gibt es ein \highlightDef{ inverses Element}:
+			$$
+				\forall x\in G\,\, \exists y\in G:\, x\ast y = y\ast x = e.
+			$$
+	\end{enumerate}
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Sei 
+$$
+	G := \{ A \in \R^{2\times 2}~|~ \exists B \in \R^{2\times 2} \text{ mit } AB=BA=I_2 \}.
+$$
+Zeigen Sie, dass $(G,\cdot)$ eine Gruppe ist.\\\pause\vfill
+\highlightDef{Lösungskizze:}
+		\begin{itemize}
+			\item[(1)] Man zeigt, dass die Verkn\"upfung ``$\cdot$'' assoziativ ist (konkretes Rechnen!). 
+			\item[(2)] Das neutrale Element bzgl. ``$\cdot$'' ist die Matrix
+					$$
+						I_2 =
+							\begin{pmatrix}
+								1	& 0	\\
+								0	& 1	
+							\end{pmatrix},
+					$$
+					und $I_2\in G$:\\
+					F\"ur $B=I_2$ folgt
+					$$
+						I_2\cdot B = B\cdot I_2 =B= I_2
+					$$
+					und somit $I_2\in G$.
+			\item[(3)] Jede Matrix $A\in G$ besitzt ein inverses Element: Die Matrix $B$. Und mit $A \in G$ ist auch immer $B\in G$ (Vertauschte Rollen).
+		\end{itemize}
+\end{frame}
+%
+\section{Ringe und Polynome}
+%
+%
+\begin{frame}\frametitle{Definition Ring}
+	
+	Seien $R$ eine Menge und $+, \cdot$ zwei Verkn\"upfungen auf $R$. 
+	Dann hei{\ss}t $(R,+,\cdot)$ ein \highlightDef{ Ring}, wenn gilt:
+	\begin{enumerate}
+		\item $(R,+)$ ist eine abelsche Gruppe.
+		\item Die Verkn\"upfung $\cdot$ ist assoziativ.
+		\item Die Distributivgesetze gelten, d.h. $\forall a,b,c \in R$:
+			$$
+				a\cdot (b+c) = a\cdot b + a\cdot c
+			$$
+			und
+			$$
+		 		(a+b)\cdot c = a\cdot c + b\cdot c.
+			$$
+	\end{enumerate}
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Polynome}
+Sei $(R,+,\cdot)$ ein Ring. Ein \highlightDef{ Polynom} $f$ in der Variable $X$ mit Koeffizienten in $R$ ist ein Ausdruck der Form
+	$$
+		f = f(X) = a_nX^n + a_{n-1}X^{n-1} + \ldots + a_1X + a_0 
+	$$
+	mit $a_n,\ldots, a_0 \in R$\\
+	Seien $(R,+,\cdot)$ ein Ring und $R[X]$ die Menge aller Polynome mit Koeffizienten in $R$. Dann ist
+	$$
+		(R[X],+,\cdot)
+	$$
+	ein Ring, genannt der \highlightDef{Polynomring} über $R$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Der Grad eines Polynoms}
+Der Grad eines Polynoms $f=\sum_{k=0}^d a_kX^k \in R[X]$ ist definiert als
+$$
+deg(f):=\begin{cases} \max(\{k \in \N_0 \mid a_k\ne 0\}), \ & f\ne 0 \\
+						- \infty, & f=0 \end{cases}
+$$\pause\vfill
+Es gilt dann: $\forall f,g \in R[X]:$
+\begin{itemize}
+\item $deg(f+g)\le \max(deg(f),deg(g))$ 
+\item $deg(f\cdot g)\le deg(f)+deg(g)$ 
+\end{itemize}
+\vfill
+und falls $R$ nullteilerfrei ist sogar
+\begin{itemize}
+\item $deg(f\cdot g)= deg(f)+deg(g)$
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Geben Sie alle Polynome in $\Z_3[X]$ mit Grad $1$ an. \\\pause\vfill
+\highlightDef{Lösung:}\\
+Der Ring $\Z_3=\{[0],[1],[2]\}$ hat das Nullelement $[0]$.
+Somit sind die folgenden Polynome alle Polynome mit Grad $1$ in $\Z_3[X]$:
+\begin{eqnarray*}
+	f_1	&=	& [1]\cdot X + [0]	\\
+	f_2	&=	& [1]\cdot X + [1]	\\
+	f_3	&=	& [1]\cdot X + [2]	\\
+	f_4	&=	& [2]\cdot X + [0]	\\
+	f_5	&=	& [2]\cdot X + [1]	\\
+	f_6	&=	& [2]\cdot X + [2]	\\
+\end{eqnarray*}
+\end{frame}
+%
+\section{Körper}
+%
+\begin{frame}\frametitle{Definition}
+	Ein Ring $(K,+,\cdot)$ bei dem $(K\backslash\{0\},\cdot)$ sogar eine abelsche Gruppe ist, nennt man \highlightDef{ K\"orper}.\\\vspace{3mm}
+	Das heißt ein Körper ist ein kommutativer Ring mit Eins, in dem jedes von Null verschiedene Element ein multiplikatives Inverses besitzt.\\
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Sei
+$$
+	K := \{ a + b\sqrt{5} ~|~a,b \in \Q \}. 
+$$
+Zeigen Sie, dass $(K,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein  K\"orper ist.\\\vfill\pause
+\highlightDef{Lösungsskizze:}
+\begin{itemize}
+\item[1.)] $(K,+,\cdot)$ ist abgeschlossen unter $+$ und $\cdot$, da für $a+b\sqrt{5}$, $x+y\sqrt{5} \in K$ gilt
+$$
+(a+b\sqrt{5})+(x+y\sqrt{5})=(a+x)+(b+y)\sqrt{5} \in K
+$$
+sowie 
+$$
+(a+b\sqrt{5})\cdot(x+y\sqrt{5})=(ax+5by)+(bx+ay)\sqrt{5} \in K
+$$\pause
+\item[2.)] Da $K \subseteq \R$ und $+$ und $\cdot$ auf $\R$ assoziativ, distributiv und kommutativ sind, und $-(a+b\sqrt{5})=-a-b\sqrt{5} \in K$ gilt, folgt, dass $(K,+,\cdot)$ ein kommutativer Ring mit $1=1+0\sqrt{5} \in K$ ist.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Sei
+$$
+	K := \{ a + b\sqrt{5} ~|~a,b \in \Q \}. 
+$$
+Zeigen Sie, dass $(K,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein  K\"orper ist.\\\vfill
+\highlightDef{Lösungsskizze:}
+\begin{itemize}
+\item[3.)] Es bleibt also nur zu zeigen, dass jedes Element in $K \setminus \{0\}$ ein multiplikatives Inverses besitzt. \pause Seien dazu $z=a_1 + b_1 \sqrt{5}, \tilde z=a_2+b_2\sqrt{5} \in K\setminus \{0\}$. Dann gilt:
+$$
+z \cdot \tilde z =(a_1 + b_1\sqrt{5}) \cdot (a_2 + b_2\sqrt{5}) = (a_1a_2 + 5b_1b_2) + (a_1b_2 + a_2b_1)\sqrt{5}
+$$
+Setzt man nun $z \cdot \tilde z=1$, so erh\"alt man zwei Gleichungen:
+\begin{align*}
+a_1a_2 + 5b_1b_2&=1\\
+a_1b_2 + a_2b_1&=0
+\end{align*}
+\begin{itemize}
+\item[$b_1=0$:]
+Es ergibt sich $a_2=\frac{1}{a_1}$ und $b_2=0$ und somit $\tilde z = \frac{1}{a_1}$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Sei
+$$
+	K := \{ a + b\sqrt{5} ~|~a,b \in \Q \}. 
+$$
+Zeigen Sie, dass $(K,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein  K\"orper ist.\\\vfill
+\highlightDef{Lösungsskizze:}
+\begin{itemize}
+\item[3.)] Es bleibt also nur zu zeigen, dass jedes Element in $K \setminus \{0\}$ ein multiplikatives Inverses besitzt.
+\begin{itemize}
+\item[$b_1\ne 0$:]
+L\"ost man die zweite Gleichung nach $a_2$ auf, so erh\"alt man $a_2=\frac{-a_1b_2}{b_1}$. Dies kann man wiederum in die erste Gleichung einsetzen und erh\"alt
+$$
+a_1\cdot \frac{-a_1b_2}{b_1} + 5b_1b_2=1
+$$
+L\"ost man diese Gleichung nun nach $b_2$, so ergibt das $b_2=\frac{b_1}{5b_1^2-a_1^2}$. Setzt man $b_2$ nun zur\"uck in die Formel von $a_2$ ein, erh\"alt man $a_2=\frac{-a_1}{5b_1^2-a_1^2}$.\\
+Somit ist $\tilde z=\frac{-a_1}{5b_1^2-a_1^2} + \frac{b_1}{5b_1^2-a_1^2} \cdot \sqrt{5}$ das zu $z$ Inverse Element und es gilt auch offensichtlich $\tilde z \in K$. 
+\end{itemize}
+\end{itemize}
+Damit ist $K$ ein K\"orper.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Bemerkung}
+Wir haben im Verlauf des Semesters den \highlightDef{Gauß-Algorithmus} zum Lösen linearer Gleichungssysteme kennen gelernt (siehe weiter unten). Man kann ihn benutzen um in der obigen Aufgabe das LGS zu lösen:
+$$\begin{array}{rcl}
+a_1a_2 + 5b_1b_2&=&1\\
+a_1b_2 + a_2b_1&=&0
+\end{array} \Longleftrightarrow 
+\left(\begin{array}{cc|c}
+a_1 & 5b_1&1\\
+b_1&  a_1&0
+\end{array}\right)
+$$
+Wichtig: Auch hier muss die Fallunterscheidung gemacht werden!
+\end{frame}
+%
+\section{Vektorräume}
+%
+\begin{frame}\frametitle{Definition}
+
+	Sei $K$ ein Körper\footnote{genauer: $(K, +_{K}, \cdot_{K})$ mit Einselement $1_{K}$}. 
+	Ein \highlightDef{Vektorraum über dem Körper $K$} (oder \highlightDef{$K$-Vektorraum}) 
+	ist eine abelsche Gruppe $(V,+)$, für die eine Abbildung
+	$$
+		\cdot: K\times V \to V,\,
+		(a,v) \mapsto a\cdot v 
+	$$ 
+	mit folgenden Eigenschaften definiert ist:\\[1mm]
+	
+	$\forall a,b \in K, \forall u,v\in V$ gilt:
+	\begin{itemize}
+		\item[(1)] 
+			$1_{K}\cdot v = v$.
+		\item[(2)]
+			$a\cdot(b\cdot v) = (a\cdot_{K} b)\cdot v$.
+			(Assoziativgesetz)
+		\item[(3)]
+			$ (a+_{K}b)\cdot v = a\cdot v + b\cdot v$ \quad und\\
+			$ a\cdot (u+v) = a\cdot u + a\cdot v.$  
+			(Distributivgesetze)
+	\end{itemize}
+	
+	\vfill 
+	
+	Die Elemente $v\in V$ hei{\ss}en \highlightDef{Vektoren}, die Abbildung `` $\cdot$ '' heißt \highlightDef{Skalarmultiplikation}.
+	
+		\vfill 
+	Mit $(u-v)$ ist immer der Vektor $u + (-v)$ gemeint.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition}
+Es sei $K$ ein Körper und $V$ eine $K$-Vektorraum. Ein \highlightDef{Untervektorraum} von $V$ ist eine Teilmenge $U \subseteq V$, die bezüglich der Addition eine Untergruppe von $V$ ist und für die gilt:
+$$
+\forall a \in K, u\in U: a \cdot u \in U.
+$$
+
+$U$ ist dann selbst ein $K$-Vektorraum. Um einen Untervektorraum von beliebigen Teilmengen zu unterscheiden schreibt man oft $U\le V$.
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Es sei $V$ ein $K$-Vektorraum und $U_1,U_2 \le V$ Untervektorräume. Zeigen Sie, dass wenn $U_1 \cup U_2$ ein Untervektorraum von $V$ ist, dann entweder $U_1 \subseteq U_2$ oder $U_2 \subseteq U_1$ gelten muss.\\\pause \vfill
+\highlightDef{Lösung:}\\
+Annahme: $U_1 \nsubseteq U_2$ und $U_2 \nsubseteq U_1$. Dann gibt es Elemente $u_1 \in U_1 \setminus U_2$ und $u_2 \in U_2 \setminus U_1$. Da $u_1,u_2 \in U_1\cup U_2$ und $U_1\cup U_2$ ein Untervektorraum ist, liegt auch $u_1+u_2 \in U_1\cup U_2$. \\\pause
+Fall 1: $u_1+u_2 \in U_1$. Dann muss auch $(u_1+u_2)-u_1=u_2 \in U_1$ gelten, da $U_1$ ein UVR von $V$ ist. Dies ist aber ein Widerspruch zur Definition von $u_2$.\\\pause
+Fall 2: $u_1+u_2 \in U_2$. Dann muss auch $(u_1+u_2)-u_2=u_1 \in U_2$ gelten, da $U_2$ ein UVR von $V$ ist. Dies ist aber ein Widerspruch zur Definition von $u_1$.\\\pause
+Somit muss die Annahme falsch sein und entweder $U_1 \subseteq U_2$ oder $U_2 \subseteq U_1$ gelten. \hfill $\square$
+\end{frame}
+%
+\section{Basen und lineare Abbildungen}
+%
+\begin{frame}\frametitle{Lineare Unabhängigkeit}
+	Seien $V$ ein $K$-Vektorraum, $v_1,\ldots, v_k \in V$ und $a_1,\ldots, a_k \in K$. \\[1mm]
+	
+	Die Summe
+	$$
+		\sum_{j=1}^k a_j\cdot v_j = a_1\cdot v_1 + \ldots + a_k\cdot v_k
+	$$ 
+	nennt man eine \highlightDef{Linearkombination} der Vektoren $v_1, \ldots, v_k$.\\\vfill
+	Die Vektoren $v_1,\ldots, v_k \in V$ hei{\ss}en \highlightDef{linear unabhängig}, wenn die einzige Möglichkeit den Nullvektor als Linearkombination darzustellen, die triviale ist, d.h.
+	für $a_1,\ldots, a_k\in K$  gilt
+	$$
+		\left(\sum_{j=1}^k a_j\cdot v_j = a_1\cdot v_1 + \ldots + a_k\cdot v_k = 0 \right) \ \Leftrightarrow \ \left( a_1=\ldots = a_k = 0 \right)
+	$$
+	Eine \textit{maximale} Menge linear unabhängiger Vektoren $B=\{b_1,\ldots, b_k\}$ hei{\ss}t
+	\highlightDef{Basis} von $V$.\\
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lineare Abbildungen}
+Seien $V$ und $W$ zwei $K$-Vektorräume.
+	Eine Abbildung
+	$$
+		\Phi: V \to W
+	$$ 
+	nennt man \highlightDef{lineare Abbildung} oder \highlightDef{Homomorphismus}, 
+	wenn für alle $u,v \in V$ und $a\in K$ gilt:
+	\begin{itemize}
+		\item[i)] $\Phi(u+v)		= \Phi(u) + \Phi(v)$
+		\item[ii)] $\Phi(a\cdot v)	= a\cdot \Phi(v).$
+	\end{itemize}
+	\highlightDef{Satz}\\
+Es sei $\Phi:\R^n \to \R^m$ ein Homomorphismus und $B=\{e_1,...,e_n\}$ die Standardbasis von $\R^n$. Dann gilt:
+$$
+\Phi=\Phi_A:\R^n \to \R^m, v \mapsto A\cdot v 
+$$
+für die Matrix $A$ mit den Spalten $A_{\cdot j}=\Phi(e_j)$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Es sei $\Psi: \R^3 \to \R^3$ eine lineare Abbildung mit
+$$
+\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}) = \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}, \quad \Psi(\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}) = \begin{pmatrix}0\\2\\4 \end{pmatrix} \quad \text{ und } \quad \Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix} )= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}.
+$$
+\begin{itemize}
+\item[a)]  Zeigen Sie, dass die Vektoren $\begin{pmatrix}1\\1\\1 \end{pmatrix}$, $\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}$ und $\begin{pmatrix} 0\\1\\1\end{pmatrix}$ eine Basis von $\R^3$ bilden.
+\item[b)] Bestimmen Sie eine Matrix $A \in \R^{3\times 3}$, sodass $\Psi=\Phi_A$ gilt. 
+\end{itemize}\pause\vfill
+\highlightDef{Lösungsskizze:}\\
+\begin{itemize}
+\item[a)]Zeigen Sie, dass das homogene LGS $\left(\begin{array}{ccc|c}1&2&0&0\\1&0&1&0\\1&2&1&0 \end{array}\right)$ eindeutig lösbar ist.
+\item[b)] siehe Übungsblatt 7.
+\end{itemize}
+\end{frame}
+%
+\section{Lineare Gleichungssysteme}
+%
+%
+\begin{frame}\frametitle{Lineare Gleichungssysteme}
+
+	Ein \highlightDef{Lineares Gleichungssystem (LGS)}	 mit $n$ Gleichungen und $m$ Unbekannten ist ein System
+	$$
+		\begin{array}{ccccccccc}
+			a_{11}x_1	&+	&a_{12}x_2	&+	&\cdots	&a_{1m}x_m	&=	& b_1 \\
+			a_{21}x_1	&+	&a_{22}x_2 	&+	&\cdots	&a_{2m}x_m	&=	& b_2 \\
+			\vdots	&	&\vdots		&	&\vdots	&\vdots		&	& \vdots\\
+			a_{n1}x_1	&+ 	&a_{n2}x_2 	&+	&\cdots	&a_{nm}x_m	&=	& b_n 
+		\end{array}
+	$$
+	mit Koeffizienten $a_{ij}\in\R$ und $b_j\in \R$, für das eine Lösung
+	$$	
+		x
+		=
+		\begin{pmatrix} 
+			x_1\\
+			x_2\\
+			\vdots\\
+			x_m
+		\end{pmatrix} 
+		\in \R^m
+	$$
+	gesucht wird.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{LGS}
+
+	Ein lineares Gleichungssystem
+	$
+		A\cdot x = 0
+	$
+	hei{\ss}t \highlightDef{homogen},\\[2mm]
+	
+	ein lineares Gleichungssystem
+	$
+		A\cdot x = b
+	$
+	für $b\neq 0$ hei{\ss}t \highlightDef{inhomogen}.\\\vfill
+	Ist ein inhomogenes LGS 
+	$A\cdot x = b$ 
+	gegeben, so hei{\ss}t das LGS $A\cdot x = 0$ das zugehörige homogene LGS.\\\vfill
+	Für die Lösungsmenge eines inhomogenen LGS gilt
+	$$
+ 		\mathcal{L}_{inh} = \{ x_{sp} + x_h ~|~ x_h \in \mathcal{L}_{h} \}.
+	$$
+wobei \highlight{$x_{sp} \in \mathcal{L}_{inh}$} eine (spezielle) Lösung des inhomogenen LGS und \highlight{$\mathcal{L}_{h}$} die Lösungsmenge des zugehörigen homogenen LGS bezeichnet.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Seien $\alpha,\beta \in \R$ und
+$$
+	A =
+	\begin{pmatrix}
+		1	&5	&\alpha	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix},
+	\qquad
+	b =
+	\begin{pmatrix}
+		-1	\\
+		\beta	\\
+		1
+	\end{pmatrix}.
+$$
+\begin{itemize}
+\item[a)]  F\"ur welche Werte von $\alpha$ und $\beta$ ist das LGS $A\cdot x = b$
+\begin{itemize}
+	\item eindeutig l\"osbar,
+	\item nicht l\"osbar,
+	\item l\"osbar, aber nicht eindeutig l\"osbar?
+\end{itemize}
+	\item[b)] Bestimmen Sie die Lösungsmenge des LGS für $\alpha=-6$ und $\beta=0$.
+\end{itemize}
+\pause
+\highlightDef{Lösungsskizze:}\\
+Aufgabenteil a) siehe Übungsblatt 8.\\
+Aufgabenteil b): Gauß-Algorithmus und (-1)-Trick.
+\end{frame}
+%
+\section{Determinanten}
+%
+%
+\begin{frame}\frametitle{Entwicklungssatz von Laplace}
+Es sei $n \in \N$ und  $A \in \R^{n\times n}$ sowie $1\le i,j \le n$. Weiter bezeichne $A^{ij}$ die $(n-1)\times(n-1)$-Matrix, die aus $A$ entsteht, wenn man die $i$-te Zeile und die $j$-te Spalte entfernt. Dann gilt für die Determinante
+$$\det(A)=a_{11} \quad \text{ falls } n=1$$ 
+und für $n>1$
+\vfill
+$\det(A)=a_{i1}(-1)^{i+1}\det(A^{i1})+a_{i2}(-1)^{i+2}\det(A^{i2})+...$\\ \vspace{1mm}
+\hspace{21mm}$...+a_{in}(-1)^{i+n}\det(A^{in})$\\\vspace{3mm}
+\hspace{11.5mm}$=a_{1j}(-1)^{1+j}\det(A^{1j})+a_{2j}(-1)^{2+j}\det(A^{2j})+...$\\ \vspace{1mm}
+\hspace{21mm}$...+a_{nj}(-1)^{n+j}\det(A^{nj})$\\\vspace{3mm}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften der Determinante}
+\highlightDef{Satz}\\
+Ist $D=(d_{ij}) \in \R^{n\times n}$ eine Dreiecksmatrix, dann gilt
+$$
+\det(D)=\prod_{i=1}^n d_{ii} = d_{11} \cdot d_{22} \cdot ... \cdot d_{nn}
+$$
+\vfill
+\highlightDef{Weitere Eigenschaften der Determinante}\\
+Es seien $A,B \in \R^{n\times n}$ und $k \in \R$. Dann gilt: \vfill
+\begin{itemize}
+\item[1)] $\det(A\cdot B)=\det(A) \cdot \det (B)$
+\item[2)] $\det(k\cdot A)=k^n\cdot \det(A)$
+\item[3)] $\det(A^T)=\det(A)$
+\item[4)] Falls $\det(A)\ne0$, dann $\det(A^{-1})=\frac{1}{\det(A)}$.
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+
+Prüfen Sie mit Hilfe der Determinanten, ob die folgenden Matrizen invertierbar sind.
+
+$$
+A=\begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 &2 \\ 0&0&1\end{pmatrix}, \quad 
+B=\begin{pmatrix} 1 & 2 & 3 \\ 1 & 0 &2 \\ 0&0&1\end{pmatrix} \ \text{ und } \
+C=\begin{pmatrix}
+		1	& 0	&  3	& 0	\\
+		0	& 1	&  0	& -1	\\
+		0	& 0	&  -1	& 0\\
+		0	& 0	&  0& 3
+	\end{pmatrix}
+$$
+\pause
+\highlightDef{Lösung:}\\
+Für die Matrizen $A$ und $B$ siehe Übungsblatt 9.\\
+Die Matrix $C$ ist eine Dreiecksmatrix und daher ist die Determinante das Produkt der Diagonaleinträge:
+$$
+\det(C)=1\cdot1\cdot(-1)\cdot3=-3
+$$
+Da eine Matrix genau dann invertierbar ist, wenn ihre Determinante $\ne0$ ist, ist $C$ invertierbar.
+\end{frame}
+%
+\section{Diagonalisierbarkeit und Eigenwerte}
+%
+\begin{frame}\frametitle{Diagonalisierbarkeit}
+\highlightDef{Definition}\\
+Es sei $n \in \N$ und $A \in \R^{n\times n}$ eine Matrix. Dann heißt $A$ \highlightDef{diagonalisierbar}, wenn es eine invertierbare Matrix $D \in \R^{n\times n}$ gibt, sodass $D^{-1}\cdot A \cdot D$ eine Diagonalmatrix ist.\\\vfill
+\highlightDef{Satz}\\
+Es sei $A \in \R^{n\times n}$. Dann ist $A$ genau dann diagonalisierbar, wenn es eine Basis des $\R^n$ aus Eigenvektoren von $A$ gibt.\\
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenwerte und Eigenvektoren}
+Es sei $A\in\R^{n\times n}$ eine Matrix. \pause \vfill
+\begin{itemize}
+\item[a)] Ein Vektor $v \in \R^n\setminus \{0\}$ heißt \highlightDef{Eigenvektor} von $A$, wenn gilt: $A\cdot v = \lambda \cdot v$ für ein $\lambda \in \R$. \vfill
+\item[b)] Ein Wert $\lambda \in \R$ heißt \highlightDef{Eigenwert} von $A$, wenn es einen Eigenvektor $v$ von $A$ gibt mit $A\cdot v = \lambda\cdot v$. \vfill
+\item[c)] Die Menge aller Eigenwerte von $A$ nennt man das \highlightDef{Spektrum} von $A$, notiert als $Spec(A)$.
+\end{itemize}\vfill\pause
+\highlightDef{Eigenwertgleichung}\\
+Es sei $A\in \R^{n\times n}$ und $\lambda \in Spec(A)$ sowie $v \in \R^n\setminus \{0\}$. Dann gilt:\\\vfill 
+$
+v \in Eig(A,\lambda) \Longleftrightarrow Av=\lambda v  \Longleftrightarrow Av-\lambda v=0 \Longleftrightarrow (A-\lambda I_n)v=0
+$
+\vfill
+D.h. Eigenvektoren von $A$ sind nicht-triviale Lösungen des homogenen LGS \highlightDef{$(A-\lambda I_n)v=0$}.\\
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Das charakteristische Polynom}
+Es sei $A \in \R^{n\times n}$. Das Polynom
+$$
+CP_A(X):=\det(A-X\cdot I_n)
+$$
+heißt das \highlightDef{charakteristische Polynom} von $A$.
+\vfill 
+Die Matrix $A-\lambda I_n$ ist genau dann nicht invertierbar, wenn $\lambda$ eine Nullstelle des charakteristischen Polynoms von $A$ ist. Daraus folgt:
+$$
+\lambda \in Spec(A) \Longleftrightarrow CP_A(\lambda)=0
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Aufgabenbeispiel}
+Sei $A=\begin{pmatrix} -\frac{1}{4} & 0 & -\frac{1}{2} \\ 0 & \frac{9}{4} & 0 \\ \frac{1}{2} & 0 &1 \end{pmatrix}$. 
+\begin{itemize}
+\item[a)] Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte der Matrix $A$.
+\item[b)] Bestimmen Sie eine invertierbare Matrix $D \in \R^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{itemize}
+\vfill
+\highlightDef{Lösung:}\\
+siehe Übungsblatt 10.
+\end{frame}
+%
+%
+%
+\begin{frame}
+\LARGE{Viel Erfolg in der Klausur!}
+\end{frame}
+%
+%
+\end{document}

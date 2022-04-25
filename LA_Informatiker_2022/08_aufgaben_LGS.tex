@@ -1,0 +1,163 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE 	Übungsaufgaben 8}\\[3mm]
+		{\Large Lineare Gleichungssysteme}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+%-------------------------
+\section{LGS }
+%%%
+
+Berechnen Sie die L\"osungsmenge des LGS
+
+\begin{align*}
+	x_1 - x_2 + 6x_3 + 8x_4 &= 1,\\
+	-x_1 +2x_2 - 7x_3-2x_4 &= 1.
+\end{align*}
+
+%-------------------------
+\section{Noch ein LGS}
+%%%
+
+Berechnen Sie die L\"osungsmenge des LGS
+
+$$
+	\left(
+	\begin{array}{cccccc|c}
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\
+		1	& 1	& 3	& 2	& 0	& 1	& 1\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		3	& 2	& 7	& 7	& -1	& -2	& 4
+	\end{array}
+	\right).
+$$
+
+%-------------------------
+\section{L\"osbarkeit *}
+%%%
+
+Seien $\alpha,\beta \in \R$ und
+$$
+	A =
+	\begin{pmatrix}
+		1	&5	&\alpha	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix},
+	\qquad
+	b =
+	\begin{pmatrix}
+		-1	\\
+		\beta	\\
+		1
+	\end{pmatrix}.
+$$
+
+F\"ur welche Werte von $\alpha$ und $\beta$ ist das LGS $A\cdot x = b$
+\begin{itemize}
+	\item eindeutig l\"osbar,
+	\item nicht l\"osbar,
+	\item l\"osbar, aber nicht eindeutig l\"osbar?
+\end{itemize}
+
+
+%-------------------------
+\section{Spezielle Matrizen II}
+%%%
+
+Sei 
+$$
+	D = 
+	\begin{pmatrix}
+		d_{11}	&\cdots	&d_{15}\\
+		d_{21}	&\cdots	&d_{25}\\		
+		d_{31}	&\cdots	&d_{35}\\
+		d_{41}	&\cdots	&d_{45}\\
+	\end{pmatrix}
+	\in \R^{4\times 5}.
+$$
+
+\begin{itemize}
+	\item[(a)] Geben Sie eine invertierbare Matrix $A\in\R^{4\times 4}$ an, so dass
+			$$
+				A\cdot D = 
+				\begin{pmatrix}
+					d_{31}	&\cdots	&d_{35}\\
+					d_{21}	&\cdots	&d_{25}\\		
+					d_{11}	&\cdots	&d_{15}\\
+					d_{41}	&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Vertauschung von Zeilen 1 und 3.)
+	\item[(b)] Geben Sie eine invertierbare Matrix $B\in\R^{4\times 4}$ an, so dass
+			$$
+				B\cdot D = 
+				\begin{pmatrix}
+					d_{11} 			&\cdots	&d_{15} \\
+					d_{21}			&\cdots	&d_{25}\\		
+					2d_{31}			&\cdots	&2d_{35}\\
+					d_{41}			&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Multiplikation von Zeile 3 mit 2.)
+	\item[(c)] Geben Sie eine invertierbare Matrix $C\in\R^{4\times 4}$ an, so dass
+			$$
+				C\cdot D = 
+				\begin{pmatrix}
+					d_{11} 			&\cdots	&d_{15} \\
+					d_{21}			&\cdots	&d_{25}\\		
+					2d_{11} + d_{31}	&\cdots	&2d_{15} + d_{35}\\
+					d_{41}			&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Addition des 2-fachen von Zeile 1 zu Zeile 3.)
+\end{itemize}
+\quad
+
+\section{Nochmal die Abbildungsmatrix}
+%%%
+Es sei $\Psi: \R^3 \to \R^3$ eine lineare Abbildung mit
+$$
+\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}) = \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}, \quad \Psi(\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}) = \begin{pmatrix}0\\2\\4 \end{pmatrix} \quad \text{ und } \quad \Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix} )= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}.
+$$
+Bestimmen Sie eine Matrix $A \in \R^{3\times 3}$, sodass $\Psi=\Phi_A$ gilt, indem Sie das LGS
+$$
+A\cdot \begin{pmatrix}1\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix},\ 
+A\cdot \begin{pmatrix}2\\0\\2 \end{pmatrix}= \begin{pmatrix}0 \\ 2 \\ 4 \end{pmatrix} \text{ und }
+A\cdot \begin{pmatrix}0\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 0 \\ 2 \end{pmatrix} 
+$$
+lösen. 
+%
+
+\section{Inverse Matrix}
+%%%
+Bestimmen Sie mit Hilfe des Gauß-Verfahrens die inverse Matrix zu
+$$
+A= \begin{pmatrix}1&2 & 0&0 \\ 0 & 2 & 4 & 0 \\ 0& 2 & 0 & 1 \\ 5 & 0& 5 & 0  \end{pmatrix}
+$$
+
+\end{document}

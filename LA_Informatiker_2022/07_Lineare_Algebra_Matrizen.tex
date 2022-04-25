@@ -1,0 +1,1144 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Lineare Algebra}
+\subtitle{Lineare Abbildungen \& Matrizen}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+\section{Matrizen I}
+\makeSectionDividerPage
+%
+\subsection{Definition}
+%
+\begin{frame}\frametitle{Definition: $m \times n$-Matrix}
+Es sei $K$ ein Körper und $n,m \in \N$. Eine \highlightDef{$m\times n$-Matrix} $A$ über $K$ ist eine Anordnung von Elementen $a_{ij} \in K$ in $m$ Zeilen und $n$ Spalten:
+$$
+A=(a_{ij})_{i , j=1}^{m,n}=\begin{pmatrix}
+					a_{11} & a_{12} & ... &a_{1n} \\ 
+					a_{21} & a_{22} & ... &a_{2n} \\ 
+					... & ...&...&... \\ 
+					a_{m1} & a_{m2} & ... &a_{mn} \\ 
+			  \end{pmatrix}
+$$
+Den ersten Index, $i$, nennt man den \highlightDef{Zeilenindex}, den zweiten Index, $j$, den \highlightDef{Spaltenindex}.\\\pause
+Die $i$-te Zeile von $A$ wird mit $A_{i\cdot}$ und die $j$-te Spalte mit $A_{\cdot j}$ bezeichnet.\\
+Die Menge aller $m\times n$-Matrizen über $K$ notiert man als \highlightDef{$K^{m\times n}$} (oder auch $Mat(K,m,n)$).
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item $A=\begin{pmatrix} 1 & 2 & 3 \\ 1 & \sqrt{2} & \sqrt{3} \end{pmatrix} \in \R^{2\times 3}$ ist eine reelle $2\times 3$-Matrix.\pause
+\vfill
+\item $B=\begin{pmatrix} i & 2  \\ 1 & \sqrt{2} \\ 1 & 2+i \end{pmatrix} \in \C^{3\times 2}$ ist eine komplexe $3\times 2$-Matrix.\pause
+\vfill
+\item Spezialfall: Spaltenanzahl gleich 1
+$$
+C=\begin{pmatrix}  2  \\  \sqrt{2} \\ 1 \end{pmatrix} \in \R^{3\times 1}=\R^3
+$$\pause
+$\Rightarrow$ $n\times 1$-Matrizen über $K$ können als Vektoren aus $K^n$ verstanden werden.
+
+\end{itemize}
+\end{frame}
+%
+\subsection{Matrix-Vektor-Multiplikation}
+\begin{frame}\frametitle{Matrix-Vektor-Multiplikation}
+Es sei $A=(a_{ij})_{i,j=1}^{m,n} \in K^{m\times n}$ eine $m\times n$-Matrix über $K$ und $x=(x_j)_{j=1}^n\in K^n$ ein Vektor. Das \highlightDef{Matrix-Vektor-Produkt} von $A$ mit $x$ ist definert als
+		$$
+		A\cdot x 
+		:=
+		\begin{pmatrix}
+			a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n \\
+			a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n \\
+			\vdots				\\
+			a_{m1}x_1 + a_{m2}x_2 + \ldots + a_{mn}x_n\\
+		\end{pmatrix}
+		=
+		\left(
+			\sum_{j=1}^na_{ij}x_j
+		\right)_{i=1}^{m} \in K^m
+		$$\pause
+\vfill
+Man beachte, dass $x \in K^n$ und $A\cdot x \in K^m$.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item $A=\begin{pmatrix} 1 & 2 & 3 \\  \frac{1}{2} & 1 & \frac{1}{3} \end{pmatrix} \in \R^{2\times 3}$ und $x=\begin{pmatrix} 4  \\ 5 \\ 6 \end{pmatrix} \in \R^{3}$\\\pause
+$
+A\cdot x=\begin{pmatrix} 1 & 2 & 3 \\  \frac{1}{2} & 1 & \frac{1}{3} \end{pmatrix} \cdot \begin{pmatrix} 4  \\ 5 \\ 6 \end{pmatrix}$\pause$=\begin{pmatrix} 1\cdot4 + 2\cdot5 + 3\cdot6 \\  \frac{1}{2}\cdot4 + 1\cdot5 +\frac{1}{3}\cdot6 \end{pmatrix}$\pause$ = \begin{pmatrix} 32 \\ 9 \end{pmatrix}\pause
+$
+\item $A=\begin{pmatrix} 1 & 2 & 3 \end{pmatrix} \in \R^{1\times 3}$ und $x=\begin{pmatrix} 4  \\ 5 \\ 6 \end{pmatrix} \in \R^{3}$\\\pause
+$
+A\cdot x=\begin{pmatrix} 1 & 2 & 3  \end{pmatrix} \cdot \begin{pmatrix} 4  \\ 5 \\ 6 \end{pmatrix}$\pause$=\begin{pmatrix} 1\cdot4 + 2\cdot5 + 3\cdot6 \end{pmatrix}$\pause$ = \begin{pmatrix} 32 \end{pmatrix} = 32
+$
+\end{itemize}
+\end{frame}
+%--------------------------------------------
+\section{Lineare Abbildungen}
+%%%
+%
+%--------------------------------------------
+\subsection{Definition}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Definition}
+
+	Seien $V$ und $W$ zwei $K$-Vektorräume.
+	Eine Abbildung
+	$$
+		\Phi: V \to W
+	$$ 
+	nennt man \highlightDef{lineare Abbildung} oder \highlightDef{Homomorphismus}, 
+	wenn für alle $u,v \in V$ und $a\in K$ gilt:
+	\begin{itemize}
+		\item[i)] $\Phi(u+v)		= \Phi(u) + \Phi(v)$
+		\item[ii)] $\Phi(a\cdot v)	= a\cdot \Phi(v).$
+	\end{itemize}
+	
+	\pause
+	\vspace{10mm}
+	Durch i) ist $\Phi$ insbesondere ein Gruppenhomomorphismus von $(V,+)$ nach $(W,+)$.
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Eigenschaften lineare Abbildungen}
+\begin{itemize}
+\item Ist $B=\{b_1,...,b_n\}$ eine Basis von $V$, so ist jeder Homomorphismus $\Phi: V \to W$ durch die Bilder der Basisvektoren eindeutig bestimmt.\\\pause 
+Denn: Ist $v\in V$, so gibt es eine eindeutige Darstellung $v=\sum_{j=1}^n a_j\cdot b_j$ mit Koeffizienten $a_j \in K$.\\\pause
+Damit gilt:\\ $\Phi(v)$\pause$=\Phi(\sum_{j=1}^n a_j\cdot b_j)$ \pause$=\sum_{j=1}^n \Phi(a_j\cdot b_j)$\pause$=\sum_{j=1}^n a_j\cdot \Phi(b_j)$.\pause
+\vfill
+\item Ein Homomorphismus $\Phi: V \to W$ ist genau dann injektiv, wenn das Urbild des Nullvektors nur aus dem Nullvektor besteht: $\Phi^{-1}(\{0_W\})=\{0_V\}$. \qquad (Übungsaufgabe)\\\pause
+$\Phi^{-1}(\{0_W\})$ wird als \highlightDef{Kern} von $\Phi$ bezeichnet und ist ein Untervektorraum von $V$.
+\end{itemize}
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Beispiele}
+%%%
+%
+\begin{frame}\frametitle{Beispiel $\Phi: \R^n\to \R^n$}
+
+
+	Seien $c \in \R$ und $V=W=\R^n$ (Vektorraum über $\R$).
+	$$
+		\Phi: \R^n \to \R^n, \, v \mapsto \Phi(v) := c\cdot v.
+	$$\pause
+	Es gilt:
+$$
+		\Phi(u+v) 		= c\cdot(u+v) = c\cdot u + c\cdot v = \Phi(u) + \Phi(v)
+$$\pause
+und 
+$$
+		\Phi(a\cdot v)	= c\cdot (a\cdot v) = (c\cdot a)\cdot v = a\cdot (c\cdot v) = a\cdot \Phi(v).
+$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\Phi: \R^2\to \R^2$}
+
+	Seien $a_{11}, a_{12}, a_{21}, a_{22} \in \R$ und $V=W=\R^2$.
+	$$
+		\Phi\left( 	
+				\begin{pmatrix}
+					v_1	\\
+					v_2	
+				\end{pmatrix}
+			\right) 
+		:=
+		\begin{pmatrix}
+			a_{11}v_1 + a_{12}v_2	\\
+			a_{21}v_1 + a_{22}v_2	
+		\end{pmatrix}.
+	$$
+	\pause
+	\vspace{4mm}
+	
+	Es gilt für $a \in \R$,
+	$
+		u = 
+		\begin{pmatrix}
+			u_1	\\
+			u_2	
+		\end{pmatrix}
+	$
+	und
+	$
+		v = 
+		\begin{pmatrix}
+			v_1	\\
+			v_2	
+		\end{pmatrix}:
+	$			\pause	
+	\begin{align*}
+		\Phi(u+v) 		
+			&= 
+			\begin{pmatrix}
+				a_{11}(u_1+v_1) + a_{12}(u_2+v_2)	\\
+				a_{21}(u_1+v_1) + a_{22}(u_2+v_2)		
+			\end{pmatrix}	\\
+			&=
+			\begin{pmatrix}
+				a_{11}u_1 + a_{12}u_2	\\
+				a_{21}u_1 + a_{22}u_2		
+			\end{pmatrix}
+			+
+			\begin{pmatrix}
+				a_{11}v_1 + a_{12}v_2	\\
+				a_{21}v_1 + a_{22}v_2		
+			\end{pmatrix}	\\
+			&=
+			\Phi(u) + \Phi(v).	
+	\end{align*}	\pause
+	Analog:
+	$$
+		\Phi(a\cdot v) = a\cdot \Phi(v).
+	$$	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\Phi_A: \R^2\to \R^2$}
+
+	Mit 
+	$$
+		A =
+		\begin{pmatrix}
+			a_{11} 	& a_{12}	\\
+			a_{21}	& a_{22}	
+		\end{pmatrix}
+		\in \R^{2 \times 2}
+		%
+		\quad
+		\text{und} 
+		\quad
+		%
+		v = 
+		\begin{pmatrix}
+			v_1	\\
+			v_2	
+		\end{pmatrix}
+		\in\R^2
+	$$
+	haben wir definiert
+	$$
+		A\cdot v
+		:=
+		\begin{pmatrix}
+			a_{11}v_1 + a_{12}v_2	\\
+			a_{21}v_1 + a_{22}v_2	
+		\end{pmatrix}.
+	$$ \pause
+	Das hei{\ss}t
+	$$
+		\Phi(v) = \Phi_A(v) := A\cdot v.
+	$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Spiegelung am Ursprung}
+	
+	\vspace{2mm}
+	Seien
+	$$
+		A=
+		\begin{pmatrix}
+			-1	&	0	\\
+			0	&	-1
+		\end{pmatrix},
+		\qquad
+		v =
+		\begin{pmatrix}
+			v_1\\
+			v_2
+		\end{pmatrix}.
+	$$
+	Dann folgt:
+	$$
+		\Phi_A(v) = A\cdot v =
+		\begin{pmatrix}
+			-v_1\\
+			-v_2
+		\end{pmatrix} 
+		=
+		-v.
+	$$
+	
+	
+	\vspace{5mm}
+	\begin{center}
+		\includegraphics[scale=0.7]{Grafiken/Spiegelung/spiegelung.pdf}
+	\end{center}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Drehung um $\pi/2$}
+	
+	\vspace{2mm}
+	Seien
+	$$
+		A=
+		\begin{pmatrix}
+			0	&	-1	\\
+			1	&	0
+		\end{pmatrix},
+		\qquad
+		v =
+		\begin{pmatrix}
+			v_1\\
+			v_2
+		\end{pmatrix}.
+	$$
+	Dann folgt:
+	$$
+		\Phi_A(v) = A\cdot v =
+		\begin{pmatrix}
+			-v_2\\
+			v_1
+		\end{pmatrix}.
+	$$
+	
+	\vspace{5mm}
+	\begin{center}
+		\includegraphics[scale=0.7]{Grafiken/Drehung_90/drehung_90.pdf}
+	\end{center}
+
+\end{frame}
+%
+%
+%\begin{frame}\frametitle{Drehung um den Winkel $\varphi$}
+%
+%	Die lineare Abbildung
+%	$$
+%		\Phi: \R^2 \to \R^2,\,
+%		\Phi(v) := 
+%		\begin{pmatrix}
+%			\cos(\varphi)	&-\sin(\varphi)	\\
+%			\sin(\varphi)	&\cos(\varphi)
+%		\end{pmatrix}
+%		\cdot
+%		v
+%	$$
+%	dreht den Vektor $v\neq 0$ um den Winkel $\varphi$.\\
+%	(\"Ubungsaufgabe)
+%
+%\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\Phi_A: \R^n \to \R^m$}
+
+	Eine Matrix $A\in \R^{m\times n}$ 
+	$$
+		A = 
+		\begin{pmatrix}
+			a_{11}	&a_{12}	&\cdots	&a_{1n}\\
+			a_{21} 	&a_{22} 	&\cdots 	&a_{2n}\\
+			\vdots 	& \vdots   	&            	& \vdots \\
+			a_{m1} 	&a_{m2}	&\cdots 	&a_{mn}
+		\end{pmatrix}
+	$$
+	definiert eine \highlight{lineare Abbildung $\Phi_A: \R^n \to \R^m$} durch
+	$$
+		\Phi_A
+		\left(
+			\begin{pmatrix}
+				x_1\\
+				\vdots\\
+				x_n
+			\end{pmatrix}
+	     	\right) 
+	      :=
+		\begin{pmatrix}
+			a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n \\
+			a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n \\
+			\vdots				\\
+			a_{m1}x_1 + a_{m2}x_2 + \ldots + a_{mn}x_n\\
+		\end{pmatrix}.
+	$$
+	(Beweis: Analog zum Beispiel $\Phi_A: \R^2\to \R^2$.)
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\Phi_A: \R^n \to \R^m$}
+	
+	Mit 
+	$$
+		x 
+		=
+		\begin{pmatrix}
+			x_1\\
+			\vdots\\
+			x_n
+		\end{pmatrix}
+	$$
+	haben wir definiert
+	$$
+		A\cdot x 
+		:=
+		\begin{pmatrix}
+			a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n \\
+			a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n \\
+			\vdots				\\
+			a_{m1}x_1 + a_{m2}x_2 + \ldots + a_{mn}x_n\\
+		\end{pmatrix}
+		=
+		\left(
+			\sum_{j=1}^na_{ij}x_j
+		\right)_{i=1,\ldots, m}	
+	$$
+	Das hei{\ss}t
+	$$
+		\Phi_A(x) = A\cdot x.
+	$$
+	
+\end{frame}
+%
+%
+\subsection{Abbildungsmatrix}
+%
+\begin{frame}\frametitle{Abbildungsmatrix}
+Die obigen Beispiele waren (fast) alle von der Form $\Phi_A : \R^n \to \R^m, \Phi_A(x)=A \cdot x$ mit einer Matrix $A \in \R^{m\times n}$. \pause\\ \vfill
+In der Tat ist jeder Homomorphismus $\Phi: \R^n \to \R^m$ von dieser Form:\\\quad\\
+\pause
+\highlightDef{Satz}\\
+Es sei $\Phi:\R^n \to \R^m$ ein Homomorphismus und $B=\{e_1,...,e_n\}$ die Standardbasis von $\R^n$. Dann gilt:
+$$
+\Phi=\Phi_A \ \text{ für die Matrix } A \text{ mit den Spalten } A_{\cdot j}=\Phi(e_j)
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel: Abbildungsmatrix}
+	Seien $c \in \R$ und $V=W=\R^n$ (Vektorraum über $\R$).
+	$$
+		\Phi: \R^n \to \R^n, \, v \mapsto \Phi(v) := c\cdot v.
+	$$\pause
+	Seien nun $e_1,...,e_n$ die Standardbasisvektoren des $\R^n$. Dann\pause
+	$$
+	\Phi(e_1)=c\cdot e_1=\begin{pmatrix} c \\ 0 \\ 0\\... \\0 \end{pmatrix}, \Phi(e_2)=\begin{pmatrix} 0 \\ c \\ 0 \\ ... \\0 \end{pmatrix},...,\Phi(e_n)=\begin{pmatrix} 0 \\ 0 \\ ... \\ 0 \\c \end{pmatrix}
+	$$\pause
+	Das ergibt die Abbildungsmatrix
+	$$
+	A=\begin{pmatrix} c & 0 &0&... &0\\ 0&c&0&...&0 \\ 0&0 & ...&...&...\\... &...&...&c&0\\0&...&...&0&c \end{pmatrix}
+	$$
+\end{frame}
+%
+%--------------------------------------------
+\section{Verkettung \& Matrixmultiplikation}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Verkettung}
+	
+	\vspace{2mm}
+	Seien $V_1, V_2, V_3$ Vektorräume über $K$ und 
+	$\Phi_1: V_1 \to V_2$ sowie $\Phi_2:V_2\to V_3$ lineare Abbildungen.
+	Dann ist auch
+	$$
+		\Phi_2\circ\Phi_1: V_1 \to V_3
+	$$
+	eine lineare Abbildung.\\[3mm]
+	\pause
+	\highlight{Beweis}
+	\begin{align*}
+		\Phi_2\circ\Phi_1(u+v) 
+			&= \Phi_2\big( \Phi_1(u+v) \big) 			\\
+			&= \Phi_2\big( \Phi_1(u) + \Phi_1(v) \big)	\\
+			&= \Phi_2\big( \Phi_1(u) \big) + \Phi_2\big( \Phi_1(v) \big)	\\
+			&= \Phi_2\circ\Phi_1(u) + \Phi_2\circ\Phi_1(v)	\\[1mm]
+		\Phi_2\circ\Phi_1(a\cdot v) 
+			&= \Phi_2\big( \Phi_1(a\cdot v) \big) 		\\
+			&= \Phi_2\big( a\cdot \Phi_1(v) \big) 		\\
+			&= a\cdot\Phi_2\big( \Phi_1(v) \big) 		\\
+			&= a\cdot\Phi_2\circ\Phi_1(v)  		
+	\end{align*}	
+	
+	\vspace{-3mm}\qed
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verkettung \& Matrixmultiplikation}
+	
+	Seien $A\in \R^{m\times n}$ und $B \in \R^{p\times m}$. 
+	Dann sind
+	$$
+		\Phi_A: \R^n \to \R^m,\, x\mapsto A\cdot x
+	$$
+	und
+	$$
+		\Phi_B: \R^m\to \R^p, y\mapsto B\cdot y
+	$$
+	lineare Abbildungen.\\[3mm]
+	\pause
+	Dann ist $\Phi_B \circ \Phi_A: \R^n \to \R^p$ eine lineare Abbildung und besitzt daher eine Abbildungsmatrix $C \in \R^{p \times n}$.\pause\\
+	Wie sieht die Matrix $C \in \R^{p\times n}$ mit
+	$$
+		\Phi_C = \Phi_B\circ \Phi_A\, 
+	$$
+	aus?
+	
+
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verkettung \& Matrixmultiplikation}
+	
+$\Phi_B\circ \Phi_A(x) = \Phi_B\big(\Phi_A(x)\big)= \Phi_B(A\cdot x) $ \pause\\
+\hspace{20mm}$=\Phi_B\left(\left( \sum_{j=1}^na_{ij}x_j \right)_{i=1}^{m}\right)	= B \cdot \left(\sum_{j=1}^na_{ij}x_j \right)_{i=1}^{m}$ \pause	\\
+\hspace{20mm}$= \left( \sum_{i=1}^m b_{ki}\sum_{j=1}^na_{ij}x_j \right)_{k=1}^{p}$\\ \pause 
+\hspace{20mm}$= \left( \sum_{j=1}^n (\sum_{i=1}^m b_{ki}a_{ij}) x_j \right)_{k=1}^{p}$ \pause	\\
+\hspace{20mm}$= \Phi_C(x)$\\
+	
+	für die Matrix
+	$$
+		C:= \left(\sum_{i=1}^m b_{ki}a_{ij}\right)_{\substack{k=1\ldots p,\\ j=1\ldots n} } \in \R^{p \times n}.
+	$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verkettung \& Matrixmultiplikation}
+	
+$\Phi_B\circ \Phi_A(x) = \Phi_B\big(\Phi_A(x)\big)= \Phi_B(A\cdot x) $ \\
+\hspace{20mm}$=\Phi_B\left(\left( \sum_{j=1}^na_{ij}x_j \right)_{i=1}^{m}\right)	= B \cdot \left(\sum_{j=1}^na_{ij}x_j \right)_{i=1}^{m}$ 	\\
+\hspace{20mm}$= \left( \sum_{i=1}^m b_{ki}\sum_{j=1}^na_{ij}x_j \right)_{k=1}^{p}$\\  
+\hspace{20mm}$= \left( \sum_{j=1}^n (\textcolor{red}{\sum_{i=1}^m b_{ki}a_{ij}}) x_j \right)_{k=1}^{p}$ 	\\
+\hspace{20mm}$= \Phi_C(x)$\\
+	
+	für die Matrix
+	$$
+		C:= \left(\textcolor{red}{\sum_{i=1}^m b_{ki}a_{ij}}\right)_{k=1, j=1}^{p, n}  \in \R^{p \times n}.
+	$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition: Matrixmultiplikation}
+Seien $A\in \R^{m\times n}$ und $B \in \R^{p\times m}$. Das \highlightDef{Matrizenprodukt} von $B$ mit $A$ definiert man als
+
+$B\cdot A = \begin{pmatrix}
+			b_{11}	&b_{12}	&\ldots	&b_{1m}	\\
+			\vdots	&		&		&\vdots	\\
+			b_{p1}	&b_{p2}	&\ldots	&b_{pm}	\\
+		\end{pmatrix}
+		\cdot
+		\begin{pmatrix}
+			a_{11}	&a_{12}	&\ldots	&a_{1n}	\\
+			a_{21}	&a_{22}	&\ldots	&a_{2n}	\\
+			\vdots	&		&		&\vdots	\\
+			a_{m1}	&a_{m2}	&\ldots	&a_{mn}	\\
+		\end{pmatrix}	
+		:=	
+	$ \pause $	
+		\begin{pmatrix}
+			b_{11}a_{11} + b_{12}a_{21} + \ldots + b_{1m}a_{m1} & \cdots & b_{11}a_{1n}  + \ldots + b_{1m}a_{mn}\\
+			\vdots &           & \vdots \\
+			b_{p1}a_{11} + b_{p2}a_{21} + \ldots + b_{pm}a_{m1} & \cdots & b_{p1}a_{1n}  + \ldots + b_{pm}a_{mn}
+		\end{pmatrix} 
+	$
+	$$
+		= \left(\sum_{i=1}^m b_{ki}a_{ij}\right)_{k=1, j=1}^{p, n}
+	$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verkettung \& Matrixmultiplikation}
+	
+	Es folgt:
+	\begin{align*}
+		\Phi_B\circ\Phi_A(x) 
+			&= B\cdot (A\cdot x)	\\
+			&= (B\cdot A)\cdot x	\\
+			&= \Phi_{B\cdot A}(x).
+	\end{align*}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item[(1)]
+			$$
+				\begin{pmatrix}
+					1			&2			&3	\\
+					{4}	&{5}	&{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					1	&{2}	\\
+					3	&{4}	\\
+					5	&{6}	
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					22	&28	\\
+					49	&{64}
+				\end{pmatrix}
+			$$
+
+
+	
+	\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item[(1)]
+			$$
+				\begin{pmatrix}
+					1			&2			&3	\\
+					\highlight{4}	&\highlight{5}	&\highlight{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					1	&\highlight{2}	\\
+					3	&\highlight{4}	\\
+					5	&\highlight{6}	
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					22	&28	\\
+					49	&\highlight{64}
+				\end{pmatrix}
+			$$
+	
+			Hierbei:
+			$$
+				\highlight{64 = 4\cdot 2 + 5\cdot 4 + 6\cdot 6.}
+			$$
+
+	
+	\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item[(1)]
+			$$
+				\begin{pmatrix}
+					1			&2			&3	\\
+					{4}	&{5}	&{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					1	&{2}	\\
+					3	&{4}	\\
+					5	&{6}	
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					22	&28	\\
+					49	&{64}
+				\end{pmatrix}
+			$$
+	
+		\item[(2)]
+			$$
+				\begin{pmatrix}
+					\highlight{1}			&\highlight{2}			&\highlight{3}	\\
+					{4}	&{5}	&{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					\highlight{1}	\\
+					\highlight{3}	\\
+					\highlight{5}		
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					\highlight{22}	\\
+					{49}
+				\end{pmatrix}
+			$$
+	
+	\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item[(1)]
+			$$
+				\begin{pmatrix}
+					1			&2			&3	\\
+					{4}	&{5}	&{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					1	&{2}	\\
+					3	&{4}	\\
+					5	&{6}	
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					22	&28	\\
+					49	&{64}
+				\end{pmatrix}
+			$$
+
+		\item[(2)]
+			$$
+				\begin{pmatrix}
+					1			&2			&3	\\
+					\highlight{4}	&\highlight{5}	&\highlight{6}	\\		
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+					\highlight{1}	\\
+					\highlight{3}	\\
+					\highlight{5}		
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					22	\\
+					\highlight{49}
+				\end{pmatrix}
+			$$
+	
+	\end{itemize}
+\end{frame}
+%
+%--------------------------------------------
+\section{Matrizen II}
+%%%
+%
+%--------------------------------------------
+\subsection{Eigenschaften der Matrixmultiplikation}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Matrixmultiplikation ist assoziativ}
+
+	Seien  $A\in \R^{m\times n}, B \in \R^{p\times m}, C \in \R^{q\times p}$.
+	Da die Verkettung der Abbildungen $\Phi_A, \Phi_B, \Phi_C$ assoziativ ist, folgt für alle $x\in \R^n$: 
+	\begin{align*}
+		C\cdot\big((B\cdot A)\cdot x\big) 
+			&= \Phi_C\big( \Phi_{B\cdot A}(x) \big)		\\
+			&= \Phi_C\big( \Phi_B\circ\Phi_A(x)\big)	\\
+			&= \Phi_C\circ\Phi_B\big(\Phi_A(x)\big)	\\
+			&= \Phi_{C\cdot B}\big(\Phi_A(x)\big)		\\
+			&= (C\cdot B)\cdot (A\cdot x) 
+	\end{align*}
+	und somit
+	$$
+		C\cdot(B\cdot A) = (C\cdot B)\cdot A,
+	$$
+	denn eine Matrix $A$ legt die zugehörige lineare Abbildung $\Phi_A$ eindeutig fest. 
+	
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Quadratische Matrizen}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Einheitsmatrix}
+	
+	Die \highlightDef{Einheitsmatrix}
+	$$
+		I_n = 
+		\begin{pmatrix}
+			1 & 0 & 0 & \cdots & 0 \\
+			0 & 1 & 0 & \cdots & 0\\
+			0 & 0 & 1 & \cdots & 0\\
+			\vdots & & & & \vdots\\
+			0 & 0 & 0 & \cdots & 1
+		\end{pmatrix} \in \R^{n\times n}
+	$$
+	ist das neutrale Element der Matrixmultiplikation in $\R^{n\times n}$ 	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inverse Matrix}
+
+	Sei $A\in \R^{n\times n}$.
+	Die zu $A$ \highlightDef{inverse Matrix} $A^{-1}\in\R^{n\times n}$ ist diejenige Matrix, für die 
+	$$
+		A^{-1}\cdot A = A\cdot A^{-1} = I_n
+	$$
+	gilt.
+	\pause
+	\vfill
+	\highlight{Bemerkungen}
+	\begin{itemize}
+		\item[(a)] 
+			Die Abbildung $\Phi_{A^{-1}}$ ist die Umkehrabbildung von $\Phi_A$,
+			denn für alle $x\in \R^n$ gilt:
+			$$
+				\Phi_{A^{-1}} \circ \Phi_A(x) 
+				= A^{-1}\cdot(A\cdot x) 
+				= (A^{-1}\cdot A)\cdot x
+				= I_n\cdot x
+				= x.
+			$$\pause
+	\item[(b)] Es gibt nicht zu jeder Matrix $A\in\R^{n\times n}$ eine inverse Matrix. 
+	\end{itemize}
+	
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Matrixaddition}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Matrixaddition}
+
+	Für 
+	$$
+		A = 
+			\begin{pmatrix}
+				a_{11}	&a_{12}	&\cdots	&a_{1n}\\
+				a_{21} 	&a_{22} 	&\cdots 	&a_{2n}\\
+				\vdots 	&\vdots   	&            	&\vdots \\
+				a_{m1} 	&a_{m2} 	&\cdots 	&a_{mn}
+			\end{pmatrix},
+		\;
+		B = 
+			\begin{pmatrix}
+				b_{11}	&b_{12}	&\cdots	&b_{1n}\\
+				b_{21} 	&b_{22} 	&\cdots 	&b_{2n}\\
+				\vdots 	&\vdots   	&            	& \vdots \\
+				b_{m1} 	&b_{m2} 	&\cdots 	&b_{mn}
+			\end{pmatrix}
+		\in \R^{m\times n}
+	$$
+	definieren wir
+	$$
+		A+B := 
+			\begin{pmatrix}
+				a_{11} + b_{11}		&a_{12} + b_{12}	&\cdots	&a_{1n} + b_{1n}\\
+				a_{21} + b_{21}		&a_{22} + b_{22}	&\cdots	& a_{2n} + b_{2n}\\
+				\vdots 			&\vdots   			&            	& \vdots \\
+				a_{m1} + b_{m1}	&a_{m2} + b_{m2}	&\cdots	& a_{mn} + b_{mn}
+			\end{pmatrix} \in \R^{m \times n}
+	$$
+	\pause
+	Es gilt für alle $x\in \R^n$:
+	$$
+		\Phi_A(x) + \Phi_B(x) = \Phi_{A+B}(x). 
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Nullmatrix}
+
+	Die \highlightDef{Nullmatrix}
+	$$
+		\begin{pmatrix}
+			0		&\cdots	&0		\\
+			\vdots	&		&\vdots	\\
+			0		&\cdots	&0
+		\end{pmatrix}
+		\in \R^{m\times n}
+	$$
+	ist das neutrale Element der Matrixaddition  in $\R^{m\times n}$ und	
+	$(\R^{m\times n}, +)$ ist eine abelsche Gruppe.
+
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Matrizen als Vektorraum}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Multiplikation mit einem Körperelement}
+
+	Für $c\in\R$ und 
+	$$
+		A = 
+			\begin{pmatrix}
+				a_{11}	&a_{12}	&\cdots	&a_{1n}\\
+				a_{21} 	&a_{22} 	&\cdots 	&a_{2n}\\
+				\vdots 	&\vdots   	&            	&\vdots \\
+				a_{m1} 	&a_{m2} 	&\cdots 	&a_{mn}
+			\end{pmatrix}
+			=(a_{ij})_{i,j}\in \R^{m\times n}
+	$$
+	definieren wir
+	$$
+		c\cdot A := 
+			\begin{pmatrix}
+				ca_{11}	&ca_{12}	&\cdots	&ca_{1n}\\
+				ca_{21} 	&ca_{22} 	&\cdots 	&ca_{2n}\\
+				\vdots 	&\vdots   	&            	&\vdots \\
+				ca_{m1} 	&ca_{m2} 	&\cdots 	&ca_{mn}
+			\end{pmatrix}
+			=(ca_{ij})_{i,j}.
+	$$
+\pause
+	Es gilt für alle $x\in \R^n$:
+	$$
+		\Phi_{c\cdot A}(x) = (c\cdot A)\cdot x = c\cdot(A\cdot x) = c\cdot \Phi_A(x). 
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{$\R^{m\times n}$ als Vektorraum}
+
+	$(\R^{m\times n},+,\cdot)$ ist ein Vektorraum über $\R$ mit $\dim(\R^{m\times n}) = m\cdot n$.\\[10mm]
+	
+	\pause
+	\highlight{Beweisskizze} 
+	\begin{itemize}
+		\item[(1)] $(\R^{m\times n},+,\cdot)$ ist ein Vektorraum: 
+			\"Uberprüfung der definierenden Eigenschaften eines Vektorraums.\pause
+		\item[(2)] Die Matrizen $E_{ij}$, die in der Stelle $(i,j)$ (Zeile $i$, Spalte $j$) den Wert $1$ haben 
+			und an den anderen Stellen eine $0$, bilden eine Basis.
+	\end{itemize}
+
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Spezielle Matrizen}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Elementarmatrizen}
+Die Matrizen $E_{ij}$, die in der Stelle $(i,j)$ (Zeile $i$, Spalte $j$) den Wert $1$ haben und an den anderen Stellen eine $0$, heißen \highlightDef{Elementarmatrizen}.
+			
+$$
+E_{ij}:=\begin{pmatrix}
+0 & 0& ... &0& 0\\
+0 & 0& ... &0& 0\\
+...&...&0&...&...\\
+...& 0& 1 &0& ...\\
+...&...&0&...&...\\
+0& 0&...& 0
+\end{pmatrix}
+$$
+
+\end{frame}
+%
+\begin{frame}\frametitle{Transponierte Matrix}
+	
+	Sei
+	$$
+		A = 
+			\begin{pmatrix}
+				a_{11}	&a_{12}	&\cdots	&a_{1n}\\
+				a_{21} 	&a_{22} 	&\cdots 	&a_{2n}\\
+				\vdots 	&\vdots   	&            	&\vdots \\
+				a_{m1} 	&a_{m2} 	&\cdots 	&a_{mn}
+			\end{pmatrix}
+			\in \R^{m\times n}.
+	$$
+	
+	\vspace{3mm}
+	Die zu $A$  \highlightDef{transponierte} Matrix $A^{\top}$ ist definiert durch
+	$$
+	A^{\top} := 
+			\begin{pmatrix}
+				a_{11}	&a_{21}	&\cdots	&a_{m1}\\
+				a_{12} 	&a_{22} 	&\cdots 	&a_{m2}\\
+				\vdots 	&\vdots   	&            	&\vdots \\
+				a_{1n} 	&a_{2n} 	&\cdots 	&a_{mn}
+			\end{pmatrix}
+			\in \R^{n\times m}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	$$
+		A =
+		\begin{pmatrix}
+			1	&2	&3	\\
+			4	&5	&6	
+		\end{pmatrix},
+		\qquad
+		A^{\top} =
+		\begin{pmatrix}
+			1	&4	\\
+			2	&5	\\
+			3	&6	
+		\end{pmatrix}.
+	$$
+	
+	$$
+		v = 
+		\begin{pmatrix}
+			1	\\
+			2	\\
+			3
+		\end{pmatrix},
+		\qquad
+		v^{\top} =
+		\begin{pmatrix}
+			1	&2	&3
+		\end{pmatrix}
+		.
+	$$
+\end{frame}
+%
+\begin{frame}\frametitle{Additionsmatrix}
+Für $1\le i \ne j \le n$ und $\alpha \in \R$ definieren wir die Matrix $A_{i,j}(\alpha) \in \R^{n\times n}$ durch
+$$
+A_{i,j}(\alpha):=I_n + \alpha \cdot E_{i,j}
+$$
+Die Matrix $A_{i,j}(\alpha)$ heißt \highlightDef{Additionsmatrix} und für jede Matrix $M \in \R^{n\times m}$ ist $A_{i,j}(\alpha)\cdot M$ die Matrix, die aus $M$ entsteht, wenn man zur $i$-ten Zeile das $\alpha$-fache der $j$-ten Zeile addiert.
+\vfill
+Additionsmatrizen sind invertierbar mit inverser Matrix $A_{i,j}(\alpha)^{-1}=A_{i,j}(-\alpha)$.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel für Additionsmatrix}
+Es sei $n=2$ und 
+	$$
+		A_{1,2}(\alpha)=\begin{pmatrix}
+			1 & \alpha\\
+			0 & 1
+		\end{pmatrix}
+	$$
+	ist invertierbar mit inverser Matrix
+	$$
+		\begin{pmatrix}
+			1 & -\alpha\\
+			0 & 1
+		\end{pmatrix}.
+	$$ \pause
+	Es gilt:
+	$$
+		\begin{pmatrix}
+			1 & \alpha\\
+			0 & 1
+		\end{pmatrix} 
+		\cdot
+		\begin{pmatrix}
+			a & b & \ldots & c\\
+			d & e  & \ldots & f
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			a +\alpha d& b + \alpha e & \ldots & c + \alpha f\\
+			d & e  & \ldots & f
+		\end{pmatrix}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Vertauschungsmatrix}
+Für $1\le i \ne j \le n$ definieren wir die Matrix $V_{i,j} \in \R^{n\times n}$ durch
+$$
+V_{i,j}:=I_n +  E_{i,j}+  E_{j,i}-  E_{i,i}-  E_{j,j}
+$$
+Die Matrix $V_{i,j}$ heißt \highlightDef{Vertauschungsmatrix} und für jede Matrix $M \in \R^{n\times m}$ ist $V_{i,j}\cdot M$ die Matrix, die aus $M$ entsteht, wenn man in $M$ die $i$-te und die $j$-te Zeile vertauscht.
+\vfill
+Vertauschungsmatrizen sind invertierbar mit Inversermatrix $V_{i,j}^{-1}=V_{i,j}$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel für Vertauschungsmatrix}
+
+	Es sei $n=2$ und 
+	$$ 
+		V_{1,2} =
+		\begin{pmatrix}
+			0 & 1\\
+			1 & 0
+		\end{pmatrix}
+	$$
+	ist invertierbar mit inverser Matrix $V_{1,2}$.\\
+\pause \vfill
+	Es gilt:
+	$$
+		\begin{pmatrix}
+			0 & 1\\
+			1 & 0
+		\end{pmatrix} 
+		\cdot
+		\begin{pmatrix}
+			a & b & \ldots & c\\
+			d & e  & \ldots & f
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			d & e  & \ldots & f\\
+			a & b & \ldots & c
+		\end{pmatrix}.
+	$$
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Diagonalmatrizen}
+Für $\alpha_1,...,\alpha_n \in \R$ definiert man die \highlightDef{Diagonalmatrix} $diag(\alpha_1,...,\alpha_n)$ als
+$$
+diag(\alpha_1,...,\alpha_n):= \sum_{i=1}^n \alpha_i E_{i,i}
+$$
+für jede Matrix $M \in \R^{n\times m}$ ist $V_{i,j}\cdot M$ die Matrix, die aus $M$ entsteht, wenn man in $M$ für alle $1\le i \le n$ die $i$-te Zeile mit $\alpha_i$ multipliziert.
+\vfill
+Wenn alle $\alpha_i$ ungleich $0$ sind, dann ist $diag(\alpha_1,...,\alpha_n)$ invertierbar mit inverser Matrix $diag(\alpha_1,...,\alpha_n)^{-1}=diag(\alpha_1^{-1},...,\alpha_n^{-1})$.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel für Diagonalmatrix}
+
+	Für $\alpha, \beta \in \R\backslash\{0\}$ ist die Matrix
+	$$ 
+		diag(\alpha,\beta)=\begin{pmatrix}
+			\alpha & 0\\
+			0         & \beta
+		\end{pmatrix}
+	$$
+	invertierbar mit inverser Matrix 
+	$$ 
+		\begin{pmatrix}
+			1/\alpha & 0\\
+			0         & 1/\beta
+		\end{pmatrix}.
+	$$
+	\pause
+	Es gilt:
+	$$
+		\begin{pmatrix}
+			\alpha & 0\\
+			0         & \beta
+		\end{pmatrix}
+		\cdot
+		\begin{pmatrix}
+			a & b & \ldots & c\\
+			d & e  & \ldots & f
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\alpha a & \alpha b  & \ldots & \alpha c\\
+			\beta d & \beta e & \ldots & \beta f
+		\end{pmatrix}.
+	$$
+	
+\end{frame}
+%
+
+
+
+\end{document}

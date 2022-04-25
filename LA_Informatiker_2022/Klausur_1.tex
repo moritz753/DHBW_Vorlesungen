@@ -1,0 +1,213 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Seien $a$ und $b$  Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(\neg a) \lor (b \land a).
+$$
+\item Negieren Sie die Aussage \ $\forall x \in \N\ \exists y \in \Z\ \forall z \in \N: x+y \le z$.\vspace{2mm}\\
+(Hinweis: $\neg(\forall x \in \N\ \exists y \in \Z\ \forall z \in \N: x+y \le z)$ ist keine ausreichende Lösung!)\\
+\item Geben Sie die Definition der Potenzmenge ${\cal P}(M)$ einer Menge $M$ an und bestimmen Sie die Potenzmenge für $M = \{1,2,3,4\}.$
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es seien die Abbildungen $$f:\RR \to \RR^3, x \mapsto (x, 0, -3x)$$ und $$g: \RR^3 \to \RR, (x,y,z) \mapsto 2x+y+z$$ gegeben. 
+\begin{enumerate}[a)]
+\item Sind $f$ und $g$ injektiv? Begründen Sie Ihre Antwort.
+\item Sind $f$ und $g$ surjektiv? Begründen Sie Ihre Antwort.
+\item Bestimmen Sie $g \circ f$ und $f\circ g$.
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei 
+$$K:=\{a+b\sqrt{3} \mid a,b \in  \Q \} \subset \RR$$
+zusammen mit den Verknüpfungen $+$ und $\cdot$ wie in $\RR$ gegeben.
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Körpers an.
+
+\item Zeigen Sie, dass $(K,+,\cdot)$ ein Körper ist.
+
+\item Bestimmen Sie das multiplikative Inverse zu $z=5+2\sqrt{3} \in K$. 
+
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien $K$ ein Körper, $V$ ein $K$-Vektorraum und $U_1$ und $U_2$
+Untervektorräume von $V.$
+
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines $K$-Vektorraums an.
+\item Geben Sie die Definition eines Untervektorraums an.
+\item Zeigen Sie: $V=U_1\cup U_2  \ \Longleftrightarrow \ V=U_1\ \text{ oder }\ V=U_2.$
+\end{enumerate}
+
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien die Vektoren $b_1=\begin{pmatrix} 2\\1\\0\end{pmatrix}$, $b_2=\begin{pmatrix} 0\\1\\2\end{pmatrix}$ und $b_3=\begin{pmatrix} 1\\0\\1\end{pmatrix} \in \RR^3$ sowie die lineare Abbildung 
+$
+\Phi: \RR^3 \to \RR^2, v \mapsto \Phi(v)
+$
+mit 
+$$
+\Phi(b_1)=\begin{pmatrix} 4\\0\end{pmatrix}, \ \Phi(b_2)=\begin{pmatrix} 0\\4\end{pmatrix} \text{ und } \Phi(b_3)=\begin{pmatrix} 4\\4\end{pmatrix}
+$$
+gegeben.
+
+\begin{enumerate}[a)]
+
+\item Zeigen Sie, dass die Vektoren $b_1,b_2$ und $b_3$ linear unabhängig sind.
+\item Bestimmen Sie die Abbildungsmatrix $A$ von $\Phi$ bezüglich der Standardbasis.
+\item Berechnen Sie $\Phi(\begin{pmatrix} 3\\2\\1 \end{pmatrix})$.
+
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Bestimmen Sie alle $t\in\RR$, für die das folgende lineare Gleichungssystem lösbar ist:
+\[\begin{array}{rrrrrrrrr}
+2x_1&+&4x_2&+&2x_3&=&12t\\
+2x_1&+&12x_2&+&7x_3&=&12t+7\\
+x_1&+&10x_2&+&6x_3&=&7t+8
+\end{array}\]
+\item Geben Sie die Lösungsmenge des obigen linearen Gleichungssystems für $t=-1$ an.
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Berechnen Sie die Determinanten der folgenden Matrizen und geben Sie jeweils an, ob die Matrix invertierbar ist.\\
+%
+\hspace*{10mm} a) \ $A=\begin{pmatrix} 7 & 5 \\ 1 & 7 \end{pmatrix}$ \qquad
+b) \ $B=\begin{pmatrix} 1 & \frac{4}{7} & 93 \\ 0 & 2 & \frac{6}{47} \\ 0 & 0& 3 \end{pmatrix}$ \qquad
+c) \ $C=\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & 4 \\ 1 & -1 & 5 & 4 \end{pmatrix}$
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Sei $A=\begin{pmatrix} -\frac{1}{3} & 0 & -\frac{2}{3} \\ 0 & 3 & 0 \\ \frac{2}{3} & 0 &\frac{4}{3} \end{pmatrix}$. 
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Eigenvektors einer Matrix $B \in \RR^{n\times n}$ an.
+\item Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte von $A$.
+\item Bestimmen Sie eine invertierbare Matrix $D \in \RR^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{enumerate}
+
+
+\quad\\
+
+\vfill \hfill \textbf{Viel Erfolg!}
+%%%
+%Lösungsanfang...\\
+%\\Wir bestimmen das charakteristische Polynom $CP_A(X)=\det(A-X\cdot I_3)$:\\
+%$
+%det(A-X\cdot I_3)=\det(\begin{pmatrix} -\frac{1}{3}-X & 0 & -\frac{2}{3} \\ 0 & 3-X & 0 \\ \frac{2}{3} & 0 &\frac{4}{3}-X \end{pmatrix})$\\
+%\hspace{24.5mm}$=(3-X)\cdot \det(\begin{pmatrix} -\frac{1}{3}-X &  -\frac{2}{3} \\ \frac{2}{3} &\frac{4}{3}-X \end{pmatrix})$\\
+%\hspace{24.5mm}$=(3-X)\cdot ((-\frac{1}{3}-X)(\frac{4}{3}-X)-(-\frac{2}{3})(\frac{2}{3}))$\\
+%\hspace{24.5mm}$=(3-X)\cdot(-\frac{4}{9}-X+X^2+\frac{4}{9})$\\
+%\hspace{24.5mm}$=(3-X)\cdot(X^2-X)$\\
+%\hspace{24.5mm}$=-(3-X)(1-X)X
+%$
+
+
+
+
+\end{document}

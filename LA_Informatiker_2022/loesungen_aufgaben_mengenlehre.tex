@@ -1,0 +1,293 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+\include{macros}
+
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{L\"osungen \"Ubungsaufgaben 2\\ 
+	Mengenlehre
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+
+
+%%%
+\section{Gleichheit}
+%%%
+Gilt f\"ur die Mengen $A=B$?
+\begin{itemize}
+	\item[(a)] $A = \{2,4,6,8\}$, $B = \{2,8,6,2,4\}$.
+	\item[(b)] $A = \{ x \in \N ~|~ x^2 = 4\}$, $B = \{ x\in \Z ~|~ x^2 = 4\}$.
+\end{itemize}
+
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+	\item[(a)] Ja, da $A\subseteq B$ und $B\subseteq A$.
+	\item[(b)] Nein: $-2 \in B$ aber $-2 \notin A$.
+\end{itemize}
+
+
+%%%
+\section{Elemente}
+%%%
+Geben Sie alle Elemente der folgenden Menge an:
+$$
+	A = \{ x \in \N ~|~ x \text{~gerade und~} x < 17\}.
+$$
+
+%%%
+\paragraph{L\"osung:}
+%%%
+$A = \{2,4,6,8,10,12,14,16 \}$.
+
+
+%%%
+\newpage
+\section{Potenzmenge}
+%%%
+
+\begin{itemize}
+	\item[(a)]Sei $M = \{0,1,2,3\}.$ Bestimmen Sie ${\cal P}(M)$.
+	\item[(b)] Was ist ${\cal P}(\emptyset)$?
+	\item[(c)] Seien $A, B$ zwei Mengen. Zeigen Sie:
+			$$
+				{\cal P}(A) \cap {\cal P}(B) = {\cal P}(A\cap B).
+			$$
+	\item[(d)] Finden Sie zwei Mengen $A,B$, so dass
+			$$
+				{\cal P}(A) \cup {\cal P}(B) \neq {\cal P}(A\cup B).
+			$$
+\end{itemize}
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+	\item[(a)] ${\cal P}(M) = $\\
+			$\{ \emptyset,\\ 
+				\{0\}, \{1\}, \{2\}, \{3\},\\ 
+				\{0,1\}, \{0,2\}, \{0,3\}, \{1,2\}, \{1,3\}, \{2,3\},\\ 
+				\{0,1,2\}, \{0,1,3\}, \{0,2,3\}, \{1,2,3\},\\ 
+				\{0,1,2,3\}  \}.$
+	\item[(b)] ${\cal P}(\emptyset) = \{ \emptyset \}$.
+	\item[(c)] 1. Schritt:\\ 
+			Wir zeigen ${\cal P}(A) \cap {\cal P}(B) \subseteq  {\cal P}(A\cap B)$:\\
+			Sei $X \in {\cal P}(A) \cap {\cal P}(B).$ Dann folgt:
+			$$
+				X \subseteq A\quad \land \quad X \subseteq B.
+			$$
+			Das hei{\ss}t
+			$$
+				X \subseteq A \cap B
+			$$
+			und somit
+			$$
+				X \in  {\cal P}(A\cap B).
+			$$
+			
+			2. Schritt:\\
+			Wir zeigen $ {\cal P}(A\cap B) \subseteq  {\cal P}(A) \cap {\cal P}(B) $:\\
+			Sei $X \in {\cal P}(A\cap B)$. Dann folgt:
+			$$
+				X \subseteq A\cap B.
+			$$
+			Das hei{\ss}t
+			$$
+				X \subseteq A \quad \land \quad X \subseteq B
+			$$
+			und somit
+			$$
+				X \in {\cal P}(A) \cap {\cal P}(B).
+			$$
+			
+	\item[(d)] $A=\{1\}$ und $B=\{2\}$: 
+			$$
+				{\cal P}(A) = \{\emptyset, \{1\} \}, \quad {\cal P}(B) = \{\emptyset, \{2\} \}.
+			$$
+			$$
+				{\cal P}(A\cup B) = \{\emptyset, \{1\}, \{2\}, \{1,2\} \}.
+			$$
+\end{itemize}
+
+%%%
+\section{Mengenoperationen}
+%%%
+
+Seien $A = \{1,2,3,4,5 \}$, $B=\{1,3,5,7\}$, $C= \{ 1,2,4,7,9,11\}$. Bestimmen Sie:
+\begin{itemize}
+	\item[(a)] $A\cap B \cap C$
+	\item[(b)] $A\cup( B\cap C)$
+	\item[(c)] $(A\cup B) \cap C$.
+	\item[(d)] $(A\cap \emptyset) \cup (B \cup \emptyset)$.
+\end{itemize}
+
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+	\item[(a)] $A\cap B \cap C = \{ 1 \}$
+	\item[(b)] $A\cup( B\cap C) = \{ 1,2,3,4,5, 7 \}$
+	\item[(c)] $(A\cup B) \cap C = \{ 1,2,4,7\}$.
+	\item[(d)] $(A\cap \emptyset) \cup (B \cup \emptyset) = \emptyset \cup B = B$.
+\end{itemize}
+
+
+%%%
+\newpage
+\section{De Morgan'sche Regel}
+Beweisen Sie die zweite de Morgan'sche Regel:
+$$
+	(A \cap B)^{\mathsf{c}} = A^{\mathsf{c}} \cup B^{\mathsf{c}}.
+$$
+
+%%%
+\paragraph{L\"osung:}
+%%%
+$A,B$ seien Teilmenge von $M$ und das Komplement beziehe sich auf die Menge $M$.\\
+
+Sei $x \in (A \cap B)^{\mathsf{c}}$. Dann gilt:
+$$
+	(x \in M) \land (x \notin (A\cap B) ).
+$$
+Das ist \"aquivalent zu
+$$
+	(x \in M) \land \neg( (x \in A)\land (x\in B) )
+$$
+bzw. zu (de Morgan'sche Regel der Aussagenlogik)
+$$
+	(x \in M) \land ( \neg(x \in A)\lor \neg(x\in B) )
+$$
+Diese Aussage ist wiederum \"aquivalent zur folgenden (Distributivgesetz der Aussagenlogik)
+$$
+	( (x \in M) \land ( \neg(x \in A)) \lor ( (x \in M)  \land (\neg(x\in B)) )
+$$
+bzw
+$$
+	( (x \in M) \land ( x \notin A)) \lor ( (x \in M)  \land (x\notin B) ).
+$$
+Dies ist wiederum \"aquivalent zu
+$$
+	(x \in A^{\mathsf{c}}) \lor (x\in B^{\mathsf{c}})
+$$
+bzw
+$$
+	x \in A^{\mathsf{c}}\cup B^{\mathsf{c}}.
+$$
+
+Da wir nur \"Aquivalenzumformungen vorgenommen haben, gilt $x \in (A \cap B)^{\mathsf{c}}$ genau dann, wenn $x \in A^{\mathsf{c}}\cup B^{\mathsf{c}}$. Somit folgt die Behauptung.
+
+%%%
+\newpage
+\section{Abbildungen}
+Es seien die Abbildungen $f:\R \to \R^3, x \mapsto (-x, 0, 2x)$ und $g: \R^3 \to \R, (x,y,z) \mapsto x+y+z$ gegeben. 
+\begin{itemize}
+\item[(a)] Sind $f$ und $g$ injektiv? Begr\"unden Sie Ihre Antwort.
+\item[(b)] Sind $f$ und $g$ surjektiv? Begr\"unden Sie Ihre Antwort.
+\item[(c)] Bestimmen Sie $g \circ f$.
+\end{itemize}
+
+
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+\item[(a)]
+\underline{$f$ ist injektiv:} Seien $x_1, x_2 \in \R$ mit $f(x_1)=f(x_2)$. Dann folgt $$(-x_1,0,2x_1)=(-x_2,0,2x_2) \ \text{ und damit } \ x_1=x_2$$
+\underline{$g$ ist nicht injektiv:} Aus $g((x_1,y_1,z_1))=g((x_2,y_2,z_2))$ folgt nicht zwingend $(x_1,y_1,z_1)=(x_2,y_2,z_2)$, denn z.B. $g((1,0,0))=1=g((0,1,0))$.
+ 
+\item[(b)] 
+\underline{$f$ ist nicht surjektiv:} Es gilt $Bild(f) \ne \R^3$, da z.B. $(0,1,0) \notin Bild(f)$. Damit ist $f$ nicht surjektiv.\\
+\underline{$g$ ist surjektiv:} Sei $a \in \R$, dann gilt: $(a,0,0) \in \R^3$ und $a=g((a,0,0))$. Somit ist $g$ surjektiv.
+\item[(c)]
+Es ist
+$$ g\circ f : \R \to \R, x \mapsto x$$
+denn 
+$$g(f(x))=g((-x,0,2x))=-x+0+2x=x$$ 
+\end{itemize}
+
+%%%
+\newpage
+\section{Verkettung von Abbildungen (optional)}
+%%%
+
+Der Benzinverbrauch $B$ eines Fahrzeuges ist abh\"angig von der Geschwindigkeit $v$:
+$$ 
+	B(v) = 2 + 0.5v + 0.25v^2.
+$$
+Dabei ist $v$ in Meilen pro Stunde anzugeben und $B$ ist in (US-)Gallonen pro Meile abzulesen. 
+Wandeln Sie diese Formel in eine Formel um, bei der die Geschwindigkeit in Kilometer pro Stunde angegeben wird und 
+der Verbrauch in Liter pro Kilometer abgelesen werden kann.\\
+(Eine Meile entspricht 1.60935 Kilometern, eine Gallone entspricht 3.7853 Litern.)
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Seien $v_K$ die Geschwindigkeit in $km/h$ und $B_L$ der Benzinverbrauch in $L/km$.
+Wegen 
+$$
+	1 \frac{\text{Meile}}{h} = 1.60935 \frac{km}{h}  
+$$
+folgt
+$$
+	v \frac{\text{Meile}}{h} = 1.60935\cdot v \frac{km}{h}  = v_K  \frac{km}{h}  
+$$
+Die Abbildung
+$$
+	h(v_K) = \frac{v_K}{1.60935}
+$$
+bildet somit eine Geschwindigkeit in $km/h$ in Meilen/h ab.\\
+Wegen
+$$
+	1 \frac{\text{Gallone}}{\text{Meile}} = \frac{3.7853}{1.60935}\frac{L}{km}
+$$
+folgt
+$$
+ 	B_L \frac{\text{Gallone}}{\text{Meile}} =  \frac{1.60935}{3.7853}\cdot B_L \frac{L}{km} = B \frac{L}{km}
+$$
+Die Abbildung
+$$
+	g(B) = \frac{3.7853}{1.60935}\cdot B
+$$
+bildet somit einen Verbrauch in Gallonen/Meile in $L/km$ ab.\\
+
+Es folgt:
+\begin{align*}
+	B_L(v_K) &= g\circ B \circ h(v_K)	\\ 
+			&= g( 2 + 0.5\cdot v_K/1.60935 + 0.25\cdot (v_K/1.60935)^2  )\\
+			&= \frac{3.7853}{1.60935}\cdot ( 2 + 0.5\cdot v_K/1.60935 + 0.25\cdot (v_K/1.60935)^2  )	\\
+			&\approx 4.7 + 0.73\cdot v_K + 0.23\cdot v_K^2 
+\end{align*}
+\end{document}

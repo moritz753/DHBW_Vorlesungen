@@ -1,0 +1,340 @@
+\input{../preamble_aufgaben.teX}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE L\"osungen \"Ubungsaufgaben 6}\\[3mm]
+		{\Large Vektorr\"aume}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+%-------------------------------------------------------------------
+\section{Untervektorräume von $\R^n$}
+Es sei $\R^n=\{\begin{pmatrix} v_1 \\ v_2 \\ ... \\ v_n \end{pmatrix} \mid v_1,...,v_n \in \R \}$ mit der Addition
+$$
++: \R^n \times \R^n \to \R^n, (v,w) \mapsto v+w \text{ definiert durch } \begin{pmatrix} v_1 \\ v_2 \\ ... \\ v_n \end{pmatrix}+\begin{pmatrix} w_1 \\ w_2 \\ ... \\ w_n \end{pmatrix}:=\begin{pmatrix} v_1+w_1 \\ v_2+w_2 \\ ... \\ v_n+w_n \end{pmatrix}
+$$
+und der Skalarmultiplikation
+$$
+\cdot : \R \times \R^n \to \R^n, (a,v) \mapsto a\cdot V \text{ definiert durch } a \cdot \begin{pmatrix} v_1 \\ v_2 \\ ... \\ v_n \end{pmatrix}:=\begin{pmatrix} a v_1 \\ a v_2 \\ ... \\ a v_n \end{pmatrix}
+$$
+wie in der Vorlesung. Dann ist $\R^n$ ein $n$-dimensionaler reeller Vektorraum.
+\quad\\
+\begin{itemize}
+\item[a)] Zeigen Sie, dass für jedes $m \in \N, m\le n$ die Mengen
+$$
+U(m):= \{\begin{pmatrix} v_1 \\ v_2 \\ ... \\ v_n \end{pmatrix} \in \R^n \mid v_1,...,v_m =0 \} \ \text{ und } \ W(m) := \{\begin{pmatrix} v_1 \\ v_2 \\ ... \\ v_n \end{pmatrix} \in \R^n \mid v_{m+1},...,v_n =0 \}
+$$ 
+Untervektorräume von $\R^n$ sind.
+
+\item[b)] Zeigen Sie, dass für $\forall m \in \N, m\le n$ gilt: $\langle U(m)\cup W(m) \rangle = \R^n$.
+
+\item[d)] Finden Sie einen Untervektorraum $U \le \R^n$, sodass gilt
+$$
+\forall u=\begin{pmatrix} u_1 \\ u_2 \\ ... \\ u_n \end{pmatrix} \in U: ( \exists j \in \{1,...,n\}: u_j=0 \Rightarrow u=\begin{pmatrix} 0 \\ 0 \\ ... \\ 0 \end{pmatrix} )
+$$
+\end{itemize}
+
+
+
+%---------------------------
+\subsection*{L\"osung}
+%%%
+\begin{itemize}
+\item[a)] 
+	\begin{itemize}
+	\item $U(m)$: Es gilt $\begin{pmatrix} 0 \\ 0 \\ ... \\ 0 \end{pmatrix} \in U(m)$ und somit ist $U(m)\ne \emptyset$.\\ Außerdem gilt für alle $u,v \in U(m)$, dass $x:=u+(-v)$ wieder in $U(m)$ liegt, da $ x_i=u_i-v_i$ und damit $x_j=0-0=0$ für alle $j \in \{1,...,m\}$. Mit dem Untergruppenkriterium folgt, dass $(U(m),+)$ eine Untergruppe von $(\R^n,+)$ ist.\\
+	Da für alle $a \in \R$ das Produkt $a\cdot 0=0$ ist, gilt auch 
+	$$
+	\forall u \in U(m) \ \forall a \in \R: a \cdot u \in U(m)
+	$$
+	und somit ist $U(m)$ ein Untervektorraum vom $\R^n$.
+	\item $W(m)$: analog zu $U(m)$.
+	\end{itemize}
+\item[b)] Jeder Vektor 
+$$
+v=\begin{pmatrix} v_1\\ v_2 \\ ... \\ v_n \end{pmatrix} \in \R^n
+$$
+lässt sich zerlegen in
+$$
+v=\begin{pmatrix} v_1 \\...\\v_m \\0\\ ... \\ 0 \end{pmatrix}+\begin{pmatrix} 0  \\ ... \\0\\ v_{m+1} \\ ...\\v_n \end{pmatrix}
+$$
+Da nun $v_U:=\begin{pmatrix} 0  \\ ... \\0\\ v_{m+1} \\ ...\\v_n \end{pmatrix} \in U(m)$ und $v_W:=\begin{pmatrix} v_1 \\...\\v_m \\0\\ ... \\ 0 \end{pmatrix} \in W(m)$, lässt sich somit jeder Vektor in $\R^n$ als Linearkombination von Vektoren aus $U(m)$ und $W(m)$ schreiben. Damit gilt $\langle U(m)\cup W(m) \rangle = \R^n$.
+\item[c)]
+Wir definieren $U:=\langle \begin{pmatrix} 1  \\1\\...\\ 1 \end{pmatrix} \rangle = \{u \in \R^n \mid u_1=u_2=...=u_n\}$. Dann gilt:
+$$
+\left( \exists j: u_j=0 \right) \  \Rightarrow \ (u_1=...=u_n=u_j=0)
+$$
+und somit ist $U$ ein Untervektorraum wie gesucht.
+\end{itemize}
+
+%-------------------------------------------------------------------
+\newpage
+\section{Polynome als Vektorraum}
+%%%
+
+Sei
+$$
+	V := \{a_0 +a_1X+\ldots +a_nX^n~|~ a_0,\ldots, a_n\in \R \} \subset \R[X]
+$$
+die Menge der Polynome mit Koeffezienten in $\R$ und maximalem Grad $n$.\\
+
+Seien weiter die Verkn\"upfung $+$ auf $V$ und die Abbildung $\cdot: \R\times V \to V$ definiert:
+$$
+	(a_0 +\ldots +a_nX^n) + (b_0 +\ldots +b_nX^n) := a_0 +b_0+\ldots +(a_n+b_n)X^n
+$$
+$$
+	a\cdot(a_0 +\ldots +a_nX^n) := aa_0 +\ldots +aa_nX^n.
+$$
+
+\begin{itemize}
+	\item[a)] Zeigen Sie, dass $(V,+,\cdot)$  ein $\R$-Vektorraum ist.
+	\item[b)] Zeigen Sie, dass die Vektoren $1, X, \ldots, X^n \in V$ linear unabh\"angig sind.
+\end{itemize}
+
+%---------------------------
+\subsection*{L\"osung}
+%%%
+
+\begin{itemize}
+	\item[a)]
+		$(V,+)$ ist eine abelsche Gruppe (z.B. in der Vorlesung gezeigt).\\
+
+		Desweiteren gilt f\"ur $a,b \in \R$:
+		%
+		\begin{itemize}
+			\item[(1)] $1\cdot (a_0 + a_1X+\ldots + a_nX^n) = a_0 + a_1X+\ldots + a_nX^n$.
+			\item[(2)] Assoziativgesetz:
+				\begin{align*}
+					a\cdot(b\cdot (a_0 + a_1X+\ldots + a_nX^n) ) 
+						&= aba_0 + aba_1X+\ldots + aba_nX^n 		\\
+						&= (a\cdot b)\cdot (a_0 + a_1X+\ldots + a_nX^n) 
+				\end{align*}
+			\item[(3)] Distributivgesetze:
+				\begin{align*}
+						&(a+b)\cdot (a_0 + a_1X+\ldots + a_nX^n)  								\\		
+						&= aa_0 + aa_1X+\ldots + aa_nX^n + ba_0 + ba_1X+\ldots + ba_nX^n 			\\
+						&= a\cdot(a_0 + a_1X+\ldots + a_nX^n) +  b\cdot(a_0 + a_1X+\ldots + a_nX^n) 
+				\end{align*}	
+				(analog zweites Distributivgesetz)
+		\end{itemize}
+		Damit sind alle definierenden Eigenschaften eines Vektorraums erf\"ullt.
+	\item[b)]
+		Die Vektoren $1, X, \ldots, X^n \in V$ sind linear unabh\"angig:
+		$$
+			a_0 + a_1X+\ldots + a_nX^n = 0 
+			\quad
+			\Rightarrow
+			\quad
+			a_0=a_1=\ldots=a_n=0.
+		$$
+		
+		Tats\"achlich bilden diese Vektoren eine Basis, denn die Vektoren (Polynome)
+		$$
+			1,X, \ldots, X^n,\, a_0 + a_1X + \ldots + a_nX^n
+		$$
+		sind linear abh\"angig: Das letzte Polynom l\"asst sich als Linearkombination der ersten Vektoren schreiben.\\
+		
+%		Es gibt \"ubrigens noch viele weitere Basen von sochen Polynom-Vektorr\"aumen, die in Anwendungen wichtig sind:
+%		\begin{itemize}
+%			\item Lagrange-Basis: Lagrange-Interpolation. (Signalverarbeitung)
+%			\item Newton-Basis: Polynome, die mit Hilfe der Newton-Basis dargestellt werden, 
+%				k\"onnen effizient mit dem sogenannten Horner-Schema ausgewertet werden.
+%		\end{itemize} 
+\end{itemize}
+
+
+%-------------------------------------------------------------------
+\newpage
+\section{Lineare Unabh\"angigkeit}
+%%%
+
+Seien $V = \R^3$ und
+$$
+	e_1 :=
+	\begin{pmatrix}
+		1\\
+		0\\
+		0	
+	\end{pmatrix},
+	\quad
+	e_2 :=
+	\begin{pmatrix}
+		0\\
+		1\\
+		0	
+	\end{pmatrix},
+	\quad
+	e_3 :=
+	\begin{pmatrix}
+		0\\
+		0\\
+		1	
+	\end{pmatrix}
+	\quad
+	\in V.
+$$
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass die Vektoren $e_1, e_2, e_3 \in V$ linear unabh\"angig sind.
+	\item[(b)] Zeigen Sie, dass f\"ur jeden Vektor $v\in V$, die vier Vektoren $e_1, e_2, e_3, v \in V$ linear abh\"angig sind.
+	\item[c)] Finden Sie drei Vektoren $b_1,b_2,b_3 \in V$ mit $\{b_1,b_2,b_3\}\cap\{e_1,e_2,e_3\} = \emptyset$, für die die Aussagen aus a) und b) auch wahr sind.
+\end{itemize}
+
+%---------------------------
+\subsection*{L\"osung}
+%%%
+
+\begin{itemize}
+	\item[(a)]
+		Sei
+		$$
+			a_1\cdot e_1 + a_2\cdot e_2 + a_3\cdot e_3 = 0.
+		$$
+		Es folgt:
+		$$
+			\begin{pmatrix}
+				a_1\\
+				a_2\\
+				a_3
+			\end{pmatrix}
+			=
+			a_1e_1 + a_2e_2 + a_3e_3 
+			=
+			\begin{pmatrix}
+				0\\
+				0\\
+				0
+			\end{pmatrix}
+		$$
+		und somit 
+		$$
+			a_1=a_2=a_3=0.
+		$$
+	\item[(b)]
+		Sei
+		$$
+			v =
+			\begin{pmatrix}
+				v_1\\
+				v_2\\
+				v_3
+			\end{pmatrix}.
+		$$
+		Dann gilt:
+		$$
+			-v_1\cdot e_1 -v_2\cdot e_2 - v_3\cdot e_3 + 1\cdot v = 0.
+		$$
+		Dies ist eine nicht-triviale Darstellung des Nullvektors und somit sind die Vektoren $e_1, e_2, e_3, v$ linear abh\"angig.\\
+		
+
+
+Damit ist $\{e_1, e_2, e_3\}$ eine Basis des $\R^3$.
+
+
+\item[c)] Jede Basis des $\R^3$ erfüllt die geforderten Eigenschaften, also z.B. auch 
+$$
+	b_1 :=
+	\begin{pmatrix}
+		2\\
+		0\\
+		0	
+	\end{pmatrix},
+		b_2 :=
+	\begin{pmatrix}
+		0\\
+		2\\
+		0	
+	\end{pmatrix} \text{ und }
+		b_3 :=
+	\begin{pmatrix}
+		0\\
+		0\\
+		2	
+	\end{pmatrix}
+$$
+oder
+$$
+	\tilde b_1 :=
+	\begin{pmatrix}
+		1\\
+		1\\
+		0	
+	\end{pmatrix},
+		\tilde b_2 :=
+	\begin{pmatrix}
+		0\\
+		1\\
+		1	
+	\end{pmatrix} \text{ und }
+		\tilde b_3 :=
+	\begin{pmatrix}
+		1\\
+		0\\
+		1	
+	\end{pmatrix}.
+$$
+\end{itemize}
+
+%
+%-----------------
+\section{Die komplexen Zahlen als $\R$-Vektorraum - Teil 1}
+Es sei $\C=\{a+bi \mid a,b \in \R\}$ die Menge der komplexen Zahlen. Es sei weiter \\ $+: \C \times \C \to \C$ die Addition von komplexen Zahlen wie in der Vorlesung und \\$\cdot: \R \times \C \to \C, (x,a+bi) \mapsto xa+xbi$.
+\begin{itemize}
+\item[a)] Zeigen Sie, dass $\C$ mit der Addition und $\cdot$ wie oben als Skalarmultiplikation ein reeller Vektorraum ist.
+\item[b)] Finden Sie eine Basis des $\R$-Vektorraums $\C$ und bestimmen Sie dessen Dimension.
+\item[c)] Betrachten Sie die komplexen Zahlen $z_1=5, z_2=i$ und $z_3=10+2i$ als Vektoren und geben Sie deren Koordinaten bezüglich der Basis aus b) an.
+
+\end{itemize}
+
+
+%---------------------------
+\subsection*{L\"osung}
+%%%
+
+\begin{itemize}
+\item[a)] $(\C,+)$ ist eine abelsche Gruppe (siehe Vorlesung zu Körpern) und es gilt $1\cdot z =z$ für alle $z \in \C$.
+Da weiter $\R \subseteq \C$ und die Skalarmultiplikation eine Einschränkung der Multiplikation in $\C$ ist, folgen auch die Assoziativität und die Distributivgesetze.
+
+\item[b)] Die Vektoren $b_1:=1$ und $b_2:=i$ sind linear unabhängig (über $\R$), denn:\\
+Es seien $a_1,a_2 \in \R$ und  $a_1\cdot b_1 + a_2 \cdot b_2 =0$ eine Linearkombination, die den Nullvektor in $\C$ darstellt. Dann folgt
+\begin{align*}
+&& a_1\cdot b_1 + a_2 \cdot b_2 &=0\\
+\Leftrightarrow && a_1+ a_2\cdot i &=0\\
+\end{align*}
+und somit muss $a_1=a_2=0$ gelten.\\
+Außerdem gilt für jeden weiteren Vektor $v=a+bi \in \C$, dass $b_1,b_2,v$ linear abhängig sind, da 
+$$
+a\cdot b_1+b\cdot b_2-1\cdot v=0
+$$
+eine nicht triviale Darstellung des Nullvektors ist. Somit ist $B=\{b_1,b_2\}$ eine Basis von $\C$. Da $\#B=2$ ist die Dimension von $\C$ als $\R$-Vektorraum 2.
+
+\item[c)] In Koordinaten bzgl. der Basis $b_1=1,b_2=i$ aus b) gilt:
+\begin{itemize}
+\item[] $z_1=5=5\cdot b_1 + 0\cdot b_2 =\begin{pmatrix} 5 \\ 0 \end{pmatrix}$
+\item[] $z_2=i=0\cdot b_1 + 1\cdot b_2 =\begin{pmatrix} 0 \\ 1 \end{pmatrix}$
+\item[] $z_3=10 +2i=10\cdot b_1 + 2\cdot b_2 =\begin{pmatrix} 10 \\ 2 \end{pmatrix}$
+\end{itemize}
+
+\end{itemize}
+
+
+
+\end{document}

@@ -1,0 +1,279 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Die Determinante
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+\section{Motivation}
+%%%
+%
+\begin{frame}\frametitle{Eindeutige Löungen eines LGS}
+Oft steht man vor dem Fall eines linearen Gleichungssystems mit ebensovielen Gleichungen wie Unbekannten, d.h. man möchte 
+$$ 
+A\cdot x = b \quad \text{ mit } \ A \in \R^{n\times n} \text{ und } b\in \R^n
+$$
+lösen.\\\pause
+Ein solches Gleichungssystem hat genau dann eine eindeutige Lösung, wenn $A$ invertierbar ist, und die Lösung ist dann
+$$
+x= A^{-1} \cdot b
+$$
+Es ist daher von großen Interesse, zu wissen wann eine Matrix $A \in \R^{n\times n}$ invertierbar ist. 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{$2 \times 2$-Matrizen}
+
+Im Fall von $n=2$  lässt sich leicht das zeigen, dass 
+$$
+A=\begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \R^{2 \times 2} \text{genau dann invertierbar ist, wenn } \ ad-bc \ne 0.
+$$
+Die Zahl $ad-bc$ heißt die \highlightDef{Determinante} von $A$.	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{}
+Geometrisch lässt sie sich (bis auf Vorzeichen) als der Flächeninhalt des von den Spalten
+$$u=\begin{pmatrix} a  \\ c \end{pmatrix} \text{ und } v=\begin{pmatrix} b  \\ d \end{pmatrix}$$
+von $A$ aufgespannten Parallelogramms verstehen.
+	\begin{center}
+		\includegraphics[scale=0.6]{Grafiken/Parallelogramm.pdf}
+	\end{center}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{}
+	\begin{center}
+		\includegraphics[scale=0.6]{Grafiken/Parallelogramm_Flaeche.pdf}
+	\end{center}
+gesamt $= \pause (a+b)\cdot(d+c)=ad+ac+bd+bc$\\
+gelb $= \pause 2 \cdot a\cdot d$\\
+grün $= \pause 2\cdot(\frac{1}{2}\cdot a \cdot c)=a\cdot c$\\
+pink $= \pause 2\cdot(\frac{1}{2}\cdot b \cdot d)=b\cdot d$\\\pause
+\vfill
+Damit erhalten wir:\\\pause\vfill
+Flächeninhalt-Parallelogramm = gesamt $-$ gelb $-$ grün $-$ pink $= \pause(ad+ac+bd+bc)-2ad-ac-bd=-ad+bc=-(ad-bc)$.
+\end{frame}
+%
+\begin{frame}
+Der Flächeninhalt des Parallelogramms ist genau dann $0$, wenn die beiden Vektoren $u$ und $v$ linear abhängig sind.\\\pause\vfill
+Dieser geometrische Ansatz lässt sich so auf $n >2$ übertragen: Eine Matrix $A \in \R^{n\times n}$ ist genau dann invertierbar, wenn ihre Spalten linear unabhängig sind.\pause \\
+Dies widerrum ist genau dann der Fall, wenn das Volumen des von den Spalten aufgespannten Parallelopipeds ungleich $0$ ist.
+\end{frame}
+%
+%%
+\section{Determinante}
+%
+\subsection{Definition}
+%
+\begin{frame}\frametitle{Definition: Determinante}
+Die \highlightDef{Determinante} ist die eindeutig definierte Abbildung
+$$
+\det: \R^{n\times n} \to \R, A \mapsto \det(A)
+$$
+für die gilt:\pause
+\begin{itemize}
+\item[i)] $\det(I_n)=1$ \pause
+\item[ii)] Die Determinante ist linear in jeder Spalte, d.h. 
+$$
+\det(a_1,...,a_j+w_j,...,a_n)=\det(a_1,...,a_j,...,a_n)+\det(a_1,...,w_j,...,a_n)
+$$  \pause
+\item[iii)] Die Determinante ist alternierend, d.h. durch Vertauschen zweier Spalten verändert sich das Vorzeichen:
+$$
+\det(a_1,...,a_i,...,a_j,...,a_n)=- \det(a_1,...,a_j,...,a_i,...,a_n)
+$$ \pause
+\end{itemize}
+Wir betrachten hier die Matrix $A$ als das Tupel $(a_1,...,a_n)$ ihrer Spalten. 
+\end{frame}
+%
+\subsection{Entwicklungssatz von Laplace}
+%
+\begin{frame}\frametitle{Entwicklungssatz von Laplace}
+Es sei $n \in \N$ und  $A \in \R^{n\times n}$ sowie $1\le i,j \le n$. Weiter bezeichne $A^{ij}$ die $(n-1)\times(n-1)$-Matrix, die aus $A$ entsteht, wenn man die $i$-te Zeile und die $j$-te Spalte entfernt. Dann gilt für die Determinante\pause
+$$\det(A)=a_{11} \quad \text{ falls } n=1$$ \pause
+und für $n>1$
+\vfill
+$\det(A)=a_{i1}(-1)^{i+1}\det(A^{i1})+a_{i2}(-1)^{i+2}\det(A^{i2})+...$\\ \vspace{1mm}
+\hspace{21mm}$...+a_{in}(-1)^{i+n}\det(A^{in})$\\\vspace{3mm}\pause
+\hspace{11.5mm}$=a_{1j}(-1)^{1+j}\det(A^{1j})+a_{2j}(-1)^{2+j}\det(A^{2j})+...$\\ \vspace{1mm}
+\hspace{21mm}$...+a_{nj}(-1)^{n+j}\det(A^{nj})$\\\vspace{3mm}
+\end{frame}
+%
+\subsection{Beispiele}
+%
+\begin{frame}\frametitle{Beispiel: $n=2$}
+\begin{itemize}
+\item $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ und $i=1$:\pause \\ \vspace{1mm}$\det(A)=a(-1)^{1+1}\det(d)+b(-1)^{1+2}\det(c)\pause=ad-bc$
+\pause \vfill
+\item $B=\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ und $i=1$:\pause \\ \vspace{1mm}$\det(B)=1(-1)^{1+1}\det(4)+2(-1)^{1+2}\det(3)=4-6=-2$
+\pause \vfill
+\item $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ und $j=2$:\pause \\ \vspace{1mm}$\det(A)=b(-1)^{1+2}\det(c)+d(-1)^{2+2}\det(a)\pause=-bc+da$\\\hspace{11.75mm}$=ad-bc$
+\pause \vfill
+\item $C=\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ und $j=2$:\pause \\ \vspace{1mm}$\det(C)=2(-1)^{1+2}\det(2)+4(-1)^{2+2}\det(1)\pause=-4+4=0$
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: $n=3$}
+$A=\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 0 \\ 4 & 2 & 0 \end{pmatrix}$\\\pause\vfill
+Zuerst \highlightDef{entwickeln} wir die Determinante nach der 2. Zeile ($i=2$): \\\pause\vfill
+\small$\det(A)=0\cdot(-1)^{2+1}\det(A^{21})+1\cdot(-1)^{2+2}\det(A^{22})+0\cdot(-1)^{2+3}\det(A^{23})$\pause\\
+\hspace{10.75mm}$=1\cdot\det(\begin{pmatrix} 1&3\\4&0 \end{pmatrix})$\\\pause \vfill
+\normalsize Als nächstes entwickeln wir nach der 2. Spalte (j=2):\\\pause\vfill
+\small $ \det(A)=1\cdot\det(\begin{pmatrix} 1&3\\4&0 \end{pmatrix})=1\cdot (3\cdot(-1)^{2+1}\det(4)+0\cdot(-1)^{2+2}\det(1))$\\\hspace{10.75mm}$=1\cdot(-3\cdot4 +0)=-12$
+\end{frame}
+%
+\subsection{Determinanten von Dreiecksmatrizen}
+%
+\begin{frame}\frametitle{Determinante von Dreiecksmatrizen und Diagonalmatrizen}
+Eine Matrix $D =(d_{ij})\in \R^{n\times n}$ heißt obere (untere) Dreiecksmatrix, wenn für alle $i>j$ ($i<j$) gilt: $d_{ij}=0$.\\\pause
+Beispiel: $D=\begin{pmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0&0&6 \end{pmatrix}$ ist eine obere Dreiecksmatrix. \\\vfill
+Insbesondere ist jede Diagonalmatrix eine Dreiecksmatrix.\\
+\vfill \pause
+\highlightDef{Satz}\\
+Ist $D=(d_{ij}) \in \R^{n\times n}$ eine Dreiecksmatrix, dann gilt
+$$
+\det(D)=\prod_{i=1}^n d_{ii} = d_{11} \cdot d_{22} \cdot ... \cdot d_{nn}
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweis}
+Wir betrachten den Fall für eine obere Dreiecksmatrix (untere Dreiecksmatrix als Übungsaufgabe).\\\pause
+Wir verwenden für den Beweis das Prinzip der vollständigen Induktion.\\\pause
+\highlightDef{Induktionsanfang:} $n=1$, dann gilt $\det(D)=d_{11}$.\\\pause
+\highlightDef{Induktionsvoraussetzung:} Für jede obere $(n-1)\times(n-1)$-Dreiecksmatrix $D$ gelte $\det(D)=\prod_{i=1}^{n-1} d_{ii}$.\\\pause
+\highlightDef{Induktionsschritt:} Es sei $D \in \R^{n\times n}$ eine obere Dreiecksmatrix. Wir entwickeln die Determinante von $D$ nach der ersten Spalte:\\\pause
+$\det(D)=d_{11}\cdot(-1)^{1+1}\det(D^{11})+d_{21}\cdot(-1)^{2+1}\det(D^{21})+...$\\
+\hspace{15mm}$...+d_{n1}\cdot(-1)^{n+1}\det(D^{n1})$\\\pause
+Da $D$ eine obere Dreiecksmatrix ist, gilt $d_{i1}=0$ für $i\ne1$, und somit bleibt nur der erste Summand stehen. Da weiter $D^{11}\in\R^{(n-1)\times(n-1)}$ eine obere Dreiecksmatrix ist, folgt mit der Induktionsvoraussetzung:\\\pause
+$\det(D)=d_{11}\cdot \det(D^{11})=\pause d_{11}\cdot \prod_{i=2}^n d_{ii}= \pause \prod_{i=1}^n d_{ii}$ \hfill $\square$.
+ 
+
+\end{frame}
+%
+\subsection{Eigenschaften der Determinante}
+%
+\begin{frame}\frametitle{Weitere Eigenschaften der Determinante}
+Es seien $A,B \in \R^{n\times n}$ und $k \in \R$. Dann gilt: \pause\vfill
+\begin{itemize}
+\item[1)] $\det(A\cdot B)=\det(A) \cdot \det (B)$\pause\vfill
+\item[2)] $\det(k\cdot A)=k^n\cdot \det(A)$\pause\vfill
+\item[3)] $\det(A^T)=\det(A)$\pause\vfill
+\item[4)] Falls $\det(A)\ne0$, dann $\det(A^{-1})=\frac{1}{\det(A)}$.
+\end{itemize}
+\end{frame}
+%
+\subsection{Determinanten von speziellen Matrizen}
+%
+\begin{frame}\frametitle{Determinanten von Additionsmatrizen}
+Additionsmatrizen $A_{i,j}(\alpha)=I_n+\alpha\cdot E_{i,j}$ haben Determinante $\det(A_{i,j})=1$, denn sie sind Dreiecksmatrizen mit Einsen auf der Diagonalen. \pause\\\vfill
+Es gilt also für jede Matrix $M \in \R^{n\times n}$: 
+$$
+\det(A_{i,j}(\alpha)\cdot M)=\det(A_{i,j}(\alpha))\cdot \det( M)=\det(M)
+$$\pause\vfill
+Damit können wir Matrizen vor bzw. während dem Entwickeln der Determinante noch vereinfachen.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Determinanten von Vertauschungsmatrizen}
+Da die Determinante per Definition alternierend ist, muss für Vertauschungsmatrizen gelten, dass sie Determinante $-1$ haben:\\\vfill\pause
+Sei $A \in \R^{n\times n}$ beliebig und $A(i,j)$ die Matrix, die aus $A$ entsteht, wenn die $i$-te und die $j$-te Spalte vertauscht. Dann gilt:\pause
+\begin{itemize}
+\item[1)] $\det(A^T)=\det(A)=-\det(A(i,j))=-\det(A(i,j)^T)$ \pause
+\item[2)] $A(i,j)^T = V_{i,j}\cdot A^T$ \pause
+\item[3)] $\det(A(i,j)^T)=\det(V_{i,j}\cdot A^T)=\det(V_{i,j})\cdot\det( A^T)$
+\end{itemize}
+\vfill
+Betrachtet man nun $A$ mit $\det(A)=\det(A^T)=1 \ne 0$, so folgt aus der Kombination von 1) mit 3)
+$$
+-1=\det(A(i,j)^T)=\det(V_i,j)\cdot \det(A^T)=\det(V_i,j).
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$A=\begin{pmatrix} 1&1&1&1&2 \\ 1&1&1&1&1 \\ 2&3&3&3&5 \\ 2&3&1&1&2 \\ 2&3&4&5&5 \end{pmatrix}$\\\pause\vfill
+Wir addieren die zweite Zeile $(-1)$-mal auf die erste Zeile\\\vfill
+$A_{1,2}(-1)\cdot A=\begin{pmatrix} 0&0&0&0&1 \\ 1&1&1&1&1 \\ 2&3&3&3&5 \\ 2&3&1&1&2 \\ 2&3&4&5&5 \end{pmatrix}$\\\pause\vfill
+Dann entwickeln wir die Determinante nach der ersten Zeile:
+$\det(A)=\det(A_{1,2}(-1)\cdot A)=1\cdot(-1)^{1+5}\cdot \det(\begin{pmatrix}  1&1&1&1\\ 2&3&3&3 \\ 2&3&1&1 \\ 2&3&4&5 \end{pmatrix})$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Dann addieren wir das $(-3)$-fache der ersten Zeile auf die zweite Zeile und erhalten\\
+$\det(A)=\det(\begin{pmatrix}  1&1&1&1\\ 2&3&3&3 \\ 2&3&1&1 \\ 2&3&4&5 \end{pmatrix})=\det(\begin{pmatrix}  1&1&1&1\\ -1&0&0&0 \\ 2&3&1&1 \\ 2&3&4&5 \end{pmatrix})$\\\pause
+\vfill Jetzt entwickeln wir nach der zweiten Zeile:\\\vfill
+$\det(A)=-1\cdot(-1)^{2+1}\cdot\det(\begin{pmatrix} 1&1&1 \\ 3&1&1 \\ 3&4&5\end{pmatrix})=\det(\begin{pmatrix} 1&1&1 \\ 3&1&1 \\ 3&4&5\end{pmatrix})$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Als nächstes addieren wir das $(-1)$-fache der ersten Zeile auf die zweise Zeile und entwickeln dann nach der zweiten Zeile\\\vfill
+$\det(A)=\det(\begin{pmatrix} 1&1&1 \\ 3&1&1 \\ 3&4&5\end{pmatrix})=\det(\begin{pmatrix} 1&1&1 \\ 2&0&0 \\ 3&4&5\end{pmatrix})$\\\pause
+\hspace{11.75mm}$=2\cdot(-1)^{2+1}\cdot\det(\begin{pmatrix} 1&1 \\ 4 & 5 \end{pmatrix})=-2\cdot\det(\begin{pmatrix} 1&1 \\ 4 & 5 \end{pmatrix})$ \pause \\\vfill
+Mit der Determinanten-Formel für $2\times2$-Matrizen erhalten wir schließlich\\ \vfill
+$\det(A)=-2\cdot(1\cdot5 - 1\cdot 4)=-2 \cdot 1 =-2$.
+
+\end{frame}
+%
+\subsection{Formel für inverse Matrix}
+%
+\begin{frame}\frametitle{Formel für die inverse Matrix}
+Es sei $A \in \R^{n\times n}$ eine invertierbare Matrix, d.h. $\det(A)\ne 0$.
+Mit Hilfe der Determinante kann man eine Formel für die inverse Matrix $A^{-1}$ angeben.\pause Dazu sei die \highlightDef{komplementäre Matrix} $\bar A := (\bar a_{jk})$ gegeben durch
+$$
+\bar a_{jk}=(-1)^{j+k}\det(A^{kj})
+$$\pause
+Dann gilt:
+$$
+A^{-1}=\frac{1}{\det(A)}\cdot \bar A
+$$\pause\vfill
+In der Praxis ist diese Formel aber oft sehr aufwendig auszuwerten.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Sei $A=\begin{pmatrix} 1 & 2 \\ 3 & 4\end{pmatrix}$.\pause Dann ist $\det(A)=1\cdot 4 - 2 \cdot 3 =-2 \ne 0$.\\
+Außerdem:
+$$
+A^{11}=4, \   A^{12}=3, \ A^{21}=2 \text{ und }  A^{22}=1
+$$\pause
+Da die Determinante einer $1\times1$-Matrix gerade deren Eintrag ist, folgt
+$$
+\bar A=\begin{pmatrix} 4 & -2 \\ -3 & 1\end{pmatrix}
+$$\pause
+Somit erhalten wir 
+$$
+A^{-1}=\frac{1}{\det(A)}\cdot \bar A=\frac{1}{-2}\begin{pmatrix} 4 & -2 \\ -3 & 1\end{pmatrix}=\begin{pmatrix}-2 & 1 \\ \frac{3}{2} & -\frac{1}{2}\end{pmatrix}
+$$\pause
+Probe: $A\cdot A^{-1}=\begin{pmatrix} 1 & 2 \\ 3 & 4\end{pmatrix} \cdot \begin{pmatrix}-2 & 1 \\ \frac{3}{2} & -\frac{1}{2}\end{pmatrix}$\\\hspace{24.5mm}$ =\pause\begin{pmatrix}1\cdot (-2)+2\cdot \frac{3}{2} & 1\cdot1 + 2\cdot(-\frac{1}{2}) \\ 3\cdot (-2)+4\cdot \frac{3}{2} & 3\cdot1+4\cdot(-\frac{1}{2}\end{pmatrix}=\pause\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}$
+\end{frame}
+%%
+%
+\end{document}

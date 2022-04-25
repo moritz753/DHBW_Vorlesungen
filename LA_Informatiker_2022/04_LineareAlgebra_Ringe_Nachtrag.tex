@@ -1,0 +1,120 @@
+\input{../preamble_beamer.tex}
+
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Grad-Formel für Polynommultiplikation
+}
+\author{Dr. Moritz Gruber } 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+
+\begin{frame}\frametitle{Satz}
+Wenn $R$ ein nullteilerfreier Ring ist, dann 
+%ist auch der Polynomring $R[X]$ nullteilerfrei und es 
+gilt Gleichheit in der Grad-Formel:
+$$
+\deg(f\cdot g) = \deg(f) +\deg(g) \quad \forall f,g \in \R[X] \setminus \{0\}
+$$\pause
+\vfill
+\highlightDef{Beweis:}\\
+Es seien $f,g \in R[X]\setminus \{0\}$ und $n=deg(f), m=deg(g)$. Dann gibt es Koeffizienten $a_i,b_j \in R$ sodass
+$$
+f=\sum_{i=0}^n a_iX^i , \ g=\sum_{j=0}^m b_jX^j \quad \text{mit } a_n\ne0\ne b_m
+$$\pause
+Es gilt dann
+	$$
+	(f \cdot g)(X) :=	(a_0  b_0) + (a_0 b_1+ a_1 b_0)X +\ldots +a_n b_m X^{n+m}
+	$$ \pause
+Da $R$ nullteilerfrei ist gilt $a_nb_m \ne 0$ und damit $deg(f\cdot g)=n+m$.\\
+\hfill $\square$
+\end{frame}
+%
+\begin{frame}\frametitle{Der Grad des Nullpolynoms}
+Im Satz wurde das Nullpolynom $0 \in R[X]$ ausgeschlossen, da unsere bisherige Definition für $f=0$ nicht funktioniert.\\\pause
+\vfill
+Was ist $deg(0)$?\pause\\
+\vfill
+\highlightDef{Definition}\\
+Der Grad eines Polynoms $f=\sum_{k=0}^d a_kX^k \in R[X]$ ist definiert als
+$$
+deg(f):=\begin{cases} \max(\{k \in \N_0 \mid a_k\ne 0\}), \ & f\ne 0 \\\pause
+						- \infty, & f=0 \end{cases}
+$$\pause 
+\vfill
+Es gilt: $\forall m \in \N_0:  -\infty < m \text{ und somit } \max(m,-\infty)=m,$\\ \hspace{11mm} und $ -\infty+m=-\infty$ sowie $-\infty + (-\infty)=-\infty$.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Satz}
+Wenn $R$ ein nullteilerfreier Ring ist, dann 
+ist auch der Polynomring $R[X]$ nullteilerfrei und es 
+gilt Gleichheit in der Grad-Formel:
+\vspace{2mm}
+$
+\deg(f\cdot g) = \deg(f) +\deg(g) \quad \forall f,g \in \R[X] 
+$\pause\\
+\vspace{2mm}
+\highlightDef{Beweis:}\\
+Ist eines der Polynome $f,g$ das Nullpolynom (o.B.d.A. $f=0$), so gilt $f\cdot g=0$. \pause Damit: $deg(f\cdot g)=deg(0)=-\infty\pause=-\infty + deg(g)\pause=deg(f)+deg(g)$.\\\pause
+Es seien $f,g \in R[X]\setminus \{0\}$ und $n=deg(f), m=deg(g)$. Dann gibt es Koeffizienten $a_i,b_j \in R$ sodass
+$$
+f=\sum_{i=0}^n a_iX^i , \ g=\sum_{j=0}^m b_jX^j \quad \text{mit } a_n\ne0\ne b_m
+$$\pause
+Es gilt dann
+	$$
+	(f \cdot g)(X) :=	(a_0  b_0) + (a_0 b_1+ a_1 b_0)X +\ldots +a_n b_m X^{n+m}
+	$$ \pause
+Da $R$ nullteilerfrei ist gilt $a_nb_m \ne 0$ und damit $deg(f\cdot g)=n+m$.
+\end{frame}
+%
+\begin{frame}\frametitle{Satz}
+Wenn $R$ ein nullteilerfreier Ring ist, dann ist auch der Polynomring $R[X]$ nullteilerfrei und es gilt Gleichheit in der Grad-Formel:
+$$
+\deg(f\cdot g) = \deg(f) +\deg(g) \quad \forall f,g \in \R[X]
+$$
+\vfill
+\highlightDef{Beweis (Fortsetzung):}\\
+Es seien nun $f,g \in R[X]$ und $f\cdot g=0$. \pause Es folgt dann mit der Grad-Formel:\\
+\vspace{2mm}
+$
+-\infty=deg(0)\pause=deg(f\cdot g)\pause =deg(f) + deg(g)
+$\\
+\vspace{2mm}\pause
+Da $\forall d \in \N_0: \ -\infty < d$ gilt, muss somit schon $deg(f)=-\infty$ oder $\deg(g)=-\infty$ gelten und damit $f=0$ oder $g=0$. Damit ist auch $R[X]$ nullteilerfrei. \hfill $\square$
+\end{frame}
+%
+\begin{frame}\frametitle{Zusammenfassung}
+Damit erhalten wir für den Grad von Polynomen:\\
+\vfill
+$\forall f,g \in R[X]:$
+\begin{itemize}
+\item $deg(f+g)\le \max(deg(f),deg(g))$ \pause
+\item $deg(f\cdot g)\le deg(f)+deg(g)$ \pause
+\end{itemize}
+\vfill
+und falls $R$ nullteilerfrei ist sogar
+\begin{itemize}
+\item $deg(f\cdot g)= deg(f)+deg(g)$
+\end{itemize}
+\end{frame}
+%%%
+%
+
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+
+\include{macros}
+
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{\"Ubungsaufgaben 3\\ 
+	Gruppen
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+
+%%%
+\section{Die symmetrische Gruppe}
+%%%
+Es sei $D$ eine endliche Menge und 
+$$
+Sym(D):=\{f:D \to D \mid f \text{ bijektiv}\}.
+$$
+Zeigen Sie, dass $(Sym(D),\circ)$ eine Gruppe ist.
+
+%%%
+\section{Assoziativ?}
+%%%
+
+Sei $M = \{a,b\}$ mit $a\neq b$. Wir definieren eine Verkn\"upfung $\ast$ auf $M$ durch
+$$
+	a\ast a = b, \quad b\ast b = a, \quad a \ast b = a \quad \text{und} \quad b\ast a = a.
+$$ 
+Zeigen Sie, dass die Verkn\"upfung kommutativ aber nicht assoziativ ist.
+
+%%%
+\section{Abel'sche Gruppe}
+%%%
+Wir definieren auf der Menge $G= \R\backslash\{-\frac{1}{2}\}$ die Verkn\"upfung $\ast$ durch
+$$
+	a\ast b := 2ab +a +b.
+$$
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass $(G,\ast)$ eine abelsche Gruppe ist.
+	\item[(b)] Zeigen Sie, dass die Abbildung
+			$$
+				f: G \to \R\backslash\{0\},\, x\mapsto 2x + 1
+			$$
+			ein Isomorphismus (d.h. ein bijektiver Homomorphismus) der Gruppen $(G,\ast)$ und $(\R\backslash\{0\}, \cdot)$ ist.\\
+			(Die Gruppe $(G,\ast)$ ist also die Gruppe $(\R\backslash\{0\}, \cdot)$ in einem neuen Gewand.)
+	\item[(c)] L\"osen Sie die Gleichung
+			$$
+				2\ast x\ast x = 1.
+			$$
+			D.h., bestimmen Sie alle $x\in G$, f\"ur die diese Gleichung erf\"ullt ist.
+\end{itemize}
+
+%%%
+\section{Matrixmultiplikation von reellen $(2\times 2)$-Matrizen *}
+%%%
+
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass die Matrixmultiplikation assoziativ ist.
+	\item[(b)] Zeigen Sie, dass die Matrixmultiplikation nicht kommutativ ist: 
+			Finden Sie hierzu $A,B \in \R^{2\times 2}$ mit
+			$$
+				AB \neq BA.
+			$$
+	\item[(c)] Zeigen Sie, dass  
+			$$
+				E
+				=
+				\begin{pmatrix}
+					1	&	0\\
+					0	&	1
+				\end{pmatrix}
+			$$ 
+			das neutrale Element der Matrixmultiplikation ist. 
+	
+\end{itemize}
+%%%
+\section{Matrixgruppe}
+%%%
+
+Sei 
+$$
+	G := \{ A \in \R^{2\times 2}~|~ \exists B \in \R^{2\times 2} \text{ mit } AB=BA=E \}.
+$$
+
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass $(G,\cdot)$ eine Gruppe ist (``$\cdot$'' bezeichnet die Matrixmultiplikation).
+	\item[(b)] Wir bezeichnen mit $A^{-1}$ das inverse Element zu der Matrix $A \in G$.\\[1mm] 
+			Zeigen Sie, dass f\"ur alle $A,B \in G$ gilt:
+			$$
+				(A\cdot B)^{-1} = B^{-1}\cdot A^{-1}.
+			$$
+\end{itemize}
+
+%%%
+\section{Rekursive Folge (optional)}
+%%%
+Sei die Folge $(a_n)_{n\in \N}$ rekursiv definiert:
+\begin{eqnarray*}
+	a_0 		&=& 1\\
+	a_{n+1}	&=& a_n + 2^{n+1}, \qquad n\in \N.
+\end{eqnarray*}
+Die ersten Folgeglieder berechnen sich als
+$$
+	a_1 = 1+2= 3, \qquad a_2 = 3+4= 7, \qquad a_3 = 7 + 8 =15,\qquad a_4 = 15 + 16 = 31, \ldots
+$$
+Hieraus k\"onnten wir die Vermutung ableiten, dass im Allgemeinen gilt:
+$$
+	a_n = 2^{n+1} - 1.
+$$
+Beweisen Sie diese Vermutung durch vollst\"andige Induktion.
+
+
+
+
+\end{document}

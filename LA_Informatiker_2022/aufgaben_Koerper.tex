@@ -1,0 +1,94 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+
+\include{macros}
+
+\author{Moritz Gruber\\ DHBW Karlsruhe}
+\title{\"Ubungsaufgaben 5\\ 
+	Ringhomomorphismen \& K\"orper
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+%%%
+\section{Ringhomomorphismen}
+Es seien $R,S$ zwei Ringe mit Eins und $R\times S$ das kartesische Produkt dieser Ringe. Zeigen Sie, dass die Abbildungen
+		$$p_1 : R\times S \to R, (r,s) \mapsto r \ \text{ und } \ p_2 : R\times S \to S, (r,s) \mapsto s$$
+Ring-Homomorphismen sind.
+
+%%%
+\section{Schon bekannte Ringe}
+%%%
+\begin{itemize}
+\item[a)] Sei
+$
+	R := \{ a + b\sqrt{2} ~|~a,b \in \Z \}. 
+$
+Ist $R$ ein K\"orper?
+\item[b)]
+Zeigen Sie, dass $(\Z_3,+_3,\cdot_3)$ ein K\"orper ist. Gilt das auch f\"ur $(\Z_4,+_4,\cdot_4)$?
+\end{itemize}
+%%%
+
+\section{K\"orper *}
+%%%
+
+Sei
+$$
+	K := \{ a + b\sqrt{2} ~|~a,b \in \Q \}. 
+$$
+Zeigen Sie, dass $(K,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein  K\"orper ist.
+%%
+\newpage
+%%%
+\section{komplexe Zahlen}
+
+\begin{itemize}
+\item[(a)] Bestimmen Sie additiven und multiplikativen Inversen f\"ur die folgenden komplexen Zahlen:
+\begin{itemize}
+\item[i)] $z_1=i$
+\item[ii)] $z_2=1+i$
+\item[iii)] $z_3=3-2i$
+\end{itemize}
+
+\item[(b)] L\"osen Sie die folgende Gleichung einmal in $\R$ und einmal in $\C$:
+$$
+2x^2+2x+1=0
+$$
+\end{itemize}
+
+
+
+
+\end{document}

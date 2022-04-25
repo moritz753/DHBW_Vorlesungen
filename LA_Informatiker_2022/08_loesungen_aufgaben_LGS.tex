@@ -1,0 +1,933 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE L\"osungen Übungsaufgaben 8}\\[3mm]
+		{\Large Lineare Gleichungssysteme}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+%-------------------------
+\section{LGS}
+%%%
+
+Berechnen Sie die L\"osungsmenge des LGS
+
+\begin{align*}
+	x_1 - x_2 + 6x_3 + 8x_4 &= 1,\\
+	-x_1 +2x_2 - 7x_3-2x_4 &= 1.
+\end{align*}
+
+%-------------------------
+\subsection*{L\"osung}
+%%%
+
+$$
+	\left(
+		\begin{array}{rrrr | r}
+			1	&-1	&6	&8	&1	\\
+			-1	&2	&-7	&-2	&1
+		\end{array}
+	\right)
+$$
+
+Addition der ersten Zeile zur zweiten Zeile:
+$$
+	\sim>
+	\left(
+		\begin{array}{rrrr | r}
+			1	&-1	&6	&8	&1	\\
+			0	&1	&-1	&6	&2
+		\end{array}
+	\right)
+$$
+
+Addition der zweiten Zeile zur ersten Zeile:
+$$
+	\sim>
+	\left(
+		\begin{array}{rrrr | r}
+			1	&0	&5	&14	&3	\\
+			0	&1	&-1	&6	&2
+		\end{array}
+	\right)
+$$
+
+Das ist die Gau{\ss}-Normalform mit Stufen in den Spalten 1 und 2.\\
+
+Freie Variablen $x_3 = t_1 \in \R$ und $x_4 = t_2 \in \R$,
+
+\begin{align*}
+	x_1 &= 3 - 5x_3 - 14x_4 = 3 - 5t_1 - 14t_2,\\
+	x_2 &= 2 +x_3 - 6x_4 = 2 + t_1 -6t_2.
+\end{align*}
+
+F\"ur alle $t_1, t_2 \in \R$ ist also
+
+$$
+	\begin{pmatrix}
+		x_1\\
+		x_2\\
+		x_3\\
+		x_4
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		3\\
+		2\\
+		0\\
+		0
+	\end{pmatrix}
+	+
+	t_1 \cdot
+	\begin{pmatrix}
+		-5\\
+		1\\
+		1\\
+		0
+	\end{pmatrix}	
+	+t_2\cdot
+	\begin{pmatrix}
+		-14\\
+		-6\\
+		0\\
+		1
+	\end{pmatrix}	
+$$
+eine L\"osung des LGS. \\
+
+L\"osungsmenge:
+$$
+	\left\{
+		\begin{pmatrix}
+			3\\
+			2\\
+			0\\
+			0
+		\end{pmatrix}
+		+
+		t_1 \cdot
+		\begin{pmatrix}
+			-5\\
+			1\\
+			1\\
+			0
+		\end{pmatrix}	
+		+t_2\cdot
+		\begin{pmatrix}
+			-14\\
+			-6\\
+			0\\
+			1
+		\end{pmatrix}		
+		~|~
+		t_1, t_2 \in \R	
+	\right\}.
+$$
+
+%-------------------------------------
+\subsection*{Der $(-1)$-Trick}
+%%%
+
+Erg\"anze in der Gau{\ss}-Normalform (!)
+$$
+	\left(
+		\begin{array}{rrrr | r}
+			1	&0	&5	&14	&3	\\
+			0	&1	&-1	&6	&2
+		\end{array}
+	\right)
+$$
+
+Nullzeilen, so dass die Stufen auf der Diagonalen liegen:
+
+$$
+	\left(
+		\begin{array}{rrrr | r}
+			1	&0	&5	&14	&3	\\
+			0	&1	&-1	&6	&2	\\
+			0	&0	&0	&0	&0	\\
+			0	&0	&0	&0	&0
+		\end{array}
+	\right)
+$$
+
+Die rechte Seite 
+$$
+	\begin{pmatrix}
+		3\\
+		2\\
+		0\\
+		0
+	\end{pmatrix}
+$$
+ist eine (spezielle) L\"osung des LGS.\\[1mm]
+
+Ersetze auf der Diagonalen Nullen durch $-1$:
+
+$$
+	\left(
+		\begin{array}{rrrr | r}
+			1	&0	&5			&14			&3	\\
+			0	&1	&-1			&6			&2	\\
+			0	&0	&\highlight{-1}	&0			&0	\\
+			0	&0	&0			&\highlight{-1}	&0
+		\end{array}
+	\right)
+$$
+
+Die Spalten mit den $(-1)$en auf der Diagonale erzeugen die L\"osungsmenge des zugeh\"origen homogenen LGS.\\[2mm]
+
+Wir erhalten als L\"osungsmenge des inhomogenen LGS:
+
+$$
+	\left\{
+		\begin{pmatrix}
+			3\\
+			2\\
+			0\\
+			0
+		\end{pmatrix}
+		+
+		t_1 \cdot
+		\begin{pmatrix}
+			5\\
+			-1\\
+			-1\\
+			0
+		\end{pmatrix}	
+		+t_2\cdot
+		\begin{pmatrix}
+			14\\
+			6\\
+			0\\
+			-1
+		\end{pmatrix}		
+		~|~
+		t_1, t_2 \in \R	
+	\right\}.
+$$
+
+%-------------------------
+\newpage
+\section{Noch ein LGS}
+%%%
+
+Berechnen Sie die L\"osungsmenge des LGS
+
+$$
+	\left(
+	\begin{array}{rrrrrr | r}
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\
+		1	& 1	& 3	& 2	& 0	& 1	& 1\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		3	& 2	& 7	& 7	& -1	& -2	& 4
+	\end{array}
+	\right).
+$$
+
+%-------------------------
+\subsection*{L\"osung}
+%%%
+
+$$
+	\left(
+	\begin{array}{rrrrrr | r}
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\
+		1	& 1	& 3	& 2	& 0	& 1	& 1\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		3	& 2	& 7	& 7	& -1	& -2	& 4
+	\end{array}
+	\right).
+$$
+Vertauschen von Zeile 1 und 2:
+$$
+	\sim>
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		1	& 1	& 3	& 2	& 0	& 1	& 1\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		3	& 2	& 7	& 7	& -1	& -2	& 4
+	\end{array}
+	\right).
+$$
+
+Addition des $(-1)$-fachen von Zeile 1 zu Zeile 3 und des $(-3)$-fachen zu Zeile 5:
+$$
+	\sim>
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		0	& 2	& 4	& -2	& -1	& 1	& 1
+	\end{array}
+	\right).
+$$
+
+Vertauschen von  Zeile 2 und 3:
+$$
+	\sim>
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 2	& 4	& -2 	& 1	& 7	& -1\\
+		0	& 1	& 2	& -1	& -1	& -1	& 1\\
+		0	& 2	& 4	& -2	& -1	& 1	& 1
+	\end{array}
+	\right).
+$$
+
+Addition des $(-2)$-fachen von Zeile 2 zu Zeile 3 und 5, des $(-1)$-fachen zu Zeile 4:
+$$
+	\sim>
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 0	& 0	& 0 	& 1	& 3	& -1\\
+		0	& 0	& 0	& 0	& -1	& -3	& 1\\
+		0	& 0	& 0	& 0	& -1	& -3	& 1
+	\end{array}
+	\right).
+$$
+
+Addition von Zeile 3 zu Zeilen 4 und 5:
+$$
+	\sim>
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 0	& 0	& 0 	& 1	& 3	& -1\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0
+	\end{array}
+	\right).
+$$
+
+Gau{\ss}-Normalform mit Stufen in den Spalten 1, 2 und 5.\\
+
+Freie Variablen
+$$
+	x_3 = t_1,\quad x_4 = t_2,\quad x_6 = t_3
+$$
+und
+\begin{align*}
+	x_1	&= 1 - x_3 - 3x_4 + x_6	= 1 - t_1 - 3t_2 + t_3,	\\
+	x_2	&= -2x_3 + x_4-2x_6 	= -2t_1 + t_2 -2t_3,	\\
+	x_5	&= -1 - 3x_6 			= -1 - 3t_3							
+\end{align*}
+
+F\"ur alle $t_1, t_2, t_3 \in \R$ ist also
+
+$$
+	\begin{pmatrix}
+		x_1\\
+		x_2\\
+		x_3\\
+		x_4\\
+		x_5\\
+		x_6
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		1\\
+		0\\
+		0\\
+		0\\
+		-1\\
+		0
+	\end{pmatrix}
+	+
+	t_1 \cdot
+	\begin{pmatrix}
+		-1\\
+		-2\\
+		1\\
+		0\\
+		0\\
+		0
+	\end{pmatrix}	
+	+t_2\cdot
+	\begin{pmatrix}
+		-3\\
+		1\\
+		0\\
+		1\\
+		0\\
+		0
+	\end{pmatrix}	
+	+t_3\cdot
+	\begin{pmatrix}
+		1\\
+		-2\\
+		0\\
+		0\\
+		-3\\
+		1
+	\end{pmatrix}	
+$$
+eine L\"osung des LGS. \\
+
+L\"osungsmenge:
+$$
+	\left\{
+		\begin{pmatrix}
+			1\\
+			0\\
+			0\\
+			0\\
+			-1\\
+			0
+		\end{pmatrix}
+		+
+		t_1 \cdot
+		\begin{pmatrix}
+			-1\\
+			-2\\
+			1\\
+			0\\
+			0\\
+			0
+		\end{pmatrix}	
+		+t_2\cdot
+		\begin{pmatrix}
+			-3\\
+			1\\
+			0\\
+			1\\
+			0\\
+			0
+		\end{pmatrix}	
+		+t_3\cdot
+		\begin{pmatrix}
+			1\\
+			-2\\
+			0\\
+			0\\
+			-3\\
+			1
+		\end{pmatrix}	
+		~|~
+		t_1, t_2, t_3 \in \R	
+	\right\}.
+$$
+
+%-------------------------------------
+\newpage
+\subsection*{Der $(-1)$-Trick}
+%%%
+
+Erg\"anze in der Gau{\ss}-Normalform 
+$$
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 0	& 0	& 0 	& 1	& 3	& -1\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0
+	\end{array}
+	\right).
+$$
+
+eine Nullzeile und vertausche Zeilen so, dass die $1$en der Stufen auf der Diagonalen stehen:
+
+$$
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1	& 3	& 0	& -1	& 1\\	
+		0	& 1	& 2	& -1	& 0	& 2	& 0\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0\\
+		0	& 0	& 0	& 0 	& 1	& 3	& -1\\
+		0	& 0	& 0	& 0	& 0	& 0	& 0
+	\end{array}
+	\right).
+$$
+
+Die rechte Seite
+$$
+	\begin{pmatrix}
+		1\\
+		0\\
+		0\\
+		0\\
+		-1\\
+		0
+	\end{pmatrix}
+$$
+ist eine (spezielle) L\"osung des inhomogenen LGS.\\[2mm]
+
+Erg\"anze $(-1)$en:
+$$
+	\left(
+	\begin{array}{rrrrrr | r}
+		1	& 0	& 1			& 3			& 0	& -1			& 1\\	
+		0	& 1	& 2			& -1			& 0	& 2			& 0\\
+		0	& 0	& \highlight{-1}	& 0			& 0	& 0			& 0\\
+		0	& 0	& 0			&  \highlight{-1}	& 0	& 0			& 0\\
+		0	& 0	& 0			& 0 			& 1	& 3			& -1\\
+		0	& 0	& 0			& 0			& 0	&  \highlight{-1}	& 0
+	\end{array}
+	\right).
+$$
+
+L\"osungsmenge des inhomogenen LGS:
+$$
+	\left\{
+		\begin{pmatrix}
+			1\\
+			0\\
+			0\\
+			0\\
+			-1\\
+			0
+		\end{pmatrix}
+		+
+		t_1 \cdot
+		\begin{pmatrix}
+			1\\
+			2\\
+			-1\\
+			0\\
+			0\\
+			0
+		\end{pmatrix}	
+		+t_2\cdot
+		\begin{pmatrix}
+			3\\
+			-1\\
+			0\\
+			-1\\
+			0\\
+			0
+		\end{pmatrix}	
+		+t_3\cdot
+		\begin{pmatrix}
+			-1\\
+			2\\
+			0\\
+			0\\
+			3\\
+			-1
+		\end{pmatrix}	
+		~|~
+		t_1, t_2, t_3 \in \R	
+	\right\}.
+$$
+
+%-------------------------
+\newpage
+\section{L\"osbarkeit}
+%%%
+
+Seien $\alpha,\beta \in \R$ und
+$$
+	A =
+	\begin{pmatrix}
+		1	&5	&\alpha	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix},
+	\qquad
+	b =
+	\begin{pmatrix}
+		-1	\\
+		\beta	\\
+		1
+	\end{pmatrix}.
+$$
+
+F\"ur welche Werte von $\alpha$ und $\beta$ ist das LGS $A\cdot x = b$
+\begin{itemize}
+	\item eindeutig l\"osbar,
+	\item nicht l\"osbar,
+	\item l\"osbar, aber nicht eindeutig l\"osbar?
+\end{itemize}
+
+%-------------------------
+\subsection*{L\"osung}
+%%%
+
+$$
+	\left(
+		\begin{array}{rrr | r}
+			1	&5	&\alpha	&-1\\
+			0	&-2	&1	&\beta\\
+			-1	&1	&3	&1
+		\end{array}
+	\right)
+$$
+
+Addition von Zeile 1 zu Zeile 3, Multiplikation von Zeile 2 mit $-\frac{1}{2}$:
+$$
+	\sim>
+	\left(
+		\begin{array}{rrr | r}
+			1	&5	&\alpha		&-1\\
+			0	&1	&-1/2	&-\beta/2\\
+			0	&6	&\alpha+3	&0
+		\end{array}
+	\right)
+$$
+Addition des $(-6)$-fachen von Z2 zu Z3:
+$$
+	\sim>
+	\left(
+		\begin{array}{rrr | r}
+			1	&5	&\alpha		&-1\\
+			0	&1	&-1/2	&-\beta/2\\
+			0	&0	&\alpha+6	&3\beta
+		\end{array}
+	\right)
+$$
+
+Das LGS ist somit
+\begin{itemize}
+	\item eindeutig l\"osbar, wenn $\alpha\neq -6$,
+	\item nicht l\"osbar, wenn $\alpha=-6$ und $\beta\neq 0$
+	\item l\"osbar, aber nicht eindeutig l\"osbar, wenn $\alpha=-6$ und $\beta=0$.
+\end{itemize}
+
+
+
+%-------------------------
+\newpage
+\section{Spezielle Matrizen II}
+%%%
+
+Sei 
+$$
+	D = 
+	\begin{pmatrix}
+		d_{11}	&\cdots	&d_{15}\\
+		d_{21}	&\cdots	&d_{25}\\		
+		d_{31}	&\cdots	&d_{35}\\
+		d_{41}	&\cdots	&d_{45}\\
+	\end{pmatrix}
+	\in \R^{4\times 5}.
+$$
+
+\begin{itemize}
+	\item[(a)] Geben Sie eine invertierbare Matrix $A\in\R^{4\times 4}$ an, so dass
+			$$
+				A\cdot D = 
+				\begin{pmatrix}
+					d_{31}	&\cdots	&d_{35}\\
+					d_{21}	&\cdots	&d_{25}\\		
+					d_{11}	&\cdots	&d_{15}\\
+					d_{41}	&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Vertauschung von Zeilen 1 und 3.)
+		%-------------------------
+		\subsection*{L\"osung}
+		%%%
+
+		$$	
+			A =
+			\begin{pmatrix}
+				0	&0	&1	&0	\\
+				0	&1	&0	&0	\\
+				1	&0	&0	&0	\\
+				0	&0	&0	&1	
+			\end{pmatrix}.
+		$$
+		$$
+			A^{-1} = A.
+		$$
+		(Zweimal vertauschen von Zeilen 1 und 3 ergibt wieder $A$.)			
+	\item[(b)] Geben Sie eine invertierbare Matrix $B\in\R^{4\times 4}$ an, so dass
+			$$
+				B\cdot D = 
+				\begin{pmatrix}
+					d_{11} 			&\cdots	&d_{15} \\
+					d_{21}			&\cdots	&d_{25}\\		
+					2d_{31}			&\cdots	&2d_{35}\\
+					d_{41}			&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Multiplikation von Zeile 3 mit 2.)
+		%-------------------------
+		\subsection*{L\"osung}
+		%%%			
+		$$	
+			B =
+			\begin{pmatrix}
+				1	&0	&0	&0	\\
+				0	&1	&0	&0	\\
+				0	&0	&2	&0	\\
+				0	&0	&0	&1	
+			\end{pmatrix}.
+		$$	
+		
+		$$	
+			B^{-1} =
+			\begin{pmatrix}
+				1	&0	&0	&0	\\
+				0	&1	&0	&0	\\
+				0	&0	&1/2	&0	\\
+				0	&0	&0	&1	
+			\end{pmatrix}.
+		$$			
+		(Multiplikation von Zeile 3 mit $1/2$ invertiert die Operation.)
+	\item[(c)] Geben Sie eine invertierbare Matrix $C\in\R^{4\times 4}$ an, so dass
+			$$
+				C\cdot D = 
+				\begin{pmatrix}
+					d_{11} 			&\cdots	&d_{15} \\
+					d_{21}			&\cdots	&d_{25}\\		
+					2d_{11} + d_{31}	&\cdots	&2d_{15} + d_{35}\\
+					d_{41}			&\cdots	&d_{45}\\
+				\end{pmatrix}.
+			$$
+			(Addition des 2-fachen von Zeile 1 zu Zeile 3.)
+
+		%-------------------------
+		\subsection*{L\"osung}
+		%%%			
+		$$	
+			C =
+			\begin{pmatrix}
+				1	&0	&0	&0	\\
+				0	&1	&0	&0	\\
+				2	&0	&1	&0	\\
+				0	&0	&0	&1	
+			\end{pmatrix}.
+		$$	
+		
+		$$	
+			C^{-1} =
+			\begin{pmatrix}
+				1	&0	&0	&0	\\
+				0	&1	&0	&0	\\
+				-2	&0	&1	&0	\\
+				0	&0	&0	&1	
+			\end{pmatrix}.
+		$$	
+		(Addition des $(-2)$-fachen von Zeile 1 zu Zeile 3 invertiert die Operation.)
+\end{itemize}
+\section{Nochmal die Abbildungsmatrix}
+%%%
+Es sei $\Psi: \R^3 \to \R^3$ eine lineare Abbildung mit
+$$
+\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}) = \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}, \quad \Psi(\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}) = \begin{pmatrix}0\\2\\4 \end{pmatrix} \quad \text{ und } \quad \Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix} )= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}.
+$$
+Bestimmen Sie eine Matrix $A \in \R^{3\times 3}$, sodass $\Psi=\Phi_A$ gilt, indem Sie das LGS
+$$
+A\cdot \begin{pmatrix}1\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix},\ 
+A\cdot \begin{pmatrix}2\\0\\2 \end{pmatrix}= \begin{pmatrix}0 \\ 2 \\ 4 \end{pmatrix} \text{ und }
+A\cdot \begin{pmatrix}0\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 0 \\ 2 \end{pmatrix} 
+$$
+lösen. 
+
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+Aus $A\cdot \begin{pmatrix}1\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}$ erhalten wir die Gleichungen
+\begin{align*}
+a_{11} + a_{12} + a_{13}&=2 \\
+a_{21}+a_{22}+a_{23}&=1\\
+a_{31}+a_{32}+a_{33}&=2
+\end{align*}
+
+Aus $A\cdot \begin{pmatrix}2\\0\\2 \end{pmatrix}= \begin{pmatrix}0 \\ 2 \\ 4 \end{pmatrix}$ erhalten wir die Gleichungen
+\begin{align*}
+2a_{11} +2 a_{13}&=0 \\
+2a_{21}+2a_{23}&=2\\
+2a_{31}+2a_{33}&=4
+\end{align*}
+
+Aus $A\cdot \begin{pmatrix}0\\1\\1 \end{pmatrix}= \begin{pmatrix}2 \\ 0 \\ 2 \end{pmatrix}$ erhalten wir die Gleichungen
+\begin{align*}
+a_{12} + a_{13}&=2 \\
+a_{22}+a_{23}&=0\\
+a_{32}+a_{33}&=2
+\end{align*}
+
+Insgesamt ergibt das somit das LGS
+$$
+	\left(
+		\begin{array}{rrrrrrrrr | r}
+			a_{11} & a_{12} & a_{13}&a_{21}&a_{22}&a_{23}&a_{31}&a_{32}&a_{33}&\\
+			\hline
+			1&1&1&0&0&0&0&0&0&2\\
+			0&0&0&1&1&1&0&0&0&1\\
+			0&0&0&0&0&0&1&1&1&2\\
+			2&0&2&0&0&0&0&0&0&0\\
+			0&0&0&2&0&2&0&0&0&2\\
+			0&0&0&0&0&0&2&0&2&4\\
+			0&1&1&0&0&0&0&0&0&2\\
+			0&0&0&0&1&1&0&0&0&0\\
+			0&0&0&0&0&0&0&1&1&2\\
+		\end{array}
+	\right)
+$$
+Wir multiplizieren die 4. Zeile mit $\frac{1}{2}$ und ziehen sie dann von der 1.Zeile ab. Außerdem multiplizieren die 5. Zeile mit $\frac{1}{2}$ und ziehen sie dann von der 2.Zeile ab und multiplizieren die 6. Zeile mit $\frac{1}{2}$ und ziehen sie dann von der 3.Zeile ab. Das ergibt
+$$
+	\left(
+		\begin{array}{rrrrrrrrr | r}
+			a_{11} & a_{12} & a_{13}&a_{21}&a_{22}&a_{23}&a_{31}&a_{32}&a_{33}&\\
+			\hline
+			0&1&0&0&0&0&0&0&0&2\\
+			0&0&0&0&1&0&0&0&0&0\\
+			0&0&0&0&0&0&0&1&0&0\\
+			1&0&1&0&0&0&0&0&0&0\\
+			0&0&0&1&0&1&0&0&0&1\\
+			0&0&0&0&0&0&1&0&1&2\\
+			0&1&1&0&0&0&0&0&0&2\\
+			0&0&0&0&1&1&0&0&0&0\\
+			0&0&0&0&0&0&0&1&1&2\\
+		\end{array}
+	\right)
+$$
+Dann ziehen wir die 1.Zeile von der 7.Zeile, die 2.Zeile von der 8.Zeile und die 3.Zeile von der 9.Zeile ab. Das ergibt
+$$
+	\left(
+		\begin{array}{rrrrrrrrr | r}
+			a_{11} & a_{12} & a_{13}&a_{21}&a_{22}&a_{23}&a_{31}&a_{32}&a_{33}&\\
+			\hline
+			0&1&0&0&0&0&0&0&0&2\\
+			0&0&0&0&1&0&0&0&0&0\\
+			0&0&0&0&0&0&0&1&0&0\\
+			1&0&1&0&0&0&0&0&0&0\\
+			0&0&0&1&0&1&0&0&0&1\\
+			0&0&0&0&0&0&1&0&1&2\\
+			0&0&1&0&0&0&0&0&0&0\\
+			0&0&0&0&0&1&0&0&0&0\\
+			0&0&0&0&0&0&0&0&1&2\\
+		\end{array}
+	\right)
+$$
+Dann ziehen wir die 7.Zeile von der 4.Zeile, die 8.Zeile von der 5.Zeile und die 9.Zeile von der 6.Zeile ab. Das ergibt
+$$
+	\left(
+		\begin{array}{rrrrrrrrr | r}
+			a_{11} & a_{12} & a_{13}&a_{21}&a_{22}&a_{23}&a_{31}&a_{32}&a_{33}&\\
+			\hline
+			0&1&0&0&0&0&0&0&0&2\\
+			0&0&0&0&1&0&0&0&0&0\\
+			0&0&0&0&0&0&0&1&0&0\\
+			1&0&0&0&0&0&0&0&0&0\\
+			0&0&0&1&0&0&0&0&0&1\\
+			0&0&0&0&0&0&1&0&0&0\\
+			0&0&1&0&0&0&0&0&0&0\\
+			0&0&0&0&0&1&0&0&0&0\\
+			0&0&0&0&0&0&0&0&1&2\\
+		\end{array}
+	\right)
+$$
+Als letztes sortieren wir die Zeilen zur Stufenform und lesen dann die Lösung ab.
+$$
+	\left(
+		\begin{array}{rrrrrrrrr | r}
+			a_{11} & a_{12} & a_{13}&a_{21}&a_{22}&a_{23}&a_{31}&a_{32}&a_{33}&\\
+			\hline
+			1&0&0&0&0&0&0&0&0&0\\
+			0&1&0&0&0&0&0&0&0&2\\
+			0&0&1&0&0&0&0&0&0&0\\
+			0&0&0&1&0&0&0&0&0&1\\
+			0&0&0&0&1&0&0&0&0&0\\
+			0&0&0&0&0&1&0&0&0&0\\
+			0&0&0&0&0&0&1&0&0&0\\
+			0&0&0&0&0&0&0&1&0&0\\
+			0&0&0&0&0&0&0&0&1&2\\
+		\end{array}
+	\right)
+$$
+Damit ist die gesuchte Matrix
+$$
+A= \begin{pmatrix}0&2&0\\1&0&0\\0&0&2 \end{pmatrix}
+$$
+
+\section{Inverse Matrix}
+%%%
+Bestimmen Sie mit Hilfe des Gauß-Verfahrens die inverse Matrix zu
+$$
+A= \begin{pmatrix}1&2 & 0&0 \\ 0 & 2 & 4 & 0 \\ 0& 2 & 0 & 1 \\ 5 & 0& 5 & 0  \end{pmatrix}
+$$
+\subsection{Lösung}
+$
+\left(
+		\begin{array}{rrrr|rrrr}
+1&2 & 0&0 & 1&0&0&0 \\ 0 & 2 & 4 & 0 &0&1&0&0 \\ 0& 2 & 0 & 1 & 0&0&1&0 \\ 5 & 0& 5 & 0 &0&0&0&1
+		\end{array}
+	\right)
+	\stackrel{1)}{\sim>}
+	\left(
+		\begin{array}{rrrr|rrrr}
+1&2 & 0&0 & 1&0&0&0 \\ 0 & 2 & 4 & 0 &0&1&0&0 \\ 0& 2 & 0 & 1 & 0&0&1&0 \\ 0 & -10& 5 & 0 &-5&0&0&1
+		\end{array}
+	\right)\\\vspace{5mm}\\
+	\stackrel{2)}{\sim>}
+		\left(
+		\begin{array}{rrrr|rrrr}
+1&2 & 0&0 & 1&0&0&0 \\ 0 & 2 & 4 & 0 &0&1&0&0 \\ 0& 0 & -4 & 1 & 0&-1&1&0 \\ 0 & 0& 25 & 0 &-5&5&0&1
+		\end{array}
+	\right)
+		\stackrel{3)}{\sim>}
+		\left(
+		\begin{array}{rrrr|rrrr}
+1&2 & 0&0 & 1&0&0&0 \\ 0 & 2 & 4 & 0 &0&1&0&0 \\ 0& 0 & -4 & 1 & 0&-1&1&0 \\ 0 & 0& 0 & \frac{25}{4} &-5&\frac{-5}{4}&\frac{25}{4}&1
+		\end{array}
+	\right)\\\vspace{5mm}\\
+	\stackrel{4)}{\sim>}
+		\left(
+		\begin{array}{rrrr|rrrr}
+1&2 & 0&0 & 1&0&0&0 \\ 0 & 1 & 2 & 0 &0&\frac{1}{2}&0&0 \\ 0& 0 & 1 & -\frac{1}{4} & 0&\frac{1}{4}&-\frac{1}{4}&0 \\ 0 & 0& 0 & 1 &-\frac{4}{5}&\frac{-1}{5}&1&\frac{4}{25}
+		\end{array}
+	\right)
+	\stackrel{5)}{\sim>}
+		\left(
+		\begin{array}{rrrr|rrrr}
+1&0 & 0&0 &\frac{1}{5}&-\frac{1}{5}&0&\frac{4}{25}  \\ 0 & 1 & 0 & 0 &\frac{2}{5}&\frac{1}{10}&0&-\frac{2}{25} \\ 0& 0 & 1 & 0 & -\frac{1}{5}&\frac{1}{5}&0&\frac{1}{25} \\ 0 & 0& 0 & 1 &-\frac{4}{5}&\frac{-1}{5}&1&\frac{4}{25}
+		\end{array}
+	\right)
+$
+
+
+\begin{itemize}
+\item[1)] 4. Zeile minus 5mal 1.Zeile 
+\item[2)] 3.Zeile minus 2.Zeile und 4.Zeile plus 5mal 2. Zeile
+\item[3)] 4.Zeile plus 25/4 mal 3.Zeile
+\item[4)] 2.Zeile mal 1/2, 3.Zeile mal -1/4 und 4.Zeile mal 4/25
+\item[5)] 3.Zeile plus 1/4 mal 4.Zeile, danach 2.Zeile minus 2mal 3.Zeile und danach 1.Zeile minus 2mal 2.Zeile
+\end{itemize}
+
+Somit erhalten wir
+$$
+A^{-1}=\begin{pmatrix}\frac{1}{5}&-\frac{1}{5}&0&\frac{4}{25}  \\ \frac{2}{5}&\frac{1}{10}&0&-\frac{2}{25} \\  -\frac{1}{5}&\frac{1}{5}&0&\frac{1}{25} \\ -\frac{4}{5}&\frac{-1}{5}&1&\frac{4}{25}\end{pmatrix}
+$$
+%
+%
+%
+%
+\end{document}

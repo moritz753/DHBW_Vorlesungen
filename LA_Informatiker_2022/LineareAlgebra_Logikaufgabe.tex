@@ -1,0 +1,223 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Logikaufgabe: Klammern
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+%%%
+\begin{frame} \frametitle{Aufgabe}
+Seien $a,b,c$  Aussagen.
+Erstellen Sie Wahrheitstafeln für 
+$$
+	a\land (b \lor c)
+$$
+und
+$$
+	(a\land b) \lor c.
+$$
+\end{frame}
+%%
+
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+&&&&\\
+&&&&\\
+&&&&\\
+&&&&\\
+&&&&\\
+&&&&\\
+&&&&\\
+&&&&\\
+	\end{array}
+$$
+
+\end{frame}
+%%
+
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&&&&		\\
+		w	&&&&			\\
+		w	&&&&			\\
+		f	&&&&				\\
+		f	&&&&				\\
+		f	&&&&			\\
+		w	&&&&			\\
+		f	&&&&			\\
+	\end{array}
+$$
+
+
+
+\end{frame}
+%%
+
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& &			\\
+		w	&w	&f	& &			\\
+		w	&f	&w	&&				\\
+		f	&w	&w	&&\\
+		f	&f	&w	&&				\\
+		f	&w	&f	& &				\\
+		w	&f	&f	&&				\\
+		f	&f	&f	&&			\\
+	\end{array}
+$$
+
+
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung:}
+%%
+
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w&			\\
+		w	&w	&f	& &			\\
+		w	&f	&w	&&				\\
+		f	&w	&w	&&\\
+		f	&f	&w	&&				\\
+		f	&w	&f	& &				\\
+		w	&f	&f	&&				\\
+		f	&f	&f	&&			\\
+	\end{array}
+$$
+Damit $a\land (b \lor c)$ wahr ist, müssen sowohl $a$ als auch $(b \lor v)$ wahr sein.\\
+Damit $(b \lor c)$ wahr ist, reicht es, dass $b$ oder $c$ wahr ist.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w				& 			\\
+		w	&w	&f	& w				& 				\\
+		w	&f	&w	& w				& 				\\
+		f	&w	&w	& f				& 				\\
+		f	&f	&w	& f				& 				\\
+		f	&w	&f	& f				& 			\\
+		w	&f	&f	& f				& 			\\
+		f	&f	&f	& f				& 			\\
+	\end{array}
+$$
+
+Damit $a\land (b \lor c)$ wahr ist, müssen sowohl $a$ als auch $(b \lor v)$ wahr sein.\\
+Damit $(b \lor c)$ wahr ist, reicht es, dass $b$ oder $c$ wahr ist.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w				& w				\\
+		w	&w	&f	& w				& 				\\
+		w	&f	&w	& w				& 				\\
+		f	&w	&w	& f				& 				\\
+		f	&f	&w	& f				& 				\\
+		f	&w	&f	& f				& 			\\
+		w	&f	&f	& f				& 			\\
+		f	&f	&f	& f				& 			\\
+	\end{array}
+$$
+
+Damit $(a \land b) \lor c$ wahr ist, reicht es, dass $(a\land b)$ \underline{oder} $c$ wahr ist.\\
+Damit $(a \land b)$ wahr ist, müssen sowohl $a$ als auch $b$ wahr sein.
+
+\end{frame}
+%
+%
+%
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w				& w				\\
+		w	&w	&f	& w				& w				\\
+		w	&f	&w	& w				& w				\\
+		f	&w	&w	& f				& w				\\
+		f	&f	&w	& f				& w				\\
+		f	&w	&f	& f				& f				\\
+		w	&f	&f	& f				& f				\\
+		f	&f	&f	& f				& f				\\
+	\end{array}
+$$
+
+Damit $(a \land b) \lor c$ wahr ist, reicht es, dass $(a\land b)$ \underline{oder} $c$ wahr ist.\\
+Damit $(a \land b)$ wahr ist, müssen sowohl $a$ als auch $b$ wahr sein.
+
+
+\end{frame}
+%
+%%
+\begin{frame}\frametitle{Lösung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w				& w				\\
+		w	&w	&f	& w				& w				\\
+		w	&f	&w	& w				& w				\\
+		f	&w	&w	& \textcolor{red}{f}				& \textcolor{green}{w}				\\
+		f	&f	&w	&\textcolor{red}{f}			&\textcolor{green}{w}			\\
+		f	&w	&f	&{ f}				& f				\\
+		w	&f	&f	& f				& f				\\
+		f	&f	&f	& f				& f				\\
+	\end{array}
+$$
+\vfill
+Somit: $a\land (b \lor c) \not\equiv (a\land b) \lor c$.
+
+
+\end{frame}
+%
+%%
+
+%
+\end{document}

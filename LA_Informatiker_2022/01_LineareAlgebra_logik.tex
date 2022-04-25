@@ -1,0 +1,757 @@
+\input{../preamble_beamer.tex}
+
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Aussagenlogik \& Prädikatenlogik
+}
+\author{
+	Dr. Moritz Gruber \\[1mm]
+	\small moritz.gruber@edu.dhbw-karlsruhe.de
+}
+\institute{DHBW Karlsruhe}
+\date{2022}
+
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document ----------------------------------------------------------------------------
+\begin{document}
+
+\AtBeginSubsection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} \\[5mm] 
+		{\large \insertsubsection}
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%%%
+\section{Organisatorisches}
+%%%
+
+\begin{frame}
+	
+	\begin{itemize}
+		\item Materialien in Moodle.
+		\item Hausaufgaben zu jeder Vorlesung in Eigenverantwortung. 
+		\item Besprechnung der Lösungen am Beginn des nächsten Termins. 
+		\item Nutzen Sie das Begleitete Selbststudium.
+% Termine:
+%			\begin{itemize}
+%				\item 20.10.2020 17:00-18:30 
+%				\item 27.10.2020 17:00-18:30 
+%				\item 04.11.2020 17:00-18:30 
+%				\item 11.11.2020 17:00-18:30 
+%				\item 17.11.2020 17:00-18:30 
+%				\item 19.11.2020 17:00-18:30 
+%				\item 24.11.2020 17:00-18:30 
+%				\item 03.12.2020 17:00-18:30 
+%			\end{itemize}
+%			Der AlfaView-Link hierzu wird noch bekanntgegeben.
+	\end{itemize}
+	
+\end{frame}
+
+
+%%%
+\section{Themen der Vorlesung}
+%%%
+%
+\begin{frame}\frametitle{Themen der Vorlesung}
+	
+	\begin{itemize}
+		\item Aussagenlogik \& Prädikatenlogik
+		\item Mengenlehre und Abbildungen
+		\item Wichtige algebraische Strukturen: Gruppen, Ringe und Körper
+		\item Vektorräume
+		\item Lineare Gleichungssysteme
+		\item Lineare Abbildungen und Matrizen
+		\item Skalarprodukte und Geometrie
+		\item Graphentheorie
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lehrbuch}
+	
+	\highlightDef{[Teschl]}\\ 
+	G. Teschl, S. Teschl: Mathematik für Informatiker, 
+	Band 1, 
+	Diskrete Mathematik und Lineare Algebra, 
+	2013.
+	
+\end{frame}
+%
+%%%
+\section{Aussagenlogik}
+%%%
+%
+%%%
+\subsection{Aussagen}
+%%%
+%
+\begin{frame}{Aussagen}
+	
+	Die Aussagenlogik beschäftigt sich mit Aussagen und Zusammenhängen zwischen Aussagen.\\[5mm]
+	
+	\begin{definition}
+		Eine \highlightDef{Aussage} ist ein Satz, der entweder wahr (w) oder falsch (f) ist.
+	\end{definition}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	Die folgenden Sätze sind Aussagen:
+	\begin{itemize}
+		\item Berlin ist die Hauptstadt von Deutschland.
+		\item $6\cdot 7 = 42$.
+		\item $7<5$.
+		\item $2\leq 2$.
+		\item Wenn 2 ungerade ist, dann ist 1 = 0.
+	\end{itemize}
+	
+	\pause
+	\vfill
+	Die folgenden Sätze sind {\em keine} Aussagen:
+	\begin{itemize}
+		\item Wie wird das Wetter morgen?
+		\item Hallo!
+		\item $x + 1 = 7$.
+		\item $x < y$.
+	\end{itemize}
+	
+\end{frame}
+%
+%%%
+\subsection{Negation und Verknüpfungen von Aussagen}
+%%%
+%
+\begin{frame}\frametitle{Verknüpfungen und Negationen von Aussagen}
+	
+	Die beiden Aussagen
+	\begin{itemize}
+		\item Ich wohne in Karlsruhe.
+		\item Ich studiere an der DHBW.
+	\end{itemize}
+	können durch eine Verknüpfung wie \highlightDef{und} zu der neuen Aussage
+	\begin{itemize}
+		\item Ich wohne in Karlsruhe \highlightDef{und} ich studiere an der DHBW.
+	\end{itemize}
+	verknüpft werden.
+	
+	\vfill
+	Man kann eine Aussage auch durch ein \highlightDef{nicht} negieren.
+	\begin{itemize}
+		\item Ich wohne \highlightDef{nicht} in Karlsruhe.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Negation}
+		Im Folgenden wollen wir Aussagen mit kleinen Buchstaben $a, b, c, \ldots$ bezeichnen.\\[1mm]
+	Beispiel: 
+	$a = $ ``Ich wohne in Karlsruhe'',\\ 
+	\vfill
+	\pause
+	Sei $a$ eine Aussage. Dann nennt man die Aussage
+	$$
+		\neg a
+	$$ 
+	die \highlightDef{Negation} oder \highlightDef{Verneinung} der Aussage $a$.\\[1mm]
+	$\neg a$ ist genau dann wahr, wenn $a$ falsch ist.\\
+	
+	\pause
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c}
+			a	& \neg a	\\ \hline
+			w	& f		\\
+			f	& w
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Negation: Beispiele}
+	
+	Wie lautet jeweils die Negation der folgenden Aussagen?
+	\begin{itemize}
+		\item Das Glas ist voll.
+		\item Alle Studierenden sind anwesend.
+		\item $2 > 5$.
+	\end{itemize}
+	%
+	\vfill
+	\pause
+	Die Negationen lauten:
+	\begin{itemize}
+		\item<2-> Das Glas ist nicht voll. 
+		\item<3-> Nicht alle Studierenden sind anwesend.
+		\item<4-> $2\leq 5$.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Konjunktion (Und-Verknüpfung)}
+	
+	Seien $a, b$ zwei Aussagen. Die Aussage
+	$$
+		a \land b
+	$$
+	heißt \highlightDef{Konjunktion} oder \highlightDef{Und-Verknüpfung}. \\[1mm]
+	
+	Die Aussage $a \land b$ ist genau dann wahr, wenn $a$ und $b$ wahr sind.
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\land b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& f		\\
+			f	& w	& f		\\
+			f	& f	& f	
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Seien \\
+	$a = $ ``Karlsruhe liegt in Deutschland'',\\
+	$b = $ ``Die Erde ist eine Scheibe''\\
+	 zwei Aussagen.\\[2mm]
+	 
+	 Wie lautet der Wahrheitswert von 
+	 $$
+	 	a\land b?
+	 $$
+	 \pause
+	 (falsch)
+	
+\end{frame}
+%
+% DIESER FRAME IST KAPUTT ?!?!
+\begin{frame}\frametitle{Disjunktion (Oder-Verknüpfung)}
+
+	Seien $a, b$ zwei Aussagen. Die Aussage
+	$$
+		a \lor b
+	$$
+	heißt \highlightDef{Disjunktion} oder \highlightDef{Oder-Verknüpfung}. \\[1mm]
+	
+	Die Aussage $a \lor b$ ist genau dann wahr, wenn mindestens eine der beiden Aussagen $a, b$ wahr ist 
+	(nicht-ausschließendes oder).
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\lor b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& w		\\
+			f	& w	& w		\\
+			f	& f	& f	
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Seien \\
+	$a = $ ``Karlsruhe liegt in Deutschland'',\\
+	$b = $ ``Die Erde ist eine Scheibe''\\
+	 zwei Aussagen.\\[2mm]
+	 
+	 Wie lautet der Wahrheitswert von 
+	 $$
+	 	a\lor b?
+	 $$
+	 \pause
+	 (wahr)
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Klammern}
+	
+	Was ist mit einer Aussage
+	$$
+		a\land b \lor c
+	$$
+	gemeint?\\ 
+	\pause
+	Es gibt die beiden Möglichkeiten
+	$$
+		(a\land b) \lor c\qquad\text{bzw.}\qquad a \land (b\lor c).
+	$$
+	Deshalb ist es wichtig, eine logische Verknüpfung von mehr als zwei Aussagen durch Klammern zu strukturieren.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Logische Äquivalenz}
+	
+	Seien $a_1,\ldots, a_n$ Aussagen.\\[1mm]
+	
+	Sind die Aussagen $a$ bzw. $b$ \highlightDef{logische Verknüpfungen} der Aussagen $a_1, \ldots, a_n$,
+	dann heißen  $a$ und $b$  \highlightDef{logisch äquivalent}, wenn sie für jede Kombination von Wahrheitswerten 
+	für $a_1, \ldots, a_n$ die gleichen Wahrheitswerte annehmen.\\[2mm]
+	
+	Notation: 
+	$$
+		a \equiv b.
+	$$
+	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{De Morgan'sche Regeln}
+
+	Seien $a,b$ Aussagen.
+	Dann gilt:
+	$$
+		\neg( a\land b) \equiv (\neg a) \lor (\neg b)
+	$$
+	und 
+	$$
+		\neg( a\lor b) \equiv (\neg a) \land (\neg b).
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{De Morgan'sche Regeln: Beweis}
+
+	 \highlightDef{$\neg( a\land b) \equiv (\neg a) \lor (\neg b)$:}\\[3mm]
+	
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c || c}
+			a	& b	& \neg(a\land b)	& (\neg a) \lor (\neg b)	\\ \hline
+			w	& w	& f				& f	\\
+			w	& f	& w				& w	\\
+			f	& w	& w				& w	\\
+			f	& f	& w				& w
+		\end{array}
+	$$
+	
+	\vspace{10mm}
+	Der Nachweis der zweiten Regel $\neg( a\lor b) \equiv (\neg a) \land (\neg b)$ ist eine Ubungsaufgabe.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Distributivgesetze}
+	
+	Seien $a,b,c$ Aussagen.
+	Dann gilt:
+	\begin{eqnarray*}
+		a\land (b \lor c)	&\equiv& (a\land b) \lor (a\land c)\\
+		a\lor (b\land c) 	&\equiv& (a\lor b) \land (a\lor c)
+	\end{eqnarray*}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Distributivgesetze: Beweis}
+	
+	\highlightDef{$a\land (b \lor c) \equiv (a\land b) \lor (a\land c)$:}
+	
+	$$
+		\begin{array}{c | c | c || c || c}
+			a	& b	&c				&a\land (b \lor c)	& (a\land b) \lor (a\land c)	\\ \hline
+			w	& w	& w				&w				& w					\\
+			w	& w	&f				&w				& w					\\
+			w	& f	&w				&w				& w				 	\\
+			f	&w	&w				&f 				&f					\\
+			f	&f	&w				&f				&f					\\
+			f	&w	&f				&f				&f					\\
+			w	&f	&f				&f				&f					\\
+			f	&f	&f				&f				&f	
+		\end{array}
+	$$
+	\pause
+	\vfill
+	$a\lor (b\land c) \equiv (a\lor b) \land (a\lor c)$ zeigt man analog.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Exclusive OR: XOR}
+
+	Seien $a, b$ zwei Aussagen. Die Aussage
+	$$
+		a \oplus b
+	$$
+	heißt \highlightDef{XOR} oder \highlightDef{Exklusive Oder Verknüpfung}. \\[1mm]
+	
+	Die Aussage $a \oplus b$ ist genau dann wahr, wenn genau eine der beiden Aussagen $a, b$ wahr ist 
+	(ausschließendes oder).
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\oplus b	\\ \hline
+			w	& w	& f		\\
+			w	& f	& w		\\
+			f	& w	& w		\\
+			f	& f	& f	
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Seien \\
+	$a = $ ``Karlsruhe liegt in Deutschland'',\\
+	$b = $ ``Die Erde ist eine Kugel''\\
+	 zwei Aussagen.\\[2mm]
+	 
+	 Wie lautet der Wahrheitswert von 
+	 $$
+	 	a\oplus b?
+	 $$
+	 \pause
+	 (falsch, da die Wahrheitswerte von $a$ und $b$ wahr sind)
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Subjunktion}
+
+	Seien $a, b$ zwei Aussagen. Die Aussage
+	$$
+		a \rightarrow b
+	$$
+	heißt \highlightDef{Subjunktion} oder \highlightDef{Wenn-Dann-Verknüpfung}. \\
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\rightarrow b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& f		\\
+			f	& w	& w		\\
+			f	& f	& w	
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	Wenn $2+2=5$, dann ist die Erde eine Scheibe.\\[2mm]
+	
+	\pause
+	Seien \\
+	$a = $ ``2 + 2 = 5'',\\
+	$b = $ ``Die Erde ist eine Scheibe''\\
+	 zwei Aussagen.\\[2mm]
+	 
+	 Wie lautet der Wahrheitswert von 
+	 $$
+	 	a\rightarrow  b?
+	 $$
+	 \pause
+	 (wahr, da der Wahrheitswert von $a$ falsch ist)
+	 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Subjunktion}
+	
+	Eine sehr wichtige Tatsache ist
+	$$
+		a \rightarrow b \equiv (\neg b) \rightarrow (\neg a).
+	$$
+	(Dies ist die Grundlage für Beweise durch Kontraposition.)\\[3mm]
+	\pause
+	Beweis:\\
+	$$
+		\begin{array}{c | c || c || c}
+			a	& b	& a\rightarrow b	&(\neg b) \rightarrow (\neg a)	\\ \hline
+			w	& w	& w				& w						\\
+			w	& f	& f				& f						\\
+			f	& w	& w				& w						\\
+			f	& f	& w				& w						
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Bijunktion}
+	
+	Seien $a, b$ zwei Aussagen. Die Aussage
+	$$
+		a \leftrightarrow b
+	$$
+	heißt \highlightDef{Bijunktion} oder \highlightDef{Genau-Dann-Verknüpfung}. \\
+
+	\vfill
+	Wahrheitstafel:
+	$$
+		\begin{array}{c | c || c}
+			a	& b	& a\leftrightarrow b	\\ \hline
+			w	& w	& w		\\
+			w	& f	& f		\\
+			f	& w	& f		\\
+			f	& f	& w	
+		\end{array}
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Bijunktion}
+	
+	Seien $a, b$ zwei Aussagen. Dann gilt
+	$$
+		a \leftrightarrow b \equiv (a\rightarrow b) \land (b\rightarrow a).
+	$$
+	(Beweis: Übungsaufgabe)
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Implikation / Logischer Schluss}
+	
+	Man schreibt in Schlussfolgerungen
+	$$
+		a \Rightarrow b,
+	$$
+	wenn die Aussage $a\rightarrow b$ wahr ist.\\[2mm]
+	
+	Sprechweise: Aus {\em $a$ folgt $b$} oder {\em $a$ impliziert $b$}.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Äquivalenz}
+	
+	Man schreibt in Schlussfolgerungen
+	$$
+		a \Leftrightarrow b,
+	$$
+	wenn die Aussage $a\leftrightarrow b$ wahr ist.\\[2mm]
+	
+	Sprechweise: {\em $a$ genau dann, wenn $b$}.
+	
+\end{frame}
+%
+%%%
+\section{Prädikatenlogik}
+%%%
+%%%
+\subsection{Aussageform \& Prädikat}
+%%%
+%
+\begin{frame}{Motivation}
+	
+	Es gibt Sätze, deren Wahrheitswert von einer oder mehreren Variablen abhängt:
+	$$
+		x < 5.
+	$$
+	Solche Sätze sind keine Aussagen, können aber in der Prädikatenlogik behandelt werden.
+	
+\end{frame}
+%
+%
+\begin{frame}{Aussageform \& Prädikat}
+	
+	Eine \highlightDef{Aussageform $a(x)$} entsteht, wenn man in einer Aussage eine Konstante durch eine Variable ersetzt.\\[3mm]
+	
+	\pause
+	Beispiel: Aussageform
+	$$
+		a(x): x < 5.
+	$$
+	Zwei Bestandteile:
+	\begin{itemize}
+		\item Variable $x$ und
+		\item \highlightDef{Prädikat} ``Ist kleiner $5$'': $a(x): \text{ist\_kleiner\_5}(x)$.\\[1mm]
+		
+			In einer (objektorientierten) Programmiersprache entspricht ein Prädikat $\text{ist\_kleiner\_5}(\cdot)$
+			einer Methode mit boolschem Rückgabewert (wahr/falsch). 
+	\end{itemize}
+	
+	\vfill
+	\pause
+	Eine Aussageform $a(x)$ wird zu einer Aussage, wenn man für $x$ ein konkretes Objekt einsetzt:
+	$a(1)$ ist wahr und $a(7)$ ist falsch.
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Verknüpfungen von Aussageformen}
+	
+	Aussageformen $a(x), b(x)$ können wie Aussagen negiert werden ($\neg$) oder durch 
+	$\land, \lor, \oplus, \rightarrow, \leftrightarrow$ verknüpft werden.\\
+	Hierdurch entstehen neue Aussageformen:
+	$$
+		\neg a(x), \quad a(x) \land b(x), \quad a(x) \lor b(x), 
+	$$
+	$$
+		a(x) \oplus b(x), \quad a(x) \rightarrow b(x),\quad a(x) \leftrightarrow b(x).
+	$$
+\end{frame}
+%
+%%%
+\subsection{Quantoren}
+%%%
+%
+\begin{frame}\frametitle{Quantoren}
+	
+	Quantoren erzeugen Aussagen aus Aussageformen.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Allquantor $\forall$}
+	
+	Sei $a(x)$ eine Aussageform. Dann ist die Aussage 
+	$$
+		\forall x: a(x)
+	$$
+	genau dann wahr, wenn $a(x)$ \highlightDef{für alle} $x$ wahr ist.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Allquantor $\forall$}
+	
+	Sei $M$ eine Menge.\\[2mm]
+	Die Aussage 
+	$$
+		\forall x\in M: a(x)
+	$$
+	ist eine andere (lesbarere) Schreibweise für die Aussage
+	$$
+		\forall x: \big(x\in M \rightarrow a(x) \big) .
+	$$
+	(``$x\in M$'' ist ebenfalls eine Aussageform.)
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	Welche der folgenden Aussagen ist wahr?
+	\begin{itemize}
+		\item $\forall x\in \N: x^2 \geq x$. 
+		\item $\forall x\in \R: x^2 \geq x$.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Existenzquantor $\exists$}
+
+	Sei $a(x)$ eine Aussageform. Dann ist die Aussage 
+	$$
+		\exists x: a(x)
+	$$
+	genau dann wahr, wenn ein $x$ \highlightDef{existiert}, sodass $a(x)$ für dieses $x$ wahr ist.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Existenzquantor $\exists$}
+
+	Die Schreibweise
+	$$
+		\exists x \in M: a(x)
+	$$
+	wird für die Aussage
+	$$
+		\exists x: \big( (x\in M) \land a(x) \big)
+	$$ 
+	verwendet.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	Welche der folgenden Aussagen ist wahr?
+	\begin{itemize}
+		\item $\exists x\in \R: x^2 \geq x$.
+		\item $\exists x\in\N: x^2 = 2$.
+		\item $\exists x\in\Q: x^2 = 2$.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Negation von Aussagen mit Quantoren}
+	
+	Sei $a(x)$ eine Aussageform. Dann gilt:
+	\begin{eqnarray*}
+		\neg( \forall x: a(x) ) 	&\equiv	& \exists x: \neg a(x)\\
+		\neg( \exists x: a(x) )	& \equiv	& \forall x: \neg a(x)
+	\end{eqnarray*}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	\begin{itemize}
+		\item Jeder spricht Englisch.
+		\pause
+		\item $\forall x: x$ spricht Englisch.
+		\pause
+		\item Negation: 
+			$$
+				\neg( \forall x: x \text{\;spricht Englisch}) \equiv \exists x : x \text{\; spricht nicht Englisch}
+			$$
+		\item ``Nicht jeder spricht Englisch.'' $\equiv$ ``Es gibt jemanden, der nicht Englisch spricht.'' 
+	\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Reihenfolge von Quantoren}
+	
+	Es ist sehr wichtig, auf die Reihenfolge der Quantoren zu achten.
+	\begin{itemize}
+		\item $\forall x\in\N\;\; \exists y\in \N: x + y \text{\,ungerade}$
+		\item $\exists y\in \N\;\; \forall x\in \N: x +y \text{\,ungerade}$ 
+	\end{itemize}
+	Welche der Aussagen ist wahr?
+	
+\end{frame}
+%
+%%%
+
+
+
+
+\end{document}

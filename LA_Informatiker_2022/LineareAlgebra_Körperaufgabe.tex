@@ -1,0 +1,78 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Körper-Aufgabe: Körpererweiterung von $\Q$
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabe: Körpererweiterung von $\Q$}
+Sei
+$$
+	K := \{ a + b\sqrt{2} ~|~a,b \in \Q \}. 
+$$
+Zeigen Sie, dass $(K,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein  K\"orper ist.
+%%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: }
+%
+Alle Eigenschaften eines kommutativen Ringes zeigt man wie in Aufgabe 1 auf  \"Ubungsblatt 4. Es bleibt also nur zu zeigen, dass jedes Element in $K \setminus \{0\}$ ein multiplikatives Inverses besitzt. \\ \pause
+\quad\\
+Seien dazu $z=a_1 + b_1 \sqrt{2}, \tilde z=a_2+b_2\sqrt{2} \in K$. Dann gilt: \pause
+$$
+z \cdot \tilde z =(a_1 + b_1\sqrt{2}) \cdot (a_2 + b_2\sqrt{2}) = (a_1a_2 + 2b_1b_2) + (a_1b_2 + a_2b_1)\sqrt{2}
+$$ \pause
+Setzt man nun $z \cdot \tilde z=1$, so erh\"alt man zwei Gleichungen: \pause
+\begin{align*}
+a_1a_2 + 2b_1b_2&=1\\ 
+a_1b_2 + a_2b_1&=0
+\end{align*}
+\end{frame}
+%
+\begin{frame}
+\begin{align*}
+a_1a_2 + 2b_1b_2&=1\\
+a_1b_2 + a_2b_1&=0
+\end{align*}
+Fall $b_1=0$: \\Dann ist $z=a_1+0\cdot \sqrt{2}=a_1 \in \Q$ und mit $\tilde z=\frac{1}{a_1}$ gilt $z\cdot \tilde z=1$.\\\quad\\
+Fall $b_1 \ne 0$: \\
+L\"ost man die zweite Gleichung nach $a_2$ auf, so erh\"alt man $a_2=\frac{-a_1b_2}{b_1}$.  \pause Dies kann man wiederum in die erste Gleichung einsetzen und erh\"alt
+$$
+1=a_1\cdot \frac{-a_1b_2}{b_1} + 2b_1b_2=b_2 \left( \frac{-a_1^2+2b_1^2}{b_1}\right)
+$$ \pause
+L\"ost man diese Gleichung nun nach $b_2$, so ergibt das $b_2=\frac{b_1}{2b_1^2-a_1^2}$. \\
+(Aus $2b_1^2-a_1^2=0$ würde $a_1=\sqrt{2}b_1 \notin \Q$ folgen.)
+\\ \pause Setzt man $b_2$ nun zur\"uck in die Formel von $a_2$ ein, erh\"alt man $a_2=\frac{-a_1}{2b_1^2-a_1^2}$.\\ 
+\end{frame}
+%
+\begin{frame}
+Somit ist $\tilde z=\frac{-a_1}{2b_1^2-a_1^2} + \frac{b_1}{2b_1^2-a_1^2} \cdot \sqrt{2}$ das zu $z$ Inverse Element und es gilt auch offensichtlich $\tilde z \in K$. \\
+\vfill
+Somit haben wir beide Fälle, $b_1=0$ und $b_1\ne 0$ ein multiplikatives Inverses zu $z$ gefunden.\\
+\vfill
+Damit ist $K$ ein Körper.
+\end{frame}
+%
+%
+
+
+\end{document}

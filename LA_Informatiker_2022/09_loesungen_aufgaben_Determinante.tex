@@ -1,0 +1,340 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE L\"osungen Übungsaufgaben 9}\\[3mm]
+		{\Large Determinante}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+%-------------------------
+%-------------------------
+\section{Invertierbar?}
+%%%
+
+Prüfen Sie mit Hilfe der Determinanten, ob die folgenden Matrizen invertierbar sind.
+
+$$
+A=\begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 &2 \\ 0&0&1\end{pmatrix}, \quad 
+B=\begin{pmatrix} 1 & 2 & 3 \\ 1 & 0 &2 \\ 0&0&1\end{pmatrix} \ \text{ und } \
+C=\begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 &1 \\ 1&1&0\end{pmatrix}
+$$
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+Eine quadratische Matrix ist genau dann invertierbar, wenn ihre Determinante unngleich 0 ist. \\
+Addieren des Vielfachen einer Zeile zu einer anderen Zeile ändert die Determinante nicht, dies der Multiplikation mit einer Additionsmatrix entspricht und diese Determinante 1 haben. 
+$$
+\det(A)=\det(\begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 &2 \\ 0&0&1\end{pmatrix})=\det(\begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 &1 \\ 0&0&1\end{pmatrix})=\det(\begin{pmatrix} 0 & 0 & 0 \\ 1 & 1 &1 \\ 0&0&1\end{pmatrix})=0
+$$
+Die letzte Gleichheit folgt, da die Matrix eine Null-Zeile besitzt. Somit ist die Matrix $A$ nicht invertierbar.
+$$
+\det(B)=\det(\begin{pmatrix} 1 & 2 & 3 \\ 1 & 0 &2 \\ 0&0&1\end{pmatrix})=\det(\begin{pmatrix} 1 & 2 & 3 \\ 0 & -2 &-1 \\ 0&0&1\end{pmatrix})=-2 \ne 0
+$$
+Wir nutzen hier die Formel für die Determinte einer oberen Dreiecksmatrix. Somit ist die Matrix $B$ invertierbar.
+$$
+\det(C)=\det(\begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 &1 \\ 1&1&0\end{pmatrix})=-1\cdot \det(\begin{pmatrix} 1  &1 \\ 1&0\end{pmatrix})+1\cdot \det(\begin{pmatrix} 1 &0 \\ 1&1\end{pmatrix})=-1\cdot(-1) + 1 \cdot 1=2 \ne 0
+$$
+Somit ist auch die Matrix $B$ invertierbar.
+
+\newpage
+%-------------------------
+\section{Determinante}
+%%%
+
+Berechnen Sie die Determinante der Matrix
+$$
+	M=\begin{pmatrix}
+		0	& 2	& 4	& -2 & 1	\\
+		1	& 0	& 1	& 3	& 0	\\
+		1	& 1	& 3	& 2	& 0\\
+		0	& 1	& 2	& -1	& -1	\\
+		3	& 2	& 7	& 7	& -1	
+	\end{pmatrix}.
+$$
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+Wir benutzen, dass für Additionsmatrizen $\det(A_{ij}(\alpha))=1$ gilt (wenn $i\ne j$).
+Damit:
+$$
+	A_{3,2}(-1)A_{5,2}(-3)M=\begin{pmatrix}
+		0	& 2	& 4	& -2 & 1	\\
+		1	& 0	& 1	& 3	& 0	\\
+		0	& 1	& 2	& -1	& 0\\
+		0	& 1	& 2	& -1	& -1	\\
+		0	& 2	& 4	& -5	& -1	
+	\end{pmatrix}.
+$$
+Wir entwickeln die Determinante nun nach der ersten Spalte:
+\begin{align*}
+\det(M)&=\det(A_{3,2}(-1))\cdot\det(A_{5,2}(-3))\cdot\det(M)=\det(A_{3,2}(-1)A_{5,2}(-3)M)\\
+&=(-1)^{2+1}\cdot \det(\begin{pmatrix}
+			 2	& 4	& -2 & 1	\\
+			 1	& 2	& -1	& 0\\
+			 1	& 2	& -1	& -1	\\
+			 2	& 4	& -5	& -1	
+	\end{pmatrix})
+\end{align*}
+Setzte $\tilde M^{21}:=\begin{pmatrix}
+			 2	& 4	& -2 & 1	\\
+			 1	& 2	& -1	& 0\\
+			 1	& 2	& -1	& -1	\\
+			 2	& 4	& -5	& -1	
+	\end{pmatrix}$.
+Wieder nutzen wir Additionsmatrizen:
+$$
+A_{3,1}(1)A_{4,1}(1)\tilde M^{21}=\begin{pmatrix}
+			 2	& 4	& -2 & 1	\\
+			 1	& 2	& -1	& 0\\
+			 3	& 6	& -3& 0	\\
+			 4	& 8	& -7	& 0	
+	\end{pmatrix}
+$$
+Damit erhalten wir durch Entwickeln nach der 4. Spalte:
+\begin{align*}
+\det(M)&=-\det(\tilde M^{21})=-\det(A_{3,1}(-1))\cdot\det(A_{4,1}(-3))\cdot\det(\tilde M^{21})\\
+&=-\det(A_{3,1}(-1)A_{4,1}(-3)\tilde M^{21})\\
+&=(-1)\cdot(-1)^{1+4}\det(\begin{pmatrix}
+			 1	& 2	& -1	\\
+			 3	& 6	& -3	\\
+			 4	& 8	& -7	
+	\end{pmatrix})
+\end{align*}
+Setze $\tilde M^{14}:=\begin{pmatrix}
+			 1	& 2	& -1	\\
+			 3	& 6	& -3	\\
+			 4	& 8	& -7	
+	\end{pmatrix}$.
+Erneut benutzen wir Additionsmatrizen
+$$
+A_{3,1}(-4)A_{2,1}(-3)\tilde M^{14}=\begin{pmatrix}
+			 1	& 2	& -1	\\
+			 0	& 0	& 0	\\
+			 0	& 0	& -3	
+	\end{pmatrix}
+$$
+Damit erhalten wir 
+\begin{align*}
+\det(M)&=\det(\tilde M^{14})=\det(A_{3,1}(-4))\cdot\det(A_{2,1}(-3))\cdot\det(\tilde M^{14})\\
+&=\det(A_{3,1}(-4)A_{2,1}(-3)\tilde M^{14})\\
+&=0
+\end{align*}
+Für die letzte Gleichheit nutzen wir, dass sich die Determinante einer oberen Dreiecksmatrix als Produkt ihrer Diagonaleinträge berechnet.
+
+\newpage
+%-------------------------
+\section{Invertierbarkeit}
+%%%
+
+Sei $\alpha \in \R$ und
+$$
+	A =
+	\begin{pmatrix}
+		1	&5	&\alpha	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix}
+$$
+
+F\"ur welche Werte von $\alpha$ ist $A$ invertierbar?
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+$A$ ist genau dann invertierbar, wenn $\det(A)\ne 0$. Daher berechnen wir die Determinante von $A$:
+\begin{align*}
+\det(A)&=\det(A_{3,1}(1)A)=\det(\begin{pmatrix}
+		1	&5	&\alpha	\\
+		0	&-2	&1	\\
+		0	&6	&3+\alpha
+	\end{pmatrix})=1\cdot(-1)^{1+1}\cdot\det(\begin{pmatrix}
+		-2	&1	\\
+		6	&3+\alpha
+	\end{pmatrix})\\
+	&=\det(\begin{pmatrix}
+		-2	&1	\\
+		6	&3+\alpha
+	\end{pmatrix})=(-2)\cdot(3+\alpha)-1\cdot 6\\
+	&=-6-2\alpha-6\\
+	&=-2\alpha-12
+\end{align*}
+Damit gilt:
+\begin{align*}
+&&\det(A)&=0\\
+\Leftrightarrow\quad&& -2\alpha-12&=0\\
+\Leftrightarrow\quad&& \alpha&=-6
+\end{align*}
+Somit ist $A$ invertierbar für alle $\alpha \in \R\setminus\{-6\}$.
+
+\newpage
+%-------------------------
+\section{Inverse bestimmen mittels Determinanten-Formel}
+%%%
+
+Sei 
+$$
+	D = 
+	\begin{pmatrix}
+		1	& x	&z\\
+		0	&1&y\\		
+		0	&0	&1
+	\end{pmatrix}
+	\in \R^{3\times 3}.
+$$
+Bestimmen Sie mit Hilfe der komplementären Matrix $\bar D$ die zu $D$ inverse Matrix.
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+Um die komplementäre Matrix $\bar D$ aufzustellen, benötigen wir die Determinanten von den Matrizen $D^{ij}$ für alle $i,j\in \{1,2,3\}$.
+\begin{align*}
+&D^{11}=\begin{pmatrix}
+		1	&y	\\
+		0	&1
+	\end{pmatrix}
+&D^{12}=\begin{pmatrix}
+		0	&y	\\
+		0	&1
+	\end{pmatrix}
+&&D^{13}=\begin{pmatrix}
+		0	&1	\\
+		0	&0
+	\end{pmatrix}\\
+%
+&D^{21}=\begin{pmatrix}
+		x	&z	\\
+		0	&1
+	\end{pmatrix}
+&D^{22}=\begin{pmatrix}
+		1	&z	\\
+		0	&1
+	\end{pmatrix}
+&&D^{23}=\begin{pmatrix}
+		1	&x	\\
+		0	&0
+	\end{pmatrix}\\
+%
+&D^{31}=\begin{pmatrix}
+		x	&z	\\
+		1	&y
+	\end{pmatrix}
+&D^{32}=\begin{pmatrix}
+		1	&z	\\
+		0	&y
+	\end{pmatrix}
+&&D^{33}=\begin{pmatrix}
+		1	&x	\\
+		0	&1
+	\end{pmatrix}
+\end{align*}
+Damit können wir die komplementäre Matrix aufstellen:
+$$
+\bar D=\begin{pmatrix}
+		(-1)^{1+1}\det(D^{11})	&(-1)^{1+2}\det(D^{21})	&(-1)^{1+3}\det(D^{31}) \\
+		(-1)^{2+1}\det(D^{12})	&(-1)^{2+2}\det(D^{22})	&(-1)^{2+3}\det(D^{32}) \\
+		(-1)^{3+1}\det(D^{13})	&(-1)^{3+2}\det(D^{23})	&(-1)^{3+3}\det(D^{33}) 
+	\end{pmatrix}
+	= 
+	\begin{pmatrix}
+	1 & -x & xy-z \\
+	0 & 1 & -y \\
+	0 & 0& 1
+	\end{pmatrix}
+$$
+Da $\det(D)=1$ gilt, folgt somit 
+$$
+D^{-1}=\frac{1}{\det(D)}\cdot \bar D = \bar D= \begin{pmatrix}
+	1 & -x & xy-z \\
+	0 & 1 & -y \\
+	0 & 0& 1
+	\end{pmatrix}.
+$$
+\newpage
+%-------------------------
+\section{Determinante einer dünn-besetzten Matrix *}
+%%%
+Berechnen Sie die Determinante der Matrix
+$$
+	M=\begin{pmatrix}
+		0	& 2	&  0& 1	\\
+		1	& 0	&  3	& 0	\\
+		1	& 0	&  2	& 0\\
+		0	& 1	&  -1	& -1	
+	\end{pmatrix}.
+$$
+
+
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+Wir beginnen mit einigen Umformungen durch Additionsmatrizen ($\det(A_{i,j}(\alpha))=1$) und Vertauschungsmatrizen ($\det(V_{i,j})=-1$). 
+\begin{align*}
+V_{2,4}V_{1,2}A_{1,4}(-2)A_{4,3}(-1)A_{3,2}(-1)M&=V_{2,4}V_{1,2}A_{1,4}(-2)A_{4,3}(-1)\begin{pmatrix}
+		0	& 2	&  0& 1	\\
+		1	& 0	&  3	& 0	\\
+		0	& 0	&  -1	& 0\\
+		0	& 1	&  -1	& -1	
+	\end{pmatrix}\\
+	&=V_{2,4}V_{1,2}A_{1,4}(-2)\begin{pmatrix}
+		0	& 2	&  0& 1	\\
+		1	& 0	&  3	& 0	\\
+		0	& 0	&  -1	& 0\\
+		0	& 1	&  0	& -1	
+	\end{pmatrix}\\
+	&=V_{2,4}V_{1,2}\begin{pmatrix}
+		0	& 0	&  0& 3	\\
+		1	& 0	&  3	& 0	\\
+		0	& 0	&  -1	& 0\\
+		0	& 1	&  0	& -1	
+	\end{pmatrix}\\
+	&=V_{2,4}\begin{pmatrix}
+		1	& 0	&  3	& 0	\\
+		0	& 0	&  0& 3	\\
+		0	& 0	&  -1	& 0\\
+		0	& 1	&  0	& -1	
+	\end{pmatrix}\\
+	&=\begin{pmatrix}
+		1	& 0	&  3	& 0	\\
+		0	& 1	&  0	& -1	\\
+		0	& 0	&  -1	& 0\\
+		0	& 0	&  0& 3
+	\end{pmatrix}
+\end{align*}
+Insgesamt erhalten wir somit
+\begin{align*}
+\det(M)&=\frac{1}{-1}\cdot\frac{1}{-1}\cdot\frac{1}{1}\cdot\frac{1}{1}\cdot\frac{1}{1}\cdot\det(V_{2,4}V_{1,2}A_{1,4}(-2)A_{4,3}(-1)A_{3,2}(-1)M)\\
+&=\det(\begin{pmatrix}
+		1	& 0	&  3	& 0	\\
+		0	& 1	&  0	& -1	\\
+		0	& 0	&  -1	& 0\\
+		0	& 0	&  0& 3
+	\end{pmatrix}\\
+	&=1\cdot1\cdot(-1)\cdot3\\
+	&=-3
+\end{align*}
+%
+%
+%
+%
+%
+%
+\end{document}

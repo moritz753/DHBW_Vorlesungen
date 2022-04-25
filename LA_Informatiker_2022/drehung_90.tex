@@ -1,0 +1,46 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfmath}
+\usepackage{pgfplots}
+
+\usepgfplotslibrary{fillbetween}
+
+\input{../../../colors.tex}
+
+\definecolor{lightBlue}{RGB}{28,134,230}
+
+\begin{document}
+
+\begin{tikzpicture}
+	
+  	\begin{axis}[
+  		domain	= 0.001:3.7,
+		samples 	=100,
+		axis x line = center,
+		axis y line = center,
+		ymin		= -0.5,
+		ymax	= 2.3,
+		xmin		= -1.3,
+		xmax	= 2.3,
+		xtick		= {-1,2},
+		xticklabels	= { {\scriptsize $-v_2$}, {\scriptsize $v_1$}},		
+		ytick		= {1,2},
+		yticklabels= {{\scriptsize $v_2$, {\scriptsize $v_1$}}},
+		%xlabel	={$v_1$},
+		%xlabel style	={below right},
+		%ylabel	={$v_2$},
+		%ylabel style	={above left}
+	]
+		 \addplot[color=lightBlue, ->] coordinates {(0,0) (2,1)};
+		 \node[] at (axis cs:2.2,1.1) { {\scriptsize\color{lightBlue}  $v$}};
+		 \addplot[color=black, style=dotted] coordinates {(2,0) (2,1)};
+		 
+		 \addplot[color=dhbwRed, ->] coordinates {(0,0) (-1,2)};
+		 \node[] at (axis cs:-1.1,2.2) { {\scriptsize\color{dhbwRed}  $\Phi(v)$}};
+		\addplot[color=black, style=dotted] coordinates {(-1,2) (0,2)};
+	  \end{axis}
+	  
+\end{tikzpicture}
+
+\end{document}

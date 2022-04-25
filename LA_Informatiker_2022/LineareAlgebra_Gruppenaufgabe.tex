@@ -1,0 +1,203 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Verknüpfungsaufgabe: Matrizenmultiplikation
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+%%%
+\begin{frame} \frametitle{Aufgabe: Matrixmultiplikation von reellen $(2\times 2)$-Matrizen}
+
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass die Matrixmultiplikation assoziativ ist.
+	\item[(b)] Zeigen Sie, dass die Matrixmultiplikation nicht kommutativ ist: 
+			Finden Sie hierzu $A,B \in \R^{2\times 2}$ mit
+			$$
+				AB \neq BA.
+			$$
+	\item[(c)] Zeigen Sie, dass  
+			$$
+				E
+				=
+				\begin{pmatrix}
+					1	&	0\\
+					0	&	1
+				\end{pmatrix}
+			$$ 
+			das neutrale Element der Matrixmultiplikation ist. 
+
+\end{itemize}
+%%%
+\end{frame}
+%
+
+%
+\begin{frame}\frametitle{Lösung: Teil a)}
+%%
+Seien
+		$$
+			A 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix}, \quad
+			B 
+			=
+			\begin{pmatrix}
+				b_{11}	&b_{12}	\\
+				b_{21}	&b_{22}
+			\end{pmatrix}, \quad		
+			C 
+			=
+			\begin{pmatrix}
+				c_{11}	&c_{12}	\\
+				c_{21}	&c_{22}
+			\end{pmatrix}
+			\in \R^{2\times 2}.		
+		$$
+		Es folgt:\pause
+		$$
+			(A\cdot B) \cdot C	
+			=
+			\begin{pmatrix}
+				a_{11}b_{11} + a_{12}b_{21}	&	a_{11}b_{12} + a_{12}b_{22}	\\
+				a_{21}b_{11} + a_{22}b_{21}	&	a_{21}b_{12} + a_{22}b_{22}	\\
+			\end{pmatrix}
+			\cdot C
+			= \pause
+		$$
+		\tiny$$													
+			\begin{pmatrix}
+				a_{11}b_{11}c_{11} + a_{12}b_{21}c_{11} +  a_{11}b_{12}c_{21} + a_{12}b_{22}c_{21}	
+					&	a_{11}b_{11}c_{12} + a_{12}b_{21}c_{12} +  a_{11}b_{12}c_{22} + a_{12}b_{22}c_{22}	\\
+				a_{21}b_{11}c_{11} + a_{22}b_{21}c_{11} +  a_{21}b_{12}c_{21} + a_{22}b_{22}c_{21}	
+					&	a_{21}b_{11}c_{12} + a_{22}b_{21}c_{12} +  a_{21}b_{12}c_{22} + a_{22}b_{22}c_{22}
+			\end{pmatrix}			
+		$$\pause
+		\normalsize$$
+			= \ldots
+			= A\cdot(B\cdot C).
+		$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: Teil b)}
+%
+F\"ur 
+		$$
+			A
+			=
+			\begin{pmatrix}
+				1	&	0	\\
+				0	&	0
+			\end{pmatrix}, \quad			
+			B
+			=
+			\begin{pmatrix}
+				0	&	1	\\
+				0	&	0
+			\end{pmatrix}			
+		$$
+		folgt:\pause
+		$$
+			A \cdot B = 	\begin{pmatrix}
+				1\cdot0+0\cdot0	&	1\cdot1+0\cdot0	\\
+				0\cdot0+0\cdot0	&	0\cdot1+0\cdot0
+			\end{pmatrix}=
+			\begin{pmatrix}
+				0	&	1	\\
+				0	&	0
+			\end{pmatrix}
+		$$\pause
+		und
+		$$
+			B \cdot A = 			\begin{pmatrix}
+				0\cdot1+1\cdot0	&	0\cdot0+1\cdot0	\\
+				0\cdot1+0\cdot0	&	0\cdot0+0\cdot0
+			\end{pmatrix}=
+			\begin{pmatrix}
+				0	&	0	\\
+				0	&	0
+			\end{pmatrix}.
+		$$		
+\end{frame}
+%
+%
+%%
+\begin{frame}\frametitle{Lösung: Teil c)}
+%%
+		F\"ur alle
+		$$
+			A 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix} 
+			\in \R^{2\times 2}
+		$$
+		folgt:
+		$$
+			A\cdot E 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix} 
+			\cdot
+			\begin{pmatrix}
+				1	&	0\\
+				0	&	1
+			\end{pmatrix}			
+			=\pause
+			\begin{pmatrix}
+				a_{11}\cdot1+a_{12}\cdot0	&a_{11}\cdot0+a_{12}\cdot1	\\
+				a_{21}\cdot1+a_{22}\cdot0	&a_{21}\cdot0+a_{22}\cdot1
+			\end{pmatrix} 
+			=\pause
+			A
+		$$
+		und\pause
+		$$
+			E\cdot A 			=
+			\begin{pmatrix}
+				1	&	0\\
+				0	&	1
+			\end{pmatrix}
+						\cdot	
+						\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix} 		
+			=\pause
+			\begin{pmatrix}
+				1\cdot a_{11}+0\cdot a_{21}	&1\cdot a_{12}+0\cdot a_{22}	\\
+				0\cdot a_{11}+1\cdot a_{21} &0\cdot a_{12}+1\cdot a_{22}
+			\end{pmatrix} 
+			=\pause
+			A
+		$$
+\end{frame}
+%
+
+\end{document}

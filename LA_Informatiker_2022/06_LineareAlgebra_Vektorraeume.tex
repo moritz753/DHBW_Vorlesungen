@@ -1,0 +1,566 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Analysis \& Lineare Algebra}
+\subtitle{Vektorräume}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Vektorräume}
+\makeSectionDividerPage
+%%%
+\subsection{Definition}
+%
+%
+\begin{frame}\frametitle{Definition}
+
+	Sei $K$ ein Körper\footnote{genauer: $(K, +_{K}, \cdot_{K})$ mit Einselement $1_{K}$}. 
+	Ein \highlightDef{Vektorraum über dem Körper $K$} (oder \highlightDef{$K$-Vektorraum}) 
+	ist eine abelsche Gruppe $(V,+)$, für die eine Abbildung
+	$$
+		\cdot: K\times V \to V,\,
+		(a,v) \mapsto a\cdot v 
+	$$ 
+	mit folgenden Eigenschaften definiert ist:\\[1mm]
+	
+	$\forall a,b \in K, \forall u,v\in V$ gilt:
+	\begin{itemize}
+		\item[(1)] 
+			$1_{K}\cdot v = v$.
+		\item[(2)]
+			$a\cdot(b\cdot v) = (a\cdot_{K} b)\cdot v$.
+			(Assoziativgesetz)
+		\item[(3)]
+			$ (a+_{K}b)\cdot v = a\cdot v + b\cdot v$ \quad und\\
+			$ a\cdot (u+v) = a\cdot u + a\cdot v.$  
+			(Distributivgesetze)
+	\end{itemize}
+	
+	\vfill 
+	\pause
+	Die Elemente $v\in V$ hei{\ss}en \highlightDef{Vektoren}, die Abbildung `` $\cdot$ '' heißt \highlightDef{Skalarmultiplikation}.
+	
+		\vfill \pause
+	Mit $(u-v)$ ist immer der Vektor $u + (-v)$ gemeint.
+	
+\end{frame}
+%
+\subsection{Eigenschaften und Beispiele}
+%
+\begin{frame}\frametitle{Eigenschaften}
+	
+	Sei $(V,+,\cdot)$ ein $K$-Vektorraum.
+	Dann gilt für alle $a\in K, v\in V$:
+	\begin{itemize}
+		\item[(1)] 
+			$0_{K}\cdot v = 0_V$,\\[1mm]
+			
+			Hierbei:\\
+			$0_{K}$: Neutrales Element bzgl. $+_{K}$ in $K$,\\
+			$0_V$: Neutrales Element bzgl. $+$ in $V$.  
+			\pause
+		\item[(2)] 
+			$a\cdot 0_V = 0_V$,
+			\pause
+		\item[(3)] 
+			$(-1_{K})\cdot v = -v$.\\[1mm]
+			
+			Hierbei:\\
+			$-1_{K}$: Inverses Element von $1_{K}$ bzgl. $+_{K}$, \\
+			$-v$: Inverses Element von $v$ in Gruppe $(V,+)$.\\[2mm]						
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beweis}
+	
+	Sei $(V,+,\cdot)$ ein $K$-Vektorraum.
+	Dann gilt für alle $a\in K, v\in V$: \pause
+	\begin{itemize}
+		\item[(1)]
+			\highlight{$0_{K}\cdot v = 0_V$:}
+			$$
+				0_{K}\cdot v =\pause (0_{K} + 0_{K})\cdot v =\pause 0_{K}\cdot v + 0_{K}\cdot v.
+			$$
+			Es folgt:
+			$0_V = 0_{K}\cdot v.$		\pause
+		\item[(2)] 
+			\highlight{$a\cdot 0_V = 0_V$:}
+			$$
+				a\cdot 0_V =\pause a \cdot (0_V + 0_V) = \pause a\cdot 0_V + a\cdot 0_V.
+			$$\pause
+		\item[(3)] 
+			\highlight{$(-1_{K})\cdot v = -v$:}
+			$$
+				(-1_{K})\cdot v + 1_{K}\cdot v =\pause \big((-1_{K}) + 1_{K}\big)\cdot v =\pause 0_{K}\cdot v = 0_V.
+			$$
+			Somit ist $v= 1_{K}\cdot v$ das Inverse von $(-1_{K})\cdot v$ bzgl. $+$ in $V$.
+	\end{itemize}
+	\qed	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\R^n$}
+	
+	Die Menge
+	$$
+		\R^n :=
+		\left\{
+			\begin{pmatrix}
+				x_1\\ 
+				\vdots\\
+				x_n
+			\end{pmatrix}
+			~| ~
+			x_1,\ldots, x_n \in \R
+		\right\}
+	$$ 
+	ist zusammen mit der Verknüpfung
+	$$
+		\begin{pmatrix}
+			x_1\\ 
+			\vdots\\
+			x_n
+		\end{pmatrix}	
+		+
+		\begin{pmatrix}
+			y_1\\ 
+			\vdots\\
+			y_n
+		\end{pmatrix}
+		:=
+		\begin{pmatrix}
+			x_1 + y_1\\ 
+			\vdots\\
+			x_n + y_n
+		\end{pmatrix}							
+	$$
+	eine abelsche Gruppe.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel $\R^n$}
+	
+	$(\R^n,+)$ wird zusammen mit der Abbildung
+	$$
+		\cdot: \R\times\R^n \to \R^n,\quad
+			a
+			\cdot
+			\begin{pmatrix}
+				x_1\\ 
+				\vdots\\
+				x_n
+			\end{pmatrix}
+			:=
+			\begin{pmatrix}
+				ax_1\\ 
+				\vdots\\
+				ax_n
+			\end{pmatrix}			
+	$$ 
+	zu einem Vektorraum $(\R^n,+,\cdot)$ über $\R$ (reeller Vektorraum).
+	
+	\pause
+	\vspace{10mm}
+	Analog ist für jeden Körper $K$ die Menge $K^n$ ein $K$-Vektorraum.\\[2mm]
+	\pause
+	Kryptographie, Codierungstheorie: $\Z_p^n$.\\ 
+	($p$: Primzahl, $\Z_p$: Ring der Restklassen modulo $p$ ist ein Körper.)
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Anschauliches Beispiel $\R^2$}
+
+	\begin{center}
+		\includegraphics[]{Grafiken/Vektoren/vektoren.pdf}
+	\end{center}
+	
+	$$
+		u = 
+		\begin{pmatrix}
+			1 \\
+			2
+		\end{pmatrix},
+		\quad
+		v = 
+		\begin{pmatrix}
+			3 \\
+			1
+		\end{pmatrix},	
+		\quad
+		u+v = 
+		\begin{pmatrix}
+			1+3 \\
+			2+1
+		\end{pmatrix}= 
+		\begin{pmatrix}
+			4 \\
+			3
+		\end{pmatrix}.				
+	$$
+	
+\end{frame}
+%--------------------------------------------
+\section{Untervektorräume}
+\makeSectionDividerPage
+%%%
+\subsection{Definition und Beispiele}
+%
+\begin{frame}\frametitle{Definition}
+Es sei $K$ ein Körper und $V$ eine $K$-Vektorraum. Ein \highlightDef{Untervektorraum} von $V$ ist eine Teilmenge $U \subseteq V$, die bezüglich der Addition eine Untergruppe von $V$ ist und für die gilt:
+$$
+\forall a \in K, u\in U: a \cdot u \in U.
+$$
+\pause
+$U$ ist dann selbst ein $K$-Vektorraum. Um einen Untervektorraum von beliebigen Teilmengen zu unterscheiden schreibt man oft $U\le V$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item Jeder Vektorraum $V$ ist ein Untervektorraum von sich selbst.\pause
+\item Für jeden Vektorraum $V$ ist der \highlightDef{Nullraum} $\{0_V\}$ ein Untervektorraum von $V$.\pause
+\item Für den 3-dimensionalen reellen Vektorraum $\R^3$ ist 
+$$
+U:=\{\begin{pmatrix} x \\ y \\ 0 \end{pmatrix} \mid x,y \in \R\}
+$$
+ein 2-dimensionaler Untervektorraum.\pause
+\item Die Teilmenge
+$$
+M:=\{\begin{pmatrix} x \\ y \\ 1 \end{pmatrix} \mid x,y \in \R\}
+$$\pause
+ist \underline{kein} Untervektorraum von $\R^3$.
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Untervektorraumkriterium}
+Es sei $K$ ein Körper und $V$ eine $K$-Vektorraum, und $U \subseteq V$. Dann ist $U$ genau dann ein Untervektorraum, wenn folgendes gilt:
+\begin{itemize}
+\item[i)] $U \ne \emptyset$,
+\item[ii)] $\forall u_1,u_2 \in U: u_1+u_2 \in U$,
+\item[iii)] $\forall a \in K\ \forall u \in U: a\cdot u \in U$.
+\end{itemize} \pause
+\highlightDef{Beweis:}\\
+Wenn $U\le V$, dann sind offensichtlich alle drei Eigenschaften erfüllt.\pause Es gilt also zu zeigen, dass aus den drei Eigenschaften folgt, dass $U$ ein Untervektorraum von $V$ ist.\\\pause
+Mit $a=-1\in K$ und iii) folgt für alle $u\in U$, dass auch $-u \in U$. Und mit zusätzlich ii) erhalten wir $\forall u_1,u_2 \in U: u_1+(-u_2)\in U$.\pause \\Da $U\ne \emptyset$ erhalten wir mit dem \highlightDef{Untergruppenkriterium}, dass $U$ bzgl. der Addition eine Untergruppe von $V$ ist. Zusammen mit iii) ist das die Definition eines Untervektorraums. \hfill $\square$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Wir nutzen das Untervektorraumkriterium um zu zeigen, dass der Schnitt zweier Untervektorräume wieder ein Untervektorraum ist:
+$$
+U,W \le V \ \Longrightarrow \ U \cap W \le V
+$$
+\highlightDef{Beweis mit Hilfe des UVR-Kriteriums:}\\ \pause
+\begin{itemize}
+\item[i):] $U \cap W \ne \emptyset$, da $0_V \in U$ und $0_V \in W$. \pause
+\item[ii):] Für alle $v_1,v_2 \in U \cap W$ gilt insbesondere $v_1,v_2 \in U$ und $v_1,v_2 \in W$ und da beide UVRe von $V$ sind, gilt auch $v_1+v_2 \in U$ und $v_1+v_2 \in W$. Damit folgt $v_1+v_2 \in U \cap W$. \pause
+\item[iii):] Für alle $v \in U\cap W$ gilt insbesondere $v\in U$ und $v \in W$. Da $U$ und $W$ UVRe von $V$ sind, gilt für alle $a \in K$ auch $a\cdot v \in U$ und $a \cdot v \in W$ und somit $a\cdot v \in U \cap W$.
+\end{itemize}\pause
+Mit dem Untervektorraumkriterium folgt nun die Behauptung. \hfill $\square$
+\end{frame}
+%
+%
+%--------------------------------------------
+\section{Lineare Unabhängigkeit \& Basis}
+\makeSectionDividerPage
+%%%
+\subsection{Definitionen}
+%
+\begin{frame}\frametitle{Linearkombination}
+	
+	\vspace{2mm}
+	Seien $V$ ein $K$-Vektorraum, $v_1,\ldots, v_k \in V$ und $a_1,\ldots, a_k \in K$. \\[1mm]
+	
+	Die Summe
+	$$
+		\sum_{j=1}^k a_j\cdot v_j = a_1\cdot v_1 + \ldots + a_k\cdot v_k
+	$$ 
+	nennt man eine \highlightDef{Linearkombination} der Vektoren $v_1, \ldots, v_k$.
+	
+	\pause
+	\vspace{3mm}
+	\highlight{Beispiele ($V=\R^2$)}\\[1mm]
+	
+	Für 
+	$$
+		v = \begin{pmatrix}
+				3\\
+				-1
+			\end{pmatrix},
+		\,
+		v_1 = \begin{pmatrix}
+				1\\
+				1
+			\end{pmatrix},
+		\,
+		v_2 = \begin{pmatrix}
+				-1\\
+				1
+			\end{pmatrix},
+		\,	
+		v_3 = \begin{pmatrix}
+				-1\\
+				-1
+			\end{pmatrix},
+		\,
+		0 = \begin{pmatrix}
+				0\\
+				0
+			\end{pmatrix}	
+	$$
+	gilt:
+	\begin{align*}
+		v	&= v_1 -2\cdot v_2,\\
+		0	&= v_1 + v_3	= 2\cdot v_1 + 2\cdot v_3 = 0\cdot v_1 + 0\cdot v_3.	
+	\end{align*}
+	
+\end{frame}
+%
+%
+\subsection{Lineare Hülle}
+%
+%
+\begin{frame}\frametitle{Definition: Lineare Hülle}
+Es sei $V$ ein $K$-Vektorraum und $M \subseteq V$ eine Teilmenge. Die Menge
+$$
+\langle M \rangle := \{v \mid v \text{ ist eine Linearkombination von Vektoren aus } M\}
+$$
+nennt man die \highlightDef{lineare Hülle von M}. \\\pause
+$\langle M \rangle$ ist der kleinste Untervektorraum von $V$ der $M$ als Teilmenge enthält.
+\vfill\pause
+\highlightDef{Beispiel}\\
+Für $V=\R^3$ und  $M=\{\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix},\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \}$ ist \pause
+$$
+\langle M \rangle= \pause\{x\cdot \begin{pmatrix} 1 \\0\\ 0 \end{pmatrix} +y \cdot \begin{pmatrix} 0 \\1\\ 0 \end{pmatrix}\mid x,y \in \R \}=\pause \{\begin{pmatrix} x \\ y \\ 0 \end{pmatrix}\mid x,y \in \R \}
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lineare Unabhängigkeit}
+	
+	Sei $V$ ein $K$-Vektorraum. 
+	Die Vektoren $v_1,\ldots, v_k \in V$ hei{\ss}en \highlightDef{linear unabhängig}, wenn die einzige Möglichkeit den Nullvektor als Linearkombination darzustellen, die triviale ist,\pause d.h.
+	für $a_1,\ldots, a_k\in K$  gilt
+	$$
+		\left(\sum_{j=1}^k a_j\cdot v_j = a_1\cdot v_1 + \ldots + a_k\cdot v_k = 0 \right) \ \Leftrightarrow \ \left( a_1=\ldots = a_k = 0 \right)
+	$$
+	
+	\pause
+	\highlight{Beispiel}\\[1mm]
+	
+	Die Vektoren
+	$$
+		v_1 = \begin{pmatrix}
+				1\\
+				1
+			\end{pmatrix},
+		\,
+		v_2 = \begin{pmatrix}
+				-1\\
+				1
+			\end{pmatrix}
+		\in \R^2
+	$$
+	sind linear unabhängig.
+	
+	\pause
+	\vspace{3mm}
+	Vektoren $v_1,\ldots, v_k \in V$, die nicht linear unabhängig sind, nennt man \highlightDef{linear abhängig}.
+		
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Basis}
+	
+	Sei $V$ ein $K$-Vektorraum.
+	Eine \textit{maximale} Menge linear unabhängiger Vektoren $B=\{b_1,\ldots, b_k\}$ hei{\ss}t
+	\highlightDef{Basis} von $V$.\\
+	
+	\vspace{10mm}
+	\pause
+	Mit \textit{maximal} ist gemeint, dass nach Hinzunahme eines beliebigen weiteren Vektors $v\in V$, die Vektoren
+	$$
+		b_1,\ldots, b_k, v
+	$$
+	linear abhängig sind.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Basis}
+	
+	Seien $V$ ein $K$-Vektorraum und $B=\{b_1,\ldots, b_k\}$ eine Basis von $V$.\\[1mm]
+	Dann lässt sich jeder Vektor $v\in V$ als Linearkombination 
+	$$
+		v = a_1\cdot b_1 + \ldots + a_k\cdot b_k
+	$$
+	der Basisvektoren schreiben und die Koeffizienten $a_1,\ldots, a_k\in K$ sind \highlight{eindeutig} bestimmt.
+	Insbesondere gilt $\langle B \rangle = V$.
+
+	\pause
+	\vspace{3mm}
+	\highlight{Beweis}
+	
+	\begin{itemize}
+		\item
+			Angenommen, $b$ lässt sich nicht als Linearkombination von $b_1,\ldots, b_k$ schreiben. \\[1mm]
+			\pause
+			Dann wären $b_1,\ldots, b_k, b$ linear unabhängige Vektoren.\\[1mm] 
+			\pause
+			Ein Widerspruch zur Voraussetzung, dass $\{b_1,\ldots, b_k\}$ eine Basis 
+			(eine maximale Menge linear unabhängiger Vektoren) ist.
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Basis}
+	
+	Seien $V$ ein $K$-Vektorraum und $\{b_1,\ldots, b_k\}$ eine Basis von $V$.\\[1mm]
+	Dann lässt sich jeder Vektor $v\in V$ als Linearkombination 
+	$$
+		v = a_1\cdot b_1 + \ldots + a_k\cdot b_k
+	$$
+	der Basisvektoren schreiben und die Koeffizienten $a_1,\ldots, a_k\in K$ sind \highlight{eindeutig} bestimmt.
+
+	\vspace{3mm}
+	\highlight{Beweis (Fortsetzung)}
+	
+	\begin{itemize}
+		\item \highlight{Eindeutigkeit:} 
+			Seien $a_1,\ldots, a_k, c_1,\ldots, c_k \in K$ mit
+			$$
+				v = a_1\cdot b_1 + \ldots + a_k\cdot b_k = c_1\cdot b_1 + \ldots + c_k\cdot b_k.
+			$$
+			\pause
+			Es folgt:
+			$$
+				0_V =v-v= (a_1-c_1)\cdot b_1 + \ldots + (a_k-c_k)\cdot b_k
+			$$
+			und somit 
+			$$
+				a_1=c_1, \ldots, a_k=c_k,
+			$$
+			da die Vektoren $b_1,\ldots, b_k$ linear unabhängig sind.
+			\qed
+	\end{itemize}
+	
+\end{frame}
+%
+\subsection{Koordinaten und Dimension}
+%
+\begin{frame}\frametitle{Koordinaten}
+
+	Seien $V$ ein $K$-Vektorraum und $\{b_1,\ldots, b_k\}$ eine Basis von $V$.
+	Die eindeutigen Koeffizienten $a_1,\ldots, a_k\in K$ in der Linearkombination
+	$$
+		v = a_1\cdot b_1 + \ldots + a_k\cdot b_k
+	$$
+	für $v\in V$ hei{\ss}en \highlightDef{Koordinaten} von $v$ bzgl. der Basis $\{b_1,\ldots, b_k\}$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	\vspace{1mm}
+	Die Vektoren
+	$$
+		b_1 = \begin{pmatrix}
+				1\\
+				1
+			\end{pmatrix},
+		\quad
+		b_2 = \begin{pmatrix}
+				-1\\
+				1
+			\end{pmatrix}
+		\quad
+		\in \R^2
+	$$
+	bilden eine Basis des $\R^2$. \pause
+	Für 
+	$
+		v := 
+		\begin{pmatrix}
+			-1\\
+			3
+		\end{pmatrix}
+	$
+	gilt
+	$$
+		v = 
+		1\cdot b_1 + 2\cdot b_2.
+	$$
+	\pause
+	Bzgl. der Basis $\{b_1, b_2\}$ hat $v$ somit die Koordinaten $1$ und $2$.\\[3mm]
+	
+	\begin{center}
+		\includegraphics[scale=0.7]{Grafiken/Koordinaten/koordinaten.pdf}
+	\end{center}
+	
+	
+\end{frame}
+%
+\subsection{Dimension}
+%
+\begin{frame}\frametitle{Dimension}
+	
+	Sei $V$ ein Vektorraum. 
+	Die maximale Anzahl von linear unabhängigen Vektoren in $V$ wird als \highlightDef{Dimension $\dim(V)$} von $V$ bezeichnet.\\
+	\vfill
+	\pause
+	Man kann zeigen, dass alle maximalen Mengen von linear unabhängigen Vektoren eines Vektorraums (= Basen) die gleiche Kardinalität haben, nämlich die Dimension von $V$.\pause
+	\vfill
+	Außerdem ist die Dimension eines Vektorraums $V$ auch die minimale Kardinalität einer Teilmenge $M \subseteq V$ mit $\langle M \rangle=V$.
+	\vfill
+	\pause
+	Es gibt \highlight{endlichdimensionale} und \highlight{unendlichdimensionale} Vektorräume. \\[1mm]
+	Wir beschränken uns (in der Regel) auf endlichdimensionale Vektorräume.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Standardbasis in $V=\R^n$}
+	
+	Die Vektoren
+	$$
+		b_1 = \begin{pmatrix} 1\\ 0 \\ 0\\ \vdots \\ 0 \end{pmatrix},
+		b_2 = \begin{pmatrix} 0\\ 1 \\ 0\\ \vdots \\ 0 \end{pmatrix},
+		\ldots,
+		b_n = \begin{pmatrix} 0\\ 0 \\ 0\\ \vdots \\ 1 \end{pmatrix} \in \R^n
+	$$	
+	bilden eine Basis des $\R^n$ (\"Ubungsaufgabe). Diese Basis hei{\ss}t \highlightDef{Standardbasis}.\\[1mm]
+	
+	Somit: $\dim(\R^n) = n$.
+	
+\end{frame}
+%
+
+%
+
+%
+
+\end{document}

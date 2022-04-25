@@ -1,0 +1,101 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+
+\include{macros}
+
+\author{Moritz Gruber\\ DHBW Karlsruhe}
+\title{\"Ubungsaufgaben 4\\ 
+	Ringe
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+
+%%%
+\section{Ringe}
+%%%
+
+Sei
+$$
+	R := \{ a + b\sqrt{2} ~|~a,b \in \Z \}. 
+$$
+Zeigen Sie, dass $(R,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein kommutativer Ring mit Einselement ist.
+
+%%%
+\section{``Kleine'' Ringe *}
+Es sei $n \in \N$. Wir notieren f\"ur $a \in \Z$ mit
+$$
+[a]_n:=\{m \in \Z \mid \exists k\in \Z: m=a+kn\}
+$$
+die Menge aller Zahlen, die beim Teilen durch $n$ den gleichen Rest wie $a$ haben.
+
+\begin{itemize}
+\item[(a)] Zeigen Sie, dass aus $b \in [a]_n$ folgt, dass $[a]_n=[b]_n$.
+\end{itemize}
+Wir definieren die Menge
+$
+\Z_n := \{[a]_n \mid a \in \Z\}
+$
+\begin{itemize}
+\item[(b)] Zeigen Sie, dass $\Z_n:=\{[0]_n,[1]_n,[2]_n,...,[n-1]_n\}$ gilt.
+\end{itemize}
+Wir definieren weiter die Verkn\"upfungen $[a]_n+_n[b]_n=[a+b]_n$ und $[a]_n\cdot_n [b]_n:=[a\cdot b]_n$.
+\begin{itemize}
+\item[(c)] Zeigen Sie, dass $(\Z_n,+_n,\cdot_n)$ ein Ring ist.
+\end{itemize}
+
+
+
+%%%
+\section{Polynome}
+%%%
+
+Geben Sie alle Polynome in $\Z_3[X]$ mit Grad $1$ an. 
+
+%%%
+%%%
+\section{Nullteiler und Einheiten}
+%%%
+Bestimmen Sie alle Nullteiler und alle Einheiten der folgenden Ringe:
+\begin{itemize}
+\item[i)] $\Z_6$
+\item[ii)] $\Q[X]$
+\item[iii)] $\R$
+\end{itemize}
+%%%
+
+
+
+
+\end{document}

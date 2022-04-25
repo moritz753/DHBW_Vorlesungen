@@ -1,0 +1,669 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+
+\include{macros}
+
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{L\"osungen \"Ubungsaufgaben 3\\ 
+	Gruppen
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+%%%
+\section{Die symmetrische Gruppe}
+%%%
+Es sei $D$ eine endliche Menge und 
+$$
+Sym(D):=\{f:D \to D \mid f \text{ bijektiv}\}.
+$$
+Zeigen Sie, dass $(Sym(D),\circ)$ eine Gruppe ist.
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+\item[1)] \underline{Die Verkettung $\circ$ ist eine assoziative Verkn\"upfung auf $Sym(D)$:}\\
+Die Verkettung $\circ$ ist eine assoziative Verkn\"upfung auf der Menge aller Abbildungen $D \to D$ und somit auch assoziativ f\"ur bijektive Abbildungen $D \to D$.\\
+Es bleibt zu zeigen, dass die Verkettung zweier bijektiver Abbildungen wieder bijektiv ist.
+Es seien $f,g \in Sym(D)$. Da $f$ und $g$ bijektiv sind, gibt es Umkehrabbildungen $f^{-1}$ und $g^{-1}$. Damit folgt
+$$
+(f \circ g) \circ (g^{-1} \circ f^{-1})=f \circ (g \circ g^{-1}) \circ f^{-1}=f\circ Id_D \circ f^{-1}=Id_D
+$$
+Somit ist $g^{-1} \circ f^{-1}$ die Umkehrabbildung zu  $f \circ g$ und damit ist $f \circ g$ bijektiv. Da auch $f\circ g: D \to D$ ist $f\circ g \in Sym(D)$.
+
+\item[2)] \underline{Es gibt ein neutrales Element:}\\
+$Id_D$ ist bijektiv und f\"ur alle $f \in Sym(D)$ gilt
+$$
+f \circ Id_D = Id_D \circ f = f
+$$
+
+\item[3)] \underline{F\"ur jedes Element gibt es ein Inverses:}\\
+Da jedes Element $f\in Sym(D)$ bijektiv ist, existiert f\"ur jedes $f \in Sym(D)$ die Umkehrabbildung $f^{-1}:D \to D$. Da andersherum $f$ die Umkehrabbildung zu $f^{-1}$ ist, ist auch $f^{-1}$ bijektiv und daher $f^{-1}\in Sym(D)$. Au\ss erdem gilt
+$$
+f \circ f^{-1} = f^{-1} \circ f = Id_D
+$$
+Damit ist $f^{-1}$ das Inverse zu $f$ in $Sym(D)$.
+\end{itemize}
+
+%%%
+\section{Assoziativ?}
+%%%
+
+Sei $M = \{a,b\}$ mit $a\neq b$. Wir definieren eine Verkn\"upfung $\ast$ auf $M$ durch
+$$
+	a\ast a = b, \quad b\ast b = a, \quad a \ast b =a \quad \text{und} \quad b\ast a = a.
+$$ 
+Zeigen Sie, dass die Verkn\"upfung kommutativ aber nicht assoziativ ist.
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Verkn\"upfungstabelle:
+$$
+	\begin{array}{c || c | c}
+		\ast	&	a	&	b\\
+		\hline
+		\hline
+		a	&	b	& 	a\\
+		b	&	a	&	a
+	\end{array}
+$$
+
+\begin{itemize}
+	\item[(a)] Die Verkn\"upfung ist kommutativ:
+			$$
+				a \ast b = b \ast a.
+			$$
+	\item[(b)] Die Verkn\"upfung ist nicht assoziativ:\\
+			$$
+				(a\ast a)\ast b = b\ast b = a.
+			$$
+			$$
+				a\ast(a \ast b) = a\ast a = b.
+			$$
+\end{itemize}
+
+%%%
+\newpage
+\section{Abel'sche Gruppe}
+%%%
+Wir definieren auf der Menge $G= \R\backslash\{-\frac{1}{2}\}$ die Verkn\"upfung $\ast$ durch
+$$
+	a\ast b := 2ab +a +b.
+$$
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass $(G,\ast)$ eine abelsche Gruppe ist.
+	\item[(b)] Zeigen Sie, dass die Abbildung
+			$$
+				f: G \to \R\backslash\{0\},\, x\mapsto 2x + 1
+			$$
+			ein Isomorphismus der Gruppen $(G,\ast)$ und $(\R\backslash\{0\}, \cdot)$ ist.\\
+			(D.h., die Gruppe $(G,\ast)$ ist die Gruppe $(\R\backslash\{0\}, \cdot)$ in einem neuen Gewand.)
+	\item[(c)] L\"osen Sie die Gleichung
+			$$
+				2\ast x\ast x = 1.
+			$$
+			D.h., bestimmen Sie alle $x\in G$, f\"ur die diese Gleichung erf\"ullt ist.
+\end{itemize}
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Vorbemerkung:
+Durch $\ast$ wird tats\"achlich eine Verkn\"upfung definiert, d.h. f\"ur $a,b \in G$ gilt auch $a\ast b \in G$. Denn f\"ur $a,b\in G$ folgt:
+$$
+	a\ast b = -\frac{1}{2}
+$$ 
+gilt genau dann, wenn
+$$
+	-\frac{1}{2} = 2ab + a +b = (2b+1)a + b.
+$$
+Dies ist \"aquivalent zu
+$$
+	-\frac{1}{2}( 1 + 2b ) = (2b+1)a.
+$$
+Da $b\in G$ gilt $(2b+1)\neq 0$ und wir k\"onnen die Gleichung durch $(2b+1)$ dividieren. Wir erhalten den Widerspruch
+$$
+	-\frac{1}{2} = a.
+$$
+
+\begin{itemize}
+	\item[(a)]
+		\begin{itemize}
+			\item[(a1)] Die Verkn\"upfung ist assoziativ:\\
+					Seien $a,b,c \in G$. Dann gilt:
+					\begin{align*}
+						(a\ast b)\ast c	&=	 (2ab + a + b)\ast c\\
+									&=	 2(2ab + a + b)c + (2ab + a + b) + c\\
+									&=	 4abc + 2ac + 2bc + 2ab + a+ b + c
+					\end{align*}
+					%
+					\begin{align*}
+						a\ast(b\ast c)	&=	 a\ast(2bc + b+ c)	\\
+									&=	 2a(2bc + b + c) + a + (2bc + b + c)\\
+									&=	 4abc + 2ab + 2ac + a + 2bc + b +c
+					\end{align*}
+					Somit:
+					$$
+						(a\ast b)\ast c = a\ast(b\ast c).
+					$$
+					
+			\item[(a2)] Das neutrale Element ist $e = 0 \in G$, da f\"ur alle $x \in G$ gilt
+					$$
+						x\ast 0 = x	\qquad\text{und}\qquad	0\ast x = x.
+					$$		
+			\item[(a3)] Sei $a\in G$. Wir berechnen das zu $a$ inverse Element. Gesucht ist $x\in G$ mit
+					$$
+						a\ast x = x\ast a = e.
+					$$
+					Das hei{\ss}t
+					$$
+						0 = a\ast x = 2ax + a + x. 
+					$$
+					Dies ist \"aquivalent zu
+					$$
+						(2a+1)x = -a.
+					$$
+					Somit
+					$$
+						x = - \frac{a}{2a+1}.
+					$$
+					Da $a\neq -\frac{1}{2}$, existiert f\"ur alle $a\in G$ dieser Bruch.
+					Wegen
+					$$
+						a\ast x = 0
+					$$
+					und 
+					\begin{align*}
+						x \ast a	&=	- \frac{a}{2a+1} \ast a	\\
+								&=	 -\frac{2a}{2a+1}\cdot a - \frac{a}{2a+1}  + a \\
+								&=	\frac{-2a^2 - a + a\cdot(2a+1)}{2a+1}		\\
+								&=	0
+					\end{align*}
+					ist $x$ das inverse Element zu $a$.\\
+					
+					Aus (a1),(a2), (a3) folgt, dass $(G,\ast)$ eine Gruppe ist.
+			\item[(a4)] Es gilt
+					$$
+						b\ast a = 2ba + b + a = a \ast b.
+					$$
+					Die Verkn\"upfung ist somit kommutativ und die Gruppe hiermit abelsch.
+		\end{itemize}
+		
+		\item[(b)]
+			F\"ur $a,b \in G$ gilt:
+			\begin{align*}
+				f(a\ast b)	&=	f(2ab+a+b)	\\
+						&=	4ab + 2a + 2b + 1. 
+			\end{align*}
+			Andererseits
+			\begin{align*}
+				f(a)\cdot f(b)	&= (2a+1)\cdot(2b+1)	\\
+							&= 4ab + 2a + 2b + 1. 
+			\end{align*}
+			Es gilt also
+			$$
+				f(a \ast b) = f(a)\cdot f(b).
+			$$
+			Die Abbildung $f$ ist somit ein Homomorphismus. \\
+			Da die Abbildung offensichtlich bijektiv ist, handelt es sich um einen Isomorphismus.
+		\item[(c)]
+			Es gilt
+			$$
+				f(2\ast x \ast x) = f(2)\cdot f(x) \cdot f(x) = 5f(x)^2
+			$$ 
+			und 
+			$$
+				f(1) = 3.
+			$$
+			Die Gleichung 
+			$$
+				2\ast x\ast x = 1.
+			$$
+			in $(G,\ast)$ wird durch $f$ \"ubersetzt in die Gleichung
+			$$
+				5f(x)^2 = 3
+			$$			
+			in der Gruppe $(\R\backslash\{0\},\cdot)$.
+			Es folgt also
+			$$
+				f(x) = \pm \sqrt{ \frac{3}{5}}.
+			$$
+			F\"ur $x$ folgt dann
+			$$
+				2x+1 = \pm \sqrt{ \frac{3}{5}}
+			$$
+			bzw.
+			$$
+				x = -\frac{1}{2} \pm \frac{1}{2}\cdot \sqrt{ \frac{3}{5}}.
+			$$
+\end{itemize}
+
+%%%
+\newpage
+\section{Matrixmultiplikation von reellen $(2\times 2)$-Matrizen}
+%%%
+
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass die Matrixmultiplikation assoziativ ist.
+	\item[(b)] Zeigen Sie, dass die Matrixmultiplikation nicht kommutativ ist: 
+			Finden Sie hierzu $A,B \in \R^{2\times 2}$ mit
+			$$
+				AB \neq BA.
+			$$
+	\item[(c)] Zeigen Sie, dass  
+			$$
+				E
+				=
+				\begin{pmatrix}
+					1	&	0\\
+					0	&	1
+				\end{pmatrix}
+			$$ 
+			das neutrale Element der Matrixmultiplikation ist. 
+%	\item[(d)] Sei
+%			$$
+%				A 
+%				=
+%				\begin{pmatrix}
+%					a_{11}	&a_{12}	\\
+%					a_{21}	&a_{22}
+%				\end{pmatrix} 			
+%			$$
+%			mit $a_{11}a_{22} - a_{12}a_{21} \neq 0$.
+%			Zeigen Sie, dass die Matrix
+%			$$	
+%				B:= 
+%				\frac{1}{a_{11}a_{22} - a_{12}a_{21}}\cdot
+%				\begin{pmatrix}
+%					a_{22}	&-a_{12}	\\
+%					-a_{21}	&a_{11}
+%				\end{pmatrix} 	
+%				:= 
+%				\begin{pmatrix}
+%					\frac{a_{22}}{a_{11}a_{22} - a_{12}a_{21}}	& \frac{-a_{12}}{a_{11}a_{22} - a_{12}a_{21}}	\\
+%					\frac{-a_{21}}{a_{11}a_{22} - a_{12}a_{21}}	&\frac{a_{11}}{a_{11}a_{22} - a_{12}a_{21}}
+%				\end{pmatrix} 								
+%			$$
+%			das inverse Element zu $A$ bzgl. der Matrixmultiplikation ist, d.h. dass
+%			$$
+%				BA = AB = E
+%			$$
+%			gilt. (Man schreibt \"ublicherweise $A^{-1}$ f\"ur das inverse Element zu $A$.)\\[1mm]
+%			
+%			\textbf{Bemerkung:}\\ 
+%			Eine reelle $(2\times 2)$-Matrix 
+%			$$
+%				\begin{pmatrix}
+%					a_{11}	&a_{12}	\\
+%					a_{21}	&a_{22}
+%				\end{pmatrix} 	
+%			$$
+%			ist \textit{genau dann} invertierbar, \textit{wenn} 
+%			$$
+%				a_{11}a_{22} - a_{12}a_{21} \neq 0.
+%			$$
+\end{itemize}
+
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+\begin{itemize}
+	\item[(a)]	Seien
+		$$
+			A 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix}, \quad
+			B 
+			=
+			\begin{pmatrix}
+				b_{11}	&b_{12}	\\
+				b_{21}	&b_{22}
+			\end{pmatrix}, \quad		
+			C 
+			=
+			\begin{pmatrix}
+				c_{11}	&c_{12}	\\
+				c_{21}	&c_{22}
+			\end{pmatrix}
+			\in \R^{2\times 2}.		
+		$$
+		Es folgt:
+		$$
+			(A\cdot B) \cdot C	
+			=
+			\begin{pmatrix}
+				a_{11}b_{11} + a_{12}b_{21}	&	a_{11}b_{12} + a_{12}b_{22}	\\
+				a_{21}b_{11} + a_{22}b_{21}	&	a_{21}b_{12} + a_{22}b_{22}	\\
+			\end{pmatrix}
+			\cdot C
+			=
+		$$
+		$$													
+			\begin{pmatrix}
+				a_{11}b_{11}c_{11} + a_{12}b_{21}c_{11} +  a_{11}b_{12}c_{21} + a_{12}b_{22}c_{21}	
+					&	a_{11}b_{11}c_{12} + a_{12}b_{21}c_{12} +  a_{11}b_{12}c_{22} + a_{12}b_{22}c_{22}	\\
+				a_{21}b_{11}c_{11} + a_{22}b_{21}c_{11} +  a_{21}b_{12}c_{21} + a_{22}b_{22}c_{21}	
+					&	a_{21}b_{11}c_{12} + a_{22}b_{21}c_{12} +  a_{21}b_{12}c_{22} + a_{22}b_{22}c_{22}
+			\end{pmatrix}			
+		$$
+		$$
+			= \ldots
+			= A\cdot(B\cdot C).
+		$$
+	\item[(b)]
+		F\"ur 
+		$$
+			A
+			=
+			\begin{pmatrix}
+				1	&	0	\\
+				0	&	0
+			\end{pmatrix}, \quad			
+			B
+			=
+			\begin{pmatrix}
+				0	&	1	\\
+				0	&	0
+			\end{pmatrix}			
+		$$
+		folgt:
+		$$
+			A \cdot B = 
+			\begin{pmatrix}
+				0	&	1	\\
+				0	&	0
+			\end{pmatrix}
+		$$
+		und
+		$$
+			B \cdot A = 
+			\begin{pmatrix}
+				0	&	0	\\
+				0	&	0
+			\end{pmatrix}.
+		$$		
+	\item[(c)]
+		F\"ur alle
+		$$
+			A 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix} 
+			\in \R^{2\times 2}
+		$$
+		folgt:
+		$$
+			A\cdot E 
+			=
+			\begin{pmatrix}
+				a_{11}	&a_{12}	\\
+				a_{21}	&a_{22}
+			\end{pmatrix} 
+			\cdot
+			\begin{pmatrix}
+				1	&	0\\
+				0	&	1
+			\end{pmatrix}			
+			=
+			A
+		$$
+		und
+		$$
+			E\cdot A = A.
+		$$
+%	\item[(d)]
+%		F\"ur
+%			$$
+%				A 
+%				=
+%				\begin{pmatrix}
+%					a_{11}	&a_{12}	\\
+%					a_{21}	&a_{22}
+%				\end{pmatrix} 			
+%			$$
+%			mit $a_{11}a_{22} - a_{12}a_{21} \neq 0$ 
+%			und
+%			$$	
+%				B:= 
+%				\frac{1}{a_{11}a_{22} - a_{12}a_{21}}\cdot
+%				\begin{pmatrix}
+%					a_{22}	&-a_{12}	\\
+%					-a_{21}	&a_{11}
+%				\end{pmatrix} 	
+%				:= 
+%				\begin{pmatrix}
+%					\frac{a_{22}}{a_{11}a_{22} - a_{12}a_{21}}	& \frac{-a_{12}}{a_{11}a_{22} - a_{12}a_{21}}	\\
+%					\frac{-a_{21}}{a_{11}a_{22} - a_{12}a_{21}}	&\frac{a_{11}}{a_{11}a_{22} - a_{12}a_{21}}
+%				\end{pmatrix} 								
+%			$$
+%			folgt:
+%			$$
+%				A \cdot B 
+%				=
+%				\frac{1}{a_{11}a_{22} - a_{12}a_{21}}
+%				\cdot
+%				\begin{pmatrix}
+%					a_{11}	&a_{12}	\\
+%					a_{21}	&a_{22}
+%				\end{pmatrix} 	
+%				\cdot 
+%				\begin{pmatrix}
+%					a_{22}	&-a_{12}	\\
+%					-a_{21}	&a_{11}
+%				\end{pmatrix} 	
+%				=
+%			$$
+%			$$
+%				=
+%				\frac{1}{a_{11}a_{22} - a_{12}a_{21}}
+%				\cdot
+%				\begin{pmatrix}
+%					a_{11}a_{22} - a_{12}a_{21}	& -a_{11}a_{12} + a_{12}a_{11}	\\
+%					a_{21}a_{22} - a_{22}a_{21}	& -a_{21}a_{12} + a_{22}a_{11}
+%				\end{pmatrix} 
+%				=
+%				E.				
+%			$$
+%			Eine analoge Rechnung ergibt auch $B\cdot A = E$.
+\end{itemize}
+
+
+%%%
+\newpage
+\section{Matrixgruppe}
+%%%
+
+Sei 
+$$
+	G := \{ A \in \R^{2\times 2}~|~ \exists B \in \R^{2\times 2} \text{ mit } AB=BA=E \}.
+$$
+
+\begin{itemize}
+	\item[(a)] Zeigen Sie, dass $(G,\cdot)$ eine Gruppe ist (``$\cdot$'' bezeichnet die Matrixmultiplikation).
+	\item[(b)] Wir bezeichnen mit $A^{-1}$ das inverse Element zu der Matrix $A \in G$.\\[1mm] 
+			Zeigen Sie, dass f\"ur alle $A,B \in G$ gilt:
+			$$
+				(A\cdot B)^{-1} = B^{-1}\cdot A^{-1}.
+			$$
+\end{itemize}
+
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+\begin{itemize}
+	\item[(a)] 
+		\begin{itemize}
+			\item[(a1)] Die Verkn\"upfung ``$\cdot$'' ist assoziativ (vgl. \"Ubungsaufgaben 5). 
+			\item[(a2)] Das neutrale Element bzgl. ``$\cdot$'' ist die Matrix
+					$$
+						E =
+							\begin{pmatrix}
+								1	& 0	\\
+								0	& 1	
+							\end{pmatrix},
+					$$
+					vgl.  \"Ubungsaufgaben 5. \\
+					Zu \"uberpr\"ufen ist allerdings noch, ob $E\in G$.\\
+					F\"ur $B=E$ folgt jedoch:
+					$$
+						E\cdot B = B\cdot E = E
+					$$
+					und somit $E\in G$.
+			\item[(a3)] Jede Matrix $A\in G$ besitzt ein inverses Element: Die Matrix $B$. 
+		\end{itemize}
+		
+		Damit ist  $(G,\cdot)$  eine Gruppe.\\
+		
+		\textbf{Bemerkung:} Diese Gruppe ist nicht abelsch: 
+		$$
+			A =
+				\begin{pmatrix}
+					1	&	1\\
+					0	&	1
+				\end{pmatrix},
+			B =
+				\begin{pmatrix}
+					1	&	0\\
+					1	&	1
+				\end{pmatrix}
+			\in G
+		$$
+		(vgl. \"Ubungsaufgaben 5).\\
+		Es gilt
+		$$
+			AB =
+				\begin{pmatrix}
+					2	&	1\\
+					1	&	1
+				\end{pmatrix},				
+		$$
+		aber
+		$$
+			BA =
+				\begin{pmatrix}
+					1	&	1\\
+					1	&	2
+				\end{pmatrix}.			
+		$$	
+	\item[(b)]  Es gilt:
+			$$
+				(A\cdot B)\cdot(B^{-1}\cdot A^{-1} ) 
+				=
+				A\cdot (B\cdot B^{-1})\cdot A^{-1} 
+				=
+				A \cdot E \cdot A^{-1} 
+				= 
+				E
+			$$
+			und
+			$$
+				(B^{-1}\cdot A^{-1} ) \cdot (A\cdot B)
+				=
+				B^{-1}\cdot (A^{-1}  \cdot A) \cdot B
+				=
+				B^{-1}\cdot E \cdot B
+				=
+				E.
+			$$
+			Somit folgt
+			$$
+				(A\cdot B)^{-1} = B^{-1}\cdot A^{-1}.
+			$$
+			
+			\textbf{Bemerkung:}\\ 
+			Da die Gruppe nicht abelsch ist, gilt im Allgemeinen \textbf{nicht} $(A\cdot B)^{-1} = A^{-1}\cdot B^{-1}$.
+			
+\end{itemize}
+
+%%%
+\newpage
+\section{Rekursive Folge}
+%%%
+Sei die Folge $(a_n)_{n\in \N}$ rekursiv definiert:
+\begin{eqnarray*}
+	a_0 		&=& 1\\
+	a_{n+1}	&=& a_n + 2^{n+1}, \qquad n\in \N.
+\end{eqnarray*}
+Die ersten Folgeglieder berechnen sich als
+$$
+	a_1 = 1+2= 3, \qquad a_2 = 3+4= 7, \qquad a_3 = 7 + 8 =15,\qquad a_4 = 15 + 16 = 31, \ldots
+$$
+Hieraus k\"onnten wir die Vermutung ableiten, dass im Allgemeinen gilt:
+$$
+	a_n = 2^{n+1} - 1.
+$$
+Beweisen Sie diese Vermutung durch vollst\"andige Induktion.
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Induktionsanfang ($n=0$):
+\begin{eqnarray*}
+	a_0 &=& 1.\\
+	2^{0+1}-1 &=& 1. \quad\checkmark
+\end{eqnarray*}
+
+Induktionsschritt ($n \curvearrowright n+1$): \\
+Wir nehmen an, dass 
+$$
+	a_n = 2^{n+1} - 1
+$$
+und m\"ussen folgern, dass dann auch
+$$
+	a_{n+1} = 2^{(n+1)+1} - 1.
+$$
+
+Es gilt:
+\begin{eqnarray*}
+	a_{n+1} &=& a_n + 2^{n+1} \qquad \text{(laut Definition von $a_n$)}\\
+		     &=& 2^{n+1} - 1 + 2^{n+1} \qquad \text{(Verwendung der Induktionsannahme)}\\
+		     &=& 2^{(n+1) + 1} - 1.	
+\end{eqnarray*}
+\hfill$\qed$
+
+
+\end{document}

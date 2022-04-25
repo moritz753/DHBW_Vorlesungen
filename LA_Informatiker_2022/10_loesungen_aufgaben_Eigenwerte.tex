@@ -1,0 +1,267 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE L\"osungen Übungsaufgaben 10}\\[3mm]
+		{\Large Diagonalisierbarkeit und Eigenwerte}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+%-------------------------
+%-------------------------------------------------------------------
+\section{Charakteristisches Polynom}
+%%%
+Sei $A=	\begin{pmatrix}
+		1	&5	&8	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix}$. 
+\begin{itemize}
+\item[a)] Berechnen Sie das charakteristische Polynom der Matrix $A$:
+\item[b)] Bestimmen Sie das Spektrum $Spec(A)$ von $A$.
+\end{itemize}
+
+
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+\begin{itemize}
+\item[a)] Für das charakteristische Polynom gilt 
+\begin{align*}
+CP_A(X)&=\det(A-X\cdot I_3)\\
+&=\det(\begin{pmatrix}
+		1-X	&5&8	\\
+		0	&-2-X	&1	\\
+		-1	&1	&3-X
+	\end{pmatrix})\\
+&\stackrel{(1)}{=} (1-X)\cdot(-1)^{1+1}\cdot \det(\begin{pmatrix}
+		-2-X	&1	\\
+		1	&3-X
+	\end{pmatrix})+(-1)\cdot(-1)^{3+1}\cdot \det(\begin{pmatrix}
+		5	&8	\\
+		-2-X	&1
+	\end{pmatrix})\\
+&= (1-X)\cdot \det(\begin{pmatrix}
+		-2-X	&1	\\
+		1	&3-X
+	\end{pmatrix})-\det(\begin{pmatrix}
+		5	&8	\\
+		-2-X	&1
+	\end{pmatrix})\\
+&\stackrel{(2)}{=}(1-X)((-2-X)(3-X)-1)-(5-8(-2-X))\\
+&=
+-X^3 + 2 X^2 - 2 X - 28
+\end{align*}
+wobei man bei
+\begin{itemize}
+\item[(1)] nach der 1. Spalte entwickelt
+\item[(2)] die Formel für die Determinante einer $2\times2$ -Matrix bei beiden Matrizen verwendet.
+\end{itemize}
+\item[b)] Das Spektrum einer Matrix ist die Menge aller Eigenwerte der Matrix. Diese sind wiederum die Nullstellen des charakteristischen Polynom. Daher
+$$
+Spec(A)=\{\lambda \in \R \mid CP_A(\lambda)=0\}
+$$
+Die Zahlen in der Matrix $A$ sind aber so unangenehm gewählt, dass da charakteristische Polynom nur eine reelle Nullstelle hat:
+$$
+\lambda=\frac{1}{3} \left(2 - \frac{2^{\frac{2}{3}}}{(-194 + 3 \sqrt{4182})^{\frac{1}{3}}} + \left(2 (-194 + 3 \sqrt{4182})\right)^{\frac{1}{3}}\right)
+$$
+\end{itemize}
+
+
+
+\newpage
+
+%-------------------------
+\section{Basis aus Eigenvektoren}
+%%%
+Sei $A=\begin{pmatrix} -\frac{1}{4} & 0 & -\frac{1}{2} \\ 0 & \frac{9}{4} & 0 \\ \frac{1}{2} & 0 &1 \end{pmatrix}$. 
+\begin{itemize}
+\item[a)] Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte der Matrix $A$.
+\item[b)] Bestimmen Sie eine invertierbare Matrix $D \in \R^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{itemize}
+
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+\begin{itemize}
+\item[a)] 
+\begin{align*}
+CP_A(X)&=\det(A-X\cdot I_3)\\
+&=\det(\begin{pmatrix} -\frac{1}{4}-X & 0 & -\frac{1}{2} \\ 0 & \frac{9}{4}-X & 0 \\ \frac{1}{2} & 0 &1-X \end{pmatrix})\\
+&\stackrel{(1)}{=}(\frac{9}{4}-X )\cdot(-1)^{2+2}\cdot \det(\begin{pmatrix} -\frac{1}{4}-X & -\frac{1}{2} \\ \frac{1}{2} & 1-X \end{pmatrix})\\
+&\stackrel{(2)}{=}(\frac{9}{4}-X )\cdot((-\frac{1}{4}-X)(1-X )-(-\frac{1}{2})(\frac{1}{2}))\\
+&=(\frac{9}{4}-X )\cdot(X^2-\frac{3}{4}X)\\
+&=X(\frac{9}{4}-X )(X-\frac{3}{4})
+\end{align*}
+wobei man bei
+\begin{itemize}
+\item[(1)] nach der 2. Spalte entwickelt
+\item[(2)] die Formel für die Determinante einer $2\times2$ -Matrix verwendet.
+\end{itemize}
+Damit sind die Eigenwerte von $A$ gegeben durch $\lambda_1=0$, $\lambda_2=\frac{3}{4}$ und $\lambda_3=\frac{9}{4}$.
+\item[b)] Die gesuchte Matrix $D$ hat als Spalten eine Basis aus Eigenvektoren von $A$. Um eine solche Basis zu bestimmen, lösen wir die LGSe
+$$
+(A-\lambda_1I_3)x=0, \quad (A-\lambda_2I_3)x=0 \ \text{ und } \  (A-\lambda_3I_3)x=0
+$$
+\begin{itemize}
+\item[$\lambda_1=0$]
+\begin{align*}
+&\left(\begin{array}{ccc|c}
+-\frac{1}{4} & 0 & -\frac{1}{2} &0\\ 0 & \frac{9}{4} & 0 &0\\ \frac{1}{2} & 0 &1 &0
+\end{array}\right)\stackrel{-4\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 &2 &0\\ 0 & \frac{9}{4} & 0 &0\\ \frac{1}{2} & 0 &1 &0
+\end{array}\right)\stackrel{Z3-\frac{1}{2}\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 & 2 &0\\ 0 & \frac{9}{4} & 0 &0\\ 0 & 0 &0 &0
+\end{array}\right)\\
+&\stackrel{\frac{4}{9}\cdot Z2}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 & 2 &0\\ 0 & 1 & 0 &0\\ 0 & 0 &0 &0
+\end{array}\right)
+\end{align*}
+Mit dem $(-1)$-Trick erhalten wir $Eig(A,\lambda_1)=\langle \begin{pmatrix}2 \\ 0\\ -1 \end{pmatrix}\rangle$.
+%
+\item[$\lambda_2=\frac{3}{4}$]
+\begin{align*}
+&\left(\begin{array}{ccc|c}
+-\frac{1}{4}-\frac{3}{4} & 0 & -\frac{1}{2} &0\\ 0 & \frac{9}{4}-\frac{3}{4} & 0 &0\\ \frac{1}{2} & 0 &1-\frac{3}{4} &0
+\end{array}\right){\sim >}
+\left(\begin{array}{ccc|c}
+-1 & 0 & -\frac{1}{2} &0\\ 0 & \frac{3}{2} & 0 &0\\ \frac{1}{2} & 0 &\frac{1}{4} &0
+\end{array}\right)\stackrel{-1\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 & \frac{1}{2} &0\\ 0 & \frac{3}{2} & 0 &0\\ \frac{1}{2} & 0 &\frac{1}{4} &0
+\end{array}\right)\\
+&\stackrel{Z3-\frac{1}{4}\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 & \frac{1}{2} &0\\ 0 & \frac{3}{2} & 0 &0\\ 0 & 0 &0 &0
+\end{array}\right)\stackrel{\frac{2}{3}\cdot Z2}{\sim >}
+\left(\begin{array}{ccc|c}
+1 & 0 & \frac{1}{2} &0\\ 0 & 1 & 0 &0\\ 0 & 0 &0 &0
+\end{array}\right)
+\end{align*}
+Mit dem $(-1)$-Trick erhalten wir $Eig(A,\lambda_2)=\langle \begin{pmatrix}\frac{1}{2} \\ 0\\ -1 \end{pmatrix}\rangle$.
+%
+\item[$\lambda_3=\frac{9}{4}$]
+\begin{align*}
+&\left(\begin{array}{ccc|c}
+-\frac{1}{4} -\frac{9}{4}& 0 & -\frac{1}{2} &0\\ 0 & \frac{9}{4} -\frac{9}{4}& 0 &0\\ \frac{1}{2} & 0 &1-\frac{9}{4} &0
+\end{array}\right){\sim >}
+\left(\begin{array}{ccc|c}
+-\frac{5}{2}& 0 & -\frac{1}{2} &0\\ 0 & 0& 0 &0\\ \frac{1}{2} & 0 &\frac{5}{4} &0
+\end{array}\right)\stackrel{-\frac{2}{5}\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1& 0 & \frac{1}{5} &0\\ 0 & 0& 0 &0\\ \frac{1}{2} & 0 &\frac{5}{4} &0
+\end{array}\right)\\
+&\stackrel{Z3-\frac{1}{2}\cdot Z1}{\sim >}
+\left(\begin{array}{ccc|c}
+1& 0 & \frac{1}{5} &0\\ 0 & 0& 0 &0\\ 0 & 0 &\frac{23}{10} &0
+\end{array}\right)\stackrel{\frac{10}{23}\cdot Z3}{\sim >}
+\left(\begin{array}{ccc|c}
+1& 0 & \frac{1}{5} &0\\ 0 & 0& 0 &0\\ 0 & 0 &1 &0
+\end{array}\right)
+\end{align*}
+Mit dem $(-1)$-Trick erhalten wir $Eig(A,\lambda_3)=\langle \begin{pmatrix}0 \\ -1\\ 0 \end{pmatrix}\rangle$.
+\end{itemize}
+Somit ergibt sich die Matrix $D$ als
+$$
+D=\begin{pmatrix}2&\frac{1}{2}&0 \\0& 0&-1\\-1& -1&0 \end{pmatrix}
+$$\quad\\
+\textbf{Bemerkung:} Die Reihenfolge der Spalten ist hierbei nicht eindeutig festgelegt.
+\end{itemize}
+
+\newpage
+%-------------------------
+
+\section{Rückwärts}
+%%%
+\begin{itemize}
+\item[a)] Finden Sie eine Matrix $A$ mit charakteristischem Polynom 
+$$CP_A(X)=(X-1)(X-2)^2(X-3).$$
+\item[b)] Finden Sie eine Matrix $B \in \R^{3\times 3}$ mit Eigenwerten $\lambda_1= 1$, $\lambda_2=-1$ und $\lambda_3=4$ sowie den Eigenräumen
+$$
+Eig(B,\lambda_1)=\langle \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \rangle, \ Eig(B,\lambda_2)=\langle \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} \rangle \text{ und } Eig(B,\lambda_3)=\langle \begin{pmatrix} 0 \\ 2 \\ 1 \end{pmatrix} \rangle
+$$
+\end{itemize}
+
+
+%-------------------------
+\subsection*{L\"osung}
+%%%	
+\begin{itemize}
+\item[a)] Die Matrix 
+$$
+A:=\begin{pmatrix}1 & 0&0&0 \\ 0& 2 & 0&0 \\ 0& 0&2&0 \\ 0&0&0&3 \end{pmatrix}
+$$
+hat das charakteristische Polynom 
+\begin{align*}
+CP_A(X)&=\det(A-X\cdot I_4)\\
+&=\det(\begin{pmatrix}1 -X& 0&0&0 \\ 0& 2-X & 0&0 \\ 0& 0&2-X&0 \\ 0&0&0&3-X \end{pmatrix})\\
+&=(1-X)(2-X)(2-X)(3-X)\\
+&=(X-1)(X-2)^2(X-3)
+\end{align*}
+\item[b)] Eine Matrix $B \in \R^{3\times 3}$ mit den Eigenwerten $\lambda_1= 1$, $\lambda_2=-1$ und $\lambda_3=4$ wird durch eine invertierbare Matrix $D$ mit einer (passend geordneten) Basis aus Eigenvektoren in die Diagonalgestalt
+$$
+D^{-1}BD=diag(1,-1,4)
+$$
+transformiert.\\
+Durch die in der Aufgabenstellung angegebenen Eigenräume ist 
+$$
+D:=\begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 2 \\ 0 & 2 & 1\end{pmatrix}
+$$
+solch eine geeignete Matrix.\\
+Um $B$ berechnen zu können, muss man nun noch $D^-1$ bestimmen:
+\begin{align*}
+&\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 &1&0&0\\ 1 & 1 & 2 &0&1&0\\ 0 & 2 & 1&0&0&1
+\end{array}\right)\stackrel{Z2-Z1}{\sim >}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 &1&0&0\\ 0 & 1 & 2 &-1&1&0\\ 0 & 2 & 1&0&0&1
+\end{array}\right)\stackrel{Z3-2\cdot Z2}{\sim >}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 &1&0&0\\ 0 & 1 & 2 &-1&1&0\\ 0 & 0 & -3&2&-2&1
+\end{array}\right)\\
+&\stackrel{-\frac{1}{3}\cdot Z3}{\sim >}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 &1&0&0\\ 0 & 1 & 2 &-1&1&0\\ 0 & 0 & 1&-\frac{2}{3}&\frac{2}{3}&-\frac{1}{3}
+\end{array}\right)\stackrel{Z2-2\cdot Z3}{\sim >}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 &1&0&0\\ 0 & 1 & 0 &\frac{1}{3}&-\frac{1}{3}&-\frac{2}{3}\\ 0 & 0 & 1&\frac{2}{3}&\frac{2}{3}&-\frac{1}{3}
+\end{array}\right)
+\end{align*}
+Damit können wir $B$ berechnen:
+\begin{align*}
+B&=D\cdot diag(1,-1,4)\cdot D^{-1}\\
+&=\begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 2 \\ 0 & 2 & 1\end{pmatrix}\cdot \begin{pmatrix} 1 & 0& 0 \\ 0 & -1 & 0\\ 0&0&4\end{pmatrix}\cdot  \begin{pmatrix}1&0&0\\\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\ -\frac{2}{3}&\frac{2}{3}&-\frac{1}{3} \end{pmatrix}\\
+&=\begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 2 \\ 0 & 2 & 1\end{pmatrix}\cdot \begin{pmatrix} 1 & 0& 0 \\ -\frac{1}{3} & \frac{1}{3} & -\frac{2}{3}\\-\frac{8}{3}&\frac{8}{3}&-\frac{4}{3}\end{pmatrix}\\
+&=\begin{pmatrix} 1 & 0 & 0 \\ -\frac{14}{3} & \frac{17}{3} & -\frac{10}{3} \\ -\frac{10}{3}& \frac{10}{3} & -\frac{8}{3}\end{pmatrix}
+\end{align*}
+\end{itemize}
+%
+%
+%
+%
+%
+%
+\end{document}

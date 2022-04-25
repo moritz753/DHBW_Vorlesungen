@@ -1,0 +1,629 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Mengenlehre und Abbildungen
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%%%
+\section{Elementare Mengentheorie}
+%%%
+\subsection{Definition \& Beispiele}
+%%%
+%
+\begin{frame}\frametitle{Menge}
+
+	\begin{itemize}
+		\item<1-> Eine \highlightDef{ Menge} $M$ ist eine Ansammlung von Objekten.
+		\item<2-> Objekte der Menge werden \highlightDef{ Elemente} von $M$ genannt.
+		\item<3-> Ist $x$ Element der Menge $M$, so schreiben wir 
+			$$
+				x\in M.
+			$$
+		\item<3-> Ist $x$ nicht in $M$ enthalten, so schreibt man entweder $x \notin M$ oder (selten) $\neg(x\in M)$. 
+		\item<4-> Ein wichtiges Beispiel ist die \highlightDef{ leere Menge} $\emptyset$. Das ist die Menge, die kein Element enthält, 
+			d.h.
+			$$
+				\forall x: x\notin \emptyset.
+			$$
+		\item<5-> Die Anzahl der Elemente einer Menge $M$ hei{\ss}t \highlightDef{ Mächtigkeit} oder \highlightDef{ Kardinalität} von $M$.
+			Notation: $|M|$ oder auch $\#M$.
+	\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	``Kleine'' Mengen gibt man durch Aufzählen aller Elemente an: 
+	$$
+		M_1 = \{1,2,9,11\}
+	$$
+	\pause
+	Es gilt:
+	\begin{itemize}
+		\item $1 \in M_1$.
+		\item $7 \notin M_1$.
+		\item $|M_1| = 4$.
+	\end{itemize}
+	
+	\pause
+	\vfill
+	Elemente einer Menge können selbst auch Mengen sein:
+	$$
+		M_2 = \big\{ \{1,2\}, \{3,4\}, \{7\}, \{1,2,3,4\} \big\}.
+	$$
+	Ist $7\in M_2$?
+	\pause
+	(nein)
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+	
+	Ist das Aufzählen der Elemente einer Menge umständlich oder unmöglich, 
+	definiert man die Menge durch Angabe einer gemeinsamen Eigenschaft der Elemente:
+	$$
+		M := \big\{p ~|~ p \text{~ist eine Primzahl}\big\}.
+	$$
+
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Wichtige Mengen}
+
+	Wichtige Mengen:
+	\begin{itemize}
+		\item $\N := \{1,2,3,\ldots \}$, die \highlightDef{ natürlichen Zahlen}.
+		\item $\Z := \{\ldots, -3,-2,-1,0,1,2,3,\ldots\}$, die \highlightDef{ ganzen Zahlen}.
+		\item $\Q := \{ \frac{p}{q}~ |~ p,q\in \Z, q\neq 0 \}$, die \highlightDef{ rationalen Zahlen}.
+		\item $\R$, die \highlightDef{ reellen Zahlen}.
+	\end{itemize}
+	\vfill
+	Je nach Lehrbuch/Mathematiker wird auch $0$ zu den natürlichen Zahlen gezählt. Wir machen das mit $\N_0$ kenntlich, wenn wir die natürlichen Zahlen mit der $0$ meinen.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Russell’sche\footnote{Bertrand Russell, 1872 - 1970} Antinomie}
+	
+	Sei $M$ die Menge, die alle Mengen enthält, die sich nicht selbst enthalten:
+	$$
+		M := \{ A ~|~ A\text{~ist eine Menge und~}A\notin A \}.
+	$$
+	Ist $M$ in $M$ enthalten?
+	\pause
+	\begin{itemize}
+		\item Annahme: $M$ ist in $M$ enthalten. Dann folgt aus der Definition von $M$: $M\notin M$. $\lightning$ \pause
+		\item Annahme: $M$ ist nicht in $M$ enthalten. 
+		Dann folgt aus der Definition von $M$, dass $M$ in $M$ enthalten ist. $\lightning$
+	\end{itemize}
+	\pause
+	\vspace{1mm}
+	Diese Mengenkonstruktion führt zu einem logischen Widerspruch.\\[1mm]
+	Deshalb werden wir solche Mengenkonstruktionen (Mengen {\em aller} Mengen; Mengen, die sich selbst enthalten)  
+	ausschlie{\ss}en.\\ 
+	\vspace{2mm}
+	 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Russell’sche Antinomie}
+	\begin{itemize}
+		\item Ein Barbier einer Stadt rasiert {\em genau} die Männer der Stadt, die sich nicht selbst rasiere\\[2mm]
+				Rasiert sich der Barbier selbst?\\\vfill
+	
+		\item Um solche Probleme formal zu vermeiden wird in der modernen Mathematik mit dem Axiomensystem ZFC gearbeitet.
+	\end{itemize} 
+\end{frame}
+%
+%%%
+\subsection{Teilmengen}
+%%%
+%
+\begin{frame}\frametitle{Teilmenge}
+	
+	Eine Menge $A$ hei{\ss}t \highlightDef{ Teilmenge} der Menge $B$, wenn gilt\footnote{
+		Damit ist gemeint, dass die Aussage ``$\forall x\in A: x\in B$'' wahr ist.}:
+	$$
+		\forall x\in A: x\in B.
+	$$
+	Schreibweise:
+	$$
+		A \subseteq B\qquad \text{oder} \qquad B \supseteq A.
+	$$
+	\vfill
+	Ist $A$ eine Teilmenge von $B$, so nennt man $B$ auch \highlightDef{ Obermenge} der Menge $A$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	
+	\begin{itemize}
+		\item $\N \subseteq \Z \subseteq \Q \subseteq \R$.
+		\pause
+		\item Die leere Menge $\emptyset$ ist Teilmenge jeder Menge:\\
+			Ist $M$ eine Menge, so gilt
+			$$
+				\emptyset \subseteq M.
+			$$
+			Dies gilt insbesondere für $M=\emptyset$, d.h. $\emptyset \subseteq \emptyset$.\\
+			(Aber: $\emptyset \notin \emptyset$.)
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{$A=B$}
+	
+	Seien $A$, $B$ Mengen.\\
+	Wir definieren \highlightDef{ $A=B$}, wenn
+	$$
+		A \subseteq B \qquad\text{und}\qquad B\subseteq A.
+	$$
+	
+\end{frame}
+%
+
+%
+\begin{frame}\frametitle{Die Potenzmenge}
+	
+	Sei $M$ eine Menge. Die \highlightDef{ Potenzmenge} ${\cal P}(M)$ von $M$ ist die Menge, 
+	die aus allen Teilmengen von $M$ besteht:
+	$$
+		{\cal P}(M) := \{ A ~|~ A \subseteq M \}.
+	$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+
+	Sei $M = \{ 1,2,3 \}$.  ${\cal P}(M) =$?\\[2mm]
+	\pause
+	Es gilt: \\\quad\\
+	$
+		{\cal P}(M) = \big\{$\pause$ \emptyset, $\pause$ \{1\}, \{2\}, \{3\},$\pause$ \{1,2\}, \{1,3\}, \{2,3\}, $\pause$ \{1,2,3\} \big\}.
+	$
+
+\end{frame}
+%
+%%%
+\subsection{Mengendiagramme}
+%%%
+%
+\begin{frame}\frametitle{Venn\footnote{John Venn Junior, 1834 - 1923}-Diagramme}
+	
+	Ein \highlightDef{ Venn-Diagramm} ist eine graphische Veranschaulichung, 
+	die \textit{alle} möglichen Beziehungen zwischen einer gegebenen Anzahl von Mengen darstellt:
+	
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.6]{Grafiken/Venn2/venn2.pdf}
+			\end{figure}
+		\end{column}
+		%
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.6]{Grafiken/Venn3/venn3.pdf}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Euler\footnote{Leonhard Euler, 1707-1783}-Diagramme}
+	
+	\highlightDef{ Euler-Diagramme} veranschaulichen Teilmengenbeziehungen zwischen gegebenen Mengen:\\[3mm]
+	
+	\begin{figure}
+		\includegraphics[scale=0.5]{Grafiken/Euler/euler.pdf}
+	\end{figure}
+	
+\end{frame}
+%
+%
+%%%
+\subsection{Mengenoperationen}
+%%%
+%
+\begin{frame}\frametitle{Schnittmenge}
+	
+	Seien $A,B$ Mengen. Dann ist die \highlightDef{ Schnittmenge} $A\cap B$ definiert durch
+	$$
+		A\cap B := \big\{ x ~|~ (x\in A) \land (x\in B) \big\}.
+	$$
+	
+	\pause
+	\vspace{5mm}
+	$A$ und $B$ hei{\ss}en \highlightDef{ disjunkt}, wenn $A\cap B = \emptyset$.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Schnittmenge}
+	
+	Sei $I$ eine nichtleere (Index-)Menge und für jedes $i\in I$ sei eine Menge $A_i$ gegeben. \\
+	Dann ist die Schnittmenge dieser Mengen definiert durch	
+	$$
+		\bigcap_{i\in I} A_i := \big\{ x ~|~  \forall i \in I: x \in A_i \big\}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Vereinigung}
+
+	Seien $A,B$ Mengen. Dann ist die \highlightDef{ Vereinigung} $A\cup B$ definiert durch
+	$$
+		A\cup B := \big\{ x ~|~ (x\in A) \lor (x\in B) \big\}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Vereinigung}
+	
+	Sei $I$ eine nichtleere (Index-)Menge und für jedes $i\in I$ sei eine Menge $A_i$ gegeben. \\
+	Dann ist die Vereinigung dieser Mengen definiert durch	
+	$$
+		\bigcup_{i\in I} A_i := \big\{ x ~|~  \exists i \in I: x \in A_i \big\}.
+	$$
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Differenzmenge}
+
+	Seien $A,B$ Mengen. Dann ist die \highlightDef{ Differenzmenge} $A\backslash B$ definiert durch
+	$$
+		A\backslash B := \big\{ x ~|~ (x\in A) \land (x\notin B) \big\}.
+	$$
+	\vfill
+	Man spricht oft auch von ``$A$ ohne $B$''.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Komplement}
+	
+	Seien $A,B$ Mengen mit $A\subseteq B$. Dann ist das \highlightDef{ Komplement} $A^{\complement}$ von $A$ in $B$ definiert durch
+	$$
+		A^\complement := B \backslash A.
+	$$
+	
+\end{frame}
+%
+
+
+%%%
+\subsection{Rechenregeln}
+%%%
+%
+\begin{frame}\frametitle{De Morgan'sche\footnote{Augustus De Morgan, 1806 - 1871} Regeln}
+	
+	Seien $A,B$ Teilmengen einer Menge $M$. Dann gilt:
+	\begin{itemize}
+		\item[(1)] $(A \cup B)^\complement = A^\complement \cap B^\complement.$
+		\item[(2)] $(A \cap B)^\complement = A^\complement \cup B^\complement.$
+	\end{itemize}
+	\vfill
+	 Man vergleiche mit den De Morgan'schen Regeln der Aussagenlogik und beachte $A^\complement = M\backslash A = \{x\mid (x\in M) \land \neg (x \in A)\}$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{De Morgan'sche Regeln: Beweis}
+	
+	\vspace{-3mm}
+	\begin{eqnarray*}
+		(A \cup B)^\complement  	&=& M \backslash (A\cup B) \\
+						&=& \{x ~|~ (x\in M) \land \neg(x \in A\cup B) \}\\
+						&=& \{x ~|~ (x\in M) \land \neg( (x \in A) \lor (x\in B) ) \}\\
+						&=& \{x ~|~ (x\in M) \land ( (x \notin A) \land (x \notin B) ) \}	\qquad (*)\\ 		
+						&=& \{x ~|~ \big((x\in M) \land (x \notin A)\big) \land \big( (x \in M) \land (x \notin B) \big) \}	\\
+						&=& \{x ~|~ \big( x\in A^\complement \big) \land \big( x\in B^\complement \big) \}\\
+						&=& A^\complement \cap B^\complement
+	\end{eqnarray*}
+	$(*)$ In der vierten Zeile haben wir die de Morgan'sche Regel aus der Aussagenlogik verwendet.\\
+	\vfill \pause
+	Der Nachweis der zweiten Regel ist eine \"Ubungsaufgabe.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Assoziativgesetze und Distributivgesetze}
+	
+	\highlightDef{Assoziativgesetze}\\
+	Seien $A,B,C$ Mengen. Dann gilt:
+	\begin{itemize}
+		\item[(1)] $A\cap(B \cap C) = (A \cap B) \cap C.$
+		\item[(2)] $A\cup(B \cup C) = (A \cup B) \cup C.$
+	\end{itemize}\pause
+	\vfill
+
+	\highlightDef{Distributivgesetze}\\
+	Seien $A,B,C$ Mengen. Dann gilt:
+	\begin{itemize}
+		\item[(1)] $A\cup(B \cap C) = (A \cup B) \cap (A\cup C).$
+		\item[(2)] $A\cap(B \cup C) = (A \cap B) \cup (A\cap C).$
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Assoziativ- und Distributivgesetze}
+
+	Die Beweise der Assoziativ- und Distributivgesetze werden analog zum Beweis der de Morgan'schen Regeln geführt: \\
+	Man führt diese Gesetze für Mengen auf die jeweiligen Gesetze der Aussagenlogik zurück.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Kartesisches Produkt}
+
+	Seien $A,B$ Mengen. Dann ist das \highlightDef{ kartesische Produkt} $A\times B$ definiert durch
+	$$
+		A\times B := \big\{ (a,b) ~|~ (a\in A) \land (b\in B) \big\}.
+	$$
+	
+	\vfill
+	\pause
+	Beispiel:\\
+	$ \{a,b,c,d,e,f,g,h \} \times \{1,2,3,4,5,6,7,8\}$ wird beim Schach verwendet.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Kartesisches Produkt}
+
+	Seien $A$ eine Menge und $k\in \N$ mit $k\geq 1$. Dann ist das kartesische Produkt $A^k$ definiert durch
+	$$
+		A^k := \left\{ 
+				\begin{pmatrix} a_1\\a_2\\\vdots \\ a_k \end{pmatrix}
+				 ~\Big|~ \forall i=1,\ldots,k : a_i \in A \right\}.
+	$$
+	\vfill
+	Bekanntes Beispiel: $\R^n$.
+\end{frame}
+%
+\section{Abbildungen}
+%%%
+%
+%%%
+\subsection{Definition}
+%%%
+%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Eine \highlightDef{ Abbildung} 
+		$$
+			f:M\to N
+		$$ 
+		zwischen zwei Mengen $M$ und $N$ ist eine Teilmenge 
+		$$
+			f \subseteq M\times N
+		$$ 
+		mit der Eigenschaft dass für alle $m\in M$ genau ein $n\in N$ existiert, so dass $(m,n)\in f$.\\
+		Für dieses $n$ schreibt man $n = f(m)$.\\[2mm]
+		
+		\pause
+		$M$ hei{\ss}t \highlightDef{ Definitionsmenge}, $N$ \highlightDef{ Wertebereich} von $f$ und 
+		$f(M) := \{ f(m)~|~  m\in M \}$ \highlightDef{ Bildmenge} (auch mit \highlightDef{$Bild(f)$} notiert).\\[2mm]
+		
+		\pause
+		Schreibweise für Abbildungen:
+		\vspace{-2mm}
+		$$ 
+			f: M\to N, \quad m\mapsto f(m).
+		$$
+	\end{block}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+
+	\begin{itemize}
+		\item $M=N=\{0,1\}, f = \{(0,1),(1,1)\}$:
+			$$
+				f(0) = 1,\quad f(1)=1.
+			$$ \pause
+		\item $f: \R\to \R, x\mapsto x^2$: \pause
+			$$
+				f = \{(x,x^2)~|~ x\in \R\}.
+			$$\pause
+		\item $f: \N\to \R, x\mapsto x^2$: \pause
+			$$
+				f = \{(x,x^2)~|~ x\in \N\}.
+			$$\pause
+		\item Die Abbildung 
+			$$
+				\text{Id}_M: M\to M, \quad m\mapsto m
+			$$
+			hei{\ss}t \highlightDef{ Identität} auf $M$.
+	\end{itemize}
+
+\end{frame}
+%
+%
+%%%
+\subsection{Eigenschaften}
+%%%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Eine Abbildung $f: M\to N$ hei{\ss}t 
+		\begin{itemize}
+			\item \highlightDef{ injektiv}, wenn für alle $m_1, m_2 \in M$ gilt:
+				$$	f(m_1) = f(m_2)	
+					\quad
+					\Rightarrow
+					\quad
+					m_1 = m_2.
+				$$ \pause
+			\item \highlightDef{ surjektiv}, wenn $f(M)=N$, d.h.:
+				$$
+					\forall n\in N\; \exists m\in M: f(m)=n.
+				$$\pause
+			\item \highlightDef{ bijektiv}, wenn $f$ injektiv und surjektiv ist.
+		\end{itemize}
+	\end{block}
+	
+\end{frame}
+%
+%
+\begin{frame}
+	
+	\highlightDef{ Beispiele:}
+	\begin{itemize}
+		\item $f: \Z \to \Z,\, x\mapsto x+1$ 
+			\pause 
+			ist bijektiv.
+		\pause
+		\item $f: \N \to \N,\, x\mapsto x^2$ 
+			\pause
+			ist injektiv aber nicht surjektiv. 
+		\pause
+		\item $f:\Z \to \N,\, x\mapsto x^2$ 
+			\pause
+			ist weder injektiv noch surjektiv.
+	\end{itemize}
+	
+\end{frame}
+%
+%%%
+\subsection{Verkettung}
+%%%
+%
+\begin{frame}
+	
+	\begin{block}{Definition}
+		Seien $f: A\to B$ und $g:B\to C$ Abbildungen. 
+		Die \highlightDef{ Verkettung} oder \highlightDef{ Komposition} von $f$ und $g$ ist die Abbildung
+		$$
+			g\circ f: A\to C,\; x\mapsto g\big( f(x) \big).
+		$$
+	\end{block}
+	
+	\pause
+	\vfill
+	\highlightDef{ Beispiel:} $f:\R\to\R,\, x\mapsto x^2$ und $g:\R\to\R,\, x\mapsto e^x$: 
+	\begin{align*}
+		g\circ f(x) 	&= g\big( f(x) \big) = g\big( x^2 \big) = e^{x^2},\\
+		f\circ g(x)	&= f\big( g(x) \big) = f\big( e^x\big) = (e^x)^2 = e^{2x}.
+	\end{align*}
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	\begin{block}{Umkehrabbildung}
+		Eine Abbildung $f: M\to N$ ist \highlightDef{ genau dann} bijektiv, \highlightDef{ wenn} 
+		eine Abbildung $g: N \to M$ existiert mit
+		$$
+			g\circ f = \text{id}_M
+			\qquad
+			\text{und}
+			\qquad
+			f\circ g = \text{id}_N.
+		$$  
+		
+		\pause
+		\vspace{2mm}
+		Die Abbildung $g$ hei{\ss}t \highlightDef{ Umkehrabbildung} von $f$. Statt $g$ schreibt man meist $f^{-1}$.
+	\end{block}
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	Eine Abbildung $f: M\to N$ ist \highlightDef{ genau dann} bijektiv, \highlightDef{ wenn} 
+	eine Abbildung $g: N \to M$ existiert mit
+	$$
+		g\circ f = \text{id}_M
+		\qquad
+		\text{und}
+		\qquad
+		f\circ g = \text{id}_N.
+	$$  
+	
+	\highlightDef{ Beweis $\Rightarrow$:}\\ 
+	Voraussetzung: $f$ ist bijektiv.\\[1mm]
+	$f$ surjektiv: $\forall n\in N\;  \exists m\in M: f(m) = n$.\\
+	\pause
+	Da $f$ injektiv, ist dieses $m$ eindeutig bestimmt.\\
+	\pause
+	Definition: $g:N\to M, g(n) = m$ für das eindeutige $m\in M$ mit $f(m) = n$.\\
+	\pause
+	Es folgt:
+	$$
+		g\circ f(m) = g\big( f(m) \big) = m, \qquad \text{d.h. } g\circ f = \text{id}_M
+	$$
+	und
+	$$
+		f\circ g(n) = f\big( g(n) \big) = n, \qquad \text{d.h. } f\circ g = \text{id}_N.
+	$$	
+	
+\end{frame}
+%
+% 
+\begin{frame}
+	
+	Eine Abbildung $f: M\to N$ ist \highlightDef{ genau dann} bijektiv, \highlightDef{ wenn} 
+	eine Abbildung $g: N \to M$ existiert mit
+	$$
+		g\circ f = \text{id}_M
+		\qquad
+		\text{und}
+		\qquad
+		f\circ g = \text{id}_N.
+	$$  
+	
+	\highlightDef{ Beweis $\Leftarrow$:} \\
+	Voraussetzung: Es gibt eine Abbildung $g: N \to M$ mit $g\circ f = \text{id}_M$ und $f\circ g = \text{id}_N$.\\[1mm]
+	\pause
+	$f$ ist surjektiv, denn: Sei $n\in N$. Für $m:=g(n) \in M$ folgt 
+	$$
+		f(m) = f\big(g(n)\big) = f\circ g(n) = n.
+	$$
+	\pause
+	$f$ ist injektiv, denn: Seien $m_1, m_2\in M$ mit $f(m_1)=f(m_2) = n \in N$. \\
+	\pause
+	Dann folgt:
+	$$
+		m_1 = g\circ f(m_1) =  g\big( f(m_1)\big) =g(n)= g\big( f(m_2)\big) = g\circ f(m_2) = m_2.
+	$$
+	\qed
+	
+\end{frame}
+%
+%
+
+\end{document}

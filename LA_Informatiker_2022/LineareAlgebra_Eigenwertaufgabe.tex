@@ -1,0 +1,97 @@
+\input{../preamble_beamer.teX}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Eigenwert-Aufgabe
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabe: Eigenwerte}
+%
+Sei $A=	\begin{pmatrix}
+		2	&2&0	\\
+		0	&0	&0	\\
+		0	&1	&2
+	\end{pmatrix}$. 
+\begin{itemize}
+\vfill
+\item[a)] Berechnen Sie das charakteristische Polynom der Matrix $A$.\\\vspace{5mm}
+\item[b)] Bestimmen Sie das Spektrum $Spec(A)$ von $A$.
+\end{itemize}
+
+%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung a):}
+%%%	
+Für das charakteristische Polynom gilt 
+\begin{align*}
+CP_A(X)&=\det(A-X\cdot I_3)\\
+&=\det(\begin{pmatrix}
+		2-X	&2&0	\\
+		0	&-X	&0	\\
+		0	&1	&2-X
+	\end{pmatrix})
+\end{align*}\pause
+Zuerst entwickeln wir nach der 1. Spalte \pause
+\begin{align*}
+CP_A(X)&=\det(\begin{pmatrix}
+		2-X	&2&0	\\
+		0	&-X	&0	\\
+		0	&1	&2-X
+	\end{pmatrix})\\
+&= (2-X)\cdot(-1)^{1+1}\cdot \det(\begin{pmatrix}
+		-X	&0	\\
+		1	&2-X
+	\end{pmatrix})\\
+&=(2-X)\cdot\det(\begin{pmatrix}
+		-X	&0	\\
+		1	&2-X
+	\end{pmatrix})\\
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Fortsetzung Lösung a):}
+Dann benutzen wir die Formel für die Determinante einer Dreiecksmatrix: \pause
+\begin{align*}
+CP_A(X)&=(2-X)\cdot\det(\begin{pmatrix}
+		-X	&0	\\
+		1	&2-X
+	\end{pmatrix})\\
+&\stackrel{(2)}{=}(2-X)(-X)(2-X)\\
+&=-X(2-X)^2
+\end{align*}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung b):}
+%	
+Das Spektrum einer Matrix ist die Menge aller Eigenwerte der Matrix. \pause Diese sind wiederum die Nullstellen des charakteristischen Polynom. \pause Daher
+$$
+Spec(A)=\{\lambda \in \R \mid CP_A(\lambda)=0\}=\{0,2\}
+$$
+\end{frame}
+%
+%
+
+\end{document}

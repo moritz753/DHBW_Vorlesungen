@@ -1,0 +1,233 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+\include{macros}
+
+%-------------------------------------------------------------------
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{L\"osungen \"Ubungsaufgaben 1\\
+	Logik
+}
+\date{}
+%-------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------
+%-------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+%-------------------------------------------------------------------
+%-------------------------------------------------------------------
+
+
+%%%
+\section{Subjunktion}
+%%%
+Seien $a,b$  Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(\neg a) \lor b.
+$$
+Vergleichen Sie die Wahrheitstafel mit der Wahrheitstafel der Subjunktion und schlie{\ss}en Sie
+$$
+	a \rightarrow b \equiv (\neg a) \lor b.
+$$
+
+%%
+\paragraph{L\"osung:}
+%%
+
+$$
+	\begin{array}{c | c || c}
+		a	&b	& (\neg a) \lor b	\\ \hline
+		w	&w	& w			\\
+		w	&f	& f			\\
+		f	&w	& w			\\
+		f	&f	& w	
+	\end{array}
+$$
+
+Die Wahrheitstafel stimmt mit der Wahrheitstafel der Subjunktion \"uberein. Somit: $a \rightarrow b \equiv (\neg a) \lor b$.
+
+%%%
+\newpage
+\section{Klammern}
+%%%
+Seien $a,b,c$  Aussagen.
+Erstellen Sie Wahrheitstafeln f\"ur 
+$$
+	a\land (b \lor c)
+$$
+und
+$$
+	(a\land b) \lor c.
+$$
+
+%%
+\paragraph{L\"osung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c}
+		a	&b	&c	& a\land (b \lor c)	& (a\land b) \lor c	\\ \hline
+		w	&w	&w	& w				& w				\\
+		w	&w	&f	& w				& w				\\
+		w	&f	&w	& w				& w				\\
+		f	&w	&w	& f				& w				\\
+		f	&f	&w	& f				& w				\\
+		f	&w	&f	& f				& f				\\
+		w	&f	&f	& f				& f				\\
+		f	&f	&f	& f				& f				\\
+	\end{array}
+$$
+
+Somit: $a\land (b \lor c) \not\equiv (a\land b) \lor c$.
+
+%%
+\section{De Morgan'sche Regeln}
+%%
+Seien $a,b$ Aussagen.
+Erstellen Sie die Wahrheitstafeln f\"ur
+$$
+	\neg (a \lor b)
+$$
+und
+$$
+	(\neg a) \land (\neg b). 
+$$
+Folgern Sie, dass
+$$
+	\neg (a \lor b) \equiv (\neg a) \land (\neg b). 
+$$
+
+%%
+\paragraph{L\"osung:}
+%%
+$$
+	\begin{array}{c | c || c || c}
+		a	&b	& \neg (a \lor b)	& (\neg a) \land (\neg b)	\\ \hline
+		w	&w	& f			& f					\\
+		w	&f	& f			& f					\\
+		f	&w	& f			& f					\\
+		f	&f	& w			& w
+	\end{array}
+$$
+
+Da die Wahrheitstafeln die selben Wahrheitswerte aufweisen folgt: $(\neg a) \land (\neg b).$
+
+%%%
+\newpage
+\section{Wahrheitstafel}
+%%%
+Seien $a,b,c$ Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(a \rightarrow b) \lor (c \land \neg a).
+$$
+
+%%
+\paragraph{L\"osung:}
+%%
+
+$$
+	\begin{array}{c | c | c || c || c || c }
+		a	&b	&c	& (a \rightarrow b)	& (c \land \neg a)	& (a \rightarrow b) \lor (c \land \neg a)	\\ \hline
+		w	&w	&w	& w				& f				& w								\\
+		w	&w	&f	& w				& f				& w								\\
+		w	&f	&w	& f				& f				& f								\\
+		f	&w	&w	& w				& w				& w								\\
+		f	&f	&w	& w				& w				& w								\\
+		f	&w	&f	& w				& f				& w								\\
+		w	&f	&f	& f				& f				& f								\\
+		f	&f	&f	& w				& f				& w
+	\end{array}
+$$
+
+%%%
+\section{Quantoren}
+%%%
+Sind die folgenden Aussagen wahr?
+\begin{itemize}
+	\item[(a)] $\forall x\in \N: \exists y\in \N \text{~mit~} y = x+1.$
+	\item[(b)] $\exists y\in \N: \forall x\in \N \text{~mit~} y = x+1.$
+\end{itemize}
+
+%%
+\paragraph{L\"osung:}
+%%
+\begin{itemize}
+	\item[(a)] Ja: Jede nat\"urliche Zahl hat einen Nachfolger. 
+	\item[(b)] Nein: Es gibt keine Zahl, die um 1 gr\"o{\ss}er ist als {\em alle} nat\"urlichen Zahlen.
+\end{itemize}
+
+
+%%%
+\newpage
+\section{Negation}
+%%%
+ Negieren Sie die folgenden Aussagen:
+ \begin{itemize}
+	\item[(a)] Alle Karlsruher fahren mit der S-Bahn oder mit dem Rad.
+ 	\item[(b)] Jede Entscheidung schafft Unzufriedene.
+ \end{itemize}
+ 
+ %%
+\paragraph{L\"osung:}
+%%
+ \begin{itemize}
+	\item[(a)] Mit Quantoren lautet die Aussage
+			$$
+				\forall p \in K: (p\in S) \lor (p\in R). 
+			$$	
+			($p$: Personen, $K$: Menge aller Karlsruher, $S$: Menge aller S-Bahn-Fahrer, $R$: Menge aller Radfahrer)\\
+			Negation:
+			$$
+				\exists p \in K:  (p\notin S) \land (p\notin R). 
+			$$
+			Es gibt eine Person in Karlsruhe, die weder S-Bahn noch Rad f\"ahrt.
+			
+ 	\item[(b)] Mit Quatoren formuliert:\\
+			F\"ur alle Entscheidungen gibt es eine Person, die mit der Entscheidung unzufrieden ist:
+			$$
+				\forall e \exists p : p \text{~ist unzufrieden mit~} e.
+			$$
+			Negation:\\
+			$$
+				\exists e \forall p : \neg(p \text{~ist unzufrieden mit~} e)
+			$$
+			bzw.
+			$$
+				\exists e \forall p : p \text{~ist zufrieden mit~} e.
+			$$			
+			Es gibt eine Entscheidung, mit der alle zufrieden sind.	
+ \end{itemize}
+
+\end{document}

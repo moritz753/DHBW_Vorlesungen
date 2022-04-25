@@ -1,0 +1,311 @@
+\input{../preamble_beamer.tex}
+
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Ring-Homomorphismen \& K\"orper
+}
+\author{Dr. Moritz Gruber } 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+
+
+\section{Ring-Homomorphismen}
+\subsection{Definition}
+%%%
+%
+\begin{frame}\frametitle{Definition}
+	
+	Seien $(R,+_R,\cdot_R)$ und $(S, +_S, \cdot_S)$ zwei Ringe mit Einselementen $1_R$ und $1_S$.
+	Dann hei{\ss}t eine Abbildung
+	$$
+		\Phi: (R,+_R,\cdot_R) \to (S, +_S, \cdot_S)
+	$$
+	\highlightDef{ (Ring-)Homomorphismus}, wenn f\"ur alle $x,y \in R$ gilt:
+	\begin{itemize}
+		\item $\Phi(x +_R y) = \Phi(x) +_S \Phi(y)$,
+		\item $\Phi(x \cdot_R y) = \Phi(x) \cdot_S \Phi(y)$, 
+		\item $\Phi(1_R) = 1_S$.
+	\end{itemize}
+	
+	\vfill
+	Einen \highlightDef{ bijektiven Homomorphismus} nennt man \highlightDef{ Isomorphismus}.\\\pause
+	\vfill
+	Aus der Definition folgt direkt, dass $\Phi(0_R)=0_S$ gilt und $\Phi$ insbesondere ein Gruppenhomomorphismus der additiven Gruppen $(R,+_R)$ und $(S,+_S)$ ist.
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+	\begin{itemize}
+	\item Die Abbildung
+	$$
+		\Phi: (\Z,+,\cdot) \to (\R,+,\cdot), \, x \mapsto x
+	$$
+	ein Homomorphismus der Ringe $(\Z,+,\cdot)$ und $(\R,+,\cdot)$. \pause
+	\item Die Abbildung
+	$$
+		\Phi: (\R,+,\cdot) \to (\Z,+,\cdot), \, x \mapsto 1
+	$$
+	\underline{kein} Homomorphismus der Ringe $(\R,+,\cdot)$ und $(\Z,+,\cdot)$. \pause
+	\item Die Abbildung
+	$$
+		\Phi: R[X] \to R, \, a_nX^n + ... + a_1X+a_0 \mapsto a_0 
+	$$
+	ein Homomorphismus des Polynomrings $R[X]$ und seinem Koeffizientenring $R$.
+	\end{itemize}
+	
+\end{frame}
+%
+\subsection{Homomorphismen $\Z \to R$}
+%
+\begin{frame}\frametitle{Homomorphismen $\Z \to R$}
+Ein Ring-Homomorphismus $\Phi$ von $\Z$ in einen beliebigen Ring $R$ mit Eins muss die Zahl $1$ auf $1_R$ abbilden. Damit folgt:\\\vspace{2mm} \pause
+$\Phi(2)=\Phi(1+1)=1_R+1_R=:2\cdot 1_S$\\ \pause
+$\Phi(3)=\Phi(1+1+1)=1_R+1_R+1_R=:3\cdot 1_R$\\
+...\\\vspace{2mm}
+und \pause\\\vspace{2mm}
+$\Phi(-1)=-1_R$\\\pause
+$\Phi(0)=\Phi(1+(-1))=1_R+(-1_R)=0_R$\\
+\vspace{2mm}\pause
+Damit sind alle Bildwerte allein durch die Definition des Begriffs Homomorphismus bereits festgelegt!\\\pause
+Daher gibt es für jeden Ring $R$ genau einen Homomorphismus von $\Z$ nach $R$.
+
+
+
+
+\end{frame}
+%
+%%%
+\subsection{Produkte von Ringen}
+%%%
+
+%
+\begin{frame}\frametitle{Produkt von Ringen}
+	
+	Seien $(R,+_R,\cdot_R)$ und $(S,+_S,\cdot_S)$ Ringe. \\
+	Wir definieren auf dem kartesischen Produkt 
+	$$
+		R\times S
+	$$ 
+	die Verkn\"upfungen $+_{R\times S}$ und $\cdot_{R\times S}$: \\[1mm]
+	F\"ur $(x_1,y_1), (x_2,y_2) \in R\times S$ gelte
+	$$
+		(x_1,y_1) +_{R\times S} (x_2,y_2) := (x_1 +_R x_2, y_1 +_S y_2)
+	$$ 
+	und
+	$$
+		(x_1,y_1) \cdot_{R\times S} (x_2,y_2) := (x_1 \cdot_R x_2, y_1 \cdot_S y_2).
+	$$ 
+		
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Produkt von Ringen}
+	
+	Es gilt (\"Ubungsaufgabe):\\
+	\begin{itemize}
+		\item $(R\times S, +_{R\times S}, \cdot_{R\times S})$ ist ein Ring. \pause
+		\item Sind $R$ und $S$ kommutative Ringe, so ist auch $R\times S$ kommutativ.
+		\item Sind $R$ und $S$ Ringe mit Einselement, so ist auch $R\times S$ ein Ring mit Einselement. \pause
+		\item Die Abbildungen
+		$$p_1 : R\times S \to R, (r,s) \mapsto r \ \text{ und } \ p_2 : R\times S \to S, (r,s) \mapsto s$$
+		sind Ring-Homomorphismen.
+	\end{itemize}\vfill
+	Analog für mehr als zwei Faktoren.
+		
+\end{frame}
+%
+\section{Polynomiale Abbildungen}
+%
+\begin{frame}\frametitle{Der Ring der Abbildungen}
+Es sei $(R,+_R,\cdot_R)$ ein Ring. Dann ist die Menge $Abb(R,R)$ aller Abbildungen $R \to R$ mit den folgenden Verknüpfungen ein Ring: Für alle $f,g \in Abb(R,R)$ und alle $a\in R$ sei
+\begin{itemize}
+\item $(f+g)(a):=f(a)+_Rg(a)$
+\item $(f\cdot g)(a):=f(a)\cdot_Rg(a)$
+\end{itemize} \pause\vfill
+\highlightDef{Beispiel}\\
+$R=\Z$ und $f:\Z \to \Z, x \mapsto 2x$ und $g:\Z \to \Z, x \mapsto x^2$. \pause
+\begin{itemize}
+\item $f+g : \Z \to \Z, x \mapsto 2x+x^2$ \pause
+\item $f\cdot g: \Z \to \Z, x\mapsto 2x \cdot x^2=2x^3$
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Polynomiale Abbildungen}
+Es sei $R$ kommutativer Ring mit Eins und $f=\sum a_kX^k \in R[X]$. Wir definieren die Abbildung
+$$
+\tilde f: R \to R, x \mapsto \sum a_kx^k
+$$\pause
+Die Abbildung
+$$
+T: R[X] \to Abb(R,R), f \mapsto \tilde f
+$$
+ist ein Ringhomomorphismus. \pause
+\vfill
+\highlightDef{Bemerkung:}\\
+Wenn $\#R< \infty$, dann ist auch der Ring $Abb(R,R)$ endlich. Aber der Polynomring $R[X]$ ist trotzdem unendlich (solange $R\ne\{0\}$). Somit gibt es in diesem Fall (viel) mehr Polynome als polynomiale Abbildungen!
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item $R=\Z_2=\{[0]_2,[1]_2\}$, dann ist $\#Abb(\Z_2,\Z_2)=4$, \pause aber für jedes $n \in \N_0$ ist $f_n:=X^n=[1]_2X^n \in \Z_2[X]$ und für $n\ne m\in \N_0$ gilt $f_n \ne f_m$. \pause Somit $\#\Z_2[X] = \infty$.\pause
+
+\item Mit $R=\Z_2$ ist der Homomorphismus
+$$
+T: \Z_2[X] \to Abb(\Z_2,\Z_2), f \mapsto \tilde f
+$$
+surjektiv: \pause
+\begin{itemize}
+\item $T([0]_2)=\widetilde{[0]_2} =g_1:x \mapsto [0]_2,$\pause
+\item $T([1]_2)=\widetilde{[1]_2} =g_2:x \mapsto [1]_2,$\pause
+\item $T(X)=\widetilde{X} =g_3=Id_{\Z_2},$ \pause
+\item $T(X+[1]_2)=\widetilde{X+[1]_2} =g_4$ ist die Abbildung mit $g_4([0]_2)=[1]_2$ und $g_4([1]_2))=[0]_2$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Die Einsetzabbildung}
+Es sei $R$ ein Ring und $r \in R$. Dann ist
+$$
+E_r:R[X] \to R, f \mapsto \tilde f(r):=f(r)
+$$
+ein Ring-Homomorphismus. \\Man nennt ihn die \highlightDef{Einsetzabbildung bei $r$}.\pause\\
+\vfill
+Es macht nun Sinn von \highlightDef{Nullstellen} eines Polynoms $f \in R[X]$ zu sprechen: das sind die Elemente $r \in R$, sodass $E_r(f)=f(r)=0_R$ gilt.
+\end{frame}
+%
+%
+\section{Körper}
+\subsection{Definition}
+%
+\begin{frame}\frametitle{Definition K\"orper}
+	
+	Ein Ring $(K,+,\cdot)$ bei dem $(K\backslash\{0\},\cdot)$ sogar eine abelsche Gruppe ist, nennt man \highlightDef{ K\"orper}.
+	\pause
+	\vfill
+	Das heißt ein Körper ist ein kommutativer Ring mit Eins, in dem jedes von Null verschiedene Element ein multiplikatives Inverses besitzt.\\
+	\vfill
+	\pause
+	\highlightDef{ Beispiele:}
+	\begin{itemize}
+		\item $(\R,+,\cdot)$
+		\item $(\Q,+,\cdot)$
+	\end{itemize}
+	\pause
+	\vfill
+Für jeden Körper $(K,+,\cdot)$ gilt für die Einheitengruppe $K^\times =K\setminus \{0_K\}$.
+\end{frame}
+%
+\begin{frame}\frametitle{Ring-Homomorphismen von Körpern}
+Es seien $K$ und $L$ zwei Körper. Dann ist jeder Homomorphismus $\Phi:K \to L$ injektiv. \pause
+\vfill
+\highlightDef{Beweis:} Für jedes Element $k \in K^\times=K\setminus\{0_K\}$ gilt \pause
+$$
+\Phi(k) \in L^\times=L\setminus\{0_L\}
+$$ \pause
+denn 
+$$1_L=\pause \Phi(1_K) \pause =\Phi(k\cdot_K k^{-1}) \pause=\Phi(k)\cdot_L \Phi(k^{-1})$$\pause
+Somit gilt $Kern(\Phi)=\Phi^{-1}(\{0_L\})=\{0_K\}$, \pause und da $\Phi$ insbesondere ein Gruppenhomomorphismus der additiven Gruppen $(K,+_K)$ und $(L,+_L)$ ist, ist $\Phi$ injektiv. \hfill $\square$
+\end{frame}
+%
+\subsection{Der Körper der komplexen Zahlen}
+%
+\begin{frame}\frametitle{Lösen von Gleichungen}
+In einem Körper kann man beide Verknüfungen als Äquivalenzumformungen zum Lösen von Gleichungen verwenden, da für alle Elemente (ausgenommen Multiplikation mit $0$) Inverse gibt.\\\pause
+\vfill
+So lassen sich im Körper $\Q$ (dem kleinsten Körper der $\Z$ enthält) alle linearen Gleichungen $a\cdot x + b =0$ mit Koeffizienten $a,b \in \Q$ und in einer Variablen lösen, z.B.:\pause
+\begin{align*}
+&&a\cdot x + b &=0 &&| +(-b)\\
+\Leftrightarrow &&a\cdot x &= -b &&| \cdot a^{-1}\\
+\Leftrightarrow &&x&= -b \cdot a^{-1}&&
+\end{align*} 
+\end{frame}
+%
+\begin{frame}\frametitle{Existenz von Lösungen für (quadratische) Gleichungen}
+Im Fall von Gleichungen von höherem Grad sieht das schon anders aus. Zum Beispiel hat nicht jede quadratische Gleichung $a\cdot x^2 +b\cdot x +c =0$ in eine Lösung:
+\vfill
+In $\Q$ hat schon $x^2=2$ kein Lösung, da $\sqrt{2} \notin \Q$.
+\vfill \pause
+In $\R$ lässt sich mit der ``Mitternachtsformel'' $x_{1/2} = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$ ableiten, dass es zwei Lösungen gibt, wenn die Diskriminante $D=b^2-4ac$ positiv ist, es genau eine Lösung gibt, wenn $D=0$ gilt und es keine Lösung gibt, wenn $D$ negativ ist.\\
+Dies liegt daran, dass sich jede positive Zahl in $\R$ auf zwei Wege als Quadrat einer anderen reellen Zahl darstellen lässt, es keine Nullteiler gibt und keine negative reelle Zahl das Quadrat einer reellen Zahl ist.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Ein noch größerer Körper}
+Einen Ausweg bildet das Erweitern eines Körper um weitere Elemente, die fehlenden Lösungen. So ist z.B. 
+$$
+\Q[\sqrt{2}]:=\{a+b\sqrt{2} \mid a,b \in \Q\}
+$$
+zusammen mit der Addition und Multiplikation von $\Q$ und der Regel $\sqrt{2}\cdot \sqrt{2}=2$ der kleinste Körper, der $\Q$ enthält und in dem die Gleichung $x^2=2$ eine Lösung hat. \\\pause
+\vfill
+(Die Gleichung $x^2=3$ hat in diesem Körper noch immer keine Lösung, aber in $(\Q[\sqrt{2}])[\sqrt{3}]$.)
+\end{frame}
+%
+\begin{frame}\frametitle{Die komplexen Zahlen}
+Im Körper $\R$ haben wir durch die ``Mitternachtsformel'' verstanden, dass für die allgemeine Existenz von Lösungen von quadratischen Gleichungen, die negativen Zahlen ein Problem sind, da sich diese nicht als Quadrate darstellen lassen. \\\pause
+Es genügt also $\R$ um $i:=\sqrt{-1}$ zu erweitern (warum?). Der so entstehende Körper heißt \highlightDef{der Körper der komplexen Zahlen}
+$$
+\C:=\R[i]=\{a+b\cdot i \mid a,b \in \R\}
+$$ \pause
+Für eine \highlightDef{komplexe Zahl} $z=a+b \cdot i$ wird $a$ als der \highlightDef{Realteil} $\frak{Re}(z)$ und $b$ als der \highlightDef{Imaginärteil} $\frak{Im}(z)$ bezeichnet.
+\end{frame}
+%
+\begin{frame}\frametitle{Rechnen in $\C$}
+Es seien $z_1=a+b\cdot i, z_2=c+d\cdot i \in \C$.
+\vfill
+\begin{itemize}
+\item Addition: $z_1 + z_2 = (a+c)+(b+d)\cdot i$ \pause
+\item[] Beispiel: $(2+3i)+(4-5i)=(2+4)+(3-5)i=6-2i$\pause
+\vfill
+\item Multiplikation: $z_1\cdot z_2=(ac-bd)+(ad+bc)\cdot i$ \pause
+\item[] Beispiel: $(2+3i)\cdot(4-5i)=(2\cdot 4 - 3\cdot (-5))+(2\cdot (-5)+ 3\cdot 4)\cdot i=23+2i$
+\end{itemize}
+\vfill
+Bei der Multiplikation wird die Assoziativität und die Definition von $i$ angewendet.
+\end{frame}
+%
+\begin{frame}\frametitle{Fundamentalsatz der Algebra}
+Im Körper der komplexen Zahlen hat jede algebraische Gleichung 
+$$
+a_nx^n +a_{n-1}x^{n-1} + ... a_1x+a_0 =0 
+$$
+mit $a_n,...,a_0 \in \C, a_n \ne 0, n\ge 1$ (mindestens) eine Lösung.
+\vfill
+Der Beweis dieses Satzes überschreitet den Rahmen dieser Vorlesung.
+\end{frame}
+%
+\begin{frame}\frametitle{Algebraische Gleichungen und Polynome}
+Algebraische Gleichungen und Polynome hängen eng zusammen. Genau genommen gibt eine 1-zu-1-Beziehung zwischen Polynomen $p=p(X) \in K[X]$ und algebraischen Gleichungen $p(x)=0$ über dem Körper $K$.
+\vfill
+Der Fundamentalsatz der Algebra lässt sich so auch als Aussage über die Nullstellen eines Polynoms interpretieren.
+\end{frame}
+%
+%%%
+%
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+\include{macros}
+
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{\"Ubungsaufgaben 2\\ 
+	Mengenlehre und Abbildungen
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+
+
+%%%
+\section{Gleichheit}
+%%%
+Gilt f\"ur die Mengen $A=B$?
+\begin{itemize}
+	\item[(a)] $A = \{2,4,6,8\}$, $B = \{2,8,6,2,4\}$.
+	\item[(b)] $A = \{ x \in \N ~|~ x^2 = 4\}$, $B = \{ x\in \Z ~|~ x^2 = 4\}$.
+\end{itemize}
+
+%%%
+\section{Elemente}
+%%%
+Geben Sie alle Elemente der folgenden Menge an:
+$$
+	A = \{ x \in \N ~|~ x \text{~gerade und~} x < 17\}.
+$$
+
+%%%
+\section{Potenzmenge *}
+%%%
+
+\begin{itemize}
+	\item[(a)]Sei $M = \{0,1,2,3\}.$ Bestimmen Sie ${\cal P}(M)$.
+	\item[(b)] Was ist ${\cal P}(\emptyset)$?
+	\item[(c)] Seien $A, B$ zwei Mengen. Zeigen Sie:
+			$$
+				{\cal P}(A) \cap {\cal P}(B) = {\cal P}(A\cap B).
+			$$
+	\item[(d)] Finden Sie zwei Mengen $A,B$, so dass
+			$$
+				{\cal P}(A) \cup {\cal P}(B) \neq {\cal P}(A\cup B).
+			$$
+\end{itemize}
+
+%%%
+\section{Mengenoperationen}
+%%%
+
+Seien $A = \{1,2,3,4,5 \}$, $B=\{1,3,5,7\}$, $C= \{ 1,2,4,7,9,11\}$. Bestimmen Sie:
+\begin{itemize}
+	\item[(a)] $A\cap B \cap C$
+	\item[(b)] $A\cup( B\cap C)$
+	\item[(c)] $(A\cup B) \cap C$.
+	\item[(d)] $(A\cap \emptyset) \cup (B \cup \emptyset)$.
+\end{itemize}
+
+%%%
+
+%%%
+\section{De Morgan'sche Regel}
+Beweisen Sie die zweite de Morgan'sche Regel:
+$$
+	(A \cap B)^{\mathsf{c}} = A^{\mathsf{c}} \cup B^{\mathsf{c}}.
+$$
+%%%
+
+\section{Abbildungen}
+Es seien die Abbildungen $f:\R \to \R^3, x \mapsto (-x, 0, 2x)$ und $g: \R^3 \to \R, (x,y,z) \mapsto x+y+z$ gegeben. 
+\begin{itemize}
+\item[(a)] Sind $f$ und $g$ injektiv? Begr\"unden Sie Ihre Antwort.
+\item[(b)] Sind $f$ und $g$ surjektiv? Begr\"unden Sie Ihre Antwort.
+\item[(c)] Bestimmen Sie $g \circ f$.
+\end{itemize}
+
+
+%%%
+\section{Verkettung von Abbildungen (optional)}
+
+Der Benzinverbrauch $B$ eines Fahrzeuges ist abh\"angig von der Geschwindigkeit $v$:
+$$ 
+	B(v) = 2 + 0.5v + 0.25v^2.
+$$
+Dabei ist $v$ in Meilen pro Stunde anzugeben und $B$ ist in (US-)Gallonen pro Meile abzulesen. 
+Wandeln Sie diese Formel in eine Formel um, bei der die Geschwindigkeit in Kilometer pro Stunde angegeben wird und 
+der Verbrauch in Liter pro Kilometer abgelesen werden kann.\\
+(Eine Meile entspricht 1.60935 Kilometern, eine Gallone entspricht 3.7853 Litern.)
+
+\end{document}

@@ -1,0 +1,220 @@
+\documentclass[
+				a4paper,
+				10pt
+			]
+			{scrartcl}
+
+\parindent0mm
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{algorithm2e}
+
+\usepackage[
+			pdftex,
+			colorlinks,
+			breaklinks,
+			linkcolor=blue,
+			citecolor=blue,
+			filecolor=black,
+			menucolor=black,
+			urlcolor=black,
+			pdfauthor={Andreas Weber},
+			pdftitle={Aufgaben zur Logik und Algebra},
+			plainpages=false,
+			pdfpagelabels,
+			bookmarksnumbered=true
+		   ]{hyperref}
+
+
+\include{macros}
+
+\author{Dr. Moritz Gruber\\ DHBW Karlsruhe}
+\title{L\"osungen \"Ubungsaufgaben 4\\ 
+	Ringe
+}
+\date{}
+
+%%%%%%%%%
+\begin{document}
+%%%%%%%%%
+\maketitle
+
+%%%
+\section{Ringe}
+%%%
+
+Sei
+$$
+	R := \{ a + b\sqrt{2} ~|~a,b \in \Z \}. 
+$$
+Zeigen Sie, dass $(R,+,\cdot)$ mit der \"ublichen Addition $+$ und Multiplikation $\cdot$ ein kommutativer Ring mit Einselement ist.
+
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Addition und Multiplikation definieren eine Verkn\"upfung auf $R$:\\ 
+Seien $a_1,a_2,b_1,b_2 \in \Z$.
+$$
+	(a_1 + b_1\sqrt{2}) + (a_2 + b_2\sqrt{2}) = (a_1+ a_2) + (b_1+ b_2)\sqrt{2}	\in R,
+$$
+$$
+	(a_1 + b_1\sqrt{2}) \cdot (a_2 + b_2\sqrt{2}) = (a_1a_2 + 2b_1b_2) + (a_1b_2 + a_2b_1)\sqrt{2}	\in R.
+$$
+
+\begin{itemize}
+	\item[(1)] $(R,+)$ ist eine abelsche Gruppe:
+			\begin{itemize}
+				\item[(a)] $+$ ist auf $R$ assoziativ \& kommutativ, da $+$ schon auf $\R$ assoziativ \& kommutativ ist.
+						($R$ ist eine Teilmenge von $\R$!)
+				\item[(b)] Das neutrale Element (Nullelement) ist $0 = 0 + 0\cdot\sqrt{2} \in R$.
+				\item[(c)] Das inverse Element von $a + b\sqrt{2} \in R$  ist $(-a) + (-b)\sqrt{2} \in R$.
+			\end{itemize}
+	\item[(2)] Die Verkn\"upfung $\cdot$ ist assoziativ \& kommutativ, da $\cdot$ schon auf $\R$ assoziativ und kommutativ ist.
+	\item[(3)] Die Distributivgesetze gelten in $(\R,+,\cdot)$ somit auch in $(R, +, \cdot)$.
+	\item[(4)] Das Einselement (das neutrale Element bzgl. $\cdot$) ist $1 = 1 + 0\cdot\sqrt{2} \in R.$
+\end{itemize}
+
+
+
+%%%
+\section{``Kleine'' Ringe *}
+Es sei $n \in \N$. Wir notieren f\"ur $a \in \Z$ mit
+$$
+[a]_n:=\{m \in \Z \mid \exists k\in \Z: m=a+kn\}
+$$
+die Menge aller Zahlen, die beim Teilen durch $n$ den gleichen Rest wie $a$ haben.
+
+\begin{itemize}
+\item[(a)] Zeigen Sie, dass aus $b \in [a]_n$ folgt, dass $[a]_n=[b]_n$.
+\end{itemize}
+Wir definieren die Menge
+$
+\Z_n := \{[a]_n \mid a \in \Z\}
+$
+\begin{itemize}
+\item[(b)] Zeigen Sie, dass $\Z_n:=\{[0]_n,[1]_n,[2]_n,...,[n-1]_n\}$ gilt.
+\end{itemize}
+Wir definieren weiter die Verkn\"upfungen $[a]_n+_n[b]_n=[a+b]_n$ und $[a]_n\cdot_n [b]_n:=[a\cdot b]_n$.
+\begin{itemize}
+\item[(c)] Zeigen Sie, dass $(\Z_n,+_n,\cdot_n)$ ein Ring ist.
+\end{itemize}
+
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+\item[(a)]
+Da $b \in [a]_n$ gilt, gibt es ein $k_b\in \Z$ sodass $b=a+k_b n$. Sei nun $m \in [a]_n$ beliebig. Dann gibt es ein $k_m \in \Z$ sodass $m=a+k_m n$. Damit folgt:
+$$
+m=a+k_m n = a+k_m n + (b- (a+k_b n))=b + (a+k_m n -a- k_b n) =b + (k_m-k_b)n
+$$
+Mit $k:=k_m -k_b$ folgt also $m=b+kn$ und damit $m \in [b]_n$. Also gilt $[a]_n \subseteq [b]_n$.\\
+Da insbesondere $a \in [a]_n$ und somit $a\in [b]_n$ gilt, folgert man mit vertauschten Rollen von $a$ und $b$ nun $[b]_n \subseteq [a]_n$ und damit $[a]_n=[b]_n$.
+
+\item[(b)]
+Es sei $m \in \Z$ beliebig. Dann gibt es ein $k \in \Z$ sodass $0\le m-kn \le n-1$. Wir definieren $a:=m-kn$. Dann gilt $m=a+kn$ und damit $m \in [a]_n$. Mit Aufgabenteil (b) folgt $[m]_n=[a]_n$. Und da $a \in \{0,1,2,...,n-1\}$ folgt somit die Behauptung.
+
+\item[(c)]
+Wir zeigen zuerst (i) $(\Z_n,+_n)$ ist eine abelsche Gruppe und dann (ii) die Verkn\"upfungen $+_n$ und $\cdot_n$ erf\"ullen die Distributivit\"at.
+\begin{itemize}
+\item[(i)]
+Das neutrale Element ist $[0]_n$, da 
+$$[0]_n+_n[a]_n=[0+a]_n=[a]_n=[a+0]_n=[a]_n+_n[0]_n$$
+f\"ur alle $[a]_n \in \Z_n$.\\
+F\"ur jedes Element $[a]_n \in \Z_n$ ist $[n-a]_n$ das Inverse, denn 
+$$[a]_n+_n[n-a]_n=[a+n-a]_n=[n]_n=[0]_n=[n]_n=[n-a+a]_n=[n-a]_n+_n[a]_n$$
+Die Assoziativ\"at und die Kommutativit\"at folgt direkt aus den entsprechenden Eigenschaften von $+$ in $\Z$.
+\item[(ii)]
+Es seien $[a]_n,[b]_n,[c]_n \in \Z_n$, dann gilt mit der Distributivit\"at von $(\Z,+,\cdot)$:
+\begin{align*}
+[a]_n \cdot_n ([b]_n +_n [c]_n)&=[a]_n\cdot_n [b+c]_n=[a\cdot (b+c)]_n=[ab+ac]_n=[ab]_n+_n[ac]_n\\
+&=([a]_n\cdot_n[b]_n) +_n ([a]_n\cdot_n[c]_n)
+\end{align*}
+\end{itemize}
+Somit ist $(\Z_n,+_n,\cdot_n)$ ein Ring.
+
+\end{itemize}
+
+\newpage
+%%%
+\section{Polynome}
+%%%
+
+Geben Sie alle Polynome in $\Z_3[X]$ mit Grad $1$ an. 
+
+%%%
+\paragraph{L\"osung:}
+%%%
+
+Als Koeffizienten kommen nur die Elemente aus $\Z_3$ in Frage:
+$$
+	[0], [1], [2].
+$$
+(F\"ur bessere \"Ubersicht verzichten wir auf den Index an den eckigen Klammern und den Verkn\"upfungen, wenn dieser aus dem Kontext klar ist.)\\
+
+Ein Polynom mit Grad $1$ ist von der Form
+$$
+	a_1\cdot X + a_0	\qquad\text{mit}\qquad a_1\neq [0].
+$$
+Somit sind die folgenden Polynome alle Polynome mit Grad $1$ in $\Z_3[X]$:
+\begin{eqnarray*}
+	f_1	&=	& [1]\cdot X + [0]	\\
+	f_2	&=	& [1]\cdot X + [1]	\\
+	f_3	&=	& [1]\cdot X + [2]	\\
+	f_4	&=	& [2]\cdot X + [0]	\\
+	f_5	&=	& [2]\cdot X + [1]	\\
+	f_6	&=	& [2]\cdot X + [2]	\\
+\end{eqnarray*}
+
+%%%
+%%%
+\section{Nullteiler und Einheiten}
+%%%
+Bestimmen Sie alle Nullteiler und alle Einheiten der folgenden Ringe:
+\begin{itemize}
+\item[i)] $\Z_6$
+\item[ii)] $\Q[X]$
+\item[iii)] $\R$
+\end{itemize}
+%%%
+\paragraph{L\"osung:}
+%%%
+\begin{itemize}
+\item[i)] $\Z_6:$\\
+Wir erstellen eine Verkn\"upfungstafel von $(\Z_6, \cdot_6)$, lassen aber die Zeile und Spalte der Null weg, da dort immer nur die Null stehen wird.
+$$
+\begin{array}{c|c c c c c}
+(\Z_6, \cdot_6)& [1]_6 & [2]_6 & [3]_6 & [4]_6 &[5]_6\\
+\hline
+\ [1]_6 & [1]_6 & [2]_6 & [3]_6 & [4]_6 & [5]_6\\
+\ [2]_6 & [2]_6 & [4]_6 & [0]_6 & [2]_6 & [4]_6\\
+\ [3]_6 & [3]_6 & [0]_6 & [3]_6 & [0]_6 & [3]_6\\
+\ [4]_6 & [4]_6 & [2]_6 & [0]_6 & [4]_6 & [2]_6\\
+\ [5]_6 & [5]_6 & [4]_6 & [3]_6 & [2]_6 & [1]_6
+\end{array}
+$$
+Jedes Element in dessen Zeile das neutrale Element $[1]_6$ auftaucht ist eine Einheit, alle andern Elemente sind keine Einheiten, da keine Inverse für diese in $\Z_6$ existieren. Damit: $\Z_6^{\times}=\{[1]_6,[5]_6\}$.\\
+\quad\\
+Jedes Element in dessen Zeile das Nullelement $[0]_6$ auftaucht ist ein Nullteiler, alle andern Elemente sind keine Nullteiler. Damit sind die Nullteiler von $\Z_6$ gerade $[2]_6,[3]_6$ und $[4]_6$.
+\item[ii)] $\Q[X]:$\\
+Die rationalen Zahlen $\Q$ sind nullteilerfrei, damit ist auch der Polynomring $\Q[X]$ nullteilerfrei. Damit gilt auch in der Grad-Formel Gleichheit: $$deg(f\cdot g)=deg(f)+deg(g)$$
+Au\ss erdem gilt $deg(q)=0 \Leftrightarrow q \in \Q\setminus\{0\}$ und damit auch insbesondere $deg(1)=0$.\\
+Zusammen mit der Grad-Formel folgt nun f\"ur alle $f,g \in \Q[X]$:
+$$
+f\cdot g=1 \Rightarrow deg(f\cdot g)=\deg(1)=0 \Rightarrow deg(f)=0=deg(g) \Rightarrow f,g \in \Q
+$$
+Damit gilt $\Q[X]^\times \subseteq \Q$. Da jedes Element $q \in \Q, q\ne 0$ ein Inverses $\frac{1}{q}\in\Q \subseteq \Q[X]$ besitzt, folgt $\Q[X]^\times=\Q^\times = \Q \setminus \{0\}$.
+\item[iii)] $\R:$\\
+In $\R$ besitzt jedes Element $x \in \R, x \ne 0$ ein Inverses: $\frac{1}{x} \in \R$. Somit sind die Einheiten von $\R$ gerade $\R^\times = \R \setminus \{0\}$\\
+\quad\\
+Da eine Einheit niemals eine Nullteiler ist, und auch die $0$ per Definition kein Nullteiler ist, ist $\R$ nullteilerfrei.
+\end{itemize}
+
+\end{document}

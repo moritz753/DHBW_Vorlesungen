@@ -1,0 +1,140 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Mengenaufgabe: Potenzmenge
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+%%%
+\begin{frame} \frametitle{Aufgabe}
+
+
+\begin{itemize}
+	\item[(a)]Sei $M = \{0,1,2,3\}.$ Bestimmen Sie ${\cal P}(M)$.
+	\item[(b)] Was ist ${\cal P}(\emptyset)$?
+	\item[(c)] Seien $A, B$ zwei Mengen. Zeigen Sie:
+			$$
+				{\cal P}(A) \cap {\cal P}(B) = {\cal P}(A\cap B).
+			$$
+	\item[(d)] Finden Sie zwei Mengen $A,B$, so dass
+			$$
+				{\cal P}(A) \cup {\cal P}(B) \neq {\cal P}(A\cup B).
+			$$
+\end{itemize}
+%%%
+\end{frame}
+
+%
+%
+\begin{frame}\frametitle{Lösung: Teil a)}
+%%
+Sei $M = \{0,1,2,3\}.$ Bestimmen Sie ${\cal P}(M)$. \pause
+\vfill
+${\cal P}(M) = \big\{$ \pause				$ \emptyset,$\\  \pause
+				\hspace{17mm}$\{0\}, \{1\}, \{2\}, \{3\},$\\ \pause
+				\hspace{17mm}$\{0,1\}, \{0,2\}, \{0,3\}, \{1,2\}, \{1,3\}, \{2,3\},$\\  \pause
+				\hspace{17mm}$\{0,1,2\}, \{0,1,3\}, \{0,2,3\}, \{1,2,3\},$\\  \pause
+				\hspace{17mm}$\{0,1,2,3\}$ \pause$\ \big\}$
+%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: Teil b)}
+%
+Was ist ${\cal P}(\emptyset)$? \pause
+\vfill
+%%
+${\cal P}(\emptyset) = \{ \emptyset \}$
+\vfill
+Achtung: Dies ist \textbf{nicht} die Leere Menge!
+\end{frame}
+%
+%
+%
+\begin{frame}\frametitle{Lösung: Teil c)}
+%
+Seien $A, B$ zwei Mengen. Zeigen Sie:
+			$$
+				{\cal P}(A) \cap {\cal P}(B) = {\cal P}(A\cap B).
+			$$\pause
+%%
+1. Schritt:\\ 
+			Wir zeigen ${\cal P}(A) \cap {\cal P}(B) \subseteq  {\cal P}(A\cap B)$:\\ \pause
+			Sei $X \in {\cal P}(A) \cap {\cal P}(B).$ Dann folgt: \pause
+			$$
+				X \subseteq A\quad \land \quad X \subseteq B.
+			$$\pause
+			Das hei{\ss}t
+			$$
+				X \subseteq A \cap B
+			$$\pause
+			und somit
+			$$
+				X \in  {\cal P}(A\cap B).
+			$$
+			
+
+			
+
+\end{frame}
+%
+%%
+\begin{frame}\frametitle{Lösung: Teil c)}
+%%
+			2. Schritt:\\
+			Wir zeigen $ {\cal P}(A\cap B) \subseteq  {\cal P}(A) \cap {\cal P}(B) $:\\ \pause
+			Sei $X \in {\cal P}(A\cap B)$. Dann folgt: \pause
+			$$
+				X \subseteq A\cap B.
+			$$ \pause
+			Das hei{\ss}t
+			$$
+				X \subseteq A \quad \land \quad X \subseteq B
+			$$ \pause
+			und somit
+			$$
+				X \in {\cal P}(A) \cap {\cal P}(B).
+			$$\pause
+			
+			Und da nun $ {\cal P}(A\cap B) \subseteq  {\cal P}(A) \cap {\cal P}(B) $ und $ {\cal P}(A\cap B) \supseteq  {\cal P}(A) \cap {\cal P}(B) $ gilt, muss $ {\cal P}(A\cap B) =  {\cal P}(A) \cap {\cal P}(B) $ gelten.
+
+\end{frame}
+%
+%%
+\begin{frame}\frametitle{Lösung: Teil d)}
+Finden Sie zwei Mengen $A,B$, so dass
+			$$
+				{\cal P}(A) \cup {\cal P}(B) \neq {\cal P}(A\cup B).
+			$$\pause
+Wir benutzen hierfür zwei disjunkte Mengen, da deren Vereinigung ``viel'' größer ist als die ursprünglichen Mengen.\\
+\quad\\
+\pause
+$A=\{1\}$ und $B=\{2\}$:\pause 
+			$$
+				{\cal P}(A) = \{\emptyset, \{1\} \}, \quad {\cal P}(B) = \{\emptyset, \{2\} \}.
+			$$\pause
+			$$
+				{\cal P}(A\cup B) = \{\emptyset, \{1\}, \{2\}, \textcolor{blue}{\{1,2\}} \}.
+			$$
+\end{frame}
+%
+\end{document}

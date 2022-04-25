@@ -1,0 +1,153 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE 	\"Ubungsaufgaben 7}\\[3mm]
+		{\Large Lineare Abbildungen und Matrizen}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+
+%-------------------------
+\section{Der Kern}
+%%%
+Es seien $V,W$ $K$-Vektorräume und $\Phi: V \to W$ ein Homomorphismus.
+\begin{itemize}
+\item[a)] Zeigen Sie, dass die Menge $Kern(\Phi):=\Phi^{-1}(\{0_W\})$ ein Untervektorraum von $V$ ist.
+\item[b)] Zeigen Sie, dass $\Phi$ genau dann injektiv ist, wenn  $Kern(\Phi)=\{0_V\}$ gilt.
+\end{itemize}
+Es sei nun $A=\begin{pmatrix} 1&2&3 \\ 1&2&3 \end{pmatrix} \in \R^{2\times 3}$ und $\Phi_A: \R^3 \to \R^2, x \mapsto A \cdot x$.
+\begin{itemize}
+\item[c)] Bestimmen Sie $Kern(\Phi_A)$.
+\end{itemize}
+
+%-------------------------
+\section{Drehung in $\R^2$}
+%%%
+
+Sei $\varphi \in [0,2\pi)$ und 
+$
+	D_\varphi=\begin{pmatrix}
+		\cos(\varphi)	&-\sin(\varphi)	\\
+		\sin(\varphi)	&\cos(\varphi)
+	\end{pmatrix}
+	\in \R^{2\times 2}$.
+\begin{itemize}
+\item[a)] Bestimmen Sie die Bilder $\Phi_{D_\varphi}(v)$ für die folgenden Vekoren:\\
+i) $v=e_1$ \quad ii) $v=e_2$ \quad iii) $v=\begin{pmatrix} 2 \\ 1 \end{pmatrix}$
+\item[b)] Zeigen Sie, dass für $\varphi, \psi \in [0,2\pi)$ gilt: $D_\varphi \cdot D_\psi = D_{\varphi+\psi}$.
+\item[c)] Bestimmen Sie die inverse Matrix $D_\varphi^{-1}$.
+\item[d)] Es sei nun $\varphi=\frac{\pi}{6}$. Bestimmen Sie die Abbildungsmatrix Verkettung $(\Phi_{D_{\frac{\pi}{6}}})^{1320}$.
+\end{itemize}
+%-------------------------
+\section{Matrizen}
+%%%
+
+Seien
+$$
+	A
+	=
+	\begin{pmatrix}
+		1	&0	\\
+		1	&1	
+	\end{pmatrix}
+	\quad
+	\text{und}
+	\quad
+	B
+	=
+	\begin{pmatrix}
+		1	&2	\\
+		3	&4	
+	\end{pmatrix}.
+$$
+
+\begin{itemize}
+	\item[(a)] Bestimmen Sie die zu $A$ inverse Matrix $A^{-1}$. 
+	\item[(b)] Bestimmen Sie die Matrix $X\in \R^{2\times 2}$, f\"ur die gilt:
+		$$
+			X\cdot A = B.
+		$$
+\end{itemize}
+
+%-------------------------
+\newpage
+\section{Spezielle Matrizen}
+%%%
+
+Zeigen Sie, dass die Matrizen $A\in \R^{2\times 2}$ invertierbar sind und bestimmen Sie die zugeh\"orige inverse Matrix $A^{-1}$.
+Berechnen Sie ferner
+		$$
+			A
+			\cdot
+			\begin{pmatrix}
+				a & b & c\\
+				d & e  & f
+			\end{pmatrix}.
+		$$
+\begin{itemize}
+	\item[(a)] Additionsmatrix:	
+		Sei $\alpha \in \R$. 
+		$$
+			A
+			=
+			\begin{pmatrix}
+				1 & \alpha\\
+				0 & 1
+			\end{pmatrix}.
+		$$
+
+	\item[(b)] Vertauschungsmatrix:
+		$$
+			A
+			=
+			\begin{pmatrix}
+				0 & 1\\
+				1 & 0
+			\end{pmatrix}.
+		$$
+
+	\item[(c)] Multiplikation einer Zeile mit einer Konstante:
+		Seien $\alpha, \beta \in \R\backslash\{0\}$. 
+		$$
+			A
+			=
+			\begin{pmatrix}
+				\alpha 	& 0\\
+				0 		& \beta
+			\end{pmatrix}.
+		$$
+	
+\end{itemize}
+
+%%%
+\section{Abbildungsmatrix *}
+%%%
+Es sei $\Psi: \R^3 \to \R^3$ eine lineare Abbildung mit
+$$
+\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}) = \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}, \quad \Psi(\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}) = \begin{pmatrix}0\\2\\4 \end{pmatrix} \quad \text{ und } \quad \Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix} )= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}.
+$$
+Bestimmen Sie eine Matrix $A \in \R^{3\times 3}$, sodass $\Psi=\Phi_A$ gilt. 
+
+
+\end{document}

@@ -1,0 +1,485 @@
+\input{../preamble_beamer.tex}
+
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Ringe
+}
+\author{Dr. Moritz Gruber } 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+%%%
+\section{Motivation}
+%%%
+%
+\begin{frame}\frametitle{Motivation}
+	
+	Bisher:
+	\begin{itemize}
+		\item Verkn\"upfungen auf Mengen
+		\item Gruppe $(G,\ast)$: Menge mit einer Verkn\"upfung mit gewissen Eigenschaften 
+	\end{itemize}
+	\vfill
+	Beispiele f\"ur (abelsche) Gruppen:
+	\begin{itemize}
+		\item $(\R, +)$, $(\Q,+)$, $(\Z,+)$
+		\item $(\R\backslash\{0\},\cdot)$, $(\Q\backslash\{0\},\cdot)$ 
+	\end{itemize}
+	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Motivation}
+	
+	Auf den Mengen $\R, \Q, \Z$ sind zwei Verkn\"upfungen $+$ und $\cdot$ definiert, f\"ur die \highlightDef{ Distributivgesetze} gelten:\\\vfill
+	$\forall a,b,c: $
+	$$
+		a\cdot (b+c) = a\cdot b + a\cdot c
+	$$
+	und
+	$$
+		 (a+b)\cdot c = a\cdot c + b\cdot c.
+	$$
+	
+\end{frame}
+%
+%%%
+\section{Ringe}
+%%%
+%
+\begin{frame}\frametitle{Definition Ring}
+	
+	Seien $R$ eine Menge und $+, \cdot$ zwei Verkn\"upfungen auf $R$. 
+	Dann hei{\ss}t $(R,+,\cdot)$ ein \highlightDef{ Ring}, wenn gilt:
+	\begin{enumerate}
+		\item $(R,+)$ ist eine abelsche Gruppe.
+		\item Die Verkn\"upfung $\cdot$ ist assoziativ.
+		\item Die Distributivgesetze gelten, d.h. $\forall a,b,c \in R$:
+			$$
+				a\cdot (b+c) = a\cdot b + a\cdot c
+			$$
+			und
+			$$
+		 		(a+b)\cdot c = a\cdot c + b\cdot c.
+			$$
+	\end{enumerate}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition Ring: Beispiele}
+	
+	\begin{itemize}
+		\item $(\R,+,\cdot),\, (\Q,+,\cdot),\, (\Z,+,\cdot),$ \pause
+		\item $(\R^{2\times 2}, +, \cdot)$ bzgl. Matrixaddition 
+			$$
+				\begin{pmatrix}
+					a_{11}	&	a_{12}	\\
+					a_{21}	&	a_{22}
+				\end{pmatrix}
+				+
+				\begin{pmatrix}
+					b_{11}	&	b_{12}	\\
+					b_{21}	&	b_{22}
+				\end{pmatrix}
+				:=
+				\begin{pmatrix}
+					a_{11} + b_{11}	&	a_{12} + b_{12}	\\
+					a_{21} +b_{21}	&	a_{22} + b_{22}
+				\end{pmatrix}
+			$$
+			und Matrixmultiplikation.
+	\end{itemize}
+	
+\end{frame}
+%
+\subsection{Definition}
+%
+\begin{frame}\frametitle{Definition Ring}
+	
+	\begin{itemize}
+		\item Das neutrale Element bzgl. $+$ bezeichnet man mit $0$ (\highlightDef{ Nullelement}). \pause
+		\item Ist die Verkn\"upfung $\cdot$ kommutativ, so nennt man den Ring \highlightDef{ kommutativ}. \pause
+		\item Gibt es bzgl. der Verkn\"upfung $\cdot$ ein neutrales Element, so schreibt man hierf\"ur $1$ und nennt es \highlightDef{ Einselement} oder kurz \highlightDef{Eins}.\\
+			$(R,+,\cdot)$ hei{\ss}t dann \highlightDef{ Ring mit Eins}.\pause
+		\item Ist $a\in R$, so bezeichnen wir das zu $a$ inverse Element bzgl. der Verkn\"upfung $+$ mit $-a$. Es gilt also:
+			$$
+				(-a) + a = a + (-a) = 0.
+			$$
+		Bemerkung: F\"ur $a + (-b)$ schreibt man oft kurz $a-b$. 
+	\end{itemize}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften von Ringen} 
+		
+	Seien $(R,+,\cdot)$ ein Ring, $a,b \in R$ und $0\in R$ das Nullelement.
+	\begin{itemize}
+		\item Was ergibt $0\cdot a$ ?
+		\item Stimmen $(-a)\cdot b$ und $-(a\cdot b)$ \"uberein?\\
+			(Ist das bzgl. $+$ inverse Element von $a\cdot b$ das Element $(-a)\cdot b$?)
+	\end{itemize} \pause
+	
+	\vspace{2mm}
+	Die Antworten hierzu stehen nicht {\em direkt} in der Definition.
+		
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften von Ringen} 
+	
+	Seien $R$ ein Ring, $a,b \in R$ und $0$ das Nullelement von $R$. 
+	Dann gilt:
+	\begin{itemize}
+		\item[(1)] $0\cdot a = a\cdot 0 = 0$.
+		\item[(2)] $(-a)\cdot b = -(a\cdot b)$.
+	\end{itemize}
+		
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften von Ringen} 
+	
+	\begin{itemize}
+		\item[(1)] \highlightDef{ Beweis  $0\cdot a = a\cdot 0 = 0$:}
+			$$
+			\begin{array}{llll}
+				0\cdot a	&=\pause	&(0+0)\cdot a		&\text{($0$ ist das neutrale Element bzgl. $+$)}	\\ \pause
+						&=	&0\cdot a + 0\cdot a	&\text{(Distributivgesetz)} 			\pause		
+			\end{array}
+			$$
+			Wenn wir auf beiden Seiten $-(0\cdot a)$ addieren ($(R,+)$ ist eine Gruppe), erhalten wir
+			$$
+				0 = 0\cdot a.
+			$$\pause
+			Analog zeigt man $a\cdot 0 = 0$.
+	\end{itemize}	
+		
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Eigenschaften von Ringen} 
+	
+	\begin{itemize}
+		\item[(2)]  \highlightDef{ Beweis $(-a)\cdot b = -(a\cdot b)$:}\\
+		Aus dem Distributivgesetz folgt:
+			$$
+				(-a)\cdot b + a\cdot b = ( -a + a)\cdot b
+			$$
+			\pause
+			Da $-a$ das zu $a$ inverse Element in der Gruppe $(R,+)$ ist, folgt $-a + a = 0$ und somit
+			$$
+				(-a)\cdot b + a\cdot b= ( -a + a)\cdot b = 0\cdot b = 0.
+			$$
+			\pause
+			$(-a)\cdot b$ ist somit das zu $a\cdot b$ inverse Element in der abelschen Gruppe $(R,+)$, d.h.
+			$(-a)\cdot b = -(a\cdot b)$.
+	\end{itemize}	
+	\hfill$\qed$
+	
+\end{frame}
+%
+\subsection{Der Polynomring}
+%
+\begin{frame}\frametitle{Beispiel Polynome}
+	
+	Sei $(R,+,\cdot)$ ein Ring. Ein \highlightDef{ Polynom} $f$ in der Variable $X$ mit Koeffizienten in $R$ ist ein Ausdruck der Form
+	$$
+		f = f(X) = a_nX^n + a_{n-1}X^{n-1} + \ldots + a_1X + a_0 
+	$$
+	mit $a_n,\ldots, a_0 \in R$ und $a_n\neq 0$. \\\pause
+	Dabei hei{\ss}t $\highlightDef{\deg(f)} := n$ der \highlightDef{Grad}\footnote{In der nächsten Vorlesung werden wir eine mathematisch genauere Definition kennenlernen.} von $f$.
+	Die Menge aller Polynome mit Koeffizienten in $R$ wird mit \highlightDef{$R[X]$} bezeichnet.
+	\pause
+	\vfill
+	\highlightDef{ Beispiel:}
+	$$
+		f(X) = 3X^4 + \frac{1}{2}X^3 - 12X + 17 
+	$$
+	ist ein Polynom in $\R[X]$ mit Grad $4$. Es ist aber auch ein Polynom in $\Q[X]$. 
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Polynome: Addition}
+	
+	Seien $(R,+,\cdot)$ ein Ring und  
+	$$
+		f = f(X) = a_nX^n + a_{n-1}X^{n-1} + \ldots + a_1X + a_0,
+	$$
+	$$
+		g = g(X) = b_mX^m + b_{m-1}X^{m-1} + \ldots + b_1X + b_0
+	$$
+	zwei Polynome mit $m\leq n$.\\[1mm] 
+	Dann definieren wir eine Addition $f+g$:\pause
+	\begin{align*}
+		f + g &= (f+g)(X) :=\sum_{j=m+1}^n a_j X^j + \sum_{k=0}^m (a_k+b_k)X^k\\
+		&= a_nX^n +\ldots + a_{m+1}X^{m+1} \\
+		& \hspace{20mm}+ (a_m+b_m) X^m +\ldots+ (a_1+b_1)X +(a_0+b_0)  
+	\end{align*} 
+	\vfill \pause
+	$f+g$ ist somit ein Polynom mit $\deg(f+g) \le \max( \deg(f), \deg(g))$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Polynome: Multiplikation}
+	
+	Seien $(R,+,\cdot)$ ein Ring und  
+	$$
+		f = f(X) = a_nX^n + a_{n-1}X^{n-1} + \ldots + a_1X + a_0,
+	$$
+	$$
+		g = g(X) = b_mX^m + b_{m-1}X^{m-1} + \ldots + b_1X + b_0
+	$$
+	zwei Polynome mit $m\leq n$.\\[1mm]
+	Dann definieren wir eine Multiplikation $f \cdot g$: \pause
+	$$
+		\begin{array}{lccl}
+			(f \cdot g)(X) 	&:=	&& 	(a_0 \cdot b_0) + (a_0\cdot b_1+ a_1\cdot b_0)X +\ldots \\
+						&	&&+	 (a_n\cdot b_0 + a_{n-1}\cdot b_1 + \ldots + a_{n-m}\cdot b_m)X^n  + \ldots\\
+						&	&&+	a_n\cdot b_m X^{n+m}\\ \pause
+						&&&\\
+						&=&& \sum_{k=0}^{m+n} \left( \sum_{j=0}^k a_j b_{k-j}  \right) X^k
+		\end{array}
+	$$ 
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Polynome: Multiplikation}
+	
+\highlightDef{Beispiel in $\Z[X]$}:\\
+	$
+		f = X^2 + 2X + 5, g = 2X^3 + X 
+	$\\\pause \vfill
+Dann gilt\\
+\vspace{2mm}
+$
+f+g=\pause (X^2 + 2X + 5) + (2X^3 + X)\pause = 2X^3+X^2+3X+5
+$\\
+\vspace{2mm}
+und\\
+\vspace{2mm}
+$
+f\cdot g=\pause (X^2 + 2X + 5) \cdot (2X^3 + X) \pause $\\
+\hspace{8mm}$=2 X^3X^2 + 2\cdot2 X^3X+(5\cdot2X^3 + X^2X) + (2X^2+2XX)+5X$\\\pause
+$\hspace{8mm}=2X^5+4X^4+11X^3+4X^2+5X
+$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Grad-Formel}
+	$f\cdot g$ ist somit ein Polynom mit 
+	$$
+		\deg(f\cdot g) \le n + m = \deg(f) + \deg(g).
+	$$
+	\vfill \pause
+	Warum $=$ statt $\le$ im Allgemeinen nicht stimmen muss, werden wir uns später noch ansehen.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel Polynome}
+	
+	Seien $(R,+,\cdot)$ ein Ring und $R[X]$ die Menge aller Polynome mit Koeffizienten in $R$. Dann ist
+	$$
+		(R[X],+,\cdot)
+	$$
+	ein Ring.\\[2mm]
+	\pause
+	Ist $R$ ein kommutativer Ring mit Einselement, dann ist auch $(R[X],+,\cdot)$ ein kommutativer Ring mit Einselement.\\[2mm]
+
+	Beweis: \"Ubungsaufgabe.
+\end{frame}
+%
+%%
+%\begin{frame}\frametitle{Polynome: Teilbarkeit}
+%	
+%	\begin{itemize}
+%		\item \highlightDef{ Teilbarkeitsrelation} auf der Menge der Polynome $R[X]$:
+%			$$
+%				p \teXt{~teilt~} f	:\iff	\eXists q \in R[X]: f(X) = p(X) \cdot q(X). 
+%			$$
+%			\pause
+%			Beispiel in $\R[X]$:
+%			$$
+%				f(X) = X^2 - 4 = (X+2)\cdot(X-2)
+%			$$
+%			Aber auch
+%			$$
+%				X^2 - 4 = \left(\frac{1}{2}X + 1\right) \cdot (2X-4).
+%			$$
+%			D.h., 
+%			$$
+%				p_1(X) = X+2,\, 
+%				p_2(X) = X-2,\, 
+%				p_3(X) =  \frac{1}{2}X + 1,\, 
+%				p_4(X) = 2X-4
+%			$$ 
+%			sind Teiler von $f$.
+%	\end{itemize}
+%	
+%\end{frame}
+%%
+%
+%\begin{frame}\frametitle{Polynome: Teilbarkeit}
+%	
+%	\begin{itemize}
+%		\item \highlightDef{ Division mit Rest (Polynomdivision) / Modulare Arithmetik:}\\
+%			Seien $p(X), q(X) \in R[X]$. Dann gibt es $s(X), r(X) \in R[X]$ mit $\deg(r) < \deg(q)$ und
+%			$$
+%				p(X) = s(X)\cdot q(X) + r(X).
+%			$$
+%			(Beweis durch vollst\"andige Induktion nach $\deg(p)$).
+%		 \pause
+%		 \item $\ggT(p,q)$ zweier Polynome $p,q \in R[X]$:\\ 
+%		 	Teiler mit gr\"o{\ss}tem Grad und h\"ochster Koeffizient $a_n = 1$.
+%		\pause
+%		\item Berechnung des  $\ggT(p,q)$ mit dem euklidischen Algorithmus.
+%	\end{itemize}
+%	
+%\end{frame}
+%%
+%
+\begin{frame}\frametitle{Polynomringe: Anwendungen}
+	
+	\begin{itemize}
+		\item Polynomringe werden in der \highlightDef{ Codierungstheorie} verwendet - die Theorie der fehlererkennenden und -korrigierenden Codes. 
+		\item Ziel der Codierungstheorie:\\ 
+			Daten fehlerfrei \"ubertragen/speichern (Kommunikation, Speichern von Daten auf einer CD).
+		\item \"Ubertragungsfehler erkennen und korrigieren.
+		\item Begr\"under der Codierungstheorie:\\ 
+			Marcel Golay  (1902 - 1989,``Notes on digital coding'' (1949)), \\
+			Richard Hamming (1915 - 1998, ``Error detecting and error correcting codes'' (1950)).
+	\end{itemize}
+	
+\end{frame}
+%
+\subsection{Einheiten}
+%
+\begin{frame}\frametitle{Multiplikative Inverse}
+Die Definition eines Rings mit Eins fordert \underline{nicht} die Existenz von multiplikativen Inversen. Trotzdem oder auch gerade deshalb sind die Elemente eines Rings für die multiplikative Inverse existieren von besonderem Interesse.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition}
+\begin{itemize}
+\item Es sei $R$ ein Ring mit Eins. Ein Element $x \in R$ heißt eine \highlightDef{Einheit in $R$}, wenn es ein $y \in R$ gibt mit $x\cdot y = 1_R$. \pause
+\item Die \highlightDef{Einheitengruppe} $R^\times$ ist die Menge aller Einheiten von $R$. Zusammen mit der Multiplikation auf $R$ bildet $(R^\times, \cdot)$ eine Gruppe: \pause
+	\begin{itemize}
+	\item $1_R$ ist eine Einheit und bildet das neutrale Element\pause
+	\item Für alle $x_1,x_2 \in R^\times$ gilt: 
+	$$(x_1x_2)\cdot(x_2^{-1}x_1^{-1})=x_1\cdot(x_2x_2^{-1})\cdot x_1^{-1}=x_1\cdot 1_R \cdot x_1^{-1}=1_R$$
+	Und somit auch $x_1x_2 \in R^\times$.\pause
+	\item Außerdem ist die Multiplikation assoziativ (Definition Ring) und mit $x\in R^\times$ ist auch $x^{-1} \in R^\times$.
+	\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item Für den Ring $(\Z,+,\cdot)$ ist $\Z^\times = \{1,-1\}$.\pause \vfill
+\item Für den Ring $(\R,+,\cdot)$ ist $\R^\times = \R \setminus \{0\}$.\pause \vfill
+\item Für den Polynomring $\R[X]$ ist $\R[X]^\times = \R^\times$.\\ (Mehr dazu später)
+\end{itemize}
+\end{frame}
+%
+%%
+\subsection{Nullteiler}
+%
+\begin{frame}\frametitle{Definition}
+Es sei $R$ ein Ring. Ein Element $x\in R\setminus \{0\}$ heißt \highlightDef{Nullteiler}, wenn es ein Element $y \in R\setminus \{0\}$ gibt, sodass $x \cdot y = 0$ oder $y \cdot x = 0$.\\
+Ein Ring in dem es keine Nullteiler gibt, heißt \highlightDef{nullteilerfrei}.\\
+\vfill \pause
+\textbf{Bemerkung:} Ein Nullteiler $x \in R\setminus \{0\}$ kann natürlich niemals eine Einheit sein, da sich sonst durch Multiplikation mit $x^{-1}$ folgern lässt, dass $y=0$ gilt. Dies wäre aber ein Widerspruch!
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item $\Z,\Q$ und $\R$ mit $+$ und $\cdot$ sind alle nullteilerfrei. \pause \vfill
+\item Der Ring der reellen $2\times 2$-Matrizen ist \underline{nicht} nullteilerfrei: \pause
+$$
+\begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix} \cdot \begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 &0\end{pmatrix}
+$$
+Somit ist die Matrix $A=\begin{pmatrix} 0&1\\0&0 \end{pmatrix}$ ein Nullteiler.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Nochmal Grad-Formel}
+Es seien $f,g \in R[X]$. Dann gilt $\deg(f\cdot g) \le \deg(f) +\deg(g)$.\\ \vfill \pause
+Beispiel für $<$:\\
+$R=\R^{2\times 2}$ und \pause
+$$f=g=\begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix} \cdot X + \begin{pmatrix} 1 & 0 \\ 0 &1\end{pmatrix}$$ \pause
+Dann gilt $\deg(f)=\deg(g)=1$ aber \pause
+\begin{align*}
+f \cdot g &= (\begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix} \cdot \begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix}) \cdot X^2 +2 \cdot \begin{pmatrix} 0 & 1 \\ 0 &0\end{pmatrix} X + \begin{pmatrix} 1 & 0 \\ 0 &1\end{pmatrix} \\ 
+&=0_{\R^{2\times2}} \cdot X^2 + \begin{pmatrix} 0 & 2 \\ 0 &0\end{pmatrix} X + \begin{pmatrix} 1 & 0 \\ 0 &1\end{pmatrix}\\
+&=\begin{pmatrix} 0 & 2 \\ 0 &0\end{pmatrix} X + \begin{pmatrix} 1 & 0 \\ 0 &1\end{pmatrix}
+\end{align*}\pause
+und somit $\deg(f\cdot g)=1 < 2 = \deg(f) +\deg(g)$.
+\end{frame}
+%
+\begin{frame}\frametitle{Satz}
+Wenn $R$ ein nullteilerfreier Ring ist, dann 
+%ist auch der Polynomring $R[X]$ nullteilerfrei und es 
+gilt Gleichheit in der Grad-Formel:
+$$
+\deg(f\cdot g) = \deg(f) +\deg(g) \quad \forall f,g \in \R[X] \setminus \{0\}
+$$\pause
+\vfill
+\highlightDef{Beweis:}\\
+Es seien $f,g \in R[X]\setminus \{0\}$ und $n=deg(f), m=deg(g)$. Dann gibt es Koeffizienten $a_i,b_j \in R$ sodass
+$$
+f=\sum_{i=0}^n a_iX^i , \ g=\sum_{j=0}^m b_jX^j \quad \text{mit } a_n\ne0\ne b_m
+$$\pause
+Es gilt dann
+	$$
+	(f \cdot g)(X) :=	(a_0  b_0) + (a_0 b_1+ a_1 b_0)X +\ldots +a_n b_m X^{n+m}
+	$$ \pause
+Da $R$ nullteilerfrei ist gilt $a_nb_m \ne 0$ und damit $deg(f\cdot g)=n+m$.\\
+\hfill $\square$
+\end{frame}
+%
+%\begin{frame}\frametitle{Satz}
+%Wenn $R$ ein nullteilerfreier Ring ist, dann ist auch der Polynomring $R[X]$ nullteilerfrei und es gilt Gleichheit in der Grad-Formel:
+%$$
+%\deg(f\cdot g) = \deg(f) +\deg(g) \quad \forall f,g \in \R[X]
+%$$
+%\vfill
+%\highlightDef{Beweis (Fortsetzung):}\\
+%Es seien nun $f,g \in R[X]$ und $f\cdot g=0$. \pause Es folgt dann mit der Grad-Formel:\\
+%\vspace{2mm}
+%$
+%0=deg(0)\pause=deg(f\cdot g)\pause =deg(f) + deg(g)
+%$\\
+%\vspace{2mm}\pause
+%Da nur Elemente von $R$ Grad null besitzen folgt $f,g \in R$. Und da $R$ nach Voraussetzung nullteilerfrei ist, muss entweder $f$ oder $g$ schon $0$ sein. Damit ist auch $R[X]$ nullteilerfrei. \hfill $\square$
+%\end{frame}
+%%%
+%
+
+\end{document}

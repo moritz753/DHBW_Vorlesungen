@@ -1,0 +1,102 @@
+\input{../preamble_beamer.teX}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Determinanten-Aufgabe
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabe: Determinante}
+%
+Berechnen Sie die Determinante der Matrix
+$$
+	M=\begin{pmatrix}
+		0	& 2	&  0& 1	\\
+		1	& 0	&  3	& 0	\\
+		1	& 0	&  2	& 0\\
+		0	& 1	&  -1	& -1	
+	\end{pmatrix}
+$$
+mit Hilfe der Laplace-Entwicklung.
+
+%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung (I):}
+%	
+Wir beginnen mit einer Umformung durch eine Additionsmatrix ($\det(A_{i,j}(\alpha))=1$) und entwickeln dann nach der ersten Spalte:\pause
+\begin{align*}
+\det(M)&=\det(A_{3,2}(-1))\cdot \det(M)\\
+&=\det(A_{3,2}(-1)\cdot M)\\
+&=\det(\begin{pmatrix}
+		0	& 2	&  0& 1	\\
+		1	& 0	&  3	& 0	\\
+		0	& 0	&  -1	& 0\\
+		0	& 1	&  -1	& -1	
+	\end{pmatrix})\\
+&=1\cdot (-1)^{1+2}\cdot\det(\begin{pmatrix}
+		 2	&  0& 1	\\
+		 0	&  -1	& 0\\
+		1	&  -1	& -1	
+	\end{pmatrix})\\
+&=-1\cdot\det(\begin{pmatrix}
+		 2	&  0& 1	\\
+		 0	&  -1	& 0\\
+		1	&  -1	& -1	
+	\end{pmatrix})\\
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung (II):}
+%	
+Wir fahren mit Entwickeln nach der zweiten Zeile:\pause
+\begin{align*}
+\det(M)&=-1\cdot\det(\begin{pmatrix}
+		 2	&  0& 1	\\
+		 0	&  -1	& 0\\
+		1	&  -1	& -1	
+	\end{pmatrix})\\
+&=-1\cdot(-1)\cdot(-1)^{2+2}\cdot\det(\begin{pmatrix}
+		 2	&   1	\\
+		1	& -1	
+	\end{pmatrix})\\
+&=\det(\begin{pmatrix}
+		 2	&   1	\\
+		1	& -1	
+	\end{pmatrix})\\
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung (III):}
+%	
+Abschließend nutzen wir die Determinanten-Formel für $(2 \times 2)$-Matrizen:\pause
+\begin{align*}
+\det(M)&=\det(\begin{pmatrix}
+		 2	&   1	\\
+		1	& -1	
+	\end{pmatrix})\\
+&=(2\cdot(-1)) - (1\cdot 1)\\
+&=-3
+\end{align*}
+\end{frame}
+\end{document}

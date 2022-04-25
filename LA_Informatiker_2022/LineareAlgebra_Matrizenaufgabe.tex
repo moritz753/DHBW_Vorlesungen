@@ -1,0 +1,98 @@
+\input{../preamble_beamer.teX}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Matrizen-Aufgabe: Abbildungsmatrix
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabe: Abbildungsmatrix}
+%
+Es sei $\Psi: \R^3 \to \R^3$ eine lineare Abbildung mit
+$$
+\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}) = \begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}, \quad \Psi(\begin{pmatrix} 2 \\ 0\\ 2 \end{pmatrix}) = \begin{pmatrix}0\\2\\4 \end{pmatrix} \quad \text{ und } \quad \Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix} )= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}.
+$$
+Bestimmen Sie eine Matrix $A \in \R^{3\times 3}$, sodass $\Psi=\Phi_A$ gilt. 
+
+%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung:}
+%
+Um die Abbildungsmatrix $A$ zu bestimmen, benötigen wir die Bilder von $e_1,e_2$ und $e_3$ unter $\Psi$:
+
+\begin{itemize}
+
+\item $\Psi(e_1)=\Psi(\begin{pmatrix} 1 \\ 0\\0\end{pmatrix})=\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}- \begin{pmatrix} 0\\1\\1\end{pmatrix})$\\\hspace{10,5mm}$=\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix})-\Psi(\begin{pmatrix} 0\\1\\1\end{pmatrix})=\begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}-\begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}$\\\hspace{10,5mm}$=\begin{pmatrix} 0 \\ 1 \\ 0\end{pmatrix}$
+	
+
+\end{itemize}
+
+
+\end{frame}
+%
+\begin{frame}\frametitle{Lösung:}
+%
+Um die Abbildungsmatrix $A$ zu bestimmen, benötigen wir die Bilder von $e_1,e_2$ und $e_3$ unter $\Psi$:
+
+\begin{itemize}
+
+\item $\Psi(e_1)=\begin{pmatrix} 0 \\ 1 \\ 0\end{pmatrix}$
+	
+\item $\Psi(e_2)=\Psi(\begin{pmatrix} 0 \\ 1\\0\end{pmatrix})=\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix}-\frac{1}{2}\cdot \begin{pmatrix} 2\\0\\2\end{pmatrix})$\\\hspace{10,5mm}$=\Psi(\begin{pmatrix}1\\1\\1 \end{pmatrix})-\frac{1}{2}\Psi(\begin{pmatrix} 2\\0\\2\end{pmatrix})$\\\hspace{10,5mm}$=\begin{pmatrix}2 \\ 1 \\ 2 \end{pmatrix}-\frac{1}{2} \begin{pmatrix}0\\2\\4 \end{pmatrix}= \begin{pmatrix}2\\0\\0\end{pmatrix}$
+
+\end{itemize}
+
+\end{frame}
+%
+\begin{frame}\frametitle{Lösung:}
+%
+Um die Abbildungsmatrix $A$ zu bestimmen, benötigen wir die Bilder von $e_1,e_2$ und $e_3$ unter $\Psi$:
+
+\begin{itemize}
+
+\item $\Psi(e_1)=\begin{pmatrix} 0 \\ 1 \\ 0\end{pmatrix}$, $\Psi(e_2)= \begin{pmatrix}2\\0\\0\end{pmatrix}$
+
+\item $\Psi(e_3)=\Psi(\begin{pmatrix} 0 \\ 0\\1\end{pmatrix})=\Psi(\begin{pmatrix}0\\1\\1 \end{pmatrix}-\begin{pmatrix} 0\\1\\0\end{pmatrix})$\\\hspace{10,5mm}$=\Psi(\begin{pmatrix}0\\1\\1 \end{pmatrix})-\Psi(\begin{pmatrix} 0\\1\\0\end{pmatrix})= \begin{pmatrix} 2 \\ 0 \\ 2\end{pmatrix}- \begin{pmatrix}2\\0\\0\end{pmatrix}$\\\hspace{10,5mm}$= \begin{pmatrix}0\\0\\2\end{pmatrix}$
+\end{itemize}
+
+\end{frame}
+%
+\begin{frame}\frametitle{Lösung:}
+%
+Um die Abbildungsmatrix $A$ zu bestimmen, benötigen wir die Bilder von $e_1,e_2$ und $e_3$ unter $\Psi$:
+
+\begin{itemize}
+
+\item $\Psi(e_1)=\begin{pmatrix} 0 \\ 1 \\ 0\end{pmatrix}$, $\Psi(e_2)= \begin{pmatrix}2\\0\\0\end{pmatrix}$ und $\Psi(e_3)= \begin{pmatrix}0\\0\\2\end{pmatrix}$
+\end{itemize}
+\vfill
+Damit erhalten wie die Abbildungsmatrix 
+$$
+A=\begin{pmatrix} \Psi(e_1)\mid \Psi(e_2) \mid \Psi(e_3)\end{pmatrix}=\begin{pmatrix}0&2&0\\1&0&0\\0&0&2 \end{pmatrix}.
+$$
+
+\end{frame}
+%
+%
+
+
+\end{document}

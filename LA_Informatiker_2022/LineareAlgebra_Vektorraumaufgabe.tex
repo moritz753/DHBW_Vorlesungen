@@ -1,0 +1,105 @@
+\input{../preamble_beamer.teX}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Vektorraum-Aufgabe: Polynome von Grad $\le n$
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+\begin{frame}\frametitle{Aufgabe: Polynome von Grad $\le n$}
+Sei
+$$
+	V := \{a_0 +a_1X+\ldots +a_nX^n~|~ a_0,\ldots, a_n\in \R \} \subset \R[X]
+$$
+die Menge der Polynome mit Koeffezienten in $\R$ und maximalem Grad $n$.\\
+
+Seien weiter die Verkn\"upfung $+:V \times V \to V$ und die Abbildung $\cdot: \R\times V \to V$ definiert:
+$$
+	(a_0 +\ldots +a_nX^n) + (b_0 +\ldots +b_nX^n) := a_0 +b_0+\ldots +(a_n+b_n)X^n
+$$
+$$
+	a\cdot(a_0 +\ldots +a_nX^n) := aa_0 +\ldots +aa_nX^n.
+$$
+
+\begin{itemize}
+	\item[a)] Zeigen Sie, dass $(V,+,\cdot)$  ein $\R$-Vektorraum ist.
+	\item[b)] Zeigen Sie, dass die Vektoren $1, X, \ldots, X^n \in V$ linear unabh\"angig sind.
+\end{itemize}
+%
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: Teil a)}
+%
+$(V,+)$ ist eine abelsche Gruppe: \pause
+\vfill
+\begin{itemize}
+\item $+$ ist eine Verknüpfung auf $V$, da für alle $f,g \in V$ gilt: $deg(f+g)\le \max(deg(f),deg(g))\le n$ \pause
+\item Die Assoziativität gilt für die Polynom-Addition, also auch insbesondere für die Polynome mit Grad $\le n$.\pause
+\item Das neutrale Element ist das Nullpolynom. Und da $deg(0)=-\infty \le n$, gilt $0 \in V$.\pause
+\item Das additive Inverse zu $f \in V$ ist $-f$ und es gilt $deg(-f)=deg(f) \le n$ und somit auch $-f \in V$.
+\end{itemize}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: Teil a) Fortsetzung}
+
+
+		Desweiteren gilt für $a,b \in \R$:
+		%
+		\begin{itemize}
+			\item[(1)] $1\cdot (a_0 + a_1X+\ldots + a_nX^n) = a_0 + a_1X+\ldots + a_nX^n$.\pause
+			\item[(2)] Assoziativgesetz:
+				\begin{align*}
+					a\cdot(b\cdot (a_0 + a_1X+\ldots + a_nX^n) ) 
+						&= aba_0 + aba_1X+\ldots + aba_nX^n 		\\
+						&= (a\cdot b)\cdot (a_0 + a_1X+\ldots + a_nX^n) 
+				\end{align*}\pause
+			\item[(3)] Distributivgesetze:
+				\begin{align*}
+						&(a+b)\cdot (a_0 + a_1X+\ldots + a_nX^n)  								\\		
+						&= aa_0 + aa_1X+\ldots + aa_nX^n + ba_0 + ba_1X+\ldots + ba_nX^n 			\\
+						&= a\cdot(a_0 + a_1X+\ldots + a_nX^n) +  b\cdot(a_0 + a_1X+\ldots + a_nX^n) 
+				\end{align*}	\pause
+				(analog zweites Distributivgesetz)\pause
+		\end{itemize}
+		Damit sind alle definierenden Eigenschaften eines Vektorraums erfüllt.
+\end{frame}
+%
+%
+\begin{frame} \frametitle{Lösung: Teil b)}
+		Die Vektoren $1, X, \ldots, X^n \in V$ sind linear unabh\"angig:
+		$$
+			\sum_{j=0}^n a_j X^j=\pause a_0 + a_1X+\ldots + a_nX^n = 0 $$\pause
+			$$\Rightarrow \quad a_0=a_1=\ldots=a_n=0.
+		$$\pause \vfill
+		Tats\"achlich bilden diese Vektoren eine Basis, denn für alle $a_0,...,a_n \in \R$ sind die Vektoren (Polynome)
+		$$
+			1,X, \ldots, X^n,\, a_0 + a_1X + \ldots + a_nX^n
+		$$
+		linear abh\"angig: Das letzte Polynom l\"asst sich als Linearkombination der ersten Vektoren schreiben.\\
+
+\end{frame}
+%
+%
+
+
+\end{document}

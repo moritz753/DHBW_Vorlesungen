@@ -1,0 +1,67 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		\color{lightBlue}
+		{ \LARGE 	Übungsaufgaben 10}\\[3mm]
+		{\Large Diagonalisierbarkeit und Eigenwerte}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+\section{Charakteristisches Polynom *}
+%%%
+Sei $A=	\begin{pmatrix}
+		1	&5	&8	\\
+		0	&-2	&1	\\
+		-1	&1	&3
+	\end{pmatrix}$. 
+\begin{itemize}
+\item[a)] Berechnen Sie das charakteristische Polynom der Matrix $A$:
+\item[b)] Bestimmen Sie das Spektrum $Spec(A)$ von $A$.
+\end{itemize}
+%-------------------------
+
+%-------------------------
+\section{Basis aus Eigenvektoren}
+%%%
+Sei $A=\begin{pmatrix} -\frac{1}{4} & 0 & -\frac{1}{2} \\ 0 & \frac{9}{4} & 0 \\ \frac{1}{2} & 0 &1 \end{pmatrix}$. 
+\begin{itemize}
+\item[a)] Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte der Matrix $A$.
+\item[b)] Bestimmen Sie eine invertierbare Matrix $D \in \R^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{itemize}
+
+%-------------------------
+
+\section{Rückwärts}
+%%%
+\begin{itemize}
+\item[a)] Finden Sie eine Matrix $A$ mit charakteristischem Polynom 
+$$CP_A(X)=(X-1)(X-2)^2(X-3).$$
+\item[b)] Finden Sie eine Matrix $B \in \R^{3\times 3}$ mit Eigenwerten $\lambda_1= 1$, $\lambda_2=-1$ und $\lambda_3=4$ sowie den Eigenräumen
+$$
+Eig(B,\lambda_1)=\langle \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \rangle, \ Eig(B,\lambda_2)=\langle \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} \rangle \text{ und } Eig(B,\lambda_3)=\langle \begin{pmatrix} 0 \\ 2 \\ 1 \end{pmatrix} \rangle
+$$
+\end{itemize}
+
+
+%-------------------------
+
+
+\end{document}

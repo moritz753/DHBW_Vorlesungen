@@ -1,0 +1,140 @@
+\input{../preamble_beamer.tex}
+
+%----------------------------------------------------------------------------------------------------
+%--------- Document Title ---------------------------------------------------------------------
+\title{Lineare Algebra\\[3mm] 
+	\large Ringe-Aufgabe: Restklassenringe $\Z_n$
+}
+\author{Dr. Moritz Gruber} 
+\institute{DHBW Karlsruhe}
+\date{2022}
+%%%%%%%%%%%%%%
+\begin{document}
+
+\AtBeginSection[]{
+	\begin{frame}				
+		\usebeamercolor[fg]{frametitle}
+		{\Large \insertsection} 
+        \end{frame}
+}
+
+%
+\begin{frame}[plain] 
+ \titlepage
+\end{frame}
+%
+%
+%%%
+\begin{frame} \frametitle{Aufgabe: Restklassenringe $\Z_n$}
+
+Es sei $n \in \N$. Wir notieren f\"ur $a \in \Z$ mit
+$$
+[a]_n:=\{m \in \Z \mid \exists k\in \Z: m=a+kn\}
+$$
+die Menge aller Zahlen, die beim Teilen durch $n$ den gleichen Rest wie $a$ haben.
+
+\begin{itemize}
+\item[(a)] Zeigen Sie, dass aus $b \in [a]_n$ folgt, dass $[a]_n=[b]_n$.
+\end{itemize}
+Wir definieren die Menge
+$
+\Z_n := \{[a]_n \mid a \in \Z\}
+$
+\begin{itemize}
+\item[(b)] Zeigen Sie, dass $\Z_n=\{[0]_n,[1]_n,[2]_n,...,[n-1]_n\}$ gilt.
+\end{itemize}
+Wir definieren weiter die Verkn\"upfungen $[a]_n+_n[b]_n=[a+b]_n$ und $[a]_n\cdot_n [b]_n:=[a\cdot b]_n$.
+\begin{itemize}
+\item[(c)] Zeigen Sie, dass $(\Z_n,+_n,\cdot_n)$ ein Ring ist.
+\end{itemize}
+%%%
+\end{frame}
+%
+
+%
+\begin{frame}\frametitle{Lösung: Teil a)}
+%
+\textcolor{blue}{Zeigen Sie, dass aus $b \in [a]_n$ folgt, dass $[a]_n=[b]_n$.}
+%
+\vfill
+Da $b \in [a]_n$ gilt, gibt es ein $k_b\in \Z$ sodass $b=a+k_b n$.\\ \pause
+Sei nun $m \in [a]_n$ beliebig. Dann gibt es ein $k_m \in \Z$ sodass $m=a+k_m n$. Damit folgt: \pause
+\vfill
+$
+m=a+k_m n \pause= a+k_m n + (b- (a+k_b n))\pause=b + (a+k_m n -a- k_b n)$\\$ \pause \hspace{3mm}=b + (k_m-k_b)n
+$\pause
+\vfill
+Mit $k:=k_m -k_b$ folgt also $m=b+kn$ und damit $m \in [b]_n$. \\Somit gilt $[a]_n \subseteq [b]_n$.\\\pause
+Da insbesondere $a \in [a]_n$ und somit $a\in [b]_n$ gilt, folgert man mit vertauschten Rollen von $a$ und $b$ nun $[b]_n \subseteq [a]_n$ und damit $[a]_n=[b]_n$.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Lösung: Teil b)}
+%
+\textcolor{blue}{Zeigen Sie, dass $\Z_n=\{[0]_n,[1]_n,[2]_n,...,[n-1]_n\}$ gilt.}
+%
+\vfill
+Es sei $m \in \Z$ beliebig. \\ \pause
+Dann gibt es ein $k \in \Z$ sodass $0\le m-kn \le n-1$.\\ \pause
+Wir definieren $a:=m-kn$. Dann gilt $m=a+kn$ und damit $m \in [a]_n$.\\ \pause
+Mit Aufgabenteil (a) folgt $[m]_n=[a]_n$.\\ \pause
+Und da $a \in \{0,1,2,...,n-1\}$ folgt somit die Behauptung.
+	
+\end{frame}
+%
+%
+%%
+\begin{frame}\frametitle{Lösung: Teil c)}
+%
+\textcolor{blue}{Zeigen Sie, dass $(\Z_n,+_n,\cdot_n)$ ein Ring ist.} \pause
+%
+\vfill
+Wir zeigen zuerst 
+(i) $(\Z_n,+_n)$ ist eine abelsche Gruppe\\ und dann 
+(ii) die Verkn\"upfungen $+_n$ und $\cdot_n$ erf\"ullen die Distributivit\"at. \pause
+\vfill
+\begin{itemize}
+\item[zu (i)]
+Das neutrale Element ist $[0]_n$, da 
+$$[0]_n+_n[a]_n=[0+a]_n=[a]_n=[a+0]_n=[a]_n+_n[0]_n$$
+f\"ur alle $[a]_n \in \Z_n$.\\ \pause
+F\"ur jedes Element $[a]_n \in \Z_n$ ist $[n-a]_n$ das Inverse, denn \\
+\vspace{1mm}
+$[a]_n+_n[n-a]_n=[a+n-a]_n=[n]_n=[0]_n$\\
+$[n-a]_n+_n[a]_n=[n-a+a]_n=[n]_n=[0]_n$\\\pause
+\vspace{1mm}
+Die Assoziativ\"at und die Kommutativit\"at folgt direkt aus den entsprechenden Eigenschaften von $+$ in $\Z$.
+
+\end{itemize}
+
+\end{frame}
+%
+%
+%%
+\begin{frame}\frametitle{Lösung: Teil c)}
+%
+\textcolor{blue}{Zeigen Sie, dass $(\Z_n,+_n,\cdot_n)$ ein Ring ist.}
+%
+\vfill
+Wir zeigen zuerst \\
+(i) $(\Z_n,+_n)$ ist eine abelsche Gruppe und dann \\
+(ii) die Verkn\"upfungen $+_n$ und $\cdot_n$ erf\"ullen die Distributivit\"at.
+\vfill
+\begin{itemize}
+\item[zu (ii)]
+Es seien $[a]_n,[b]_n,[c]_n \in \Z_n$, dann gilt mit der Distributivit\"at von $(\Z,+,\cdot)$:\pause
+\vfill
+$
+[a]_n \cdot_n ([b]_n +_n [c]_n)\pause=[a]_n\cdot_n [b+c]_n\pause=[a\cdot (b+c)]_n$\\\pause
+$\hspace{33mm}=[ab+ac]_n\pause=[ab]_n+_n[ac]_n$\\\pause
+$\hspace{33mm}=([a]_n\cdot_n[b]_n) +_n ([a]_n\cdot_n[c]_n)
+$
+\vfill
+\end{itemize}\pause
+\vfill
+Somit ist $(\Z_n,+_n,\cdot_n)$ ein Ring.
+
+\end{frame}
+
+\end{document}
