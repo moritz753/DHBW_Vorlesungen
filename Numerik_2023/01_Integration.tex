@@ -1,0 +1,396 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Integration}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+ \setcounter{tocdepth}{2}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+\section{Themen der Vorlesung}
+%%%
+\begin{frame}\frametitle{Themen der Vorlesung}
+\begin{itemize}
+\item Integration und Quadraturformeln
+\item Differentialgleichungen
+\item Mehrdimensionale Analysis
+\item Optimierungsverfahren
+\item Interpolation und Extrapolation
+\item Partielle Differentialgleichungen
+\item Numerische Problemlösungen
+\item Geometrie von $\R^n$ und die QR-Zerlegung
+\end{itemize}
+\end{frame}
+%
+%---------------------------------------------%
+\section{Analytische Integration}
+\makeSectionDividerPage
+%%%
+%
+%--------------------------------------------
+\subsection{Das Riemann-Integral}
+\subsubsection{Motivation}
+%
+\begin{frame}\frametitle{Motivation}
+
+	Sei $f: [a,b] \to \R$ eine (stetige) Funktion.\\[1mm]
+
+	Wie berechnet sich der Flächeninhalt, der von $f$ und der $x$-Achse 
+	zwischen $a$ und $b$ eingeschlossen wird?
+	
+	\begin{center}
+		\includegraphics[scale=0.8]{Grafiken/Integral_und_Flaeche/Integral_und_Flaeche.pdf}
+	\end{center}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Allgemeine Situation}
+\begin{itemize}
+\item $I=[a,b]$\\[5mm]
+\item $f:I\to \R$ beschränkte Funktion.
+\end{itemize}
+\end{frame}
+%
+\subsubsection{Definition des Riemann-Integral}
+%
+\begin{frame}\frametitle{Definition: Zerlegung}
+Eine endliche Teilmenge $Z=\{x_0,x_1,...,x_n\}\subseteq I$ heißt eine \highlightDef{Zerlegung} von $I$, wenn $a=x_0<x_1<...<x_n=b$ gilt.\\\pause
+\vfill
+Ist $Z=\{x_0,x_1,...,x_n\}\subseteq I$ eine Zerlegung von $I$, dann definieren wir für $j\in \{0,...,n-1\}$:
+\begin{itemize}
+\item $I_j:=[x_j,x_{j+1}]$
+\item $|I_j|:=x_{j+1}-x_j$
+\item $m_j:=\inf(f(I_j))$
+\item $M_j:=\sup(f(I_j))$
+\end{itemize}\vfill
+Die Menge aller Zerlegungen von $I$ bezeichnen wir mit \highlightDef{$\frak{Z}(I)$}.
+\end{frame}
+%
+\begin{frame}\frametitle{Definition: Unter- und Obersumme}
+Es sei $Z=\{x_0,x_1,...,x_n\} \in \frak{Z}(I)$. Dann nennt man
+\begin{itemize}
+\item $s_f(Z):=\sum_{j=0}^{n-1} m_j\cdot |I_j|$ die \highlightDef{Untersumme} von $f$ bzgl. $Z$ und 
+\item $S_f(Z):=\sum_{j=0}^{n-1} M_j\cdot |I_j|$ die \highlightDef{Obersumme} von $f$ bzgl. $Z$.
+\end{itemize}
+
+\end{frame}
+%
+\begin{frame}\frametitle{Bemerkung}
+Sind $Z_1,Z_2 \in \frak{Z}(I)$, dann ist auch $Z_1\cup Z_2 \in \frak{Z}(I)$.\\
+\vfill
+Gilt $Z_1 \subseteq Z_2$, so nennt man $Z_2$ eine \highlightDef{Verfeinerung} von $Z_1$.
+\vfill
+\pause
+\highlightDef{Satz}\\
+Seien $Z_1,Z_2 \in \frak{Z}(I)$, dann
+\begin{itemize}
+\item[a)] $Z_1 \subseteq Z_2 \ \Longrightarrow \ s_f(Z_1)\le s_f(Z_2)$ und $S_f(Z_2)\le S_f(Z_1)$. 
+\item[b)] $s_f(Z_1) \le S_f(Z_2)$.
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Definition}
+\begin{itemize}
+\item[]
+$$
+\underline{\int}_{a}^b f(x)dx:=\sup\{s_f(Z) \mid Z \in \frak{Z}(I)\} \ \text{ heißt \highlightDef{unteres Integral} von }f
+$$
+\vfill
+\item[]
+$$
+\overline{\int}_a^{b} f(x)dx:=\inf\{S_f(Z) \mid Z \in \frak{Z}(I)\} \ \text{ heißt \highlightDef{oberes Integral} von }f
+$$
+\end{itemize}
+\vfill
+\pause
+Für jede Zerlegung $Z\in \frak{Z}(I)$ gilt
+$$
+s_f(Z)\le \underline{\int}_{a}^b f(x)dx\le \overline{\int}_a^{b} f(x)dx\le S_f(Z)
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Definition: Riemann-Integral}
+$f$ heißt \highlightDef{integrierbar} über $I=[a,b]$, wenn $\underline{\int}_{a}^b f(x)dx = \overline{\int}_a^{b} f(x)dx$ gilt.\\
+In diesem Fall heißt 
+$$
+\int_a^b f(x) dx := \underline{\int}_{a}^b f(x)dx \quad \left(= \overline{\int}_a^{b} f(x)dx \right)
+$$
+das \highlightDef{Integral} von $f$ über $I$.
+\vfill
+\pause
+\highlightDef{Bemerkung}\\
+Existiert eine Folge $(Z_n)$ von Zerlegungen von $I$ mit $\lim_{n\to \infty}s_f(Z_n)=\lim_{n\to \infty}S_f(Z_n)=R$, so ist $f$ integrierbar mit 
+$$
+\int_a^b f(x)dx=R
+$$
+\end{frame}
+%
+\subsubsection{Rechenregeln für Integrale}
+%
+\begin{frame}\frametitle{Das Integral ist linear}
+	Seien $f,g: [a,b] \to\R$ integrierbare Funktionen und $c\in\R$.
+	\vspace{5mm}
+	\begin{itemize}
+	\item[a)]
+	Dann ist auch $c\cdot f+ g$ integrierbar mit
+	$$
+		\int_{a}^{b}c\cdot f(x)+g(x)\, dx = c\cdot \int_{a}^{b}f(x)dx + \int_{a}^{b}g(x)dx. 
+	$$
+	\item[b)] Ist $f\le g$ auf $[a,b]$, dann gilt $\int_a^b f(x)dx \le \int_a^b g(x)dx$.
+	\end{itemize}
+	\vspace{5mm}
+	\highlight{Beweis}\\
+Folgt mit den Rechenregeln für Grenzwerte und den obigen Bemerkungen.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Satz}
+Jede auf $[a,b]$ stetige Funktion ist auch über $[a,b]$ integrierbar.\\
+\vspace{5mm}
+[ohne Beweis]\pause
+\vfill
+\highlightDef{Bemerkung}\\
+Vorsicht: nicht jede integrierbare Funktion ist stetig!
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Der Hauptsatz der Differential- und Integralrechnung}
+\makeSectionDividerPage
+%%%
+%
+\subsubsection{Stammfunktionen}
+%
+\begin{frame}\frametitle{Definition: Stammfunktion}
+Es sei $f: I \to \R$ eine Funktion. Eine Funktion $F: I \to \R$ ist eine \highlightDef{Stammfunktion} von $f$, wenn $F'(x)=f(x)$ für alle $x \in I$.
+\end{frame}
+%
+\subsubsection{Der Hauptsatz der Differential- und Integralrechnung}
+%
+\begin{frame}\frametitle{Der Hauptsatz der Differential- und Integralrechnung}
+Es sei $f:[a,b] \to \R$ integrierbar über $[a,b]$ und $F$ eine Stammfunktion von $f$. Dann gilt
+$$
+\int_a^b f(x) dx = F(b)-F(a) \quad \left(:= [F(x)]_{x=a}^{x=b}\right)
+$$
+\vfill
+\highlightDef{Notation}\\
+Wegen dieser Eigenschaft der Stammfunktion schreibt man oft auch $\int\hspace{-1mm} fdx$ oder $\int \hspace{-1mm}f$ statt $F$.
+\end{frame}
+%
+\subsection{Weitere Rechenregeln für Integrale}
+\makeSectionDividerPage
+%%%
+%
+\subsubsection{Aufteilen}
+%
+\begin{frame}\frametitle{Aufteilen eines Integrals}
+Es sei $f:[a,b] \to \R$ integrierbar (und beschränkt), sowie $c \in (a,b)$. Dann ist $f$ auf $[a,c]$ und $[c,b]$ integrierbar und es gilt
+$$
+\int_a^b f(x)dx=\int_a^c f(x)dx + \int_c^b f(x)dx
+$$
+\pause\vfill
+\highlightDef{Beispiel}\\
+$ \int_{-1}^1 |x|dx = \int_{-1}^0 -x dx+\int_{0}^1 xdx = \frac{1}{2} +\frac{1}{2}=1$
+\end{frame}
+%
+\subsubsection{Dreiecksungleichung}
+%
+\begin{frame}\frametitle{Dreiecksungleichung für Integrale}
+
+Es sei $f:[a,b] \to \R$ integrierbar. Dann ist auch $|f|$ integrierbar und es gilt:
+$$
+\left| \int_a^b f(x)dx \right| \le \int_a^b |f(x)|dx
+$$
+\pause\vfill
+\highlightDef{Beispiel}\\
+$0=\left| \int_{-1}^1 xdx \right| \le \int_{-1}^1 |x|dx = 1$
+\end{frame}
+%
+\subsection{Integrationstechniken}
+\makeSectionDividerPage
+%
+\subsubsection{Partielle Integration}
+%
+\begin{frame}\frametitle{Satz (Partielle Integration)}
+Es seien $f,g:[a,b] \to \R$ integrierbar und $F$ und $G$ Stammfunktionen von $f$ und $g$. Dann gilt:
+$$
+\int_a^b F\cdot g\, dx = [F \cdot G]_a^b - \int_a^b f \cdot G\, dx
+$$
+\end{frame}
+%
+\subsubsection{Substitutionsregel}
+%
+\begin{frame}\frametitle{Satz (Substitutionsregel)}
+Es sei $f:[a,b] \to \R$ integrierbar mit Stammfunktion $F$, sowie $g:[\alpha,\beta] \to \R$ differenzierbar mit $g([\alpha,\beta])\subseteq [a,b]$. Dann gilt:
+$$
+\int_\alpha^\beta f(g(t))\cdot g'(t)\, dt = \int_{g(\alpha)}^{g(\beta)} f(x) dx
+$$
+\vfill
+\highlightDef{Konvention}\\
+Es ist oben möglich, dass $g(\alpha)>g(\beta)$ gilt. In diesem Fall benutzt man:\\
+Für $a,b \in \R$ gilt $\int_a^b fdx = - \int_b^a fdx$. Dies lässt sich aus der Substitutionsregel mit $g(t)=b+a-t$ für $t \in [a,b]$ folgern.
+\end{frame}
+%
+\begin{frame}\frametitle{Bemerkung}
+Oft hilft beim Substituieren das folgende Kalkül:
+\begin{align*}
+&&g(t)&=x \\
+ \Longrightarrow &&g'(t)&=\frac{d}{dt}g(t)=\frac{dx}{dt}\\  \Longrightarrow&& dx&=g'(t)dt
+\end{align*}
+\end{frame}
+%
+
+%%
+%------------------------------
+%------------------------------
+%
+\section{Numerische Integration}
+\makeSectionDividerPage
+%
+\subsection{Newton-Cotes-Formeln}
+%
+\begin{frame}\frametitle{Newton-Cotes-Formeln}
+\begin{itemize}
+\item Mittelpunktregel  $\int_a^b f(x)dx \thickapprox (b-a)\cdot f(\frac{a+b}{2})$\\\includegraphics[scale=0.3]{Grafiken/MPRegel.png} \pause
+\item Trapezregel $\int_a^b f(x)dx \thickapprox (b-a) \cdot \frac{f(a)+f(b)}{2}$\\\includegraphics[scale=0.3]{Grafiken/TRegel.png} \pause 
+\item Simpson-Regel $\int_a^b f(x)dx \thickapprox \frac{b-a}{6}\cdot (f(a)+4f(\frac{b+a}{2})+f(b))$\\\includegraphics[scale=0.3]{Grafiken/SRegel.png}
+\end{itemize}
+Allgemein nennt man numerische/approximative Formeln zur Bestimmung von Integralen auch \highlightDef{Quadraturformeln}.
+\end{frame}
+%
+\begin{frame}\frametitle{Genauigkeitsgrad}
+Eine Quadraturformel besitzt den \highlightDef{Genauigkeitsgrad} $d$, wenn sie die Monome $1,x,x^2,...,x^d$ exakt integriert, nicht aber $x^{d+1}$.\\\pause
+\vfill
+\highlightDef{Satz}\\
+Die Mittelpunktregel und die Trapezregel haben Genauigkeitsgrad 1.\\
+Die Simpson-Regel hat Genauigkeitsgrad 3.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Approximationsfehler}
+\footnotesize
+\begin{align*}
+&\text{\highlightDef{Mittelpunktregel}}\\
+&\left|\int_a^b f(x)\ dx - (b-a)\cdot f(\frac{a+b}{2}) \right|&\le \frac{(b-a)^3}{24}\max_{x\in[a,b]}(|f''(x)|)\\
+%
+&&\\
+&\text{\highlightDef{Trapezregel}}\\
+&\left|\int_a^b f(x)\ dx - (b-a) \cdot \frac{f(a)+f(b)}{2}  \right|&\le \frac{(b-a)^3}{12}\max_{x\in[a,b]}(|f''(x)|)\\
+%
+&&\\
+&\text{\highlightDef{Simpson-Regel}}\\
+&\left|\int_a^b f(x)\ dx -  \frac{b-a}{6}\cdot \left(f(a)+4f(\frac{b+a}{2})+f(b)\right)\right|&\le \frac{(b-a)^5}{2880}\max_{x\in[a,b]}(|f^{(4)}(x)|)
+\end{align*}
+\vfill
+[ohne Beweis]
+\end{frame}
+%
+%--------------------------------------------
+\subsection{Summierte Newton-Cotes-Formeln}
+%
+\begin{frame}\frametitle{Summierte Newton-Cotes-Formeln}
+Für bessere Approximationen kann das Intervall $[a,b]$ zerlegt werden und auf jedes Teilintervall eine Quadraturformel angewendet werden. Dies führt zu den \highlightDef{summierten Newton-Cotes-Formeln}.\\\quad\\
+\includegraphics[scale=0.7]{Grafiken/SummierteMPRTR.png}\\
+\end{frame}
+%
+\begin{frame}\frametitle{Summierte Newton-Cotes-Formeln}
+\highlightDef{Summierte Mittelpunktregel}\\
+$m=$ Anzahl der Teilintervalle, $h=\frac{b-a}{m}$, \\Stützstellen $x_k=a+(k-\frac{1}{2})h$ für $k=1,...,m$.
+$$
+\int_a^b f(x) \ dx \thickapprox h \cdot \sum_{k=1}^m f(x_k)
+$$\pause
+\highlightDef{Summierte Trapezregel}\\
+$m=$ Anzahl der Teilintervalle, $h=\frac{b-a}{m}$, \\Stützstellen $x_k=a+kh$ für $k=0,...,m$.
+$$
+\int_a^b f(x) \ dx \thickapprox h \cdot \left(\frac{1}{2}f(x_0)+ \sum_{k=1}^{m-1} f(x_k) + \frac{1}{2}f(x_m)\right)
+$$
+
+\end{frame}
+%
+\begin{frame}\frametitle{Summierte Simpson-Regel}
+\includegraphics[scale=0.7]{Grafiken/SummierteSR.png}\\
+\highlightDef{Summierte Simpson-Regel}\\
+$m=$ Anzahl der Teilintervalle, $h=\frac{b-a}{m}$, \\Stützstellen $x_k=a+kh$ für $k=0,...,m$.
+\tiny
+$$
+\int_a^b f(x) \ dx \thickapprox \frac{h}{6} \cdot \left(f(x_0)+ 4f(\frac{x_0+x_1}{2})+2f(x_1)+4f(\frac{x_1+x_2}{2}+2f(x_2)+...+4f(\frac{x_{m-1}+x_m}{2})+f(x_m)\right)
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$f(x)=\cos(x)^2$ und $[a,b]=[0, \pi]$ sowie $m=2$. \\\pause 
+Dann gilt $h=\frac{\pi-0}{2}$, $x_0=0, x_1=\frac{\pi}{2}, x_2=\pi$ und \pause
+\footnotesize
+\hspace{-1mm}
+\begin{align*}
+\hspace{-1mm}\int_0^\pi \cos(x)^2\ dx &\thickapprox \frac{\frac{\pi - 0}{2}}{6}\left(\cos(0)^2+4\cos(\frac{\frac{\pi}{2}}{2})^2+2\cos(\frac{\pi}{2})^2+4\cos(\frac{\frac{\pi}{2}+\pi}{2})^2+\cos(\pi)^2 \right)\\
+&=\frac{\pi}{12}\left(1^2+4\cdot \cos(\frac{\pi}{4})^2+0+4\cdot \cos(\frac{3\pi}{4})^2+(-1)^2\right)\\
+&=\frac{\pi}{12}\left(1+4\cdot (\frac{1}{\sqrt{2}})^2+4\cdot(-\frac{1}{\sqrt{2}})^2+1\right)\\
+&=\frac{\pi}{2}
+\end{align*}
+\vfill
+\normalsize
+(Der exakte Wert des Integrals ist $\frac{\pi}{2}$.)
+\end{frame}
+%
+%%
+%------------------------------
+%------------------------------
+%
+\section{Anwendungsbeispiel: Weglänge}
+\makeSectionDividerPage
+%
+%
+\begin{frame}\frametitle{Wege und Weglänge}
+Ein \highlightDef{ebener Weg} ist eine Abbildung
+$$
+\gamma : [a,b] \to \R^2, t \mapsto (\gamma_1(t),\gamma_2(t))
+$$
+wobei die beiden Koordinaten-Funktionen $\gamma_1$ und $\gamma_2$ stetig sind. \pause
+\vfill
+Sind $\gamma_1$ und $\gamma_2$ sogar differenzierbar, so definiert man die \highlightDef{Länge} von $\gamma$ als
+$$
+L(\gamma):=\int_a^b \|\dot \gamma(t)\| \ dt
+$$
+wobei $\|\dot \gamma(t)\|=\sqrt{\gamma_1'(t)^2+\gamma_2'(t)^2}$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Betrachten wir den Weg $\gamma: [0,1] \to \R^2, t \mapsto (t,\exp(t))$. Dann ist die Länge gegeben als
+$$
+L(\gamma)=\int_0^1 \sqrt{1+\exp(x)^2} \ dt
+$$\pause
+Dieses Integral ist nicht unbedingt einfach zu berechnen, aber lässt sich durch eine Quadraturformel (z.B. summierte Trapezregel) approximieren:\pause \small
+\begin{align*}
+L(\gamma)&=\int_0^1 \sqrt{1+\exp(x)^2} \ dt \\
+&\thickapprox \frac{1-0}{2}\left(\frac{1}{2}\sqrt{1+\exp(0)^2}+\sqrt{1+\exp(\frac{1}{2})^2} +\frac{1}{2}\sqrt{1+\exp(1)^2}\right)\\
+&=\frac{1}{2}\left(\frac{1}{2}\sqrt{2}+\sqrt{1+e}+\frac{1}{2}\sqrt{1+e^2} \right)\\
+&\thickapprox 2,042
+\end{align*}
+\vfill
+(Der exakte Wert des Integrals ist $e$.)
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Küstenparadoxon}
+\includegraphics[scale=0.4]{Grafiken/Britain200km.png} 
+\includegraphics[scale=0.4]{Grafiken/Britain50km.png} \\
+\ \ Länge ca. 2800km \qquad Länge ca. 3400km
+\end{frame}
+%
+\end{document}

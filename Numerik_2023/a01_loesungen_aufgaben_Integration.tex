@@ -1,0 +1,153 @@
+\input{../preamble_aufgaben.tex}
+\usepackage{stix}
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		%\color{lightBlue}
+		{ \LARGE Lösungen Übungsaufgaben 1}\\[3mm]
+		{\Large Integration}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+
+%-------------------------------------------------------------------
+\section{Partielle Integration}
+%%%
+Bestimmen Sie mit Hilfe partieller Integration den Wert folgende Integrale:
+\begin{itemize}
+	\item[(i)] 
+		$$
+			\int_0^{\pi} e^{-x}\sin(x)\, dx
+		$$
+	\item[(ii)]
+		$$
+			\int_0^1 x^2e^x \, dx
+		$$
+\end{itemize}
+
+%-------------------------------------------------------------------
+\subsection*{Lösung}
+%%%
+\begin{itemize}
+\item[(i)] Doppelte partielle Integration:
+		\begin{align*}
+			\int_0^{\pi} \underbrace{e^{-x}}_{f(x)} \underbrace{\sin(x)}_{G(x)}\, dx
+				&=  [-e^{-x}\sin(x) ]_0^{\pi} - \int_0^{\pi}(-e^{-x})\cos(x)\, dx					\\
+				&=  0 + \int_0^{\pi}\underbrace{e^{-x}}_{f(x)}\underbrace{\cos(x)}_{G(x)}\, dx	\\
+				&= [-e^{-x}\cos(x)]_0^{\pi} - \int_0^{\pi} (-e^{-x})\cdot(-\sin(x))\, dx			\\
+				&= (e^{-\pi} + 1) - \int_0^{\pi} e^{-x}\sin(x)\, dx.
+		\end{align*}
+		Es folgt:
+		$$
+			2\int_0^{\pi} e^{-x}\sin(x)\, dx =  (e^{-\pi} + 1) 
+		$$
+		und somit
+		$$
+			\int_0^{\pi} e^{-x}\sin(x)\, dx =  \frac{1}{2}(e^{-\pi} + 1).
+		$$		
+\item[(ii)] Wieder nutzen wir zweimal partielle Integration:
+		\begin{align*}
+		\int_0^1 \underbrace{x^2}_{G(x)}\underbrace{e^{x}}_{f(x)} \, dx
+				&=[x^2e^x]_0^1 - \int_0^1 2xe^x \, dx\\
+				&=e - \int_0^1 \underbrace{2x}_{G(x)}\underbrace{e^x}_{f(x)} \, dx\\
+				&=e- \left([2xe^x]_0^1 - \int_0^1 2e^x \, dx\right)\\
+				&= e - 2e + [2e^x]_0^1\\
+				&=-e+2e-2\\
+				&=e-2
+		\end{align*}
+\end{itemize}
+\quad\\[10mm]
+%-------------------------------------------------------------------
+\section{Substitutionsregel}
+%%%
+Bestimmen Sie den Wert des folgenden Integrals mit Hilfe der Substitutionsregel:
+
+		$$
+			\int_0^{\frac{\pi}{4}} \frac{\sin(x)}{\cos(x)}\, dx
+		$$
+
+%-------------------------------------------------------------------
+\subsection*{Lösung}
+%%%
+Substitution $u(x) = \cos(x)$. Es folgt $\frac{du}{dx} = \frac{d}{dx}u(x) = -\sin(x)$ und somit $dx=\frac{1}{-\sin(x)}du$.
+	\begin{align*}
+		\int_0^{\frac{\pi}{4}} \frac{\sin(x)}{\cos(x)}\, dx&= \int_0^{\frac{\pi}{4}} \frac{\sin(x)}{u}\, \frac{du}{-\sin(x)}	\\
+				&= -\int_1^{\frac{1}{\sqrt{2}}} \frac{1}{u}\, du	\\
+				&= \int_{\frac{1}{\sqrt{2}}}^1 \frac{1}{u}\, du	\\
+				&= [\log(u)]_{\frac{1}{\sqrt{2}}}^1	\\
+				&= -\log(\frac{1}{\sqrt{2}})
+		\end{align*}
+
+%-------------------------------------------------------------------
+\newpage
+\section{Newton-Cotes-Formeln}
+%%%
+\begin{itemize}
+\item[a)] Berechnen Sie den den approximativen Wert der beiden Integrale aus Aufgabe 1 mit Hilfe der Trapezregel.
+\item[b)] Berechnen Sie den den approximativen Wert des Integrals aus Aufgabe 2 mit Hilfe der Simpson-Regel.
+
+\end{itemize}
+
+%-------------------------------------------------------------------
+\subsection*{Lösung}
+%%%
+\begin{itemize}
+\item[a)]
+	\begin{itemize}
+	\item[(i)] 
+		$$
+			\int_0^{\pi} e^{-x}\sin(x)\, dx \thickapprox \frac{\pi-0}{2}\cdot \left(e^{-0}\sin(0)+e^{-\pi}\sin(\pi) \right)=\frac{\pi}{2}\cdot(1\cdot 0 +e^{-\pi} \cdot 0)=0 
+		$$
+	\item[(ii)]
+		$$
+			\int_0^1 x^2e^x \, dx \thickapprox \frac{1-0}{2}\cdot \left(0^2\cdot e^0 + 1^2\cdot e^1 \right)=\frac{1}{2}\cdot(0\cdot 1 + 1 \cdot e)=\frac{e}{2}
+		$$
+	\end{itemize}
+\item[b)]
+\begin{align*}
+			\int_0^{\frac{\pi}{4}} \frac{\sin(x)}{\cos(x)}\, dx &\thickapprox \frac{\frac{\pi}{4}-0}{6}\cdot \left(\frac{\sin(0)}{\cos(0)}+4\cdot \frac{\sin\left(\frac{0+\frac{\pi}{4}}{2} \right)}{\cos\left(\frac{0+\frac{\pi}{4}}{2} \right)}+\frac{\sin(\frac{\pi}{4})}{\cos(\frac{\pi}{4})} \right)=\frac{\pi}{24}\left(0+4\frac{\sin(\frac{\pi}{8})}{\cos(\frac{\pi}{8})}+ \frac{\sin(\frac{\pi}{4})}{\cos(\frac{\pi}{4})}\right)\\
+&=\frac{\pi}{24}(\tan(\frac{\pi}{8})+\tan(\frac{\pi}{4}))=\frac{\pi}{24}((\sqrt{2}-1)+1)=\frac{\pi\sqrt{2}}{24}
+\end{align*}
+\end{itemize}
+\quad\\
+
+\newpage
+%-------------------------------------------------------------------
+\section{Summierte Newton-Cotes-Formeln}
+%%%
+Berechnen Sie das Integral
+$$
+\int_0^\pi \cos(x)^3 dx
+$$
+näherungsweise unter Verwendung der summierten Simpson-Regel mit $m=2$.
+
+%-------------------------------------------------------------------
+\subsection*{Lösung}
+%%%
+Es gilt mit $m=2$: $h=\frac{\pi}{2}$ und $x_0=0, x_1=\frac{\pi}{2}$ sowie $x_2=\pi$.
+\begin{align*}
+\int_0^\pi \cos(x)^3 dx & \thickapprox \frac{\frac{\pi}{2}}{6}\cdot \left(\cos(0)^3+4\cos(\frac{0+\frac{\pi}{2}}{2})^3+2\cos(\frac{\pi}{2})^3+4\cos(\frac{\frac{\pi}{2}+\pi}{2})^3+\cos(\pi)^3 \right)\\
+&=\frac{\pi}{12}\cdot \left(1^3+4 \cos(\frac{\pi}{4})^3+2\cdot 0^3+4 \cos(\frac{3\pi}{4})^3+(-1)^3 \right)\\
+&=0
+\end{align*}
+%
+%
+\end{document}

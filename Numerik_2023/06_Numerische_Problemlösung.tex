@@ -1,0 +1,353 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Eigenschaften numerischer Berechnungsverfahren}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Berechnungsverfahren}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Berechnungsverfahren}
+Ein (numerisches) \highlightDef{Berechnungsverfahren} ist eine Abfolge von mathematischen Berechnungen, um aus einer Eingangsgröße $x \in \R^n$ das Resultat 
+$$
+y=f(x) \in \R^m
+$$
+zu bestimmen. \pause
+
+\vfill
+
+In der Regel existiert eine Vielzahl an Berechnungsverfahren um die Lösung eines Problems 
+$$
+y=f(x)
+$$
+zu berechnen. Eine wichtige Aufgabe der numerischen Mathematik ist Klassifikation solcher Verfahren nach ihrer Eignung für die Anwendung.
+
+\end{frame}
+%
+\subsection{Kondition}
+%
+\begin{frame}\frametitle{Kondition eines Problems}
+Unabhängig vom Berechnungsverfahren muss als erstes die Frage gestellt werden, wie gut ein mathematisches Problem $y=f(x)$ gestellt ist, d.h. wie weit kleine Fehler in der Eingangsgröße $x$ zu Fehlern im Ergebnis $y$ führen.\pause\\
+Betrachten wir den Fall $x,f(x) \in \R$ und sei $\delta_x$ der absolute Fehler in der Eingabe $x$. Dann ergibt sich für den absoluten Fehler $\delta_y$ mit Hilfe der Taylor-Entwicklung:
+$$
+y+\delta_y=f(x+\delta_x)=f(x)+f'(x)\cdot \delta_x + \text{Terme höherer Ordnung}
+$$
+und somit $\delta_y \thickapprox f'(x)\delta_x$.\pause\\
+Interessanter als der absolute Fehler ist für uns der relative Fehler $\varepsilon_y=\frac{\delta_y}{y}$ des Ergebnisses bei relativem Eingabefehler $\varepsilon_x=\frac{\delta_x}{x}$:
+\begin{align*}
+\varepsilon_y&=\frac{\delta_y}{y}\thickapprox \frac{f'(x)\delta_x}{y}=\frac{f'(x)\delta_x}{y}\cdot \frac{x}{x}=\frac{x\cdot f'(x)}{y}\cdot \frac{\delta_x}{x}\\&=\frac{x\cdot f'(x)}{y}\cdot \varepsilon_x
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition: Kondition eines Problems}
+Die \highlightDef{Kondition} eines Berechnungsproblems $f:\R \to \R$ ist der Betrag des Verstärkungsfaktors zwischen relativem Eingabefehler und relativem Fehler des Ergebnisses
+$$
+kond_x(f):=\left| \frac{x\cdot f'(x)}{f(x)} \right|
+$$ \pause
+Die Kondition ist somit als die Sensitivität des Ergebnisses auf Änderungen der Eingabe zu verstehen.\\
+Ist die Kondition \textbf{klein}, spricht man von einem \textbf{gut konditionierten} Problem, ist sie \textbf{groß}, dann ist das Problem \textbf{schlecht konditioniert}.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele}
+\begin{itemize}
+\item $f(x)=x^2$ 
+\item $f(x)=1-\sqrt{x}$
+\end{itemize}
+
+\end{frame}
+%
+\begin{frame}\frametitle{Bemerkung}
+Die Kondition ist eine Eigenschaft des Problems $y=f(x)$ und hängt \underline{nicht} vom gewählten Berechnungsverfahren ab.\\\pause
+\vfill
+Grundsätzlich schlechte Kondition habe Probleme bei denen das Resultat $y$ um Größenordnungen kleiner ist als die Eingabe $x$, d.h. $\left| {x} /{f(x)} \right| \gg 1$.\\\pause Auch Probleme mit steilem Funktionsverlauf von $f$, d.h. $\left| f'(x) \right| \gg 1$ sind schlecht konditioniert.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Kondition eines Problems}
+Um den Begriff der Kondition auch für Probleme der Form $f:\R^n \to \R^m$ zu definieren müssen wir...
+\vfill
+\begin{itemize}
+\item die Entsprechung von $f'$ benennen,\\
+\pause $\to$ dies ist die \highlightDef{Jacobi-Matrix}
+$$ 
+Df:= \left(\frac{\partial f_i}{\partial x_j}\right)_{i,j}
+$$
+\pause
+\item den ``Betrag'' eines Vektors bzw. einer Matrix definieren. \\
+\pause $\to$ das führt zum Begriff der \highlightDef{Norm}.
+\end{itemize}
+	
+\end{frame}
+%
+\subsection{Normen}
+%
+\begin{frame}\frametitle{Definition: Norm}
+Es sei $V$ ein reeler Vektorraum. Eine Norm ist eine Abbildung
+$$
+\|\cdot\|:V \to \R, x \mapsto \|x\|
+$$
+mit den folgenden Eigenschaften:
+\begin{itemize}
+\item[i)] $\forall x \in V\setminus\{0\}: \|x\|>0$ \hfill (Positivität)
+\item[ii)] $\forall x \in V \forall \alpha \in \R: \|\alpha x\|=|\alpha| \|x\|$ \hfill (Homogenität)
+\item[iii)]$\forall x,y \in V: \|x+y\| \le \|x\|+\|y\|$ \hfill (Dreiecksungleichung) 
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele: Vektornormen}
+\begin{itemize}
+\item Die \textbf{euklidische Norm} 
+$$
+\|x\|_2:= \sqrt{\sum_{i=1}^n x_i^2}
+$$\pause
+\item Für $p\in \N \setminus\{0\}$ die \textbf{$p$-Normen} 
+$$
+\|x\|_p:= \left(\sum_{i=1}^n |x_i|^p\right)^\frac{1}{p}
+$$\pause
+\item Die \textbf{Maximumsnorm}
+$$
+\|x\|_\infty:= \max_i(|x_i|)
+$$
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiele}
+Betrachten wir den Vektor $x=\begin{pmatrix}4\\0\\-3 \end{pmatrix}$, dann:\\
+\vfill
+\begin{itemize}
+\item $\|x\|_2=\sqrt{4^2+0^2+(-3)^2}=\sqrt{16+0+9}=\sqrt{25}=5$\vfill\pause
+\item $\|x\|_1= |4|+|0|+|-3|=7$\vfill \pause
+\item $\|x\|_3= (|4|^3+|0|^3+|-3|^3)^\frac{1}{3}=(64+0+27)^\frac{1}{3}=91^\frac{1}{3}\in [4,5]$\vfill\pause
+\item $\|x\|_\infty = \max(\{|4|,|0|,|-3|\})=4 $
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Matrixnormen}
+Auch die Menge $\R^{m\times n}$ aller $m\times n$-Matrizen mit reellen Einträgen ist ein Vektorraum.
+\begin{itemize}
+\item Die \textbf{Frobenius-Norm} 
+$$
+\|A\|_F:= \sqrt{\sum_{i=1}^m\sum_{j=1}^n a_{i,j}^2}
+$$\pause
+\item Die \textbf{Zeilensummennorm}
+$$
+\|A\|_\infty:= \max_{i}(\sum_{j=1}^n |a_{i,j}|)
+$$\pause
+\item Jede (Vektor-)Norm $\|x\|$ induziert eine zugehörige Matrixnorm (\textbf{Operatornorm})
+$$
+\|A\|:=\max_{x\ne 0}\frac{\|Ax\|}{\|x\|}
+$$
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiele}
+Betrachten wir die Matrix $A=\begin{pmatrix} 1 & 0 \\ 3 & 4  \end{pmatrix}$, dann:\\
+\vfill
+\begin{itemize}
+\item $\|A\|_F=\sqrt{1^2+0^2+3^2+4^2})\sqrt{1+9+16}=\sqrt{26} \in [5,6]$\pause\vfill
+\item $\|A\|_\infty=\max(\{|1|+|0|,|3|+|4|\})=\max(\{1,7\})=7$\vfill
+\end{itemize}
+Tatsächlich ist die Zeilensummennorm die von der Maximumsnorm induzierte Operatornorm.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Verträglichkeit}
+Es sei $\|\cdot\|_V$ eine Vektornorm und $\| \cdot\|_M$ eine Matrixnorm. Dann nennt man die beiden Normen \highlightDef{verträglich}, wenn gilt
+$$
+\|Ax\|_V \le \|A\|_M \cdot \|x\|_V
+$$
+\vfill
+\highlightDef{Bemerkung}: Für jede Vektornorm sind die Vektornorm und die induzierte Matrixnorm verträglich.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Konditions eines Problems}
+Die \highlightDef{Kondition} eines Berechnungsproblems $f:\R^n \to \R^m$ ist definiert als
+$$
+kond_x(f):=\frac{\|x\|_V\cdot \|Df(x)\|_M}{\|f(x)\|_V} 
+$$ \pause
+für verträglich Normen auf $\R^{m\times n}$ und $\R^m$ bzw. $\R^n$.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Betrachten wir $f: \R^2 \to \R^2, \begin{pmatrix}x\\y \end{pmatrix} \mapsto \begin{pmatrix}f_1(x,y)\\f_2(x,y) \end{pmatrix}= \begin{pmatrix} x+y\\x\cdot y \end{pmatrix}$ und wählen als Norm $\|\cdot \|_\infty$.\\ \vfill
+Als erstes berechnen wir die Jacobi-Matrix:
+$$
+Df(x,y)=\begin{pmatrix}1 & 1 \\ y & x \end{pmatrix}
+$$
+Damit ergibt sich für die Kondition
+$$
+kond_{x,y}(f)=\frac{\|(x,y)^t\|_\infty \cdot \|Df(x)\|_\infty}{\|f(x,y)\|_\infty} = \frac{\max(|x|,|y|)\max(2,|x|+|y|)}{\max(|x+y|,|xy|)}
+$$
+\end{frame}
+%
+\subsection{Kondition eines LGS}
+%
+\begin{frame}\frametitle{Kondition eines LGS}
+Für uns von besonderen Interesse sind lineare Gleichungssysteme $Ax=b$. Wir beschränken uns nun auf den Fall $A \in \R^{n\times n}$ invertierbar und betrachten nur Störungen in $b$ (d.h. wir betrachten das Problem $f(b)=A^{-1}b=x$.)\footnote{z.B. bei der FDM (vgl. nächste Vorlesung) ist die Matrix meistens mit ganzzahligen Einträgen nicht störungsanfällig.}\\
+Nutzen wir zuerst den ursprünglichen Ansatz der relativen Fehler:\pause\\\vfill
+\begin{itemize}
+\item Für den absoluten Fehler $\Delta x$ gilt
+$$
+\|\Delta x\|=\|A^{-1}\Delta b\| \le \|A^{-1}\|\cdot \|\Delta b\|
+$$
+\item Für die Norm von $b$ gilt
+$$
+\|b\|=\|Ax\|\le \|A\|\cdot \|x\|
+$$
+\end{itemize}
+Insgesamt ergibt sich so für den relativen Fehler
+$$
+\frac{\|\Delta x\|}{\|x\|} \le (\underbrace{\|A^{-1}\|\|A\|}_{\ge kond_b(f)})\frac{\|\Delta b\|}{\|b\|}
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Kondition eines LGS}
+Alternativ können wir auch die Formel $kond_x(f):=\frac{\|x\|_V\cdot \|Df(x)\|_M}{\|f(x)\|_V}$ aus der Definition verwenden:\\
+\vfill
+\begin{itemize}
+\item Die Jacobi-Matrix von $f(b)=A^{-1}b$ ist $Df=A^{-1}$.
+\item Es gilt $x=A^{-1}b$ und $b=Ax$
+\end{itemize}
+\vfill
+Damit ergibt sich
+$$
+kond_b(f)= \frac{\|b\|\|A^{-1}\|}{\|A^{-1}b\|}=\frac{\|Ax\|\|A^{-1}\|}{\|x\|}\le \frac{\|A\|\|x\|\|A^{-1}\|}{\|x\|}=\|A^{-1}\|\|A\|
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Betrachten wir das LGS
+$$
+\underbrace{\begin{pmatrix}1&2&0\\0&2&1\\2&1&0\end{pmatrix}}_{=A}\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}=\begin{pmatrix}b_1\\b_2\\b_3\end{pmatrix}
+$$
+Die zu $A$ inverse Matrix ist gegeben durch
+$$
+A^{-1}=\frac{1}{3}\begin{pmatrix}-1&0&2\\2&0&-1\\-4&3&2\end{pmatrix}
+$$	
+Mit der Zeilensummennorm bekommen wir nun
+$$
+kond_b(f)=\|A^{-1}\|_\infty\|A\|_\infty=\frac{1}{3}\cdot 9\cdot 3=9
+$$
+\end{frame}
+%
+%--------------------------------------------
+\section{Lösungsverfahren}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Algorithmus}
+Ein \highlightDef{Algorithmus} oder auch \highlightDef{Lösungsverfahren} ist eine (maschinell) durchführbare Vorschrift zur (numerischen) Ermittlung der Lösung eines Problems.\\ \pause \vfill
+\textbf{Beispiele}\\
+\begin{itemize}
+\item Gauß-Algorithmus (Lösen eines LGS)
+\item Newton-Verfahren (Approximation von Nullstellen)
+\item Euklidischer Algorithmus (Bestimmen des ggT zweier Zahlen)
+\end{itemize}
+\end{frame}
+%
+\subsection{Stabilität}
+%
+\begin{frame}\frametitle{Stabilität}
+Bisher haben wir mit der Kondition nur das gestellte Problem selbst beurteilt. Dabei haben wir betrachtet, wie stark eine fehlerhafte Eingabe das Ergebnis beeinflußt, d.h.
+$$
+\|f(\hat x)-f(x)\| \hspace{30mm} \text{(Kondition)}
+$$ 
+wobei $x$ die korrekte und $\hat x$ die verfälschte Eingabe ist.\\ \pause \vfill
+Mit der Hinzunahme eine Algorithmus (d.h. eines Lösungsverfahren $\hat f$) stellen sich neue Fragen. Zum Beispiel, wie stark wirken sich Eingabefehler (eines gut konditionierten Problems) auf das mit dem Algorithmus erlangte Ergebnis aus? Dies nennt man die \highlightDef{Stabilität} eines Lösungsverfahrens.
+$$
+\|\hat f(\hat x)-\hat f( x)\| \hspace{30mm} \text{(Stabilität)}
+$$
+	
+	
+\end{frame}
+%
+%
+\subsection{Aufwand}
+%
+%
+\begin{frame}\frametitle{Aufwand}
+Sei nun $y=f(x)$ ein gut konditioniertes Problem und $\hat f$ eine stabiles Lösungsverfahren für dieses Problem.\\\vfill
+Dann stellt sich noch die Frage, ob das Lösungsverfahren effizient ist, d.h. wieviele Rechenoperationen für seine Durchführung notwendig sind. Dies nennt man den \highlightDef{Aufwand} von $\hat f$.\\\pause \vfill
+Bei den meisten Algorithmen hängt dies von der Größe des Problems (z.B. der Dimension eines LGS) und der geforderten Genauigkeit der Lösung (z.B. Schrittgröße bei der Diskretisierung beim numerischen Lösen von Differentialgleichungen) ab.
+\end{frame}
+%
+%
+\begin{frame}
+\begin{center}
+\includegraphics[scale=0.55]{Grafiken/Probleme.png}
+\end{center}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Landau-Symbole}
+Oft ist der genaue Aufwand oder die genaue Genauigkeit eines Lösungsverfahrens von geringerem Interesse als deren asymptotisches Verhalten. Um dies zu notieren verwendet man die \highlightDef{Landau-Symbole}. Diese beschreiben das asymptotische Verhalten einer Funktion $F$ mit Hilfe einer bekannten Funktion $g$
+\begin{itemize} 
+\item $F=\mathcal O(g) \ \Longleftrightarrow  \ $ $F$ wächst höchstens genauso schnell wie $g$. 
+\item $F=o(g)\ \Longleftrightarrow  \ $ $F$ wächst langsamer als $g$.
+\end{itemize}
+\vfill \pause
+\textbf{Beispiele}\\
+\begin{itemize}
+\item $4x^2+20x+7 = \mathcal O(x^2)$
+\item $x^n = o(e^x)$ für alle $n \in \N$
+\end{itemize}
+\end{frame}
+%
+%
+\subsection{Beispiel: Gauß-Algorithmus}
+%
+\begin{frame}\frametitle{Beispiel: Gauß-Algorithmus}
+\begin{itemize}
+\item[] \textbf{Kondition:} $kond_b(f)=\|A^{-1}\|\|A\|$ \\ \hspace{19mm} (hängt von der Matrix ab) \pause \vfill
+\item[] \textbf{Aufwand:} bis Stufenform: Für $n$ Zeilen jeweils $n^2$\\\hspace{16.5mm} Multiplikationen und $(n-1)n$ Additionen: $\mathcal O(n^3)$\\
+\hspace{16.5mm} bis Gaußnormalform: Für $n$ Zeilen jeweils $n^2$\\\hspace{16.5mm} Multiplikationen und $(n-1)n$ Additionen: $\mathcal O(n^3)$\\\pause\vfill
+\item[] \textbf{Stabilität:} Hängt auch von der Matrix $A$ ab. Es gibt (zu\\
+\hspace{17.5mm} Beginn) gut konditionierte Fälle, die nach einem\\
+\hspace{17.5mm} Teil der Gauß-Schritte zu schlecht konditionierten\\
+\hspace{17.5mm} Systemen führen und der Gaußalgorithmus somit\\
+\hspace{17.5mm} in diesen Fällen \underline{instabil} ist.
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel: Gauß-Algorithmus}
+Die Matrix $A=(a_{ij}) \in \R^{n \times n} $ mit
+$$
+a_{ij}=\begin{cases} -1 & \text{wenn } i>j \\ \hspace{3mm} 1 & \text{wenn } i= j \text{ oder } j=n \\\hspace{3mm} 0 & \text{sonst} \end{cases}
+$$
+hat Zeilensummennorm $\|A\|_\infty =n$ und ihre Inverse $\|A^{-1}\|_\infty =1$. Das LGS $Ax=b$ kann somit als gut konditioniert angesehen werden.\\
+Allerdings führt der Gauß-Algorithmus zu folgender Stufenform der Matrix 
+\small
+$$
+\tilde A= \begin{pmatrix} 1 &&&...&0&1 \\ 0&1&&...&0&2 \\ 0&0&1&...&0&4 \\ ...&...&...&...&...&...\\ 0&&...&0&1&2^{n-2} \\ 0&&&...&0&2^{n-1} \end{pmatrix} \quad \text{ mit } \|\tilde A\|_\infty = 2^{n-1} \text{ und } \|\tilde A^{-1}\|_\infty >1
+$$
+
+\end{frame}
+%
+\end{document}

@@ -1,0 +1,238 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		%\color{lightBlue}
+		{ \LARGE 	Übungsaufgaben 7 - Lösungen}\\[3mm]
+		{\Large Kondition und Stabilität}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%\section{Finite Differenzenmethode I}
+%%%%
+%Bestimmen Sie durch die Finite Differenzen Methode ein approximative Lösung Randwertproblems
+%$$
+%\begin{cases} \frac{\partial}{\partial x} u(x,y)+\frac{\partial}{\partial y}u(x,y)= 2x+2y & \text{ auf } \Omega=[0,1]^2\\ \hspace{18mm}u_{|\partial \Omega}(x,y)=x^2+y^2 \end{cases}
+%$$
+%auf dem äquidistanten Gitter mit $\Delta x = \Delta y = \frac{1}{3}$.
+%
+%\subsection*{Lösung:}
+%Die Diskretisierung von $\Omega$ mit $h=\Delta x = \Delta y = \frac{1}{3}$ ergibt die Gitterpunkte $(x_i,y_j)$ für $ i,j \in \{1,2,3,4\}$ mit 
+%\begin{align*}
+%x_1=y_1=0, \quad x_2=y_2=\frac{1}{3}, \quad x_3=y_3=\frac{2}{3} \quad \text{und } x_4=y_4=1
+%\end{align*}
+%Damit ergeben sich mit dem zentralen Differenzenquotienten als Approximation der ersten Ableitung die vier Gleichungen
+%\begin{align*}
+%\frac{4}{3}=2\frac{1}{3}+2\frac{1}{3}=2x_2+2y_2&= \frac{\partial}{\partial x} u(x_2,y_2)+\frac{\partial}{\partial y}u(x_2,y_2)\\
+%&=\frac{u(x_3,y_2)-u(x_1,y_2)}{\frac{2}{3}}+\frac{u(x_2,y_3)-u(x_2,y_1)}{\frac{2}{3}}\\
+%&=\frac{3}{2}\left(u(x_3,y_2)-u(0,y_2) +u(x_2,y_3) -u(x_2,0)\right)\\
+%\end{align*}
+%\begin{align*}
+%2=2\frac{2}{3}+2\frac{1}{3}=2x_3+2y_2&= \frac{\partial}{\partial x} u(x_3,y_2)+\frac{\partial}{\partial y}u(x_3,y_2)\\
+%&=\frac{u(x_4,y_2)-u(x_2,y_2)}{\frac{2}{3}}+\frac{u(x_3,y_3)-u(x_3,y_1)}{\frac{2}{3}}\\
+%&=\frac{3}{2}\left(u(1,y_2)-u(x_2,y_2) +u(x_3,y_3) -u(x_3,0)\right)\\
+%\end{align*}
+%\begin{align*}
+%2=2\frac{1}{3}+2\frac{2}{3}=2x_2+2y_3&= \frac{\partial}{\partial x} u(x_2,y_3)+\frac{\partial}{\partial y}u(x_2,y_3)\\
+%&=\frac{u(x_3,y_3)-u(x_1,y_3)}{\frac{2}{3}}+\frac{u(x_2,y_4)-u(x_2,y_2)}{\frac{2}{3}}\\
+%&=\frac{3}{2}\left(u(x_3,y_3)-u(0,y_3) +u(x_2,1) -u(x_2,y_2)\right)\\
+%\end{align*}
+%\begin{align*}
+%\frac{8}{3}=2\frac{2}{3}+2\frac{2}{3}=2x_3+2y_3&= \frac{\partial}{\partial x} u(x_3,y_3)+\frac{\partial}{\partial y}u(x_3,y_3)\\
+%&=\frac{u(x_4,y_3)-u(x_2,y_3)}{\frac{2}{3}}+\frac{u(x_3,y_4)-u(x_3,y_2)}{\frac{2}{3}}\\
+%&=\frac{3}{2}\left(u(1,y_3)-u(x_2,y_3) +u(x_3,1) -u(x_3,y_2)\right)
+%\end{align*}
+%Da die Randbedingung die Werte für $u(0,y), u(x,0), u(1,y)$ und $u(x,1)$ vorgibt, erhalten wir
+%\begin{align*}
+%u(x_3,y_2)+u(x_2,y_3)&=\frac{8}{9}+y_2^2+x_2^2=\frac{10}{9}\\
+%-u(x_2,y_2)+u(x_3,y_3)&=\frac{4}{3}+x_3^2-y_2^2-1=\frac{2}{3}\\
+%-u(x_2,y_2)+u(x_3,y_3)&=\frac{4}{3}+y_3^2-x_2^2-1=\frac{2}{3}\\\
+%-u(x_3,y_2)-u(x_2,y_3)&=\frac{16}{9}-y_3^2-1-x_3^2-1=-\frac{10}{9}
+%\end{align*}
+%Die erste und die vierte so wie die zweite und die dritte Gleichung liefern jeweils die gleiche Information, sodass wir nur zwei Gleichungen für 4 Unbekannte haben.\\
+%Wir können allerdings die Symmetrie in $x$ und $y$ nutzen, d.h. wir ergänzen die Information
+%$$
+%u(x_3,y_2)=u(x_2,y_3) 
+%$$
+%und erhalten damit
+%$$
+%u(x_3,y_2)=\frac{5}{9}=u(x_2,y_3) 
+%$$
+%Für die Werte $u(x_2,y_2)$ und $u(x_3,y_3)$ hilft uns das leider nicht weiter. Allerdings können wir mit der vom letzten Übungsblatt bekannten exakten Lösung $u(x,y)=x^2+y^2$ immerhin verifizieren, dass
+%$$
+%-u(x_2,y_2)+u(x_3,y_3)=-\left(\left(\frac{1}{3}\right)^2+\left(\frac{1}{3}\right)^2\right)+\left(\left(\frac{2}{3}\right)^2+\left(\frac{2}{3}\right)^2\right)=-\frac{2}{9}+\frac{8}{9}=\frac{2}{3}
+%$$
+%\newpage
+%
+%%-------------------------------------------------------------------
+%\section{Finite Differenzenmethode II}
+%%%%
+%Diskretisieren Sie nach der Finite Differenzen Methode das Randwertproblem
+%$$
+%\begin{cases} \frac{\partial^2}{\partial x^2} u(x,y)-\frac{\partial^2}{\partial y^2}u(x,y)= 0 & \text{ auf } \Omega=[0,1]^2\\ \hspace{18mm}u_{|\partial \Omega}(x,y)=\exp(x+y) \end{cases}
+%$$
+%auf dem äquidistanten Gitter mit $\Delta x = \Delta y = \frac{1}{4}$ und bestimmen Sie das zugehörige LGS.
+%
+%\subsection*{Lösung:}
+%Die Diskretisierung von $\Omega$ mit $h=\Delta x = \Delta y = \frac{1}{4}$ ergibt die Gitterpunkte $(x_i,y_j)$ für $ i,j \in \{1,2,3,4,5\}$ mit 
+%\begin{align*}
+%x_1=y_1=0, \quad x_2=y_2=\frac{1}{4}, \quad x_3=y_3=\frac{1}{2}, \quad x_4=y_4=\frac{3}{4} \quad \text{und } x_5=y_5=1
+%\end{align*}
+%Damit ergeben sich mit dem zentralen Differenzenquotienten als Approximation der zweiten Ableitung die Gleichungen
+%\begin{align*}
+%0&=\frac{\partial^2}{\partial x^2} u(x_i,y_j)-\frac{\partial^2}{\partial y^2}u(x_i,y_j)\\
+%&=\frac{u(x_{i+1},y_j)-2u(x_i,y_j)+u(x_{i-1},y_j)}{\frac{1}{16}}-\frac{u(x_{i},y_{j+1})-2u(x_i,y_j)+u(x_{i},y_{j-1})}{\frac{1}{16}}\\
+%&=16 \cdot \left(u(x_{i+1},y_j)-u(x_i,y_{j+1})+u(x_{i-1},y_j)-u(x_i,y_{j-1})  \right)
+%\end{align*}
+%Mit der Kurzschreibweise $u_{i,j}=u(x_i,y_j)$ und unter Berücksichtigung der Randbedingung ergeben sich so die folgenden 9 Gleichungen
+%\begin{align*}
+%&-u_{2,3}&&+u_{3,2}&&&&&&=\exp(\frac{1}{4})-\exp(\frac{1}{4})\\
+%-u_{2,2}&&-u_{2,4}&&+u_{3,3}&&&&&=-\exp(\frac{1}{2})\\
+%&-u_{2,3}&&&&+u_{3,4}&&&&=\exp(\frac{5}{4})-\exp(\frac{3}{4})\\
+%%
+%u_{2,2}&&&&-u_{3,3}&&+u_{4,2}&&&=\exp(\frac{1}{2})\\
+%&\hspace{4.5mm}u_{2,3}&&-u_{3,2}&&-u_{3,4}&&+u_{4,3}&&=0\\
+%&&u_{2,4}&&-u_{3,3}&&&&+u_{4,4}&=\exp(\frac{3}{2})\\
+%%
+%&&&\hspace{4.5mm}u_{3,2}&&&&-u_{4,3}&&=-\exp(\frac{5}{4})+\exp(\frac{3}{4})\\
+%&&&&u_{3,3}&&-u_{4,2}&&-u_{4,4}&=-\exp(\frac{3}{2})\\
+%&&&&&\hspace{4.5mm}u_{3,4}&&-u_{4,3}&&=\exp(\frac{7}{4})-\exp(\frac{7}{4})
+%\end{align*}
+%Verwendet man nun noch die Nummerierung $u_k=u_{i,j}$ mit $k=(i-2)\cdot 3+(j-1)$ ergibt sich so das folgende LGS in Matrixschreibweise
+%\begin{align*}
+%\left(\begin{array}{rrrrrrrrr}
+%0&-1&0&1&0&0&0&0&0\\
+%-1&0&-1&0&1&0&0&0&0\\
+%0&-1&0&0&0&1&0&0&0\\
+%1&0&0&0&-1&0&1&0&0\\
+%0&1&0&-1&0&-1&0&1&0\\
+%0&0&1&0&-1&0&0&0&1\\
+%0&0&0&1&0&0&0&-1&0\\
+%0&0&0&0&1&0&-1&0&-1\\
+%0&0&0&0&0&1&0&-1&0
+%\end{array}\right)
+%\cdot
+%\begin{pmatrix}
+%u_1\\u_2\\u_3\\u_4\\u_5\\u_6\\u_7\\u_8\\u_9
+%\end{pmatrix}
+%=
+%\left(\begin{array}{rl}
+%0\\
+%-\exp(\frac{1}{2})\\
+%\exp(\frac{5}{4})&-\exp(\frac{3}{4})\\
+%\exp(\frac{1}{2})\\
+%0\\
+%\exp(\frac{3}{2})\\
+%-\exp(\frac{5}{4})&+\exp(\frac{3}{4})\\
+%-\exp(\frac{3}{2})\\
+%0
+%\end{array}\right)
+%\end{align*}
+%\newpage
+
+%-------------------------------------------------------------------
+\section{Kondition}
+%%%
+Berechnen Sie die Kondition des Problem
+$$
+y=4x^3+x^2-10x+7
+$$
+und bestimmen Sie eine Stelle $x_g$ an der das Problem gut konditioniert ist und eine Stelle $x_s$ an der es schlecht konidtioniert ist.
+
+\subsection*{Lösung:}
+Per Definition ist die Kondition eines (differenzierbaren) Problems $f$ gegeben durch
+$$
+kond_x(f)=\left|\frac{xf'(x)}{f(x)}\right|
+$$
+Somit ergibt sich für das obige Problem
+$$
+kond_x(f)=\left|\frac{xf'(x)}{f(x)}\right|=\left|\frac{x(12x^2+2x-10)}{4x^3+x^2-10x+7}\right|=\left|\frac{12x^3+2x^2-10x)}{4x^3+x^2-10x+7}\right|
+$$
+Für $x_g=-1$ gilt $kond_{x_g}(f)=0$ und das Problem ist dort somit sehr gut konditioniert.\\ Für $x_s=-2$ gilt $kond_{x_s}(f)=\left|\frac{12\cdot(-8)+2\cdot4-10\cdot (-2)}{4\cdot (-8)+4-10\cdot(-2)+7}\right|=\left|\frac{-96+8+20}{-32+4+20+7}\right|=68$ und das Problem ist dort somit eher schlecht konditioniert.\\
+\begin{center}
+\includegraphics[scale=0.9]{ProblemGraph.png}
+\end{center}
+\newpage
+
+%-------------------------------------------------------------------
+\section{Normen}
+%%%
+Zeigen Sie, dass die Zeilensummennorm 
+$$
+\|A\|_\infty = \max_i(\sum_j |a_{ij}|) \quad \text{für} \ A=(a_{ij}) \in \R^{n\times n}
+$$
+die von der Maximumsnorm
+$$
+\|v\|= \max_i(|v_i|) \quad \text{für} \ v=(v_i) \in \R^n
+$$
+induzierte Operatornorm ist.
+
+\subsection*{Lösung:}
+Wir müssen zeigen, dass $\|A\|_\infty=\max \limits_{\|v\|_\infty=1} \|Av\|_\infty$ gilt.\\ (Hierbei steht auf der rechten Seite die Zeilensummennorm und auf der linken Seite die Maximumsnorm.)\\
+
+Sei $v \in \R^n$ mit $\|v\|_\infty =1$ und $A \in \R^{n\times n}$. Dann gilt
+\begin{align*}
+\|Av\|_\infty&=\max_{i}|(Av)_i|\\
+&=\max_{i}|\sum_{j=1}^n a_{ij}v_j| \\
+&\stackrel{1)}{\le} \max_{i}\sum_{j=1}^n |a_{ij}v_j| \\
+&\le \max_{i} \sum_{j=1}^n |a_{ij}| \cdot \max_j|v_j|\\
+&\stackrel{2)}{=}\max_{i} \sum_{j=1}^n |a_{ij}| \\
+&=\|A\|_\infty
+\end{align*}
+wobei bei 1) die Dreiecksungleichung verwendet wurde und bei 2) die Voraussetzung $\|v\|_\infty=1$.\\
+Damit gilt $\|A\|_\infty\ge \max \limits_{\|v\|_\infty=1} \|Av\|_\infty$.\\
+Sei nun $k$ der Index der Zeile von $A$ mit der größten (absoluten) Zeilensumme, d.h. $\|A\|_\infty=\sum_j |a_{kj}|$ und $w \in \R^n$ mit $w_j=\text{sgn}(a_{kj}), \forall j$. Dann gilt $\|w\|_\infty=1$ und 
+\begin{align*}
+\max \limits_{\|v\|_\infty=1} \|Av\|_\infty &\ge \|Aw\|_\infty \\
+&= \max_{i}|\sum_{j=1}^n a_{ij}w_j|\\
+&=\max_{i}|\sum_{j=1}^n a_{ij}\cdot \text{sgn}(a_{kj})|\\
+&\stackrel{3)}{=}\sum_j |a_{kj}|\\
+&=\|A\|\infty
+\end{align*}
+wobei bei 3) benutzt wird, dass $k$ der Index der Zeile von $A$ mit der größten (absoluten) Zeilensumme ist.\\
+Somit gilt auch $\|A\|_\infty\le \max \limits_{\|v\|_\infty=1} \|Av\|_\infty$. 
+\hfill $\square$
+\vspace{5mm}
+\newpage
+%-------------------------------------------------------------------
+\section{Stabilität}
+%%%
+Bringen das homogene LGS mit Hilfe des Gaußalgorithmus
+$$
+\left(\begin{array}{rrrr} 1 & 0 & 0 & \ \ 1 \\ -1& 1 &0 &1 \\ -1 & -1 & 1 &1 \\ -1 & -1 &-1 &1 \end{array}\right) \cdot \begin{pmatrix}x_1 \\x_2\\x_3\\x_4 \end{pmatrix} = 0
+$$
+in Stufenform und bestimmen Sie nach jedem Umformungsschritt die Zeilensummennorm der Matrix.
+
+\subsection*{Lösung:}
+$$
+A_0=\left(\begin{array}{rrrr} 1 & 0 & 0 & \ \ 1 \\ -1& 1 &0 &1 \\ -1 & -1 & 1 &1 \\ -1 & -1 &-1 &1 \end{array}\right)  \text{ mit } \|A_0\|_\infty = 4
+$$
+Addition der ersten Zeile auf die zweite, dritte und und vierte Zeile ergibt
+$$
+A_1=\left(\begin{array}{rrrr}  \ \ 1 & 0 & 0 & \ \ 1 \\ 0& 1 &0 &2 \\ 0 & -1 & 1 &2 \\ 0 & -1 &-1 &2 \end{array}\right)  \text{ mit } \|A_1\|_\infty = 4
+$$
+Addition der zweiten Zeile auf die dritte und vierte Zeile ergibt
+$$
+A_2=\left(\begin{array}{rrrr}  \ \ 1 & \ \ 0 & 0 & \ \ 1 \\ 0& 1 &0 &2 \\ 0 &0& 1 &4 \\ 0 &0 &-1 &4 \end{array}\right)   \text{ mit } \|A_2\|_\infty = 5
+$$
+Die Addition der dritten Zeile auf die vierte ergibt schließlich
+$$
+A_3=\left(\begin{array}{rrrr} 1 & 0 & 0 & 1 \\ 0& 1 &0 &2 \\ 0 &0& 1 &4 \\ 0 &0 &0 &8 \end{array}\right)   \text{ mit } \|A_3\|_\infty = 8
+$$
+\end{document}

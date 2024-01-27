@@ -1,0 +1,324 @@
+\input{../preamble_beamer.tex}
+\usepackage[all,cmtip]{xy}
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Interpolation}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Interpolation}
+\makeSectionDividerPage
+%%%
+\begin{frame}\frametitle{Motivation}
+Oft liegen Messergebnisse nur an endlich vielen Punkten vor oder numerische Berechnungen können nur auf einem diskreten Gitter durchgeführt werden (z.B. FDM für partielle Differentialgleichungen). Trotzdem möchte man das Resultat als eine stetige oder sogar differenzierbare Funktion darstellen und auch Werte zwischen den vorliegenden Punkten berechnen können.\\\pause\vfill
+Daher ist es das Ziel, die vorhanden Stützstellen durch eine solche Funktion zu verbinden. Dabei sind verschiedene, teilweise auch anwendungsabhängige, Anforderungen zu beachten, wie z.B. eine gute Approximation zwischen den Stützstellen, Stabilität bei kleinen Änderungen der Stützstellen und eine leichte Auswertbarkeit.  
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel: lineare Interpolation}
+Der einfachste Ansatz zwischen zwei Funktionswerten zu interpolieren, ist sie durch eine Gerade zu verbinden:\\
+Sei $x \in [a,b]$ und $f(a)$ und $f(b)$ bekannt, dann
+$$
+\hat f(x)=f(a)+\frac{(x-a)(f(b)-f(a))}{(b-a)}
+$$
+\begin{itemize}\pause
+\item Logarithmus: $a=1, b=1.1$, dann sagen die Logarithmustafeln $\log(1)=0$ und $\log(1.1)=0.095$. Für $x=1.05$ können wir dann berechnen
+$$
+\widehat \log(1.05)=0+\frac{(1.05-1)(0.095-0)}{1.1-1}=\frac{0,05\cdot 0,095}{0,1}=0.0475
+$$\pause
+\item Sinus: $a=\frac{\pi}{4}, b=\frac{3\pi}{4}$, dann ist $\sin(a)=\sin(b)$ und es gilt für alle $x\in [a,b]$: $\hat f(x)=f(a)= \frac{\sqrt{2}}{2}$.
+
+\end{itemize}
+\end{frame}
+%
+\subsection{Definition: Interpolationsaufgabe}
+%
+\begin{frame}\frametitle{Definition: Interpolationsaufgabe}
+Zu in der Regel deutlich besseren Ergebnissen führt der folgende Ansatz:\\\vfill
+Finde 
+\begin{itemize}
+\item für gegebene, paarweise verschiedene Stellen $x_0,...,x_n \in \R$ und gegebene Werte $y_0,...,y_n \in \R$ mit $f(x_j)=y_j \quad \forall j \in \{0,...,n\}$
+\item und gegebene \highlightDef{Ansatzfunktionen} $g_j: \R \to \R$, $j \in \{0,...,n\}$
+\end{itemize}
+eine Linearkombination
+$$
+g(x)=\sum_{j=0}^n a_j g_j(x)
+$$
+sodass $g(x_j)=y_j \ \forall j \in \{0,...,n\}$
+\end{frame}
+%
+\subsection{Interpolation durch Ansatzfunktionen}
+\makeSectionDividerPage
+%
+%
+\begin{frame}\frametitle{Interpolation durch ein Polynom}
+Beliebte Ansatzfunktionen sind die Monome $g_k(x)=x^k$.\\
+In diesem Fall führt der Ansatz $g(x)=\sum a_kg_k(x)$ mit $g(x_j)=y_j$ zum linearen Gleichungssystem
+$$
+\begin{pmatrix} 1 & x_0 & x_0^2& ... & x_0^n \\1 & x_1 & x_1^2& ... & x_1^n \\...\\1 & x_n & x_n^2& ... & x_n^n \end{pmatrix}\cdot \begin{pmatrix} a_0 \\ a_1 \\ ... \\ a_n \end{pmatrix} = \begin{pmatrix}y_0\\ y_1 \\ ... \\y_n \end{pmatrix}
+$$
+mit einem Polynom $g(x)=\sum a_kx^k$ als Lösung.\pause\vfill
+Die Matrix hat eine besondere Gestalt und daher auch einen Namen: \highlightDef{Vandermonde-Matrix}.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$x_0=0, y_0=1, \ x_1=1, y_1=4,\ x_2=2, y_2=2 $ und $x_3=3, y_3=4$\\
+Die Ansatzfunktionen sind
+$g_0(x)=1, g_1(x)=x, g_2(x)=x^2$ und $g_3(x)=x^3$.\\
+Damit erhält man das LGS
+$$
+\begin{pmatrix} 1 & 0 & 0& 0& \\ 1&1&1&1\\ 1 & 2 & 4 & 8\\ 1 & 3 & 9 &27 \end{pmatrix}\cdot \begin{pmatrix} a_0 \\ a_1 \\ a_2 \\ a_3 \end{pmatrix} = \begin{pmatrix}1\\4\\2\\4 \end{pmatrix}
+$$\pause
+Die Lösung des LGS ist $g(x)=1+\frac{17}{2}7x-7x^2+\frac{3}{2}x^3$
+\begin{center}
+\includegraphics[scale=0.5]{Grafiken/interpolation1.png}
+\end{center}	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Interpolation durch Basisfunktionen}
+Je nach Ausprägung der bekannten Werte oder bekannten Eigenschaften können auch andere Ansatzfunktionen $g_j$ geeigneter sein.\\
+\vfill\pause
+Damit ergibt sich das LGS
+$$
+\begin{pmatrix} g_0(x_0) & g_1(x_0) & g_2(x_0)& ... & g_n(x_0) \\g_0(x_1) & g_1(x_1) & g_2(x_1)& ... & g_n(x_1) \\...\\g_0(x_n) & g_1(x_n) & g_2(x_n)& ... & g_n(x_n) \end{pmatrix}\cdot \begin{pmatrix} a_0 \\ a_1 \\ ... \\ a_n \end{pmatrix} = \begin{pmatrix}y_0\\ y_1 \\ ... \\y_n \end{pmatrix}
+$$
+
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$x_0=\frac{\pi}{4}, y_0=1, \ x_1=\frac{\pi}{2}, y_1=2, \ x_2=\frac{3\pi}{4}, y_2=1$\\ und als Ansatzfunktionen\\
+$g_0(x)=\cos(0\cdot x)=1, \ g_1(x)=\cos(x), \ g_2(x)=\cos(2x)$.
+Damit ergibt sich
+\begin{align*}
+g_0(x_0)&=1 & g_1(x_0)&=\frac{\sqrt{2}}{2}& g_2(x_0)&=0\\
+g_0(x_1)&=1 &g_1(x_1)&=0  &g_2(x_1)&=-1\\
+g_0(x_2)&=1  &g_1(x_2)&=-\frac{\sqrt{2}}{2}  &g_2(x_2)&=0
+\end{align*}
+und insgesamt das LGS
+$$
+\begin{pmatrix} 1 & \frac{\sqrt{2}}{2} & 0 \\ 1 & 0 & -1 \\ 1 & -\frac{\sqrt{2}}{2}& 0 \end{pmatrix} \cdot \begin{pmatrix} a_0 \\ a_1 \\ a_2 \end{pmatrix} = \begin{pmatrix} 1 \\ 2 \\1 \end{pmatrix}
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Die Lösung des LGS ist 
+\begin{align*}
+g(x)&=1\cdot g_0(x)+0\cdot g_1(x)-1\cdot g_2(x)\\
+&=1-\cos(2x)
+\end{align*}
+\begin{center}
+\includegraphics[scale=0.5]{Grafiken/interpolation2.png}
+\end{center}	
+
+\end{frame}
+%
+\begin{frame}\frametitle{Probleme und Grenzen der Anwendung}
+Der Ansatz mit Polynomen als Basisfunktionen hat für eine große Anzahl an Stützstellen $f(x_j)=y_j$ einige unerwünschte Probleme:
+\begin{itemize}
+\item Das Lösungpolynom hat Grad $n$ und ist somit immer aufwendiger auszuwerten.
+\item Durch den hohen Grad des Polynoms entstehen Oszillationen
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.75]{Grafiken/interpolation3.png}
+\end{center}	
+\end{frame}
+%
+%
+\subsection{Interpolation durch Splines}
+\makeSectionDividerPage
+%
+\begin{frame}\frametitle{Definition: Spline-Funktion}
+Eine \highlightDef{Spline-Funktion} von Grad $k$ ist eine Funktion $S$ mit
+\begin{itemize}
+\item[i)] $S(x)$ ist $(k-1)$-mal stetig differenzierbar
+\item[ii)] $\forall j \in \{0,...,n-1\}$: $S(x)$ ist auf $[x_j,x_{j+1}]$ ein Polynom von Grad $k$.
+\end{itemize}
+\vfill \pause
+Man kann eine Spline-Funktion somit als eine aus Polynom-Stücken zusammen ``geklebte'' Funktion auffassen, wobei die Polynome an den ``Klebestellen'' bis zu ihren jeweils $(k-1)$-ten Ableitungen übereinstimmen.
+
+\end{frame}
+%
+\begin{frame}\frametitle{Interpolation durch Splines}	
+Für die Interpolation von $f(x_j)=y_j, \ j \in \{0,...,n\}$ durch Splines werden $n$ Polynome $p_j(x)=a_{j0}+a_{j1}x+...+a_{jk}x^k=\sum_{m=0}^k a_{jm}x^m$, $j \in \{1,...,n\}$ gesucht. Insgesamt ergibt das die folgenden Gleichungen
+\begin{align*}
+p_j^{(l)}(x_j)&=p_{j+1}^{(l)}(x_j) &\forall j\in \{1,...,n-1\} \forall l \in \{0,...,k-1\}\\
+S(x_j)&=p_j(x_j)=y_j\\
+S(x_0)&=p_j(x_0)=y_0
+\end{align*}
+Das sind $(n-1)k+(n+1)=n(k+1)-(k-1)$ Gleichungen für die $n(k+1)$ Freiheitsgrade der Polynome. Um ein eindeutig-lösbaren LGS zu erhalten, kann man $(k-1)$ weitere Bedingungen definieren. Oft gibt man hier die Ableitungen an den Randstellen $x_0$ und $x_n$ vor.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$k=2$ und $n=3$\\\vfill
+$x_0=0, y_0=1, \ x_1=1, y_1=2, \ x_2=2, y_2=0, \ x_3=3, y_3=1$\\
+Der übrige Freiheitsgrad ($k-1=2-1=1$) wird für $S'(x_3)=0$ verwendet. Das ergibt das LGS
+\small
+$$
+\begin{array}{l} S(x_0) \\ S(x_1)\\S(x_2)\\S(x_3)\\S'(x_3) \\ p_1=p_2 \\ p_2=p_3 \\ p_1'=p_2'\\ p_2'=p_3' \end{array}\quad
+\left(\begin{array}{rrr|rrr|rrr}
+1&0&0&0&0&0&0&0&0\\
+0&0&0&1&1&1&0&0&0\\
+0&0&0&0&0&0&1&2&4\\
+0&0&0&0&0&0&1&3&9\\
+0&0&0&0&0&0&0&1&6\\
+1&1&1&-1&-1&-1&0&0&0\\
+0&0&0&1&2&4&-1&-2&-4\\
+0&1&2&0&-1&-2&0&0&0\\
+0&0&0&0&1&4&0&-1&-4\\
+\end{array}\right)\cdot \begin{pmatrix} a_{10}\\a_{11}\\a_{12}\\a_{20}\\a_{21}\\a_{22}\\a_{30}\\a_{31}\\a_{32}\end{pmatrix}  = \begin{pmatrix}1\\2\\0\\1\\0\\0\\0\\0\\0 \end{pmatrix}
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Umsortieren der Zeilen ergibt
+$$
+\left(\begin{array}{rrr|rrr|rrr}
+1&0&0&0&0&0&0&0&0\\
+1&1&1&-1&-1&-1&0&0&0\\
+0&1&2&0&-1&-2&0&0&0\\
+%
+0&0&0&1&1&1&0&0&0\\
+0&0&0&1&2&4&-1&-2&-4\\
+0&0&0&0&1&4&0&-1&-4\\
+%
+0&0&0&0&0&0&1&2&4\\
+0&0&0&0&0&0&1&3&9\\
+0&0&0&0&0&0&0&1&6\\
+\end{array}\right)\cdot \begin{pmatrix} a_{10}\\a_{11}\\a_{12}\\a_{20}\\a_{21}\\a_{22}\\a_{30}\\a_{31}\\a_{32}\end{pmatrix}  = \begin{pmatrix}1\\0\\0\\2\\0\\0\\0\\1\\0 \end{pmatrix}
+$$
+\end{frame}
+%
+%\begin{frame}\frametitle{Beispiel}
+%Mit wenigen Schritten lässt sich das System im Stufenform bringen.
+%$$
+%\left(\begin{array}{rrr|rrr|rrr}
+%1&0&0&0&0&0&0&0&0\\
+%0&1&1&-1&-1&-1&0&0&0\\
+%0&0&1&1&0&-1&0&0&0\\
+%%
+%0&0&0&1&1&1&0&0&0\\
+%0&0&0&0&1&3&-1&-2&-4\\
+%0&0&0&0&0&1&1&1&0\\
+%%
+%0&0&0&0&0&0&1&2&4\\
+%0&0&0&0&0&0&0&1&5\\
+%0&0&0&0&0&0&0&0&1\\
+%\end{array}\right)\cdot \begin{pmatrix} a_{10}\\a_{11}\\a_{12}\\a_{20}\\a_{21}\\a_{22}\\a_{30}\\a_{31}\\a_{32}\end{pmatrix}  
+%= \begin{pmatrix}1\\-1\\1\\2\\-2\\2\\0\\1\\-1 \end{pmatrix}
+%$$
+%\end{frame}
+%
+%\begin{frame}\frametitle{Beispiel}
+%Und mit einigen weiteren Schritten erreicht das System die Gauß-Normalform.
+%$$
+%\left(\begin{array}{rrr|rrr|rrr}
+%1&0&0&0&0&0&0&0&0\\
+%0&1&0&0&0&0&0&0&0\\
+%0&0&1&0&0&0&0&0&0\\
+%%
+%0&0&0&1&0&0&0&0&0\\
+%0&0&0&0&1&0&0&0&0\\
+%0&0&0&0&0&1&0&0&0\\
+%%
+%0&0&0&0&0&0&1&0&0\\
+%0&0&0&0&0&0&0&1&0\\
+%0&0&0&0&0&0&0&0&1\\
+%\end{array}\right)\cdot \begin{pmatrix} a_{10}\\a_{11}\\a_{12}\\a_{20}\\a_{21}\\a_{22}\\a_{30}\\a_{31}\\a_{32}\end{pmatrix} 
+%= \begin{pmatrix}1\\4\\-3\\10\\-12\\4\\-8\\6\\-1 \end{pmatrix}
+%$$
+%\end{frame}
+%%
+%\begin{frame}{Beispiel}
+%Damit ergeben sich die Polynome
+%\begin{align*}
+%p_1(x)&=-3x^2+4x+1\\
+%p_2(x)&=4x^2-12x+10\\
+%p_3(x)&=-x^2+6x-8
+%\end{align*}
+%mit
+%$$
+%p_1(0)=1, p_1(1)=2=p_2(1), p_2(2)=0=p_3(2) \text{ und } p_3(3)=1
+%$$
+%und außerdem stimmen die ersten Ableitungen der Polynome an den ``Klebestellen'' überein:
+%\begin{align*}
+%p'_1(x)&=-6x+4\\
+%p'_2(x)&=-2\\
+%p'_3(x)&=-2x+6
+%\end{align*}
+%mit
+%$$
+%p_1(0)=1, p_1(1)=2=p_2(1), p_2(2)=0=p_3(2) \text{ und } p_3(3)=1
+%$$
+%\end{frame}
+%
+\subsection{Interpolation durch Basis-Splines}
+\makeSectionDividerPage
+%
+%
+\begin{frame}\frametitle{Interpolation durch Basis-Splines}	
+Ein weiterer Interpolationsansatz ist die Interpolation durch \highlightDef{Basis-Splines} (oder auch \highlightDef{B-Splines}). Dabei werden Ideen von den beiden vorherigen Ansätzen zusammengeführt:\\
+Die Ansatzfunktionen sind alle stückweise Polynome von einem vorgegebenen Grad $k$ und nur auf einem Abschnitt ungleich $0$.\\\pause\vfill
+\textbf{Definition}\\
+Für vorgegebene Knoten $x_0,...,x_n$ sind die $B$-Splines von Grad $k$ rekursiv definiert durch:
+\begin{itemize}
+\item $B_{i,0}(x)=\begin{cases}1, & x\in [x_i,x_{i+1}]\\ 0 ,& \text{sonst} \end{cases}$
+\item $B_{i,j}(x)=\frac{x-x_i}{x_{i+j}-x_i}B_{i,j-1}(x)+\frac{x_{i+j+1}-x}{x_{i+j+1}-x_{i+1}}B_{i+1,j-1}(x)$
+\end{itemize}
+wobei $i\in\{0,...,n-1\}$ und $j\in \{1,...,k\}$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+\begin{itemize}
+\item[$k=1$] $B_{i,1}(x)=\begin{cases} \frac{x-x_i}{x_{i+1}-x_i}, & x \in [x_i,x_{i+1}]\\  \frac{x_{i+2}-x}{x_{i+2}-x_{i+1}}, & x \in [x_{i+1},x_{i+2}]\\ 0, & \text{sonst}\end{cases}$
+
+\item[$k=2$] $B_{i,2}(x)=\frac{x-x_i}{x_{i+2}-x_i}B_{i,1}(x)+\frac{x_{i+3}-x}{x_{i+3}-x_{i+1}}B_{i+1,1}(x)$
+\end{itemize}
+\begin{center}
+\includegraphics[scale=1.5]{Grafiken/bsplines.png}
+\end{center}	
+\small
+(Die B-Splines an den Rändern werden separat oder über Indizes $i<0$ bzw. $i>n$ definiert)
+\end{frame}
+%
+%%
+\subsection{Spezifische Anforderungen}
+%\makeSectionDividerPage
+%
+\begin{frame}\frametitle{Spezifische Anforderungen}
+Es gibt neben den oben diskutierten Verfahren auch andere, ähnliche Ansätze für die Interpolation von $1$-dimensionalen Funktionen. Je nach dem spezifischen Problem und den dortigen Anforderungen kann ein anderes Verfahren zu den besten Ergebnissen führen.\\\vfill
+Oft werden auch Interpolationen für mehrdimensionale Funktionen/Flächen durchgeführt. Hier ist meist eine bilineare (oder multilineare) Interpolation das Mittel der Wahl.
+\begin{center}
+\includegraphics[scale=0.65]{Grafiken/bilinear.png}
+\end{center}	
+\end{frame}
+
+\section{Extrapolation}
+\makeSectionDividerPage
+\begin{frame}\frametitle{Extrapolation}
+Ein ähnliches Problem wie die \underline{Inter}polation ist die \highlightDef{\underline{Extra}polation}, bei der eine stetige oder gar differenzierbare Fortsetzung jenseits der bekannten Stützstellen gesucht wird.\pause Hier gibt es zwei dominierende Ansätze:\vfill
+\begin{itemize}
+\item \highlightDef{konstant}, d.h. $f(x)=\begin{cases}f(x_0), & x<x_0\\ f(x_n),& x>x_n \end{cases}$ \\\vfill
+\item \highlightDef{konsistent}, d.h. $f(x)=\begin{cases}f(x_0)+f'(x_0)(x-x_0), & x<x_0\\ f(x_n)+f'(x_n)(x-x_n),& x>x_n \end{cases}$
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}

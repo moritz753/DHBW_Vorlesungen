@@ -1,0 +1,182 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		%\color{lightBlue}
+		{ \LARGE 	Übungsaufgaben 4 - Lösungen}\\[3mm]
+		{\Large Mehrdimensionale Analysis - Teil 1}
+	}
+\end{center}
+
+\vspace{5mm}
+
+%-------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------
+\section{Jacobi-Matrix}
+%%%
+Bestimmen Sie die Jacobi-Matrix der Funktion
+$$
+f: \R^4 \to \R^3, \begin{pmatrix}x_1 \\ x_2\\x_3\\x_4\end{pmatrix} \mapsto \begin{pmatrix} x_1+x_2x_3 \\ x_4^2 \\ \sin(x_1)\cos(x_4)\end{pmatrix}
+$$
+%---------------------------------
+\subsection*{Lösung}
+%%%
+Die Einträge der Jacobi-Matrix sind die partiellen Ableitungen $\frac{\partial f_i}{\partial x_j}$. Daher muss man als erstes diese bestimmen:
+\begin{align*}
+\frac{\partial f_1}{\partial x_1} &=1  &\frac{\partial f_1}{\partial x_2}&=x_3  &\frac{\partial f_1}{\partial x_3}&=x_2  &\frac{\partial f_1}{\partial x_4}&=0  \\
+\frac{\partial f_2}{\partial x_1} &=0  &\frac{\partial f_2}{\partial x_2}&=0  &\frac{\partial f_2}{\partial x_3}&=0  &\frac{\partial f_2}{\partial x_4}&= 2x_4 \\
+\frac{\partial f_3}{\partial x_1} &=\cos(x_1)\cos(x_4)  &\frac{\partial f_3}{\partial x_2}&=0  &\frac{\partial f_3}{\partial x_3}&=0  &\frac{\partial f_3}{\partial x_4}&=-\sin(x_1)\sin(x_4)  
+\end{align*}
+Damit erhalten wir
+$$
+J_f(x)=\left( \frac{\partial f_i}{\partial x_j}\right)_{i=1,j=1}^{3,4} =\begin{pmatrix} 1 & x_3 & x_2 & 0 \\ 0 & 0& 0& 2x_4 \\ \cos(x_1)\cos(x_4) & 0&0& -\sin(x_1)\sin(x_4)   \end{pmatrix}
+$$
+
+%-------------------------------------------------------------------
+\newpage
+\section{Newton-Verfahren}
+%%%
+Bestimmen Sie näherungsweise eine Stelle $x \in \R^3$ mit $f(x)=(0,0,0)^t \in \R^3$ für die Funktion
+$$
+f: \R^3 \to \R^3, \begin{pmatrix} x_1 \\ x_2 \\x_3\end{pmatrix} \mapsto \begin{pmatrix} 2x_1-x_2 \\ 3x_2-x_3 \\ x_1x_2x_3-1 \end{pmatrix}
+$$
+indem Sie für den Startwert $x^{(0)}=(1,1,0)^t$ einen Schritt des mehrdimensionalen Newton-Verfahrens durchführen.
+
+
+%---------------------------------
+\subsection*{Lösung}
+%%%
+Um die Iteration 
+$$
+x^{(k+1)}=x^{(k)} - J_f(x^{(k)})^{-1}\cdot f(x^{(k)})
+$$
+des mehrdimensionale Newton-Verfahren durchzuführen, benötigen wir die Jacobi-Matrix der Funktion $f$. Diese ergibt sich - wie in Aufgabe 1 - aus den partiellen Ableitungen:
+\begin{align*}
+\frac{\partial f_1}{\partial x_1} &=2  &\frac{\partial f_1}{\partial x_2}&=-1 &\frac{\partial f_1}{\partial x_3}&=0    \\
+\frac{\partial f_2}{\partial x_1} &=0  &\frac{\partial f_2}{\partial x_2}&=3 &\frac{\partial f_2}{\partial x_3}&=-1  \\
+\frac{\partial f_3}{\partial x_1} &=x_2x_3 &\frac{\partial f_3}{\partial x_2}&=x_1x_3 &\frac{\partial f_3}{\partial x_3}&=x_1x_2
+\end{align*}
+Damit erhalten wir
+$$
+J_f(x)=\left( \frac{\partial f_i}{\partial x_j}\right)_{i=1,j=1}^{3,3} =\begin{pmatrix} 2 & -1 & 0 \\ 0 & 3& -1 \\ x_2x_3&x_1x_3&x_1x_2   \end{pmatrix}
+$$
+Als Startwert wurde $x^{(0)}=(1,1,0)^t$ gewählt, und erhalten damit
+$$
+f(x^{(0)})=\begin{pmatrix} 1\\3\\-1 \end{pmatrix}
+$$
+Dann müssen wir noch die Inverse von 
+$$
+J_f(x^{(0)})=\begin{pmatrix} 2 & -1 & 0 \\ 0 & 3& -1 \\ 0&0&1   \end{pmatrix}
+$$
+bestimmen. Dies tun wir mit dem Gauß-Algorithmus
+\begin{align*}
+&\left(
+		\begin{array}{ccc|ccc}
+			2&-1&0 	&1&0&0\\
+			0&3&-1	&0&1&0\\
+			0&0&1	&0&0&1
+		\end{array}
+		\right) \stackrel{II+III, \frac{1}{3}II}{\sim>} 
+				\left(
+		\begin{array}{ccc|ccc}
+			2&-1&0 	&1&0&0\\
+			0&1&0	&0&\frac{1}{3}&\frac{1}{3}\\
+			0&0&1	&0&0&1
+		\end{array}
+		\right)\\
+		\stackrel{I+II, \frac{1}{2}I}{\sim>} 
+				&\left(
+		\begin{array}{ccc|ccc}
+			1&0&0 	&\frac{1}{2}&\frac{1}{6}&\frac{1}{6}\\
+			0&1&0	&0&\frac{1}{3}&\frac{1}{3}\\
+			0&0&1	&0&0&1
+		\end{array}
+		\right)
+\end{align*}
+Somit ist 
+$$
+J_f(x^{(0)})^{-1}=\begin{pmatrix} \frac{1}{2}&\frac{1}{6}&\frac{1}{6}\\
+			0&\frac{1}{3}&\frac{1}{3}\\
+			0&0&1 \end{pmatrix}
+$$
+Jetzt haben wir alles um die Iteration den Newton-Verfahrens durchzuführen:
+\begin{align*}
+x^{(1)}&=x^{(0)} - J_f(x^{(0)})^{-1}\cdot f(x^{(0)})\\
+&=\begin{pmatrix} 1\\1\\0 \end{pmatrix} - \begin{pmatrix} \frac{1}{2}&\frac{1}{6}&\frac{1}{6}\\0&\frac{1}{3}&\frac{1}{3}\\ 0&0&1 \end{pmatrix} \cdot \begin{pmatrix} 1\\3\\-1 \end{pmatrix}\\
+&=\begin{pmatrix} 1\\1\\0 \end{pmatrix} -\begin{pmatrix} \frac{1}{2}\cdot 1 + \frac{1}{6}\cdot 3 + \frac{1}{6}\cdot (-1) \\ \frac{1}{3}\cdot 3 + \frac{1}{3}\cdot (-1)\\ 1 \cdot (-1) \end{pmatrix}\\
+&=\begin{pmatrix} 1\\1\\0 \end{pmatrix} -\begin{pmatrix} \frac{5}{6}\\ \frac{2}{3}\\ -1 \end{pmatrix}\\
+&=\begin{pmatrix} \frac{1}{6}\\\frac{1}{3}\\1 \end{pmatrix}
+\end{align*}
+Setzen wir nun $x^{(1)}$ in $f$ ein, so erhalten wir:
+$$
+f(x^{(1)})=\begin{pmatrix} 0\\0\\-\frac{17}{18} \end{pmatrix}
+$$
+%-------------------------------------------------------------------
+%\newpage
+%\section{Integral über Quader}
+%%%%
+%Berechnen Sie das Integral der Funktion
+%$$
+%f:\R^4 \to \R, (x_1,x_2,x_3,x_4) \mapsto x_1x_2x_3x_4
+%$$
+%über dem 4-dimensionalen Quader
+%$$
+%Q=[0,1]\times[0,1]\times[0,1]\times[0,1]
+%$$
+%
+%
+%%---------------------------------
+%\subsection*{Lösung}
+%%%%
+%\begin{align*}
+%\int_Q f(x)dx&=\int_0^1 \left(\int_0^1 \left(\int_0^1 \left(\int_0^1 x_1x_2x_3x_4 \ d{x_4} \right)d{x_3} \right)d{x_2} \right)d{x_1} \\
+%&=\int_0^1 \left(\int_0^1 \left(\int_0^1 \left[ \frac{1}{2} x_1x_2x_3x_4^2\right]_{x_4=0}^{x_4=1}d{x_3} \right)d{x_2} \right)d{x_1} \\
+%&=\int_0^1 \left(\int_0^1 \left(\int_0^1\frac{1}{2} x_1x_2x_3 \ dx_3\right)d{x_2} \right)d{x_1} \\
+%&=\int_0^1 \left(\int_0^1 \left[ \frac{1}{2}\cdot\frac{1}{2} x_1x_2x_3^2\right]_{x_3=0}^{x_3=1} d{x_2} \right)d{x_1} \\
+%&=\int_0^1 \left(\int_0^1 \frac{1}{4} x_1x_2 \ d{x_2} \right)d{x_1} \\
+%&=\int_0^1 \left[ \frac{1}{2}\cdot\frac{1}{4} x_1x_2^2\right]_{x_2=0}^{x_2=1} d{x_1} \\
+%&=\int_0^1 \frac{1}{8} x_1 \ d{x_1} \\
+%&= \left[ \frac{1}{2}\cdot\frac{1}{8} x_1^2\right]_{x_1=0}^{x_1=1} \\
+%&= \frac{1}{16}
+%\end{align*}
+%
+%%-------------------------------------------------------------------
+%\newpage
+%\section{Integral über Normalbereich}
+%%%%
+%Es sei $f: \R^2 \to \R, (x,y) \mapsto xy$ und $B=\{(x,y) \mid 0\le y\le 1 \text{ und } y^2 \le x \le y\}$. Berechnen Sie das Integral
+%$$
+%\int_B f(x,y)d(x,y)
+%$$
+% 
+% %---------------------------------
+%\subsection*{Lösung}
+%%%%
+%Da $B$ ein Normalbereich bezüglich der y-Achse ist, berechnet sich das Integral wie folgt:
+%\begin{align*}
+%\int_B f(x,y)d(x,y)&=\int_0^1 \left( \int_{y^2}^y xy \ dx \right) dy\\
+%&= \int_0^1 \left[ \frac{1}{2}x^2y\right]_{x=y^2}^{x=y} dy\\
+%&=\frac{1}{2}\int_0^1  y^3-y^5 \ dy \\
+%&=\frac{1}{2} \left[ \frac{1}{4}y^4 - \frac{1}{6} y^6 \right]_{y=0}^{y=1}\\
+%&=\frac{1}{2}( \frac{1}{4} - \frac{1}{6})\\
+%&=\frac{1}{24}
+%\end{align*}
+
+
+\end{document}

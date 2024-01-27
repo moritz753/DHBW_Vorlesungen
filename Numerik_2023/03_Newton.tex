@@ -1,0 +1,164 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Verfahren zur Bestimmung von Nullstellen}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Motivation}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Problemstellung}
+Wann ist die nächste Sonnenfinsternis?\\\vspace{1mm}
+\includegraphics[scale=0.35]{sonnenfinsternis.png}\\\vspace{1mm} \pause
+Nicht-lineare Gleichungen sind in der Regel nur sehr schwer exakt zu lösen. Die numerische Approximation wird oft durch eine \highlightDef{Zielwertsuche} umgesetzt. Dies sind Iterationsverfahren, die in jedem Schritt versuchen den Eingabewert so zu verändern, dass der Ausgabewert näher am Zielwert liegt.
+
+\end{frame}
+%
+%
+
+%
+%--------------------------------------------
+\section{Das Newton-Verfahren}
+\makeSectionDividerPage
+%%%
+\subsection{Algorithmus}
+%
+\begin{frame}\frametitle{Newton-Verfahren}
+\begin{columns}[T]
+\begin{column}{0.5 \textwidth}
+Es sei $f: I \to \R$ eine im Intervall $I$ differenzierbare Funktion $f$. Dann ist das \highlightDef{Newton-Verfahren} das durch
+$$
+\begin{cases}
+x_0 \in I\\
+x_{k+1}=x_{k}-\frac{f(x_k)}{f'(x_k)}
+\end{cases}
+$$
+definierte Iterationsverfahren.
+\end{column}
+\begin{column}{0.5 \textwidth}
+\includegraphics[scale=0.5]{Newton.png}
+\end{column}
+\end{columns}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Wir suchen eine Nullstelle von
+$$
+f: [0,5]\to \R, x \mapsto -x^2+5x-2
+$$\pause
+Um zwei Schritte des Newton-Verfahrens durchzuführen, verwenden wir den Startwert $x_0=1$ und berechnen die Ableitungsfunktion $f'(x)=-2x+5$. \pause Damit
+\vspace{10mm}
+\Large
+\begin{itemize}
+\item $x_1=x_0-\frac{f(x_0)}{f'(x_0)}=1-\frac{2}{3}=\frac{1}{3}$\\\quad\\\pause
+\item $x_2=x_1-\frac{f(x_1)}{f'(x_1)}=\frac{1}{3}-\frac{-\frac{1}{9}+\frac{5}{3}-2}{-\frac{2}{3}+5}=\frac{1}{3}-\frac{-\frac{4}{9}}{\frac{13}{3}}=\frac{17}{39}$
+\end{itemize}
+\end{frame}
+%
+%
+%--------------------------------------------
+\subsection{Eigenschaften}
+%
+\begin{frame}\frametitle{Quadratische Konvergenz}
+Es sei $f:I \to \R$ eine (beliebig oft) differenzierbare Funktion und $\bar x \in I$ eine einfache Nullstelle von $f$. Dann gilt in \textit{hinreichender} Nähe von $\bar x$:
+$$
+\exists L >0 \text{ mit } \quad |\bar x - x_{k+1}|\le L \cdot |\bar x - x_k|^2
+$$ 
+\quad\\\quad\\
+(Das Newton-Verfahren ist somit lokal quadratische konvergent)
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+$f: [0,1] \to \R, x \mapsto \cos(x\cdot \pi)$ mit Startwerten $x_0=\frac{1}{4}$ und $\tilde x_0=0$.\\\pause
+$\Rightarrow \quad f'(x)=-\pi\sin(x) \text{ und } f''(x)=-\pi^2\cos(x)$\pause
+\begin{align*}
+x_1&=x_0-\frac{f(x_0)}{f'(x_0)}=\frac{1}{4}-\frac{\cos(\frac{\pi}{4})}{-\pi\sin(\frac{\pi}{4})}=\frac{1}{4}+\frac{1}{\pi}\\
+&\\
+\Rightarrow&\quad |\bar x - x_1|=\left|\frac{1}{2}-(\frac{1}{4}+\frac{1}{\pi})\right|\le \frac{1}{12}\le  \frac{\pi}{2}(\frac{1}{4})^2=\frac{\pi}{2}|\bar x - x_0|^2
+\end{align*}\pause
+Im Gegensatz dazu ist $\tilde x_0=0$ ein ungeeigneter Startwert, da $f'(0)=-\pi \sin(0)=0$ gilt und somit $\tilde x_1$ nicht definiert ist. Damit konvergiert auch das Newton-Verfahren für diesen Startwert nicht.
+\end{frame}
+%
+\begin{frame}\frametitle{Nachteile des Newton-Verfahrens}
+\begin{itemize}
+\item Nur nahe einer (einfachen) Nullstelle schnell konvergent
+\item Nahe lokalen Extremstellen sehr schlecht konvergent
+\item bei $f'(x)=0$ nicht definiert
+\item Ableitung wird benötigt und muss ausgewertet werden
+\end{itemize}\pause
+\vfill
+Alternative Verfahren:
+\begin{itemize}
+\item Sekantenverfahren: langsamer, aber ohne Ableitung
+\item Bisektionsverfahren: langssamer, ohne Ableitung, immer konvergent
+\end{itemize}
+\end{frame}
+%
+\section{Weitere Verfahren zur Nullstellenbestimmung}
+\makeSectionDividerPage
+%%%
+%
+\begin{frame}\frametitle{Sekantenverfahren}
+\begin{columns}[T]
+\begin{column}{0.5 \textwidth}
+Es sei $f: I \to \R$ eine im Intervall $I$ stetige Funktion $f$. Dann ist das \highlightDef{Sekantenverfahren} das durch \vspace{2mm}
+$$
+\begin{cases}
+x_0, x_1 \in I \text{ mit } x_0\ne x_1\\
+x_{k+1}=x_{k-1}-\frac{f(x_{k-1})(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}
+\end{cases}
+$$
+ \vspace{2mm}
+definierte Iterationsverfahren.
+\end{column}
+\begin{column}{0.5 \textwidth}
+\includegraphics[scale=0.4]{Sekante.png}
+\end{column}
+\end{columns}
+\pause \vspace{10mm}
+Die Geradengleichung der Sekante ist 
+$$
+g(x)=f(x_{k-1})+(f(x_k)-f(x_{k-1}))\cdot \frac{x-x_{k-1}}{x_k-x_{k-1}}
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Bisektionsverfahren}
+Es sei $f: I \to \R$ eine im Intervall $I$ stetige Funktion $f$. Dann ist das \highlightDef{Bisektionsverfahren} das durch \vspace{2mm}
+$$
+\begin{cases}
+a_0, b_0 \in I \text{ mit } sign(f(a_0)f(b_0))=-1\\
+c_k=\frac{a_k+b_k}{2}\\
+\begin{cases}
+\text{wenn } sign(f(a_k)f(c_k))=1, \text{ dann } a_{k+1}=c_k \text{ und } b_{k+1}=b_k\\
+\text{wenn } sign(f(b_k)f(c_k))=1, \text{ dann } b_{k+1}=c_k \text{ und } a_{k+1}=a_k\\
+\end{cases}
+\end{cases}
+$$
+ \vspace{2mm}
+definierte Iterationsverfahren.
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,519 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Partielle Differentialgleichungen}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Differentialgleichungen}
+\makeSectionDividerPage
+%%%
+%
+\subsection{Definition}
+%
+\begin{frame}\frametitle{Definition: Differentialgleichung}
+Unter einer \highlightDef{Differentialgleichung} versteht man eine Gleichung, in der neben der gesuchten Funktion auch Ableitungen der Funktion auftreten.\\
+Je nachdem, ob nur Ableitungen der Funktion nach einer Variablen oder mehrere partielle Ableitungen geleichzeitig auftreten, unterscheidet man nach \highlightDef{gewöhnlichen} und \highlightDef{partiellen} Differentialgelichungen.\\
+Die höchste auftretende Ableitungsordnung der gesuchten Funktion nennt man die \highlightDef{Ordnung} der Differentialgleichung.
+
+
+\end{frame}
+%
+\begin{frame}\frametitle{Überblick/Beispiele}
+\small
+\begin{columns}[T] % align columns
+	\begin{column}{.55\textwidth}
+		\begin{itemize}
+			\item[] $f'(x)=a(x)f(x)+c(x)$\\\quad
+			
+			\item[] $f''(x)=g(f'(x),f(x),x)$\\\quad
+			
+			\item[] $\begin{cases}f'(x)=a(x)f(x) & \text{auf } [0,1]\\ f(0)= y_0 \end{cases}$\\\quad
+			
+			
+			\item[] $\frac{\partial}{\partial x}u(x,y)+\frac{\partial}{\partial y}u(x,y)=g(x,y)$\\\quad
+			
+			\item[] $\frac{\partial^2}{\partial x^2}u(x,y)+\frac{\partial^2}{\partial y^2}u(x,y)=g(x,y)$\\\quad
+			
+			\item[] $\begin{cases}\frac{\partial^2}{\partial x^2}u+\frac{\partial^2}{\partial y^2}u=g& \text{auf } \Omega \subset \R^2 \\ u_{|\partial \Omega}= f \end{cases}$
+		\end{itemize}
+	\end{column}%
+\hfill%
+\begin{column}{.28\textwidth}
+\quad\\
+lin. DGL 1. Ordnung\\\quad\\
+gewöhnliche DGL 2. Ordnung\\\vspace*{-2mm}\underline{\hspace{30mm}}\\
+\vspace*{2mm}
+Anfangswertproblem\\\underline{\hspace{30mm}}\\\vspace*{2mm}
+partielle DGL 1. Ordnung
+\\\quad\\
+partielle DGL 2. Ordnung\\\vspace*{-2mm}\underline{\hspace{30mm}}\\\vspace*{2mm}
+Randwertproblem
+\end{column}%
+\hfill%
+\begin{column}{.24\textwidth}
+\vspace{-4mm}
+\begin{eqnarray*}
+\left.\begin{array}{l} \\ 
+\\ \\ \\ \\ \\ \\ \end{array}\right\} \text{gew. DGLen}
+\end{eqnarray*}
+\vspace{-6mm}
+\begin{eqnarray*}
+\left.\begin{array}{l} \\ 
+\\ \\ \\ \\ \\ \\ \\ \end{array}\right\} \text{part. DGLen}
+\end{eqnarray*}
+\end{column}%
+\end{columns}
+
+
+\end{frame}
+%
+%\subsection{Wiederholung Analysis}
+%
+%\begin{frame}\frametitle{Lineare DGL 1. Ordnung}
+%Erinnerung: ``Kochrezept'' für das Lösen gewöhnlicher linearer Differentialgleichungen 1. Ordnung:
+%\begin{itemize}
+%\item Homogener Fall: $f'(x)=a(x)f(x)$\\
+%Dann sind alle Lösungen von der Form
+%$$
+%f(x)=c\cdot e^{A(x)} \qquad \forall x \in I
+%$$
+%wobei $c \in \R$ und $A(x)$ eine Stammfunktion von $a(x)$ ist. 
+%\item Inhomogener Fall $f'(x)=a(x)f(x)+s(x)$\\
+%Dann sind alle Lösungen von der Form $f=f_h + f_s$, wobei $f_h$ eine Lösung der homogenen DGL ist und 
+%$$
+%f_s(x)=c(x)\cdot e^{A(x)}
+%$$
+%mit
+%$$
+%c(x)=\int s(x)e^{-A(x)}dx
+%$$
+%\end{itemize}
+%
+%\end{frame}
+%
+%
+%\begin{frame}\frametitle{Beispiel: $f'(x)=4x^3 f(x) + x^3 \qquad \forall x \in (0, \infty)$}
+%Als ersten Schritt suchen wir die allgemeine Lösung der homogenen DGL $f'(x)=4x^3 f(x)$.  Hier ist $a(x)=4x^3$ und hat somit die Stammfunktion $A(x)=x^4$. Damit:
+%	$$
+%	f_h(x)=c\cdot e^{A(x)}=c\cdot e^{x^4} \qquad \text{ mit } c \in \R
+%	$$ 
+%Als nächstes suchen wir eine spezielle Lösung der inhomogenen Differentialgleichung $f'(x)=4x^3 f(x) + x^3$: $f_s(x)=c(x)\cdot e^{A(x)}=c(x)\cdot e^{x^4}$ mit 
+%$$
+%c(x)=\int s(x)e^{-A(x)}dx=\int {x^3}e^{-x^4}dx=-\frac{1}{4}e^{-x^4}
+%$$
+%Somit
+%$$
+%f_s(x)=c(x)\cdot e^{A(x)}=-\frac{1}{4}e^{-x^4}\cdot e^{x^4}=-\frac{1}{4}
+%$$
+%als spezielle Lösung der inhomogenen Differentialgleichung.\\ 
+%Insgesamt ergibt sich 
+%$$
+%f(x)=f_h(x)+f_s(x)=c\cdot e^{x^4}-\frac{1}{4} \qquad \text{ mit } c \in \R.
+%$$
+%
+%\end{frame}
+%
+\subsection{Partielle Differentialgleichungen}
+%
+\begin{frame}\frametitle{Definition und Beispiel}
+Eine \highlightDef{partielle Differentialgleichung} (PDE, engl. \textit{partial differential equation}) ist eine Differentialgleichung in der Ableitungen nach mehreren, unabhängigen Variablen vorkommen.\\\quad\\
+Beispiel: 
+$$
+\frac{\partial^2}{\partial x^2} u(x,y) - \frac{\partial^2}{\partial y^2} u(x,y) =0 \quad \forall (x,y) \in \Omega = [0,1]^2
+$$
+\underline{Aufgabe}\\
+Zeigen Sie, dass $u(x,y):=c\cdot \exp(x+y)$ für alle $c \in \R$ eine Lösung der obigen partiellen DGL ist.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Grundtypen von PDE 2. Ordnung}
+Es gibt 3 Grundtypen von partiellen Differentialgleichungen, zu denen sich zwar nicht alle partiellen Differentialgleichungen zuordnen lassen, aber zumindest die meisten der ``wichtigen''. Für Ordnung 2 ist diese wir folgt:\\\quad
+
+\begin{itemize}
+	\item elliptisch \hspace{16mm}$-\Delta u = f$\\\quad	
+	\item parabolisch \hspace{4.25mm}$\frac{\partial}{\partial t}u-\Delta u = f$\\\quad
+	\item hyperbolisch  \hspace{1mm}$\frac{\partial^2}{\partial t^2}u-\Delta u = f$\\\quad
+\end{itemize}
+wobei $-\Delta = -\frac{\partial^2}{\partial x^2}-\frac{\partial^2}{\partial y^2}$ der \highlightDef{Laplace-Operator} ist.\\
+Die Namen der der Typen kommt von den notwendigen Operationen um die Differentialgleichungen des jeweiligen Typs in die obige Normalform zu transformieren.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Elliptische Differentialgleichungen $-\Delta u = f$}
+\begin{columns}[T] % align columns
+	\begin{column}{.55\textwidth}
+		Elliptische Differentialgleichungen beschreiben Probleme die \textbf{zeitunabhängig} sind (stationär).\\ Für die eindeutige Lösbarkeit benötigen solche Probleme in der Regel Vorgaben auf dem Rand.\\
+		\quad\\
+Beispiele:
+\begin{itemize}
+	\item $-\Delta u=0$ \ (Laplace-Gleichung)
+	\item Minimalflächen (Flächen mit vorgebenem Rand und geringstem Flächeninhalt)
+\end{itemize}
+	\end{column}%
+\hfill%
+\begin{column}{.45\textwidth}
+\includegraphics[scale=0.35]{Grafiken/Scherksche_Minimalflaeche.png}
+\end{column}%
+\end{columns}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Parabolische Differentialgleichungen $\frac{\partial}{\partial t}u-\Delta u = f$}
+\small
+Parabolische Differentialgleichungen beschreiben \textbf{zeitabhängige} (nicht-stationäre) Probleme. Wichtigste Beispiele sind die \highlightDef{Wärmeleitungsgleichung} 
+$$
+\frac{\partial}{\partial t} u(x,y,t) - a\Delta u(x,y,t) = 0
+$$
+und die Korteweg-de-Vries-Gleichung (PDE 3. Ordnung)
+$$
+  \frac{\partial u}{\partial t}
+  + 6 u \cdot \frac{\partial u}{\partial x}
+  + \frac{\partial^3 u}{\partial x^3} = 0
+$$
+für Wasserwellen nahe dem Ufer.\\
+Parabolische Differentialgleichungen benötigen in der Regel Anfangsbedingungen.\\
+\includegraphics[scale=0.35]{Grafiken/heat_eqn/a94b735029e54b7fde85d265c46c0780SHqlTUCTsslTIoMj-0.png}
+\includegraphics[scale=0.35]{Grafiken/heat_eqn/a94b735029e54b7fde85d265c46c0780SHqlTUCTsslTIoMj-11.png}
+\includegraphics[scale=0.35]{Grafiken/heat_eqn/a94b735029e54b7fde85d265c46c0780SHqlTUCTsslTIoMj-16.png}
+\includegraphics[scale=0.35]{Grafiken/heat_eqn/a94b735029e54b7fde85d265c46c0780SHqlTUCTsslTIoMj-24.png}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Hyperbolische Differentialgleichungen $\frac{\partial^2}{\partial t^2}u-\Delta u = f$}
+Hyperbolische Differentialgleichungen beschreiben meist schwingende, sich über die Zeit räumlich-ausbreitende Phänomene wie Wellen.\\
+Die eindeutige Lösung hyperbolischer Differentialgleichungen benötigt in der Regel sowohl Anfangs- als auch Randbedingungen.\\
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-2.png}
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-6.png}
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-16.png}
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-21.png}
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-26.png}
+\includegraphics[scale=0.4]{Grafiken/Wave/2D_Wave_Function_resize-38.png}
+\end{frame}
+%
+\section{Finite Differenzen Methode (FDM)}
+\makeSectionDividerPage
+%%%
+%
+\subsection{Motivation}
+%
+\begin{frame}\frametitle{Motivation}
+Die exakte, analytische Lösung einer von (partiellen) Differentialgleichungen zu ermitteln ist oft sehr schwierig oder gar unmöglich. Trotzdem sind Differentialgleichungen in der Anwendung sehr wichtig, z.B. in der Physik, beim Flugzeugbau oder auch in der Finanzmathematik.\\\vfill 
+In diesem Bereichen ist oft aber keine exakte Lösung notwendig, sondern es genügen Approximationen.\\\vfill 
+Eine effiziente Methode zur Ermittlung solcher Approximationen ist die \highlightDef{Finite Differenzen Methode} (FDM). Bei dieser wird der Definitionsbereich $\Omega$ durch endlich-viele Punkte diskretisiert und es werden die Ableitungen (Differentialquotienten) durch geeignete Differenzenquotienten an diesen Punkten approximiert. Dadurch kann das Problem auf das Lösen eines LGS reduziert werden.
+\end{frame}
+%
+%
+\subsection{Approximation von Ableitungen}
+%
+\begin{frame}\frametitle{Taylor-Entwicklung}
+Es sei $f: (a,b) \to \R$ eine glatte Funktion und $x_0 \in (a,b)$. Dann heißt die Potenzreihe
+$$
+T_f(x,x_0):=\sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k
+$$
+die \highlightDef{Taylorreihe} von $f$ mit Entwicklungstelle $x_0$.\\[5mm]	
+
+Es gilt:
+\begin{itemize}
+\item $T_f(x_0,x_0)=f(x_0)$
+\item $\frac{d^n}{dx^n}T_f(x_0,x_0)=f^{(n)}(x_0) \quad \forall n \in \N$
+\end{itemize}\vfill 
+Die Partialsummen $T^n_f(x,x_0):=\sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$ der Taylorreihe verwenden wir als Approximation der Funktion $f$ in der Nähe von $x_0$.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Zentraler Differenzenquotient I}
+\includegraphics[scale=0.3]{Grafiken/Numerische_Differentiation.png}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Zentraler Differenzenquotient II}
+Zuerst suchen wir eine gute Approximation der ersten Ableitung einer Funktion $f:I \to \R$. Dazu betrachten wir $T^1_f(x,x_0)$ für ``kleines'' $h>0$ und $x=x_0+h$ und $x=x_0-h$:
+\begin{align*}
+f(x_0+h) &\thickapprox T^1_f(x_0+h,x_0)=f(x_0)+f'(x_0)\cdot h\\
+&\\
+f(x_0-h) &\thickapprox T^1_f(x_0-h,x_0)=f(x_0)-f'(x_0)\cdot h
+\end{align*}
+Stellt man diese beiden Gleichungen nach $f'(x_0)$ um und kombiniert sie, so erhält man
+$$
+f'(x_0) \thickapprox \frac{f(x_0+h)-f(x_0-h)}{2h} =:\frac{\Delta f}{\Delta x}(x_0)  \ \text{ für } \Delta x=h
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Zentraler Differenzenquotient III}
+Mit dem gleichen Vorgehen findet man auch Approximationen höherer Ableitungen, insbesonder für die 2. Ableitung. Dazu betrachten wir $T^2_f(x,x_0)$ für ``kleines'' $h>0$ und $x=x_0+h$ und $x=x_0-h$:
+\begin{align*}
+f(x_0+h) &\thickapprox T^2_f(x_0+h,x_0)=f(x_0)+f'(x_0)\cdot h+f''(x_0)\cdot \frac{h^2}{2}\\
+&\\
+f(x_0-h) &\thickapprox T^2_f(x_0-h,x_0)=f(x_0)-f'(x_0)\cdot h +f''(x_0)\cdot \frac{h^2}{2}
+\end{align*}
+Stellt man diese beiden Gleichungen nach $f''(x_0)$ um und kombiniert sie, so erhält man
+$$
+f''(x_0) \thickapprox \frac{f(x_0+h)-2f(x_0)+f(x_0-h)}{h^2}=:\frac{\Delta^2 f}{\Delta x^2}(x_0) \ \text{ für } \Delta x=h
+$$
+\end{frame}
+%
+%
+\subsection{FDM in einer Dimension}
+%
+\begin{frame}\frametitle{FDM in einer Dimension I}
+Als erstes Beispiel betrachten wir das Randwertproblem\footnote{Offensichtlich ist die exakte Lösung $f(x)=x^2$}
+$$
+\begin{cases}f'(x)=2x & \text{auf } [0,1] \\ f(0)=0 \\ f(1)=1 \end{cases}
+$$
+Wir unterteilen das Intervall $[0,1]$ in drei Teile mit den äquidistanten Punkten $x_0=0, x_1=\frac{1}{3}, x_2=\frac{2}{3}$ und $x_3=1$ (d.h. $\Delta x=h=\frac{1}{3}$). Weiter nehmen wir an, dass $f'(x_i) =\frac{\Delta f}{\Delta x}(x_i)$ für $i \in \{1,2\}$.  Damit erhalten wir die Gleichungen:
+\begin{align*}
+\frac{2}{3}&=2x_1=f'(x_1)=\frac{f(x_2)-f(x_0)}{2h}=\frac{f(\frac{2}{3})-f(0)}{\frac{2}{3}}=\frac{3}{2}f(\frac{2}{3})\\
+\frac{4}{3}&=2x_2=f'(x_2)=\frac{f(x_3)-f(x_1)}{2h}=\frac{f(1)-f(\frac{1}{3})}{\frac{2}{3}}=\frac{3}{2}(1-f(\frac{1}{3}))
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in einer Dimension II}
+$$
+\begin{cases}f'(x)=2x & \text{auf } [0,1] \\ f(0)=0 \\ f(1)=1 \end{cases}
+$$\vfill
+Durch Umstellen der Gleichungen erhalten wir
+$$
+f(\frac{2}{3})=\frac{4}{9} \ \text{ und }\ f(\frac{1}{3})=\frac{1}{9}
+$$	 \vfill
+Damit stimmt in diesem Fall die approximierte Lösung der DGL an den Punkten $x_0,x_1,x_2$ und $x_3$ mit der exakten Lösung überein. Für Auswertungen an Stellen zwischen den Gitterpunkten muss geeignet interpoliert werden, z.B. linear oder mit Splines.	
+\end{frame}
+%
+%
+\subsection{FDM in zwei Dimensionen}
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen I}
+Betrachten wir zuerst eine partielle DGL 1. Ordnung:
+$$
+\begin{cases} \frac{\partial}{\partial x} u(x,y)-\frac{\partial}{\partial y}u(x,y)= x-y & \text{ auf } \Omega=[0,1]^2\\ \hspace{19.5mm}u_{|\partial \Omega}(x,y)=-\min(x,y) \end{cases}
+$$
+und wählen die Diskretisierung mit $h_x=\Delta x = \frac{1}{3}$ und $h_y=\Delta y=\frac{1}{2}$. Damit ergeben sich die Gitterpunkte $(x_i,y_j)$ mit $x_1=0, x_2=\frac{1}{3}, x_3=\frac{2}{3}$ und $x_4=1$ sowie $y_1=0, y_2=\frac{1}{2}$ und $y_3=1$.\\	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen I}
+Wir erhalten mit Hilfe des zentralen Differenzenquotienten so zwei Gleichungen
+\begin{itemize}
+\item[(1)]
+\begin{align*}
+\frac{1}{3}-\frac{1}{2}&=x_2-y_2=\frac{u(x_3,y_2)-u(x_1,y_2)}{2h_x}-\frac{u(x_2,y_3)-u(x_2,y_1)}{2h_y}\\
+&=\frac{u(x_3,y_2)-u(0,y_2)}{\frac{2}{3}}-\frac{u(x_2,1)-u(x_2,0)}{1}\\
+&=\frac{3}{2}u(x_3,y_2)+\frac{1}{3}\\
+&\\
+\Longrightarrow\quad  & u(x_3,y_2)= -\frac{1}{3} 
+\end{align*}
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen I}
+und
+\begin{itemize}
+\item[(2)]
+\begin{align*}
+\frac{2}{3}-\frac{1}{2}&=x_3-y_2=\frac{u(x_4,y_2)-u(x_2,y_2)}{2h_x}-\frac{u(x_3,y_3)-u(x_3,y_1)}{2h_y}\\
+&=\frac{u(1,y_2)-u(x_2,y_2)}{\frac{2}{3}}-\frac{u(x_3,1)-u(x_3,0)}{1}\\
+&=\frac{3}{2}(y_2-u(x_2,y_2)+x_3\\
+&=\frac{3}{4}-\frac{3}{2}u(x_2,y_2)+\frac{2}{3}\\
+&\\
+\Longrightarrow\quad  & u(x_3,y_2)= -\frac{1}{6} 
+\end{align*}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen I}
+Somit erhalten wir
+\begin{align*}
+u(\frac{1}{3},\frac{1}{2})&=u(x_2,y_2)=- \frac{1}{6}\\
+u(\frac{2}{3},\frac{1}{2})&=u(x_3,y_2)=- \frac{1}{3}
+\end{align*}
+was an diesen Punkten der exakten Lösung $u(x,y)=-xy$ des Randwertproblems
+$$
+\begin{cases} \frac{\partial}{\partial x} u(x,y)-\frac{\partial}{\partial y}u(x,y)= x-y & \text{ auf } \Omega=[0,1]^2\\ \hspace{19.5mm}u_{|\partial \Omega}(x,y)=-\min(x,y) \end{cases}
+$$
+entspricht.
+\end{frame}
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen I}
+\includegraphics[scale=0.7]{Grafiken/xy_plot.png}
+\includegraphics[scale=0.5]{Grafiken/xy_map.png}
+\end{frame}
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+Nun verwenden wir die FDM um eine Poisson-Gleichung, eine partielle DGL 2. Ordnung vom elliptischen Typ, numerisch zu lösen:
+$$
+\begin{cases} -\frac{\partial^2}{\partial x^2}u(x,y)-\frac{\partial^2}{\partial y^2}u(x,y)= g(x,y) & \text{auf } \Omega =[0,1]^2\\\hspace{25.5mm}u_{|\partial \Omega}(x,y)=f(x,y)
+\end{cases}
+$$
+
+Wir betrachten eine äquidistante Diskretisierung von $[0,1]^2$ mit $\Delta x=\Delta y=h=\frac{1}{n-1}$.  Damit ergeben sich mit Hilfe des zentralen Differenzenquotienten für die zweite Ableitung die folgenden Gleichungen für $i,j \in \{2,...,n-1\}$
+\small
+\begin{align*}
+g(x_i,y_j)&=-\frac{\Delta^2}{\Delta x^2}u(x_i,y_j)-\frac{\Delta^2}{\Delta y^2}u(x_i,y_j) \\
+&=\frac{-u(x_{i+1},y_j)-u(x_{i},y_{j+1})+4u(x_i,y_j)-u(x_{i-1},y_j)-u(x_{i},y_{j-1})}{h^2}
+\end{align*}
+\normalsize
+für $x_{i+1}=x_i+h$ und $y_{j+1}=y_j+h$ mit $x_1=y_1=0$.
+\end{frame}
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+Jede solche Gleichung enthält fünf (noch) unbekannte Funktionswerte, die wir approximieren möchten. Umgestellt nach den konstanten Teilen, ergibt sich das LGS:
+\small
+\begin{align*}
+h^2\cdot g(x_i,y_j)=\underbrace{-u(x_{i+1},y_j)}_{=:u_{i+1,j}}-\underbrace{u(x_{i},y_{j+1})}_{=:u_{i,j+1}}+4\underbrace{u(x_i,y_j)}_{=:u_{i,j}}-\underbrace{u(x_{i-1},y_j)}_{=:u_{i-1,j}}-\underbrace{u(x_{i},y_{j-1})}_{=:u_{i,j-1}}
+\end{align*}
+\normalsize 
+Ausnahmen bilden hier die Gleichungen für $i=2$ und/oder $j=2$ sowie $i=n-1$ und/oder $j=n-1$ in denen die bereits vorgebenen Funktionswerte auf dem Rand vorkommen. Diese Typen von Gleichungen enthalten weniger Unbekannte.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+\tiny
+\begin{align*}
+&i=2, j=2 & h^2\cdot g(x_i,y_j) + u_{1,2}+u_{2,1} &=-u_{3,2}-u_{2,3}+4u_{2,2}\\\quad\\
+&i=2, j=n-1 & h^2\cdot g(x_i,y_j) + u_{1,n-1}+u_{2,n} &=-u_{3,n-1}+4u_{2,n-1}-u_{2,n-2}\\\quad\\
+&i=2, j\notin \{2,n-1\} & h^2\cdot g(x_i,y_j) + u_{1,j} &=-u_{3,j}-u_{2,j+1}+4u_{2,j}-u_{2,j-1}\\\quad\\
+&i=n-1, j=2 & h^2\cdot g(x_i,y_j) + u_{n,2}+u_{n-1,1} &=-u_{n-1,3}+4u_{n-1,2}-u_{n-2,2}\\\quad\\
+&i=n-1, j=n-1 & h^2\cdot g(x_i,y_j) + u_{n,n-1}+u_{n-1,n} &=4u_{n-1,n-1}-u_{n-2,n-1}-u_{n-1,n-2}\\\quad\\
+&i=n-1, j\notin \{2,n-1\} & h^2\cdot g(x_i,y_j) + u_{n-2,j} &=-u_{n-1,j+1}+4u_{n-1,j}-u_{n-2,j-1}-u_{n-1,j-1}\\\quad\\
+&i\notin \{2,n-1\}, j=2 & h^2\cdot g(x_i,y_j) + u_{i,1} &=-u_{i+1,2}-u_{i,3}+4u_{i,2}-u{i-1,2}\\\quad\\
+&i\notin \{2,n-1\}, j=n-1 & h^2\cdot g(x_i,y_j) + u_{i,n}&=-u_{i+1,n}+4u_{i,n-1}-u_{i-1,n-1}-u_{i,n-2}
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+Nummeriert man nun die $u_{i,j}$ mit $ i,j \in \{2,...,n-1\}$ als $u_k$ in der Reihenfolge $k=(i-2)\cdot (n-2) +(j-1)$ ergibt sich das LGS $Au=b$ mit
+\small
+$$
+A=\left(\begin{array}{c|c|c|c|c|c} 
+T & -I_{n-2} & 0&...&&0 \\\hline
+-I_{n-2} & T & -I_{n-2} & 0&... &0\\\hline
+0 & -I_{n-2}& T & -I_{n-2}& ... &0\\\hline
+...\\\hline
+0 & ...&&0&-I_{n-2}&T
+%	\begin{array}{rrrrrrr}
+%	4&-1&0&0&&...&0 \\-1&4&-1&0&&...&0\\0&-1&4&-1&0&...&0\\...\\0&...&&0&-1&4&-1 \\0&...&&0&0&-1&4
+%	\end{array}
+%	 & 
+%	 \begin{array}{rrrrrrr}
+%	 -1&0&...&&0\\ 0&-1&0&...&0\\ 0&0&-1&...&0\\...\\ 0&&...&-1&0\\ 0&&...&0&-1
+%	 \end{array}
+%	  &...&0 \\\hline \\ 
+%	  \begin{array}{rrrrrrr}
+%	  -1&0&...&&&&0\\ 0&-1&0&&&...&0\\ 0&0&-1&...&...&...&0\\...\\ 0&&...&&&-1&0\\ 0&&...&&&0&-1
+%	  \end{array}
+%	   &
+%	    \begin{array}{rrrrrrr}
+%	    4&-1&0&...&0 \\-1&4&-1&...&0\\0&-1&4&-1...&0\\...\\0&...&-1&4&-1 \\0&...&0&-1&4
+%	    \end{array}
+%	     &...&0 
+\end{array}\right)
+$$
+wobei
+$$
+T= \left(\begin{array}{rrrrrrr}
+	4&-1&0&0&&...&0 \\-1&4&-1&0&&...&0\\0&-1&4&-1&0&...&0\\...\\0&...&&0&-1&4&-1 \\0&...&&0&0&-1&4
+	\end{array}\right) \in \R^{n-2 \times n-2}
+$$
+\normalsize
+und $I_{n-2}\in \R^{n-2 \times n-2}$ die Einheitsmatrix ist.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+...und den Vektoren
+$$
+u=\begin{pmatrix}u_1 \\ u_2 \\ ... \\u_{(n-2)^2} \end{pmatrix}
+$$
+und 
+$$
+b=\left( \begin{array}{c} b_2 \\\hline b_3 \\\hline ... \\\hline b_{n-2}\\\hline b_{n-1} \end{array}\right) \in \R^{(n-2)^2}
+$$
+wobei die Teilvektoren $b_m \in \R^{n-2}$ wie folgt besetzt sind:
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+Für $m\notin \{2,n-1\}$ ist
+\small
+$$
+b_m=\left(\begin{array}{l}h^2g(x_m,y_2)+u_{m,1} \\ h^2g(x_m,y_3)\\ ... \\ h^2g(x_m,y_j)\\...\\h^2g(x_m,y_{n-2})\\ h^2g(x_m,y_{n-1})+u_{m,n} \end{array}\right)=\left(\begin{array}{l}h^2g(x_m,y_2)+f(x_m,y_1) \\ h^2g(x_m,y_3)\\ ... \\ h^2g(x_m,y_j)\\...\\h^2g(x_m,y_{n-2})\\ h^2g(x_m,y_{n-1})+f(x_m,y_n) \end{array}\right)
+$$
+und 
+$$
+b_2=\left(\begin{array}{lll}h^2g(x_2,y_2)&+f(x_2,y_1)& +f(x_1,y_2)\\ h^2g(x_2,y_3)&&+f(x_1,y_3)\\ ... \\ h^2g(x_2,y_j)&&+f(x_1,y_j)\\...\\h^2g(x_2,y_{n-2})&&+f(x_1,y_{n-2})\\ h^2g(x_2,y_{n-1})&+f(x_2,y_n)&+f(x_1,y_{n-1}) \end{array}\right)
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II}
+und
+$$
+b_{n-1}=\left(\begin{array}{lll}h^2g(x_{n-1},y_2)&+f(x_{n-1},y_1)& +f(x_n,y_2)\\ h^2g(x_{n-1},y_3)&&+f(x_n,y_3)\\ ... \\ h^2g(x_{n-1},y_j)&&+f(x_n,y_j)\\...\\h^2g(x_{n-1},y_{n-2})&&+f(x_n,y_{n-2})\\ h^2g(x_{n-1},y_{n-1})&+f(x_{n-1},y_n)&+f(x_n,y_{n-1}) \end{array}\right)
+$$
+
+Insgesamt hat sich nun die numerische Lösung des Randwertproblems auf das Lösen eines linearen Gleichungssystems reduziert.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{FDM in zwei Dimensionen II: konkretes Beispiel}
+$$
+\begin{cases} -\frac{\partial^2}{\partial x^2}u(x,y)-\frac{\partial^2}{\partial y^2}u(x,y)= g(x,y) & \text{auf } \Omega =[0,1]^2\\\hspace{25.5mm}u_{|\partial \Omega}(x,y)=f(x,y)
+\end{cases}
+$$
+mit $g(x,y)=xy$ und $f(x,y)=1$, sowie $n=5$, und somit $h=\frac{1}{4}$ und $x_1=y_1=0, x_2=y_2=\frac{1}{4}, x_3=y_3=\frac{1}{2}, x_4=y_4=\frac{3}{4}$ und $x_5=y_5=1$.
+Damit ergibt sich das LGS 
+\tiny
+$$
+\left(\begin{array}{c|c|c} 
+	\begin{array}{rrr}4 &-1 &0\\ -1 & 4 &-1 \\ 0&-1&4 \end{array}
+	& \begin{array}{rrr} -1& 0&0 \\ 0 & -1&0 \\ 0&0&-1\end{array}
+	& 0
+ \\\hline 
+	\begin{array}{rrr}-1& 0&0 \\ 0 & -1&0 \\ 0&0&-1 \end{array}
+	& \begin{array}{rrr}4 &-1 &0\\ -1 & 4 &-1 \\ 0&-1&4  \end{array}
+	& \begin{array}{rrr} -1& 0&0 \\ 0 & -1&0 \\ 0&0&-1\end{array}
+\\\hline 
+	0
+	&\begin{array}{rrr}-1& 0&0 \\ 0 & -1&0 \\ 0&0&-1 \end{array}
+	& \begin{array}{rrr}4 &-1 &0\\ -1 & 4 &-1 \\ 0&-1&4  \end{array} 
+\end{array}\right)
+\cdot
+\begin{pmatrix}u_1\\u_2\\u_3\\u_4\\u_5\\u_6\\u_7\\u_8\\u_9 \end{pmatrix}
+=
+\left(\begin{array}{lll} \frac{1}{16}\cdot \frac{1}{16}& +1&+1  \\ \frac{1}{16}\cdot \frac{1}{8} &&+1\\ \frac{1}{16}\cdot \frac{3}{16} &+1&+1\\\hline \frac{1}{16}\cdot \frac{1}{8} &+1&\\ \frac{1}{16}\cdot \frac{1}{4} &&\\ \frac{1}{16}\cdot \frac{3}{8} &+1&\\\hline \frac{1}{16}\cdot \frac{3}{16} &+1&+1  \\ \frac{1}{16}\cdot \frac{3}{8}&&+1 \\ \frac{1}{16}\cdot\frac{9}{16}&+1&+1 \end{array}\right)
+$$
+
+\end{frame}
+%
+\subsection{FDM in $n$ Dimensionen}
+%
+\begin{frame}\frametitle{FDM allgemein}
+Die Finite-Differenzen-Methode lässt sich auch auf partielle Differentialgleichungen in mehr als 2 Dimensionen und Ordnung größer als 2 anwenden. Allerdings wird das zu lösende LGS (und die Ermittlung des selben) dann nochmal aufwendiger.
+
+\end{frame}
+%
+
+\end{document}

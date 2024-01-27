@@ -1,0 +1,438 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Differentialgleichungen}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Differentialgleichungen}
+\makeSectionDividerPage
+%%%
+%
+%
+\begin{frame}\frametitle{Was wir schon kennen}
+\begin{itemize}
+\item Sei $f:\R \to \R$ differenzierbar. Dann folgt durch die Gleichung
+$$
+f'(x)=f(x)
+$$
+dass es ein $c\in \R$ gibt mit $f(x)=c\cdot e^x$.\vfill
+\item Es sei $f: I \to \R$ eine Funktion. Eine Stammfunktion $F$ von $f$ ist charakterisiert durch
+$$
+F'(x)=f(x)
+$$
+\end{itemize}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition}
+Es sei $f: I \to \R$ eine $n$-mal differenzierbare Funktion und $G: I\times\R^{n} \to \R$. Dann nennt man die Gleichung
+$$
+f^{(n)}(x)=G(x,f(x),f'(x),...,f^{(n-1)}(x)) \qquad \forall x \in I
+$$
+eine \highlightDef{gewöhnliche Differentialgleichung $n$-ter Ordnung}.
+\pause\vfill
+\highlightDef{Beispiel}\\
+$$
+f''(x)=f'(x)\cdot \sin(f(x))+3x
+$$
+ ist eine gewöhnliche DGL 2. Ordnung.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Anwendungsbereiche}
+\begin{itemize}
+\item Differentialgeometrie
+\item Physik/Mechanik, z.B. Bewegung mit konstanter Geschwindigkeit: $\frac{d}{dt}v=0$
+\item Finanzmathematik (stochastische Differentialgleichungen), z.B. Hull-White-Modell
+\item Informatik, z.B. bei automatisierter Bildbearbeitung
+\item ...
+\end{itemize}
+\end{frame}
+%
+%
+%--------------------------------------------
+\section{Lineare Differentialgleichungen}
+\makeSectionDividerPage
+%%%
+\subsection{Grundbegriffe}
+%
+\begin{frame}\frametitle{Definition: Lineare Diffentialgleichung}
+Es sei $f: I \to \R$ eine $n$-mal differenzierbare Funktion und $a_j : I \to \R$, $j\in \{0,1,2,...,n-1\}$ sowie $s:I \to \R$ stetige Funktionen. Dann nennt man eine Gleichung der Form
+$$
+f^{(n)}(x)=a_0(x)f(x)+a_1(x)f'(x)+...+a_{n-1}(x)f^{(n-1)}(x)+s(x)
+$$
+eine \highlightDef{lineare Differentialgleichung $n$-ter Ordnung}.\\[5mm]
+Die Funktion $s$ heißt \highlightDef{Störfunktion}.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition}
+Falls die Störfunktion $s(x)$ konstant $0$ ist, so nennt man die Differentialgleichung \highlightDef{homogen}, andernfalls \highlightDef{inhomogen}.\\\vfill \pause
+Die zu einer inhomogenen Differentialgleichung
+$$
+f^{(n)}(x)=a_0(x)f(x)+a_1(x)f'(x)+...+a_{n-1}(x)f^{(n-1)}(x)+s(x)
+$$
+gehörende homogene Differentialgleichung ist
+$$
+f^{(n)}(x)=a_0(x)f(x)+a_1(x)f'(x)+...+a_{n-1}(x)f^{(n-1)}(x)
+$$
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Definition: Anfangswertproblem}
+Es sei $f: I \to \R$ eine $n$-mal differenzierbare Funktion und $a_j : I \to \R$, $j\in \{0,1,2,...,n-1\}$ sowie $s:I \to \R$ stetige Funktionen. Weiter sei $x_0 \in I$ und $y_0,...,y_{n-1} \in \R$. Dann nennt man 
+$$
+\begin{cases}
+f^{(n)}(x)&=a_0(x)f(x)+...+a_{n-1}(x)f^{(n-1)}(x)+s(x)\\ \pause
+f(x_0)&=y_0\\
+f'(x_0)&=y_1\\
+...\\
+f^{(n-1)}(x_0)&=y_{n-1}
+\end{cases}
+$$
+ein \highlightDef{Anfangswertproblem}
+
+\end{frame}
+%
+%
+%--------------------------------------------
+\subsection{Lineare DGL 1.Ordnung}
+%
+\begin{frame}\frametitle{Hilfssatz (ohne Beweis)}
+Ist $a:[\alpha,\beta] \to \R$ stetig, dann ist 
+$$
+A(x):=\int_\alpha^x a(t)dt \qquad \forall x \in [\alpha,\beta]
+$$
+eine Stammfunktion von $a$.
+	
+\end{frame}
+%
+
+%
+\begin{frame}\frametitle{Satz (allgemeine Lösung einer homogenen DGL 1. Ordnung)}
+Es sei $f:I \to \R$ eine differenzierbare Funktion. Dann ist $f$ genau dann eine Lösung der homogenen linearen Differentialgleichung
+$$
+f'(x)=a(x)f(x)
+$$
+wenn es eine Konstante $c \in \R$ gibt, sodass 
+$$
+f(x)=c\cdot e^{A(x)} \qquad \forall x \in I
+$$
+gilt, wobei $A(x)$ eine Stammfunktion von $a(x)$ ist.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Satz (eindeutige Lösung AwP)}
+Sei $x_0 \in I$ und $y_0 \in \R$. Dann hat das Anfangswertproblem
+$$
+\begin{cases} f'(x)=a(x)f(x)\\
+f(x_0)=y_0
+\end{cases}
+$$
+auf $I$ genau eine Lösung.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Spezielle Lösung einer inhomogenen DGL 1.Ordnung}
+Wir betrachten nun die inhomogene Gleichung
+$$
+f'(x)=a(x)f(x)+s(x)
+$$
+Für eine (spezielle) Lösung $f_s$ dieser Gleichung verwendet man den Ansatz
+$$
+f_s(x)=c(x)\cdot e^{A(x)}
+$$
+mit einer unbekannten differenzierbaren Funktion $c:I \to \R$. Man nennt dies \highlightDef{Variation der Konstanten}.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Variation der Konstanten}
+Da 
+$$
+a(x)f_s(x)+s(x)=f_s'(x)=\frac{d}{dx}c(x)\cdot e^{A(x)}=a(x)f_s(x)+c'(x)e^{A(x)}
+$$
+gilt, \pause folgt
+$$
+c'(x)e^{A(x)}=s(x)\ \Longleftrightarrow\ c(x)=\int s(x)e^{-A(x)}dx
+$$
+Somit ist $f_s(x)=c(x)\cdot e^{A(x)}$ eine Lösung der inhomogenen Differentialgleichung, wenn  $c(x)$ eine Stammfunktion von $s(x)e^{-A(x)}$ ist.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Satz}
+Es sei $f_s$ eine spezielle Lösung der inhomogenen Differentialgleichung
+$$
+f'(x)=a(x)f(x)+s(x) \qquad (*)
+$$
+sowie $x_0\in I$ und $y_0 \in \R$. Dann gilt:
+\begin{itemize}
+\item[a)] $f$ ist genau dann eine Lösung der Differentialgleichung $(*)$, wenn es eine Lösung $f_h$ der zugehörigen homogenen Differentialgleichung gibt, sodass
+$$
+f=f_h+f_s
+$$
+\item[b)] Das Anfangswertproblem
+$$
+\begin{cases}
+f'(x)=a(x)f(x)+s(x)\\
+f(x_0)=y_0
+\end{cases}
+$$
+hat auf $I$ genau eine Lösung.
+\end{itemize}
+
+\end{frame}
+%
+%--------------------------------------------
+\section{Numerische Verfahren für Differentialgleichungen}
+\makeSectionDividerPage
+%%%
+\begin{frame}\frametitle{Numerische Verfahren für Differentialgleichungen}
+Nicht-lineare Differentialgleichungen, auch solche erster Ordnung, sind deutlich komplizierter zu lösen. Oft gibt es auch keinen analytischen Ansatz. Daher werden hier numerische Verfahren benötigt. \pause\\ \vfill
+Wir betrachten nun das Anfangswertproblem
+$$
+\begin{cases}
+f'(x)=G(x,f(x)) \quad \forall x \in [a,b]\\
+f(a)=y_0
+\end{cases}
+$$
+\end{frame}
+%
+\subsection{Explizites Eulerverfahren}
+\begin{frame}\frametitle{Explizites Eulerverfahren}
+Wir approximieren die gesuchte Lösungsfunktion durch eine stückweise-lineare Funktion. Dazu starten wir mit einer Zerlegung $\{x_0=a,x_1,...,x_n=b\}$ der Intervalls $[a,b]$ und dem Anfangswert $f(x_0)=f(a)=y_0$ und von dort bis zur Stelle $x_1$ mit der Tangente mit der Steigung $f'(x_0)=G(x_0,f(x_0))$:
+$$
+\hat f(x):= f(x_0)+ (x-x_0)\cdot G(x_0,f(x_0)) \quad \forall x \in [x_0,x_1]
+$$
+\pause
+Im nächsten Schritt starten wir beim approximierten Wert $\hat f(x_1)$ und von dort bis zur Stelle $x_2$ mit der Tangente mit der Steigung $f'(x_1)=G(x_1,\hat f(x_1))$:
+$$
+\hat f(x):= \hat f(x_1)+ (x-x_1)\cdot G(x_1,\hat f(x_1)) \quad \forall x \in [x_1,x_2]
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Explizites Eulerverfahren}
+Für den allgemeinen Schritt erhalten wir so für den Abschnitt $[x_i,x_{i+1}]$:
+$$
+\hat f(x):= \hat f(x_i)+ (x-x_i)\cdot G(x_i,\hat f(x_i)) \quad \forall x \in [x_i,x_{i+1}]
+$$
+\pause
+Für die Berechnung sind nur die Funktionswerte $\hat f(x_i)$ interessant. Weiter wird meist der Einfachheit halber eine konstante Schrittweite $h=x_{i+1}-x_i$ für alle $i$ verwendedet. Damit ergibt sich die Vorschrift
+\begin{align*}
+x_0&=a\\
+\hat f(x_0)&=f(x_0)\\
+&\\
+x_{i+1}&=x_i+h\\
+\hat f(x_{i+1})&=\hat f(x_i)+h\cdot G(x_i,\hat f(x_i))
+\end{align*}
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$$
+\begin{cases}
+f'(x)&=-f(x)^2 \quad \text{ für } x \in [1,2]\\
+f(1)&=1
+\end{cases}
+$$
+\vfill
+Wir führen einen Schritt des expliziten Eulerverfahrens mit Schrittweite $h=\frac{1}{2}$ durch.\pause Dafür wählen wir die Bezeichnungen $x_0=1$ und $x_1=x_0+h=\frac{3}{2}$.
+\begin{align*}
+\hat f(x_1)&=\hat f(x_0)+h(-  \hat f(x_0)^2)\\
+&=1+\frac{1}{2}(-1)\\
+&=\frac{1}{2}
+\end{align*}
+\end{frame}
+%
+\subsection{Implizites Eulerverfahren}
+\begin{frame}\frametitle{Implizites Eulerverfahren}
+Die Idee des impliziten Eulerverfahren ist im Wesentlichen die gleiche wie beim expliziten. Allerdings wird statt der Steigung vom linken Rand jedes Intervalls die Steigung vom rechten Rand verwendet.\pause Dies für zu 
+\begin{align*}
+x_0&=a\\
+\hat f(x_0)&=f(x_0)\\
+&\\
+x_{i+1}&=x_i+h\\
+\hat f(x_{i+1})&=\hat f(x_i)+h\cdot G(x_{i+1},\hat f(x_{i+1}))
+\end{align*}
+\pause
+Das Verfahren heißt deshalb ``implizit'', da auf beiden Seiten der Gleichung der gesuchte Wert $\hat f(x_{i+1})$ vorkommt. Dadurch muss diese Gleichung in jedem Schritt gelöst werden (z.B. mit dem Newton-Verfahren, das in der nächsten Vorlesung behandelt wird).
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$$
+\begin{cases}
+f'(x)&=-f(x)^2 \quad \text{ für } x \in [1,2]\\
+f(1)&=1
+\end{cases}
+$$
+\vfill
+Wir führen einen Schritt des impliziten Eulerverfahrens mit Schrittweite $h=\frac{1}{2}$ durch.\pause Dafür wählen wir die Bezeichnungen $x_0=1$ und $x_1=x_0+h=\frac{3}{2}$.
+\begin{align*}
+\hat f(x_1)&=\hat f(x_0)+h(- \hat f(x_1)^2)\\
+&=1-\frac{1}{2} \hat f(x_1)^2
+\end{align*}
+Dies führt zur quadratischen Gleichung
+$$
+\hat f(x_1)^2 + 2\hat f(x_1) -2=0
+$$
+mit den Lösungen 
+$$
+\hat f(x_1) = \frac{-2\pm \sqrt{4+8}}{2}= \pm \sqrt{3} - 1
+$$
+\end{frame}
+%
+%
+\subsection{Runge-Kutta-Verfahren}
+\begin{frame}\frametitle{Runge-Kutta-Verfahren}
+Nahezu alle numerischen Verfahren zum Lösen von Differentialgleichungen benutzen eine Approximation des Differentialquotienten durch einen Differenzenquotienten. Die betrachteten Eulerverfahren tun dies in dem sie mit \highlightDef{einem Schritt} die Funktion durch ihre Tangente annähern.\\ \pause
+Die \highlightDef{$s$-stufigen Runge-Kutta-Verfahren} verfeinern dies, in dem sie statt dessen $s$ Schritte verwenden:
+$$
+\hat f(x_{i+1}):=\hat f(x_i) + h\cdot \sum_{j=1}^s b_jk_j
+$$
+wobei
+$$
+k_j=G\left(x_i+hc_j, \hat f(x_i)+h \cdot \sum_{m=1}^{s} a_{jm}k_m \right)\ , \quad j=1,...,s 
+$$
+Die Koeffizienten $a_{jm}, b_j$ und $c_j$ definieren das jeweilige Verfahren.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel: Klassisches 2-stufiges Verfahren von Runge}
+Mit den Koeffizienzen 
+\begin{align*}
+&a_{11}=0, a_{12}=0, a_{21}=\frac{1}{2}, a_{22}=0\\
+&b_1=0, b_2=1\\
+&c_1=0, c_2=\frac{1}{2}
+\end{align*}
+ergibt sich:\pause
+\begin{align*}
+k_1&=G(x_i, \hat f(x_i))\\
+k_2&=G(x_i+\frac{h}{2}, \hat f(x_i)+ \frac{h}{2}k_1)\\
+\hat f(x_{i+1})&=\hat f(x_i)+h\cdot k_2\\
+&=\hat f(x_i)+h\cdot G\left(x_i+\frac{h}{2}, \hat f(x_i)+ \frac{h}{2}G(x_i, \hat f(x_i))\right)
+\end{align*}
+\end{frame}
+%
+\begin{frame}\frametitle{Butcher-Tableau}
+Um die das Verfahren beschreibenden Parameter $a_{jm}, b_j$ und $c_j$ besser darzustellen werden sogenannte \highlightDef{Butcher-Tableaus} verwendet:
+$$
+\begin{array}{c|c}
+c&A\\ \hline & b^T
+\end{array}=\begin{array}{c|cccc}
+c_1&a_{11} & a_{12} & ... & a_{1s}\\
+c_2&a_{21} & a_{22} & ... & a_{2s}\\
+...&&&&...\\
+c_s&a_{s1} & a_{s2} & ... & a_{ss}\\ \hline
+&b_1 & b_2 & ... & b_s
+\end{array}
+$$\pause
+Beispiele:
+$$
+\begin{array}{c|c|c}
+\text{Runge  } &\quad \text{Explizites Euler  } &\quad \text{Implizites Euler}\\
+&&\\
+\begin{array}{c|cc}
+0&0&0\\
+\frac{1}{2}&\frac{1}{2}&0\\\hline
+&0&1
+\end{array}&
+\begin{array}{c|c}
+0&0\\\hline
+&1
+\end{array}&
+\begin{array}{c|c}
+1&1\\\hline
+&1
+\end{array}
+\end{array}
+$$
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Wir lösen das Anfangswertproblem
+$$
+\begin{cases}
+f'(x)&=-3x^2 \cdot f(x)^2 \ \text{ für } x \in [1,2]\\
+f(1)&=1
+\end{cases}
+$$
+approximativ mit dem Runge-Kutta-Verfahren zum Butcher-Tableau
+$$
+\begin{array}{c|ccc}
+0&0&0&0\\
+\frac{1}{2}&\frac{1}{2}&0&0\\
+1&-1&2&0\\\hline
+&\frac{1}{6}&\frac{4}{6}&\frac{1}{6}
+\end{array}
+$$
+und $h=\frac{1}{2}$.
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+\begin{align*}
+\hat f(x_{i+1})&=\hat f(x_i)+\frac{1}{12}k_1+\frac{1}{3}k_2+\frac{1}{12}k_3\\
+&\\
+k_1&=-3x_i^2\cdot \hat f(x_i)^2\\
+k_2&=-3(x_i+\frac{1}{4})^2\cdot (\hat f(x_i)+\frac{1}{4}k_1)^2\\
+k_3&=-3(x_i+\frac{1}{2})^2\cdot (\hat f(x_i)+\frac{1}{2}\cdot (-k_1+2k_2))^2
+\end{align*}\pause
+und damit
+\tiny
+\begin{align*}
+\hspace{-8mm}\hat f(x_{i+1})&=\hat f(x_i)+\frac{1}{12}\left(-3x_i^2\cdot \hat f(x_i)^2\right)\\
+&\quad +\frac{1}{3}\left(-3(x_i+\frac{1}{4})^2 (\hat f(x_i)+\frac{1}{4}\left(-3x_i^2 \hat f(x_i)^2\right))^2\right)\\
+&\quad +\frac{1}{12}\left(-3\left(x_i+\frac{1}{2}\right)^2 \left(\hat f(x_i)+\frac{1}{2} \left(-\left(-3x_i^2 \hat f(x_i)^2\right)+2\left(-3\left(x_i+\frac{1}{4}\right)^2\left( \hat f(x_i)+\frac{1}{4}\left(-3x_i^2 \hat f(x_i)^2\right)\right)^2\right)\right)\right)^2\right)
+\end{align*}
+\end{frame}
+%
+%\begin{frame}\frametitle{Beispiel}
+%\tiny
+%\begin{align*}
+%\hat f(x_{i+1})&=\hat f(x_i)+\frac{1}{12}\left(-3x_i^2\cdot \hat f(x_i)^2\right)\\
+%&\quad +\frac{1}{3}\left(-3(x_i+\frac{1}{4})^2 \hat f(x_i)+\frac{1}{4}\left(-3x_i^2 \hat f(x_i)^2\right)\right)\\
+%&\quad +\frac{1}{12}\left((-3(x_i+\frac{1}{2})^2 \hat f(x_i)+\frac{1}{2} \left(-\left(-3x_i^2 \hat f(x_i)^2\right)+2\left(-3(x_i+\frac{1}{4})^2 \hat f(x_i)+\frac{1}{4}\left(-3x_i^2 \hat f(x_i)^2\right)\right)\right)\right)
+%\end{align*}
+%\normalsize
+%ergibt konkret
+%\tiny
+%\begin{align*}
+%\hat f(1+\frac{1}{2})&=\hat f(1)+\frac{1}{12}\left(-3\cdot1^2\cdot \hat f(1)^2\right)\\
+%&\quad +\frac{1}{3}\left(-3(1+\frac{1}{4})^2 \hat f(1)+\frac{1}{4}\left(-3\cdot 1^2 \hat f(1)^2\right)\right)\\
+%&\quad +\frac{1}{12}\left((-3(1+\frac{1}{2})^2 \hat f(1)+\frac{1}{2} \left(-\left(-3\cdot1^2 \hat f(1)^2\right)+2\left(-3(\cdot1+\frac{1}{4})^2 \hat f(1)+\frac{1}{4}\left(-3\cdot1^2 \hat f(1)^2\right)\right)\right)\right)\\
+%%
+%&=1+\frac{1}{12}\left(-3\cdot1\cdot 1\right)\\
+%&\quad +\frac{1}{3}\left(-3\cdot\frac{25}{16}\cdot 1+\frac{1}{4}\left(-3\cdot 1\cdot 1\right)\right)\\
+%&\quad +\frac{1}{12}\left((-3\cdot\frac{9}{4}\cdot 1+\frac{1}{2} \left(-\left(-3\cdot1\cdot 1\right)+2\left(-3\cdot \frac{25}{16} \cdot 1+\frac{1}{4}\left(-3\cdot1 \cdot 1\right)\right)\right)\right)\\
+%%
+%&=1-\frac{1}{4}-\frac{29}{16}+\frac{1}{12}\left(-\frac{27}{4}+\frac{3}{2}-3\cdot\frac{29}{8}\right)\\
+%%
+%&=\frac{32-8-58-18+4-29}{32}=-\frac{77}{32} \hspace{30mm} \text{ (vermutlich verrechnet ;-) )}
+%\end{align*}
+%\end{frame}
+%
+\begin{frame}\frametitle{Vergleich verschiedener Runge-Kutta-Verfahren für $f'(t)=\sin(t)^2\cdot f(t)$}
+\includegraphics[scale=0.5]{Runge-kutta.png}
+\end{frame}
+%
+
+
+
+
+\end{document}

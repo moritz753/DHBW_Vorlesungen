@@ -1,0 +1,388 @@
+\input{../preamble_beamer.tex}
+
+%---------------------------------------------%
+\title{Numerische Mathematik}
+\subtitle{Mehrdimensionale Analysis}
+
+%---------------------------------------------%
+\begin{document}
+
+%---------------------------------------------%
+\makeTitlePage
+
+%---------------------------------------------%
+\begin{frame}\frametitle{Inhalt}
+   \tableofcontents
+\end{frame}
+%
+
+%---------------------------------------------%
+% Folien -----------------------------------%
+%---------------------------------------------%
+%
+
+%--------------------------------------------
+\section{Funktionen $f:\R^n \to \R^m$}
+\makeSectionDividerPage
+%%%
+%
+\subsection{Grundlagen}
+%
+\begin{frame}\frametitle{Funktionen $f: \R^n \to \R^m$}
+In diesem Abschnitt betrachten wir \highlightDef{vektorwertige Funktionen in mehreren Veränderlichen}
+$$
+f: D \subset \R^n \to \R^m, (x_1,...,x_n) \mapsto \begin{pmatrix}f_1(x_1,...,x_n)\\ f_2(x_1,...,x_n)\\ ...\\f_m(x_1,...,x_n) \end{pmatrix}
+$$
+\vfill
+Solche Funktionen spielen in der Anwendung eine große Rolle, z.B. in der Strömungsmechanik, der Metereologie oder der Finanzmathematik.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Stetigkeit}
+Eine Folge $(x^{(k)})_k=(x_1^{(k)},...,x_n^{(k)})_k$ in $\R^n$ konvergiert gegen $x^{(0)}=(x_1^{(0)},...,x_1^{(0)}) \in \R^n$ für $k \to \infty$, wenn jede der Folgen $(x_j^{(k)})_k$ gegen $x_j^{(0)}$ konvergiert, $j \in \{1,...,n\}$. \\\vfill
+\pause Damit gilt für eine Funktion $f: D \subset \R^n \to \R^m$\\\vfill
+\begin{itemize}
+\item $f(x)$ konvergiert für $x \to x_0$ gegen $y_0 \in \R^n$, wenn für alle gegen $x_0$ konvergierenden Folgen $(x^{(k)})$ gilt: $f(x^{(k)}) \to y_0 \ (k \to \infty)$. Man schreibt dann $\lim \limits_{x\to x_0}f(x)=y_0$\\\pause
+\item $f$ heißt \highlightDef{stetig in $x_0$}, wenn $\lim \limits_{x\to x_0} f(x)=f(x_0)$.\\\pause
+\item $f$ heißt \highlightDef{stetig}, wenn $f$ in allen Punkten $x \in D$ stetig ist.
+\end{itemize}
+
+\end{frame} 
+%
+\begin{frame}\frametitle{Partielle Ableitungen}
+Es sei $f: D \subset \R^n \to \R$ eine \textbf{reell-wertige} Funktion und $x_0 \in \R^n$. Dann heißt $f$ \highlightDef{in $x_0$ partiell differenzierbar nach $x_j$}, wenn der Grenzwert
+$$
+\lim_{t \to 0} \frac{f(x_0+te_j)-f(x_0)}{t}
+$$
+existiert.\\\pause Man nennt diesen dann die \highlightDef{partielle Ableitung von $f$ nach $x_j$} und notiert diese als $\frac{\partial}{\partial x_j} f(x_0)$.\\\pause
+\vfill
+Man nennt $f$ \highlightDef{partiell differenzierbar nach $x_j$}, wenn in allen $x \in D$ partiell differenzierbar nach $x_j$ ist.\\\pause
+\vfill
+Im Fall noch $n=2$ und $n=3$ schreibt man meist $\frac{\partial}{\partial x} f, \frac{\partial}{\partial y} f$ und $\frac{\partial}{\partial z} f$
+
+\end{frame} 
+%
+%
+\begin{frame}\frametitle{Satz von Schwarz}
+Es sei $f: \R^n \to \R$ zweimal stetig partiell differenzierbar\footnote{D.h. für alle $i,j \in \{1,...,n\}$ exisitieren die zweiten partiellen Ableitungen $\frac{\partial^2}{\partial x_i \partial x_j}f$ und sind stetig.} Dann gilt für alle $i,j \in \{1,...n\}$:
+$$
+\frac{\partial^2}{\partial x_i \partial x_j}f = \frac{\partial^2}{\partial x_j \partial x_i}f
+$$
+Es ist also gleich, ob man zuerst partiell nach $x_j$ und dann nach $x_i$ ableitet oder andersherum.
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Die Jacobi-Matrix}
+Es sei $f: D \subset \R^n \to \R^m, (x_1,...,x_n) \mapsto \begin{pmatrix}f_1(x_1,...,x_n)\\ f_2(x_1,...,x_n)\\ ...\\f_m(x_1,...,x_n) \end{pmatrix}$, dann ist die \highlightDef{Jacobi-Matrix} von $f$ and der Stelle $x \in D$ definiert als
+$$
+J_f(x):=\left(\frac{\partial}{\partial x_j}f_i(x)   \right)_{i=1,j=1}^{m,n} 
+= \begin{pmatrix} \frac{\partial}{\partial x_1}f_1(x) &\frac{\partial}{\partial x_2}f_1(x) &...&\frac{\partial}{\partial x_n}f_1(x) \\
+\frac{\partial}{\partial x_1}f_2(x) & ... & ... & \frac{\partial}{\partial x_n}f_2(x) \\ ...&&&...\\\frac{\partial}{\partial x_1}f_m(x)  & \frac{\partial}{\partial x_2}f_m(x)  & ... &\frac{\partial}{\partial x_n}f_m(x)  \end{pmatrix}
+$$
+Die Jacobi-Matrix übernimmt die Rolle der ``Ableitung'', wie wir auch im folgenen sehen werden.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Diffenzierbarkeit}
+Eine Funktion $f: D \subset \R^n \to \R^m$ heißt \highlightDef{differenzierbar in $x_0$}, wenn es eine Matrix $A \in \R^{m \times n}$ gibt, sodass
+$$
+\lim_{h \to 0} \frac{f(x_0+h)-f(x_0)-Ah}{\|h\|}=0
+$$
+gilt.\\
+Hierbei ist für $h \in \R^n$ die \textbf{Norm} $\|h\|:= \sqrt{\sum_{i=1}^n h_i^2}$.
+\vfill \pause
+In diesem Fall ist die Matrix $A$ eindeutig bestimmt und es gilt $A=J_f(x_0)$.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+$f: \R^2 \to \R^2, (x_1,x_2) \mapsto \begin{pmatrix}x_1x_2 \\ x_1+x_2 \end{pmatrix}$\\
+Dann:
+$$
+J_f(x_1,x_2)= \begin{pmatrix} x_2& x_1 \\ 1 & 1 \end{pmatrix}
+$$\pause
+und für festes $(x_1,x_2) \in \R^2$ und $h=(h_1,h_2)$ gilt
+\begin{align*}
+&\frac{f(x_1+h_1,x_2+h_2)-f(x_1,x_2)-J_f(x_1,x_2)h}{\|h\|}\\
+=&\frac{\begin{pmatrix} (x_1+h_1)(x_2+h_2) \\ x_1+x_2+h_1+h_2 \end{pmatrix}- \begin{pmatrix} x_1 x_2 \\ x_1+x_2 \end{pmatrix}-\begin{pmatrix} x_2& x_1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} h_1 \\ h_2 \end{pmatrix}}{\|h\|}\\
+%=&\frac{\begin{pmatrix} x_1h_2+x_2h_1+h_1h_2) \\ h_1+h_2 \end{pmatrix}- \begin{pmatrix} x_1h_2+x_2h_1+h_1h_2) \\ h_1+h_2 \end{pmatrix}}{\|h\|}\\
+=&\frac{\begin{pmatrix}h_1h_2\\ 0 \end{pmatrix}}{\sqrt{h_1^2+h_2^2}}=\frac{1}{\sqrt{\frac{h_1^2}{h_1^2h_2^2}+\frac{h_2^2}{h_1^2h_2^2}}}\begin{pmatrix}1\\ 0 \end{pmatrix} \to 0 \quad (h \to 0)
+\end{align*}
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Kettenregel}
+Es seien $f: D \subset \R^m \to \R^n$ und $g: E \subset \R^n \to \R^k$ zwei (in $x_0$) differenzierbare Funktionen mit $f(D) \subset E$. \\
+Dann ist $g\circ f : D \subset \R^m \to \R^k$ differenzierbar (in $x_0$) und es gilt
+$$
+J_{g \circ f}(x_0)= J_g(f(x_0))\cdot J_f(x_0)
+$$
+\vfill \pause
+\highlightDef{Bemerkung:}\\ Da $J_g(f(x_0)) \in \R^{k \times n}$ und $J_f(x_0) \in \R^{n \times m}$ gilt, ist die Reihenfolge im Produkt relevant.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+$f: \R^2 \to \R, (x,y)  \mapsto x+y$ und $g: \R \to \R^3, u \mapsto \begin{pmatrix} 1 \\ u \\ u^2 \end{pmatrix} $
+Dann gilt:
+$J_f(x,y)=\begin{pmatrix} 1 & 1  \end{pmatrix} \in \R^{1 \times 2}$ und $J_g(u)=\begin{pmatrix} 0 \\ 1 \\ 2u \end{pmatrix} \in \R^{3 \times 1}$\\
+\pause Damit folgt: 
+\begin{align*}
+J_{g\circ f}(x,y)&=\begin{pmatrix} 0 \\ 1 \\ 2f(x,y) \end{pmatrix}\begin{pmatrix} 1 & 1  \end{pmatrix}=\begin{pmatrix} 0 \\ 1 \\ 2x+2y \end{pmatrix}\begin{pmatrix} 1 & 1  \end{pmatrix}\\
+&=\begin{pmatrix} 0 & 0 \\ 1 & 1 \\ 2x+2y & 2x+2y \end{pmatrix}
+\end{align*}
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+$f: \R^2 \to \R, (x,y)  \mapsto x+y$ und $g: \R \to \R^3, u \mapsto \begin{pmatrix} 1 \\ u \\ u^2 \end{pmatrix} $\\
+Als Probe berechnen wir die Jacobi-Matrix von 
+$$
+h=g \circ f : \R^2 \to \R^3, (x,y) \mapsto \begin{pmatrix}1 \\ x+y \\ (x+y)^2 \end{pmatrix}
+$$
+direkt über die partiellen Ableitungen nach $x$ und $y$:\pause
+\begin{align*}
+&\frac{\partial}{\partial x}h_1(x,y)=0 &&\frac{\partial}{\partial y}h_1(x,y)=0\\
+&\frac{\partial}{\partial x}h_2(x,y)=1 &&\frac{\partial}{\partial y}h_2(x,y)=1 \\
+&\frac{\partial}{\partial x}h_3(x,y)=2(x+y)&&\frac{\partial}{\partial y}h_3(x,y)=2(x+y)
+\end{align*}
+\end{frame}
+%
+\subsection{Mehrdimensionales Newton-Verfahren}
+%
+\begin{frame}\frametitle{Problemstellung}
+Bestimme (näherungsweise) eine ``Nullstelle'' einer differenzierbaren Funktion
+$
+f: \R^n \to \R^n
+$
+d.h. ein $x_0 \in \R^n$ mit $f(x_0)=\begin{pmatrix}f_1(x_0)\\...\\f_n(x_0) \end{pmatrix}=\begin{pmatrix} 0 \\ ... \\ 0 \end{pmatrix}=0 \in \R^n$
+\pause
+\vfill
+Für den Fall $n=1$ wurde früher in der Vorlesung das Newton-Verfahren mit der Iteration 
+$$
+x^{(k+1)}=x^{(k)} - \frac{f(x^{(k)})}{f'(x^{(k)})}
+$$
+eingeführt.
+\pause
+\vfill
+Wie kann man das für $n>1$ übertragen?
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Mehrdimensionales Newton-Verfahren}
+Es sei $f: \R^n \to \R^n$ eine differenzierbare Funktion und $x^{(1)} \in \R^n$. Dann ist die Iteration des \highlightDef{$n$-dimensionalen Newton-Verfahren} gegeben durch
+$$
+x^{(k+1)}=x^{(k)} - J_f(x^{(k)})^{-1}\cdot f(x^{(k)})
+$$
+
+
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Bestimmen Sie näherungsweise eine Lösung des \textbf{nicht-linearen} Gleichungssystem
+\begin{align*}
+x-\frac{1}{5}y^2 &=0\\
+x^2+(y-3)^2&=8
+\end{align*}
+\pause Dies ist äquivalent zu
+\begin{align*}
+f(x,y)=\begin{pmatrix} 0\\0\end{pmatrix}
+\end{align*}
+mit $f: \R^2 \to \R^2, (x,y) \mapsto \begin{pmatrix} x-\frac{1}{5}y^2 \\ x^2+(y-3)^2-8\end{pmatrix}$	
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Wir berechnen einen Schritt mit den $2$-dimensionale Newton-Verfahren zum Startwert $x^{(1)}=(0,0)^t$. Als erstes bestimmen wir dafür die Jacobi-Matrix:
+$$
+J_f(x,y)=\begin{pmatrix}1 & - \frac{2}{5}y\\ 2x & 2(y-3) \end{pmatrix}
+$$\pause
+Damit
+\begin{align*}
+x^{(2)}&=x^{(1)} - J_f(x^{(1)})^{-1}\cdot f(x^{(1)})\\
+&=\begin{pmatrix} 0 \\0 \end{pmatrix} - \begin{pmatrix}1 & 0\\0 & -6 \end{pmatrix}^{-1}\cdot \begin{pmatrix} 0 \\1 \end{pmatrix} \\
+&=- \begin{pmatrix}1 & 0\\0 & -\frac{1}{6} \end{pmatrix}\cdot \begin{pmatrix} 0 \\1 \end{pmatrix}\\
+&=\begin{pmatrix} 0 \\\frac{1}{6} \end{pmatrix}
+\end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Beispiel}
+\begin{align*}
+x^{(3)}&=x^{(2)} - J_f(x^{(2)})^{-1}\cdot f(x^{(2)})\\
+&=\begin{pmatrix} 0 \\\frac{1}{6}  \end{pmatrix} - \begin{pmatrix}1 &-\frac{1}{15}\\0  & -\frac{17}{3} \end{pmatrix}^{-1}\cdot \begin{pmatrix} -\frac{1}{180} \\ \frac{1}{36} \end{pmatrix} \\
+&=\begin{pmatrix} 0 \\\frac{1}{6}  \end{pmatrix} - \begin{pmatrix}1 & -\frac{1}{85}\\0 & -\frac{3}{17} \end{pmatrix}\cdot \begin{pmatrix} -\frac{1}{180} \\\frac{1}{36} \end{pmatrix}\\
+&=\begin{pmatrix} 0 \\\frac{1}{6} \end{pmatrix}-\begin{pmatrix} -\frac{1}{170} \\-\frac{1}{204} \end{pmatrix}\\
+&=\begin{pmatrix} \frac{1}{170} \\\frac{35}{204} \end{pmatrix}
+\end{align*}
+\pause
+Damit: $f(x^{(1)})=\begin{pmatrix}0 \\1 \end{pmatrix}$ \pause , $f(x^{(2)})=\begin{pmatrix}-\frac{1}{180} \\ \frac{1}{36} \end{pmatrix} \thickapprox \begin{pmatrix}-0,005 \\ 0,03 \end{pmatrix} $ \pause und $f(x^{(2)})=\begin{pmatrix}- \frac{1}{208080} \\\frac{61}{1040400} \end{pmatrix}\thickapprox \begin{pmatrix}-0,000005 \\ 0,00006 \end{pmatrix} $
+\end{frame}
+
+\section{Mehrdimensionale Integration}
+\makeSectionDividerPage
+%%%
+\begin{frame}\frametitle{Motivation}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.75]{Grafiken/3D_Graph/3D_graph.pdf}
+		\end{center}
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+Welches (3-dimensionale) Volumen ist zwischen der Fläche und der $x_1$-$x_2$-Ebene eingeschlossen? \\\pause \quad\\\quad\\
+$\Rightarrow$ Integration von Funktionen\\ \quad \ $f:\R^n \to \R$.
+\end{column}%
+\end{columns}
+
+\end{frame}
+%
+\subsection{Quader}
+%
+%
+\begin{frame}\frametitle{Definition}
+Es seien $a, b \in \R^n$ mit $a_j < b_j$ für alle $j \in \{1,...,n\}$. Dann nennt man 
+\begin{align*}
+Q(a,b)&:= \big\{x \in \R^n \mid a_j \le x_j \le b_j\ \forall j \in \{1,...,n\} \big\}\\
+&\ =[a_1,b_1] \times [a_2,b_2] \times ... \times [a_n,b_n]
+\end{align*}
+einen \highlightDef{$n$-dimensionalen Quader}.\pause \vfill
+Sei nun $f: D \subset \R^n \to \R$ eine stetige Funktion, $a,b \in \R^n$ so, dass $Q(a,b) \subset D$. Dann definieren wir das Integral von $f$ über $Q(a,b)$ als
+$$
+\int_{Q(a,b)} f(x) dx := \int_{a_n}^{b_n}...\left(\int_{a_2}^{b_2}\left(\int_{a_1}^{b_1} f(x_1,...,x_n) dx_1\right)dx_2\right)...dx_n
+$$
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+$f: \R^2 \to \R, (x_1,x_2) \mapsto x_1^2+x_2^2$ und $Q=[0,1]\times[-1,2]$.\\
+Dann:\pause
+\begin{align*}
+\int_Q f(x)dx&=\int_{-1}^2 \int_0^1 x_1^2+x_2^2 dx_1dx_2\\
+&=\int_{-1}^2 \left[\frac{1}{3}x_1^3+x_2^2x_1\right]_{x_1=0}^{x_1=1} dx_2\\
+&=\int_{-1}^2 \frac{1}{3}+x_2^2 dx_2\\
+&=\left[ \frac{1}{3}x_2+\frac{1}{3}x_2^3\right]_{x_2=-1}^{x_2=2}\\
+&=4
+\end{align*}
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Satz von Fubini für Quader}
+Es sei $f: D \subset \R^n \to \R$ eine stetige Funktion, $a,b \in \R^n$ so, dass $Q(a,b) \subset D$. Weiter sei weiter $\sigma \in Sym(n)$ eine beliebige Permutation der Zahlen $1,...,n$.\\
+ Dann gilt:
+\small
+$$
+\int_{Q(a,b)}f(x)dx=\int_{a_{\sigma(n)}}^{b_{\sigma(n)}}...\left(\int_{a_{\sigma(2)}}^{b_{\sigma(2)}}\left(\int_{a_{\sigma(1)}}^{b_{\sigma(1)}} f(x_1,...,x_n) dx_{\sigma(1)}\right)dx_{\sigma(2)}\right)...dx_{\sigma(n)}
+$$	
+\textnormal
+D.h. die Reihenfolge der Integration kann beliebig vertauscht werden.	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Beispiel}
+Es sei $f: \R^2 \to \R, (x_1,x_2) \mapsto \sin(x_2)(x_1e^{\cos(3x_1)})$ und $Q=[-2,2]\times[-\frac{\pi}{2},\frac{\pi}{2}]$ \pause
+\begin{align*}
+\int_Q f(x)dx&= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\int_{-2}^2\sin(x_2)(x_1e^{\cos(3x_1)}) dx_1dx_2\\
+&=\int_{-2}^2 \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\sin(x_2)(x_1e^{\cos(3x_1)}) dx_2dx_1\\
+&=\int_{-2}^2  \left[ -\cos(x_2) (x_1e^{\cos(3x_1)})\right]_{x_2=-\frac{\pi}{2}}^{x_2=\frac{\pi}{2}}dx_1\\
+&=\int_{-2}^2 0 dx_1\\
+&=0
+\end{align*}	
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+		\begin{center}
+			\includegraphics[scale=0.75]{Grafiken/Fubini_1.png}
+		\end{center}
+	
+	
+\end{frame}
+%
+\subsection{Normalbereiche in $\R^2$}
+%
+\begin{frame}\frametitle{Definition: Normalbereich in $\R^2$}
+Es sei $[a,b] \in \R$ mit $a<b$ und $h_1,h_2: [a,b] \to \R$ stetige Funktionen. Dann nennt man 
+$$
+A=\{(x,y) \mid a\le x\le b \text{ und } h_1(x) \le y \le h_2(x)\} \subset \R^2
+$$
+einen \highlightDef{Normalbereich} bezüglich der \textbf{x-Achse}.\\\pause \vfill
+Analog nennt man eine Menge 
+$$
+B=\{(x,y) \mid a\le y\le b \text{ und } h_1(y) \le x \le h_2(y)\}\subset \R^2
+$$
+einen \highlightDef{Normalbereich} bezüglich der \textbf{y-Achse}.	
+	
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Integral über einem Normalbereich in $\R^2$}
+Es sei $A \subset \R^2$ ein Normalbereich bezüglich der $x$-Achse (wie oben) und $f:A \to \R$ eine stetige Funktion. Dann ist das Integral von $f$ über $A$ definiert als
+$$
+\int_A f(x,y)d(x,y):= \int_a^b \left(\int_{h_1(x)}^{h_2(x)} f(x,y) dy \right)dx
+$$
+\pause \vfill
+Analog:\\
+Es sei $B \subset \R^2$ ein Normalbereich bezüglich der $y$-Achse (wie oben) und $f:B \to \R$ eine stetige Funktione. Dann ist das Integral von $f$ über $B$ definiert als
+$$
+\int_B f(x,y)d(x,y):= \int_a^b \left(\int_{h_1(y)}^{h_2(y)} f(x,y) dx \right)dy
+$$
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+$f(x,y)=xy$ und $A=\{(x,y) \mid 0\le x \le 1 \text{ und } x \le y \le \sqrt{x} \}$ \pause
+\begin{align*}
+\int_A f(x,y) d(x,y) &= \int_0^1 \left(\int_x^{\sqrt{x}} xy dy\right)dx\\
+&=\int_0^1 \left[\frac{1}{2}xy^2\right]_{y=x}^{y=\sqrt{x}} dx\\
+&=\int_0^1 \frac{1}{2}x^2-\frac{1}{2}x^3)dx\\
+&=\left[ \frac{1}{6}x^3 -  \frac{1}{6}x^4\right]_{x=0}^{x=1}\\
+&= \frac{1}{6}- \frac{1}{8}\\
+&= \frac{1}{24}
+\end{align*}
+		
+\end{frame}
+%
+\subsection{Normalbereiche in $\R^3$}
+%
+\begin{frame}\frametitle{Definition: Normalbereich in $\R^3$}
+Sei $A \subset \R^2$ ein Normalbereich bezüglich der x-Achse oder der y-Achse und seien $g_1,g_2:A \to \R$ stetige Funktionen. Dann heißt
+$$
+\Omega=\{(x,y,z) \in \R^3 \mid (x,y) \in A \text{ und } g_1(x,y) \le z \le g_2(x,y)\} \subset \R^3
+$$
+ein \highlightDef{Normalbereich} bezüglich der \textbf{x-y-Ebene}.
+\pause\vfill
+Analog definiert man Normalbereiche bezüglich der x-z-Ebene und der y-z-Ebene.
+\end{frame}
+%
+%
+\begin{frame}\frametitle{Integral über einem Normalbereich in $\R^3$}
+Es sei $\Omega$ ein Normalbereich bezüglich der x-y-Ebene mit Normalbereich $A$ und Funktionen $g_1,g_2$ (wie oben) und $f:\Omega \to \R$ eine stetige Funktion. Dann ist das Integral von $f$ über $\Omega$ definiert als
+$$
+\int_\Omega f(x,y,z)dx:= \int_A \left(\int_{g_1(x,y)}^{g_2(x,y)} f(x,y,z) dz \right)d(x,y)
+$$
+\pause \vfill
+Analog definiert man das Integral über Normalbereiche bezüglich der x-z-Ebene und der y-z-Ebene.
+	
+	
+\end{frame}
+%
+\begin{frame}\frametitle{Beispiel}
+Es sei $A=\{(x,y) \mid -1 \le x \le 1 \text{ und } -\sqrt{1-x^2} \le y \le \sqrt{1-x^2}\}$ und $\Omega=\{(x,y,z)\mid (x,y) \in A \text{ und } 0 \le z \le 1\}$. 
+\begin{align*}
+\int_\Omega 1 d(x,y,z) &= \int_A \left( \int_{0}^{1} 1 dz \right) d(x,y)\\
+&=\int_{-1}^1 \left( \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} 1 dy\right)dx\\
+&=\int_{-1}^1 2 \sqrt{1-x^2} dx\\
+&\stackrel{(*)}{=}\pi 
+\end{align*}
+wobei bei $(*)$ zuerst die Substitution $\sin(u)=x$ durchgeführt und dann im Anschluss zweimal partiell integriert wird.
+	
+\end{frame}
+%
+
+
+
+\end{document}

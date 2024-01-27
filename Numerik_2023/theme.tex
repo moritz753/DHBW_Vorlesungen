@@ -1,0 +1,116 @@
+% Color Definitions
+\definecolor{dhbwRed}{RGB}{226,0,26} 
+\definecolor{dhbwGray}{RGB}{61,77,77}
+\definecolor{lightBlue}{RGB}{28,134,230}
+
+% Basic Theme
+\usetheme{Malmoe}
+
+% Color Re-Definitions
+\usecolortheme[named=lightBlue]{structure}
+\setbeamercolor*{alerted  text}{fg=dhbwRed, bg=white}
+\setbeamercolor*{subsection in toc}{fg=dhbwGray, bg=white}
+
+%\setbeamercolor*{palette primary}{fg=white,bg=lightBlue}
+%\setbeamercolor*{palette secondary}{fg=white,bg=gray}
+%\setbeamercolor*{palette tertiary}{fg=white,bg=gray}
+%\setbeamercolor*{palette quaternary}{fg=white,bg=dhbwRed}
+
+% no navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% headline, footline
+\setbeamertemplate{footline}{\color{dhbwGray} \hfill\insertframenumber\hspace{5mm}\vspace{2mm}}
+\setbeamertemplate{headline}{}
+
+% Title Page
+\newcommand*{\makeTitlePage}{
+	
+	\begin{frame}[plain]
+		
+		\vfill
+		\vfill
+		\begin{center}
+			{
+				\usebeamerfont{title}
+				\usebeamercolor[fg]{title}
+				\Large
+				\inserttitle
+			}\\[3mm]
+			{	
+				\usebeamerfont{subtitle}
+				\usebeamercolor[fg]{subtitle}
+				\large
+				\insertsubtitle
+			}
+		\end{center}
+		%
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		%
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{flushleft}
+					{
+						\usebeamerfont{normal text}
+						\color{dhbwGray!80}
+						\scriptsize
+						Dr. Moritz Gruber\\
+						DHBW Karlsruhe\\
+						
+					}
+				\end{flushleft}
+			\end{column}
+			%
+			\begin{column}{0.5\textwidth}
+				\begin{flushright}
+					\includegraphics[scale=0.06]{../DHBW.png}
+				\end{flushright}
+			\end{column}
+		\end{columns}
+		%
+		\vspace{1mm}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{flushleft}
+					{
+						\usebeamerfont{normal text}
+						\color{dhbwGray!80}
+						\scriptsize
+						Version \today
+					}
+				\end{flushleft}
+			\end{column}
+			%
+			\begin{column}{0.5\textwidth}
+				% nothing (just a placeholder to be in line with the columns above
+			\end{column}
+		\end{columns}
+	\end{frame}
+
+}
+
+% Section Divider Page
+\newcommand*{\makeSectionDividerPage}{
+
+	\begin{frame}[plain]
+		\begin{center}
+			\begin{flushleft}
+				{				
+					\usebeamercolor[fg]{frametitle}
+					{\Large \insertsection} \\[3mm]
+					{\large \insertsubsection}
+				}
+			\end{flushleft}
+		\end{center}
+        \end{frame}
+	
+}
+
+% itemize
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate item}{(\theenumi)}
+
+

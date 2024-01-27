@@ -1,0 +1,122 @@
+\input{../preamble_aufgaben.tex}
+
+
+%-------------------------------------------------------------------
+\begin{document}
+
+\vspace*{-20mm}
+{
+	%\usekomafont{title}
+	\color{dhbwGray}
+	Dr. Moritz Gruber	\hfill Version \today\\
+	DHBW Karlsruhe\\
+}
+
+\vspace{10mm}
+\begin{center}
+	{
+		\usekomafont{title}
+		%\color{lightBlue}
+		{ \LARGE 	Übungsaufgaben 6 - Lösungen}\\[3mm]
+		{\Large Interpolation}
+	}
+\end{center}
+
+%\vspace{5mm}
+
+\section{Ansatzfunktionen}
+%%%
+Interpolieren Sie die Werte
+$$
+x_0=0, y_0=1, x_1=\frac{\pi}{3}, y_1=2, x_2=\frac{2\pi}{3}, y_2=2 \text{ und }x_3=\pi, y_3=1
+$$
+mit den Ansatzfunktionen $g_0(x)=1, g_1(x)=\sin(x), g_2(x)=\sin(2x)$ und $g_3(x)=\sin(3x)$.
+
+\subsection*{Lösung:}
+Der Ansatz $g(x)=\sum_{k=0}^3 a_kg_k(x)$ mit $g(x_k)=y_k$ ergibt das LGS
+$$
+\begin{pmatrix}1 & 0 & 0 &0 \\ 1&\frac{\sqrt{3}}{2}& \frac{\sqrt{3}}{2} & 0\\ 1& \frac{\sqrt{3}}{2}&-\frac{\sqrt{3}}{2}&0  \\1 & 0 & 0& 0 \end{pmatrix}\cdot \begin{pmatrix} a_0\\a_1\\a_2\\a_3 \end{pmatrix}= \begin{pmatrix} 1\\2\\2\\1 \end{pmatrix}
+$$
+Wir subtrahieren die erste Zeile der Gleichung von den den drei anderen und subtrahieren dann die zweite Zeile von der vierten. So erhalten wir
+$$
+\begin{pmatrix}1 & 0 & 0 &0 \\ 0&\frac{\sqrt{3}}{2}& \frac{\sqrt{3}}{2} & 0\\ 0& 0&-\sqrt{3}&0  \\0 & 0 & 0& 0 \end{pmatrix}\cdot \begin{pmatrix} a_0\\a_1\\a_2\\a_3 \end{pmatrix}= \begin{pmatrix} 1\\1\\0\\0 \end{pmatrix}
+$$
+Nun addieren wir die Hälfte der dritten Zeile auf die zweite und normieren die Diagonaleinträge. Das ergibt
+$$
+\begin{pmatrix}1 & 0 & 0 &0 \\ 0&1& 0 & 0\\ 0& 0&1&0  \\0 & 0 & 0& 0 \end{pmatrix}\cdot \begin{pmatrix} a_0\\a_1\\a_2\\a_3 \end{pmatrix}= \begin{pmatrix} 1\\\frac{2}{\sqrt{3}}\\0\\0 \end{pmatrix}
+$$
+Wir erhalten damit eine Familie $(g_t)_{t \in \R}$ von Lösungsfunktionen
+$$
+g_t(x)=1+\frac{2}{\sqrt{3}}\sin(x)+t\cdot \sin(3x)
+$$
+Dies kann nun so interpretiert werden, dass entweder die Ansatzfunktionen nicht geeignet waren, oder aber, dass mögliche (erwartete/bekannte) Schwingungen höherer Frequenz, die durch den Abstand der Messpunkte nicht beobachtbar waren, so berücksichtigt werden können.
+%-------------------------------------------------------------------
+\section{Splines}
+%%%
+Interpolieren Sie die Werte
+$$
+x_0=1, y_0=1, x_1=2, y_1=3 \text{ und } x_2=3, y_3=0
+$$
+mit Splines vom Grad $2$.
+\vspace{5mm}
+
+\subsection*{Lösung:}
+Da der Grad der Splines $k=2$ ist, haben wir einen übirgen Freiheitsgrad. Für die Lösung belegen wir ihn mit
+$$
+S'(x_0)=p_0'(x_0)=a_{01}+2a_{02}x_0=1
+$$
+Damit erhalten wir das LGS
+$$
+\begin{pmatrix}1& 1 & 1 & 0 &0&0  \\ 0&0&0&1&2&4 \\ 0&0&0&1&3&9 \\ 0&1&2 & 0&0&0\\1&2&4 &-1&-2&-4\\ 0&1&4 &0&-1&-4 \end{pmatrix}\cdot \begin{pmatrix} a_{00}\\a_{01}\\ a_{02}\\ a_{10}\\ a_{11}\\ a_{12}   \end{pmatrix}=\begin{pmatrix} 1\\3\\0\\1\\0\\0 \end{pmatrix}
+$$
+Durch Umsortieren der Zeilen erhalten wir
+$$
+\begin{pmatrix}1& 1 & 1 & 0 &0&0 \\1&2&4 &-1&-2&-4\\ 0&1&4 &0&-1&-4 \\ 0&1&2 & 0&0&0 \\ 0&0&0&1&2&4 \\ 0&0&0&1&3&9 \end{pmatrix}
+\cdot \begin{pmatrix} a_{00}\\a_{01}\\ a_{02}\\ a_{10}\\ a_{11}\\ a_{12}   \end{pmatrix}
+=\begin{pmatrix} 1\\0\\0\\1 \\3\\0 \end{pmatrix}
+$$
+Durch einige Zeilenadditionen und Normierung ergibt dies die Stufenform
+$$
+\begin{pmatrix}1& 1 & 1 & 0 &0&0 \\0&1&3 &-1&-2&-4\\ 0&0&1 &1&1&0 \\ 0&0&0 &1&\frac{3}{2}&2 \\0&0&0&0&1&4 \\ 0&0&0&0&0&1 \end{pmatrix}
+\cdot \begin{pmatrix} a_{00}\\a_{01}\\ a_{02}\\ a_{10}\\ a_{11}\\ a_{12}   \end{pmatrix}
+=\begin{pmatrix} 1\\-1\\1\\\frac{3}{2} \\3\\-6 \end{pmatrix}
+$$
+Und schließlich die Gauß-Normalform
+$$
+\begin{pmatrix}1& 0 & 0 & 0 &0&0 \\0&1&0 &0&0&0\\ 0&0&1 &0&0&0 \\ 0&0&0 &1&0&0 \\ 0&0&0&0&1&0 \\ 0&0&0&0&0&1 \end{pmatrix}
+\cdot \begin{pmatrix} a_{00}\\a_{01}\\ a_{02}\\ a_{10}\\ a_{11}\\ a_{12}   \end{pmatrix}
+=\begin{pmatrix} 1\\-1\\1\\-27 \\27\\-6 \end{pmatrix}
+$$
+Somit sind die beiden gesuchten Polynome
+\begin{align*}
+p_0(x)&=1-x+x^2\\
+p_1(x)&=-27+27x-6x^2
+\end{align*}
+%-------------------------------------------------------------------
+\section{Extrapolation}
+%%%
+Extrapolieren Sie Ihre Ergebnisse für die Aufgaben 1 und 2 für die Stellen $x_{l}=-2$ und $x_r=5$ je einmal konstant und einmal konsistent.
+\vspace{5mm}
+
+\subsection*{Lösung:}
+\textbf{Zu Aufgabe 1}\\
+\begin{itemize}
+\item konstant: $f(-2)=1$ und $f(5)=1$
+\item konsistent: $f(-2)=f(0)-2f'(0)=1-2(\frac{4}{\sqrt{3}}\cos(0))=1-\frac{8}{\sqrt{3}}$\\
+\hspace*{16.5mm} $f(5)=f(\pi)+(5-\pi)f'(\pi)=1+(5-\pi)(\frac{4}{\sqrt{3}}\cos(2\pi))=1+\frac{20-4\pi}{\sqrt{3}}$
+\end{itemize}
+
+\textbf{Zu Aufgabe 2}\\
+\begin{itemize}
+\item konstant: $f(-2)=1$ und $f(5)=0$
+\item konsistent: $f(-2)=f(1)-(1-(-2))f'(1)=1-3\cdot 1=-2$ \\
+\hspace*{16.0mm} $f(5)=f(3)+(5-3)f'(3)=0+2\cdot (-9)= -18$
+\end{itemize}
+%
+
+
+%{{1, 1 , 1 , 0 ,0,0  },{ 0,0,0,1,2,4 },{0,0,0,1,3,9  },{ 0,1,\frac{1}{2} , 0,0,0 },{1,2,4 ,-1,-2,-4 },{ 0,1,1 ,0,-1,-1 }}* {{ a_{00} },{a_{01} },{ a_{02} },{ a_{10} },{ a_{11} },{ a_{12} }}={{ 1 },{3 },{0 },{1 },{0 },{0 }}
+%-------------------------------------------------------------------
+
+
+\end{document}
