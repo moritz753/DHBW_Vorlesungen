@@ -1,0 +1,296 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Geben Sie die Definition der Kondition eines Berechnungsproblems 
+$$
+	y=f(x)
+$$
+mit $x \in \RR$ und $f:\RR \to \RR$ differenzierbar, an.
+\item  Berechnen Sie die Jacobi-Matrix von
+$$
+f: \RR^3 \to \RR^2, (x,y,z) \mapsto \begin{pmatrix} x+y \\ \sin(yz) \end{pmatrix}
+$$
+\item Bestimmen Sie die Zeilensummennorm der Matrix
+$$
+M=\begin{pmatrix} 1&2&3 \\ 2&2&-6\\ 0 & 2&4 \end{pmatrix}
+$$
+\end{enumerate}
+%
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $kond_x(f)=\frac{|xf'(x)|}{|f(x)|}$
+\item 
+$$
+J_f(x,y,z)=\begin{pmatrix}1&1&0\\0&z\cdot\cos(yz)&y\cdot\cos(yz) \end{pmatrix}
+$$
+\item $\|M\|_\infty = \max([1+2+3],[2+2+|-6|],[0+2+4])=\max(6,10,6)=10$
+\end{enumerate}
+%%%%
+\newpage
+\Aufgabe
+Berechnen Sie das Integral
+$$
+\int_0^\pi \sin(x)^2 dx
+$$
+näherungsweise unter Verwendung
+der Simpson-Regel.
+
+%
+%
+\subsubsection*{Lösungsvorschlag}
+
+\begin{align*}
+S(f)&=\frac{b-a}{6}(f(a)+4f(\frac{a+b}{2})+f(b)\\
+&=\frac{\pi}{6}(\sin(0)^2+4\sin(\frac{\pi}{2})^2+\sin(\pi)^2)\\
+&=\frac{\pi}{6}(0^2+4\cdot 1^2+(0)^2)\\
+&=\frac{2\pi}{3}
+\end{align*}
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item
+Geben Sie die Butcher-Tableaus für 
+\begin{enumerate}[(i)]
+\item das explizite Eulerverfahren und 
+\item das implizite Eulerverfahren
+\end{enumerate}
+an.
+\item
+Lösen Sie approximativ das Anfangswertproblem
+$$
+\begin{cases} f'(x)=2x\cdot f(x) & \text{ für } x \in [0,1] \\
+f(0)=2
+\end{cases}
+$$
+mit dem expliziten Eulerverfahren und Schrittweite $h=\frac{1}{2}$.
+\end{enumerate}
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item 
+$$
+\begin{array}{c|c}
+\text{Explizites Euler  } &\quad \text{Implizites Euler}\\
+&\\
+\begin{array}{c|c}
+0&0\\\hline
+&1
+\end{array}&
+\begin{array}{c|c}
+1&1\\\hline
+&1
+\end{array}
+\end{array}
+$$
+\item 
+\begin{align*}
+f(0)&=2\\
+&\\
+\hat f(\frac{1}{2})&=f(0)+\frac{1}{2}\cdot (2\cdot 0 \cdot f(0))\\
+&=f(0)\\
+&=2\\
+&\\
+\hat f(1)&=f(\frac{1}{2})+\frac{1}{2} \cdot (2 \cdot \frac{1}{2} \cdot \hat f(\frac{1}{2}))\\
+&=2+\frac{1}{2}\cdot 2\\
+&=3
+\end{align*}
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei $f: \RR \to \RR, x \mapsto -2x^3+2x^2-2$.
+\begin{enumerate}[a)]
+\item Bestimmen Sie näherungsweise die Nullstelle von $f$
+indem Sie einen Schritt des Newton-Verfahrens mit Startwert $x_0=-1$ durchführen.
+\item Bestimmen Sie näherungsweise die Nullstelle von $f$
+indem Sie zwei Schritte des Bisektionsverfahrens mit geeigneten Startwerten $a_0$ und $b_0$ durchführen (d.h. $c_1$ bestimmen).\\
+Zeigen Sie dabei, dass die gewählten Startwerte die Anforderungen des Bisektionsverfahren erfüllen.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $x_1=x_0-\frac{f(x_0)}{f'(x_0)}=-1-\frac{-2\cdot (-1)^3+2\cdot(-1)^2-2}{-6\cdot (-1)^2+4\cdot (-1)}=-1-\frac{2}{-10}=-\frac{4}{5}$
+\item $a_0=-1$, $b_0=0$ und $f(a_0)=2>0$ und $f(b_0)=-2<0$ und somit $sign(f(a_0)f(b_0)=-1$.\\
+$c_0=(a_0+b_0)/2=\frac{-1}{2}$ mit $f(c_0)=\frac{1}{4}+\frac{1}{2}-2=-\frac{5}{4}<0$.\\
+Damit $a_1=a_0=-1$ und $b_1=c_0=\frac{-1}{2}$.\\
+Somit $c_1=(a_1+b_1)/2=-\frac{3}{4}$.
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+
+
+\begin{enumerate}[a)]
+\item Berechnen Sie das Integral
+$$
+\int_0^{2\pi} \int_0^1 e^{\sin(x)x^2}\cos(y) dx\ dy
+$$
+\item Geben Sie die Definition eines Normalbereichs $A\subset \RR^2$ bezüglich der $x$-Achse an.
+\item Berechnen Sie das Integral
+$$
+\int_A y\cdot \cos(x^3)\ d(x,y)
+$$
+mit $A=\{(x,y) \in \RR^2 \mid 0 \le x \le \sqrt[3]{\pi}  \text { und } 0\le y \le 2x \}$.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item 
+$$
+\int_0^{2\pi} \int_0^1 e^{\sin(x)x^2}\cos(y) dx\ dy \stackrel{Fubini}{=} \int_0^1\int_0^{2\pi} e^{\sin(x)x^2}\cos(y) dy\ dx =\int_0^1 \left[ e^{\sin(x)x^2}\sin(y)  \right]_{y=0}^{y=2\pi} dx=\int_0^1 0 dx =0
+$$
+\item $A=\{(x,y) \mid a\le x \le b, f(x) \le y \le g(x)\}$
+\item 
+\begin{align*}
+\int_A y\cdot \cos(x^3)\ d(x,y)&=\int_0^{\sqrt[3]{\pi}} \int_0^{2x}y\cdot \cos(x^3) dydx\\
+&=\int_0^{\sqrt[3]{\pi}}\cos(x^3)( \int_0^{2x}y dy)dx\\
+&=\int_0^{\sqrt[3]{\pi}}\cos(x^3)( [\frac{1}{2}y^2]_0^{2x} dx\\
+&=\int_0^{\sqrt[3]{\pi}}\cos(x^3)2x^2dx\\
+&=\frac{2}{3}\int_0^{\sqrt[3]{\pi}}\cos(x^3)3x^2dx\\
+&=\frac{2}{3}[\sin(x^3)]_0^{\sqrt[3]{\pi}}\\
+&=\frac{2}{3}(\sin(\pi)-\sin(0))\\
+&=0
+\end{align*}
+\end{enumerate}
+%
+%
+
+
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item
+Interpolieren Sie die Punkte
+$$
+(x_0,y_0)=(1,1), (x_1,y_1)=(2,1) \text{ und } (x_2,y_2)=(3,5)
+$$
+durch ein quadratisches Polynom.
+\item Wieviele übrige Freiheitsgrade hätten Sie bei einer Spline-Interpolation mit kubischen \\Polynomen (k=3) ?
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item
+$p(x)=ax2+bx+c$ damit
+\begin{align*}
+1&=a+b+c\\
+1&=4x+2b+c\\
+5&=9a+3b+c
+\end{align*}
+Das ergibt das LGS
+$$
+\begin{pmatrix} 1&1&1 \\ 4 & 2 & 1\\ 9&3&1 \end{pmatrix}\begin{pmatrix}a\\b\\c\end{pmatrix}=\begin{pmatrix} 1\\1\\5 \end{pmatrix}
+$$
+äquivalent zu
+$$
+\begin{pmatrix} 1&1&1 \\ 1&2&4\\ 1&3&9 \end{pmatrix}\begin{pmatrix}c\\b\\a\end{pmatrix}=\begin{pmatrix} 1\\1\\5 \end{pmatrix}
+$$
+mit 
+\begin{align*}
+\left( \begin{array}{ccc|c} 1&1&1&1\\ 1&2&4&1\\1&3&9&5 \end{array}\right) \sim> \left( \begin{array}{ccc|c} 1&1&1&1\\ 0&1&3&0\\0&2&8&4 \end{array} \right) \sim> \left( \begin{array}{ccc|c} 1&1&1&1\\ 0&1&3&0\\0&0&2&4 \end{array} \right) \sim> \left( \begin{array}{ccc|c} 1&0&0&5\\ 0&1&0&-6\\0&0&1&2 \end{array} \right)
+\end{align*}
+uns somit $a=2,b=-6$ und $c=5$.\\
+Das ergibt
+$$
+p(x)=2x^2-6x+5
+$$
+\item $k-1=2$
+\end{enumerate}
+\quad\\
+
+\vfill \hfill \textbf{Viel Erfolg!}
+
+
+
+
+
+\end{document}

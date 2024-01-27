@@ -1,0 +1,294 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Es sei $(a_n)_{n \in \N}$ eine Folge. Geben Sie die Definition davon an, dass $(a_n)_{n \in \N}$ gegen $a \in \RR$ konvergiert für $n$ gegen $\infty$.
+\item Zeigen Sie, dass die Folge $(b_n)_{n \in \N}$ mit 
+$$
+b_n=\frac{4n^3+n^2-1}{3n^3+2} \qquad \forall n \in \N
+$$
+konvergent ist und bestimmen Sie den Grenzwert $\lim \limits_{n\to \infty} b_n$.
+\item Geben Sie eine Folge $(c_n)_{n \in \N}$ an, sodass \vspace{3mm}\\
+\hspace*{5mm} i)$\ \lim \limits_{n \to \infty}c_n=0 \qquad$ und gleichzeitig \qquad ii)$\ \forall n \in \N: c_n \ne 0$ \vspace{3mm}\\
+gilt. \\
+Zeigen Sie, dass die von Ihnen gewählte Folge $(c_n)$ die Eigenschaften erfüllt.
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+	\begin{enumerate}[a)]
+	\item $(a_n)_{n \in \N}$ konvergiert gegen $a \in \RR$ für $n \to \infty$ $:\Leftrightarrow$ $\forall \varepsilon >0 \exists n_0 \in \N \forall n \ge n_0: |a_n-a|<\varepsilon$.
+	\item 
+	$$
+	b_n=\frac{4n^3+n^2-1}{3n^3+2}=\frac{4n^3+n^2-1}{3n^3+2}\cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}}=\frac{4+\frac{1}{n}-\frac{1}{n^3}}{3+\frac{2}{n^3}} \to \frac{4+0+0}{3+0+0}=\frac{4}{3} \quad (n \to \infty)
+	$$
+	\item Die Folge $(c_n)_{n \in \N}$ mit $c_n=\frac{1}{n}$ erfüllt das geforderte:
+		\begin{enumerate}[i)]
+		\item $c_n=\frac{1}{n} \to 0 \quad (n \to \infty)$
+		\item $c_n=\frac{1}{n} \ne 0 \quad \forall n \in \N$
+		\end{enumerate}
+	\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Bestimmen Sie den Reihenwert der folgenden Reihen
+	\begin{enumerate}[i)]
+	\item $\sum \limits_{k=0}^\infty 5\cdot \frac{1}{2^{k+1}}$
+	\item $\sum \limits_{k=0}^\infty\left( \frac{k}{k+2}-\frac{k-1}{k+1}\right)$
+	\end{enumerate}
+\item Bestimmen Sie den Konvergenzradius der Potenzreihe $\sum \limits_{k=0}^\infty 3^{2k} X^k$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item 
+	\begin{enumerate}[i)]
+	\item \begin{align*}
+	\sum \limits_{k=0}^\infty 5\cdot \frac{1}{2^{k+1}}&=5 \cdot \sum \limits_{k=0}^\infty \frac{1}{2^{k+1}}\\
+	 &=5 \cdot \sum \limits_{k=0}^\infty \frac{1}{2}\cdot\frac{1}{2^{k}} \\
+	 &=\frac{5}{2} \cdot \sum \limits_{k=0}^\infty \frac{1}{2^{k}} \\
+	 &=\frac{5}{2} \cdot \sum \limits_{k=0}^\infty \left(\frac{1}{2}\right)^{k} \\
+	 &\stackrel{(*)}{=}\frac{5}{2} \cdot \frac{1}{1-\frac{1}{2}}\\
+	 &=5
+	 \end{align*}
+	 wobei bei $(*)$ die Formel für den Wert einer Geometrischen Reihe verwendet wird.
+	\item \begin{align*}
+	\sum \limits_{k=0}^n\left( \frac{k}{k+2}-\frac{k-1}{k+1}\right)&=1+\left( \frac{1}{3}-0\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+...+\left(\frac{n-1}{n+1}-\frac{n-2}{n} \right)+\left(\frac{n}{n+2}-\frac{n-1}{n+1} \right)\\
+	&= 1+\frac{n}{n+2}\\
+	&\to 1+1=2 \qquad (n \to \infty)
+	\end{align*}
+	\end{enumerate}
+\item Für den Konvergenzradius gilt
+$$
+\rho=\frac{1}{\lim \limits_{k \to \infty} \sqrt[k]{a_k}}=\frac{1}{\lim \limits_{k \to \infty} \sqrt[k]{3^{2k}}}=\frac{1}{\lim \limits_{k \to \infty} 3^2 }=\frac{1}{9}
+$$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe 
+\begin{enumerate}[a)]
+\item Es sei $I \subseteq \RR$ ein Intervall und $f:I \to \RR$ eine Funktion. Geben Sie eine der Definitionen an, dass $f$ stetig in $x_0 \in I$ ist.
+\item Zeigen Sie, dass
+$$
+f: (-\infty, \pi) \to \RR, x \mapsto \begin{cases} 7 & \text{ für } x\le 0 \\ \frac{x^2+7x}{\sin(x)} & \text{ für } x>0 \end{cases}
+$$
+stetig ist.\\\quad\\
+\textit{Tipp: Verwenden Sie die Regeln von l'Hospital.}
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item $\forall \varepsilon >0\ \exists \delta>0\ \forall x \in (x_0-\delta, x_0+\delta): |f(x)-f(x_0)|< \varepsilon$
+\item $f$ ist steitig in allen $x<0$ und in allen $x \in (0,\pi)$, da $f$ dort eine Komposition stetiger Funktionen ist (und $\sin(x)\ne 0$ auf $(0,\pi)$).\\ 
+Es bleibt somit zu zeigen, dass $f$ stetig in $x_0=0$ ist. Es gilt:
+$$
+\lim_{x \to 0-} f(x)=\lim_{x \to 0-} 7 =7
+$$
+Für $\lim \limits_{x \to 0+} f(x)$ verwenden wir die Regeln von l'Hospital, denn:\\
+$z(x)=x^2+7x \to 0 \quad (x \to 0)$ und $n(x)=\sin(x) \to 0 \quad (x\to 0)$.\\
+Für die Ableitungen von Zähler und Nenner gilt:\\
+$z'(x)=2x+7 \to 7 \quad (x \to 0)$ und $n'(x)=\cos(x) \to 1 \quad (x\to 0)$.\\
+Damit folgt
+$$
+\lim_{x \to 0+} f(x)=\lim_{x \to 0+} \frac{z(x)}{n(x)}=\lim_{x \to 0+} \frac{z'(x)}{n'(x)}=\frac{7}{1}=7
+$$
+Insgesamt exisitert somit der Grenzwert $\lim \limits_{x \to 0} f(x)$ und stimmt mit dem Funktionswert $f(0)$ überein. Damit ist $f$ auch stetig in $x_0=0$.
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie jeweils die erste Ableitung der folgenden Funktionen
+
+\begin{enumerate}[a)]
+\item $f:(0,\infty) \to \RR, x \mapsto x \cdot \log(x) $
+\item $g: \RR \to \RR, x \mapsto\frac{\cos(x)}{x^2+2}$
+\item $h:\RR \to \RR, x \mapsto e^{x\cdot \sin(x)} $
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+
+\begin{enumerate}[a)]
+\item $f'(x)\stackrel{Produktregel}{=}1\cdot \log(x)+x\cdot \frac{1}{x}=\log(x)+1$
+\item $g'(x)\stackrel{Quotientenregel}{=}\frac{\sin(x)(x^2+2)-\cos(x)2x}{(x^2+2)^2}=\frac{\sin(x)}{x^2+2}-\frac{2x\cos(x)}{x^4+4x^2+4}$
+\item $h'(x)\stackrel{Ketten- \& Produktregel}{=}e^{x\sin(x)}\cdot (1\cdot \sin(x)+x\cdot \cos(x))=e^{x\sin(x)}\cdot (\sin(x)+x\cos(x))$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Geben Sie die Voraussetzungen und die Aussage des Mittelwertsatzes an.
+\item Zeigen Sie, dass für alle $a,b \in [1,\infty)$ mit $a\le b$ gilt:
+$$
+\log(b)-\log(a) \le b-a
+$$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item \underline{Mittelwertsatz}\\ Es sei $f:[a,b] \to \RR$ stetig und auf $(a,b)$ differenzierbar. Dann gibt es ein $c \in (a,b)$ mit
+$$
+\frac{f(b)-f(a)}{b-a}=f'(c)
+$$
+\item  Seien $a,b \in [1,\infty)$ mit $a< b$ beliebig (für $a=b$ ist die Aussage klar). Dann:
+	$$
+	\log(b)-\log(a) \le b-a \qquad \Longleftrightarrow \qquad \frac{\log(b)-\log(a)}{b-a} \le 1
+	$$
+	Der Logarithmus $log(x)$ ist auf $[a,b]$ stetig (da $a,b \ge 1$) und auf $(a,b)$ differenzierbar mit Ableitung $\frac{d}{dx}\log(x)=\frac{1}{x}$. Somit folgt mit dem Mittelwert, dass es ein $c\in (a,b)$ gibt mit 
+		$$
+		 \frac{\log(b)-\log(a)}{b-a} = \frac{1}{c}
+	$$
+Insbesondere ist $c>1$ und somit $ \frac{1}{c} < 1$.
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie den Wert der folgenden Integrale
+\begin{enumerate}[a)]
+\item $\displaystyle\int \limits_{0}^1 x^3\ dx$
+\item $\displaystyle\int \limits_{1}^5 x\cdot e^x \ dx$
+\item $\displaystyle\int \limits_{1}^\infty \frac{1}{x^3}\ dx$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+
+\begin{enumerate}[a)]
+\item $\displaystyle\int \limits_{0}^1 x^3\ dx=\left[\frac{1}{4}x^4\right]_{0}^{1}=\frac{1}{4}$
+\item $\displaystyle\int \limits_{1}^5 \underbrace{x}_{=G(x)}\cdot \underbrace{e^x}_{=f(x)} \ dx\stackrel{partielle \ Integration}{=} \left[xe^x\right]_1^5 - \displaystyle\int \limits_{1}^5 1\cdot e^x\ dx =[(x-1)e^x]_1^5=4e^5$
+\item $\displaystyle\int \limits_{1}^\infty \frac{1}{x^3}\ dx = \lim \limits_{t \to \infty}\displaystyle\int \limits_{1}^t \frac{1}{x^3}\ dx = \lim \limits_{t \to \infty} \left[-\frac{1}{2x^2}\right]_1^t= \lim \limits_{t \to \infty} \left(-\frac{1}{2t^2}+\frac{1}{2}\right)=\frac{1}{2}$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Lösen Sie das Anfangswertproblem
+$$
+\begin{cases} f'(x)=2xf(x)+x\\
+f(1)=-1 \end{cases}
+$$
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[(I)]
+\item Als erstes bestimmen wir die allgemeine Lösung der homogenen DGL $f'(x)=2xf(x)$. Diese ist $f_h(x)=c\cdot e^{x^2}$ mit $c \in \RR$, da $A(x)=x^2$ eine Stammfunktion von $a(x)=2x$ ist.
+\item Dann bestimmen wir eine spezielle Lösung der inhomogenen DGL. Diese ist $f_s(x)=c(x)\cdot e^{x^2}$ wobei
+$$
+c(x)=\int s(x)e^{-A(x)}\ dx=\int x \cdot e^{-x^2}=-\frac{1}{2}e^{-x^2}
+$$
+Also ist $f_s(x)=-\frac{1}{2}e^{-x^2}\cdot e^{x^2} = -\frac{1}{2}$.
+\item Als allgemeine Lösung der inhomogenen DGL ist somit
+$$
+f(x)=f_h(x)+f_s(x)=c\cdot e^{x^2}-\frac{1}{2} \quad \text{mit } c \in \RR
+$$
+\item Um das AWP zu lösen müssen wir nun noch $c \in \RR$ so bestimmen, dass
+$$
+-1=f(1)=c\cdot e^{1^2}-\frac{1}{2}=c\cdot e - \frac{1}{2}
+$$
+gilt. Dies ist genau dann erfüllt, wenn $c=\frac{-1}{2e}$.\\
+Somit löst $f(x)=\frac{-1}{2e}\cdot e^{x^2}-\frac{1}{2}$ das AWP.
+\end{enumerate}
+
+
+\Aufgabe
+Es sei $\gamma: [-1,1] \to \RR^2, t \mapsto (t^2,t^3)$.
+\begin{enumerate}[a)]
+\item Skizzieren Sie den Bogen von $\gamma$.
+\item Geben Sie die Definition der Länge der Kurve $\gamma$ an.
+\item Zeigen Sie, dass $\gamma$ \underline{nicht} nach Bogenlänge parametrisiert ist.
+\end{enumerate}
+
+%%%
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item
+\item
+\item
+\end{enumerate}
+\end{document}

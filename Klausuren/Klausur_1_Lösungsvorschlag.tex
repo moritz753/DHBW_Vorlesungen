@@ -1,0 +1,379 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Seien $a$ und $b$  Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(\neg a) \lor (b \land a).
+$$
+\item Negieren Sie die Aussage \ $\forall x \in \N\ \exists y \in \Z\ \forall z \in \N: x+y \le z$.\vspace{2mm}\\
+(Hinweis: $\neg(\forall x \in \N\ \exists y \in \Z\ \forall z \in \N: x+y \le z)$ ist keine ausreichende Lösung!)\\
+\item Geben Sie die Definition der Potenzmenge ${\cal P}(M)$ einer Menge $M$ an und bestimmen Sie die Potenzmenge für $M = \{1,2,3,4\}.$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+
+\item $$\begin{array}{c|c||c|c||c}
+a&b&\neg a&b\land a&(\neg a)\lor(b\land a)\\ \hline
+w&w&f&w&w\\
+w&f&f&f&f\\
+f&w&w&f&w\\
+f&f&w&f&w
+\end{array}$$
+\item $\neg(\forall x \in \N\ \exists y \in \Z\ \forall z \in \N: x+y \le z) \equiv \exists x \in \N \ \forall y \in \Z\ \exists z \in \N: x+y>z$ 
+\item Die Potenzmenge einer Menge $M$ ist die Menge aller Teilmengen von $M$
+$$
+\mathcal{P}(M):=\{A \mid A \subseteq M\}
+$$
+Für $M=\{1,2,3,4\}$ ist die Potenzmenge
+\begin{align*}
+\mathcal{P}(M)=\Big\{&\emptyset,\\
+&\{1\},\{2\},\{3\},\{4\},\\
+&\{1,2\},\{1,3\},\{1,4\},\{2,3\},\{2,4\},\{3,4\},\\
+&\{1,2,3\},\{1,2,4\},\{1,3,4\},\{2,3,4\},\\
+&\{1,2,3,4\}\Big\}
+\end{align*}
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es seien die Abbildungen $$f:\RR \to \RR^3, x \mapsto (x, 0, -3x)$$ und $$g: \RR^3 \to \RR, (x,y,z) \mapsto 2x+y+z$$ gegeben. 
+\begin{enumerate}[a)]
+\item Sind $f$ und $g$ injektiv? Begründen Sie Ihre Antwort.
+\item Sind $f$ und $g$ surjektiv? Begründen Sie Ihre Antwort.
+\item Bestimmen Sie $g \circ f$ und $f\circ g$.
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+
+\item $f$ ist injektiv, denn seien $x,y \in \RR$ mit $f(x)=f(y)$, dann folgt
+$$
+(x,0,-3x)=(y,0,-3y) \ \Rightarrow x=y
+$$
+$g$ ist nicht injektiv, da $g((0,1,0))=1=g((0,0,1) \quad \text{aber} \quad (0,1,0) \ne (0,0,1)$.
+\item $f$ ist nicht surjektiv, da $(0,1,0) \notin f(\RR) \subseteq \{(x,0,y)\mid x,y \in \RR\} $.\\
+$g$ ist surjektiv, denn für jedes $a \in \RR$ gilt
+$$
+(0,0,a) \in \RR^3 \quad \text{und} \quad g((0,0,a))=a
+$$
+\item
+\begin{align*}
+&(g\circ f)(x)=g(f(x))=g((x,0,-3x))=2x-3x=-x\\
+\Rightarrow&\quad g\circ f :\RR \to \RR, x \mapsto -x\\
+&\\
+&(f \circ g)(x,y,z)=f(g(x,y,z))=f(2x+y+z)=(2x+y+z,0,-3(2x+y+z))\\
+\Rightarrow&\quad f\circ g : \RR^3 \to \RR^3, (x,y,z) \mapsto (2x+y+z,0,-6x-3y-3z)
+\end{align*}
+
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei 
+$$K:=\{a+b\sqrt{3} \mid a,b \in  \Q \} \subset \RR$$
+zusammen mit den Verknüpfungen $+$ und $\cdot$ wie in $\RR$ gegeben.
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Körpers an.
+
+\item Zeigen Sie, dass $(K,+,\cdot)$ ein Körper ist.
+
+\item Bestimmen Sie das multiplikative Inverse zu $z=5+2\sqrt{3} \in K$. 
+
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+
+\item Ein Körper ist eine Menge $K$ zusammen mit zwei Verknüpfungen $+$ und $\cdot$, sodass
+\begin{enumerate}[i)]
+\item $(K,+)$ eine abelsche Gruppe ist (mit Neutralelement $0$),
+\item $(K\setminus\{0\},\cdot)$ eine abelsche Gruppe ist,
+\item $+$ und $\cdot$ die Distributivgesetze erfüllen.
+\end{enumerate}
+
+\item $K \subseteq \RR$ und $0=0+0 \cdot \sqrt{3} \in K$, $1=1+0 \cdot \sqrt{3} \in K$ sowie für $a+b \sqrt{3} \in K$ auch $-(a+b \sqrt{3})=-a-b\sqrt{3} \in K$. Außerdem gilt für alle $z_1=a+b\sqrt{3}, z_2=x+y\sqrt{3} \in K$:
+\begin{align*}
+z_1+z_2&=(a+x)+(b+y)\sqrt{3}\in K\\
+z_1\cdot z_2&=(ax+3by)+(ay+bx)\sqrt{3} \in K
+\end{align*}
+Damit ist $(K,+,\cdot)$ ein kommutativer Ring mit 1, da die Assoziativität und die Kommutativität der Verknüpfungen, sowie die Distributivgesetze auf ganz $(\RR,+,\cdot)$ gelten.\\
+Es bleibt zu zeigen, dass jedes Element $\ne 0$ ein multiplikatives Inverses in $K$ besitzt. Dazu setzen wir $z_1\cdot z_2=1$. Dies ergibt das LGS
+\begin{align*}
+ax+3by&=1\\
+bx+ay&=0
+\end{align*}
+mit den Unbekannten $x, y \in \Q$.\\
+Für den Fall $b=0$ ergibt sich die Lösung $y=0$ und $x=\frac{1}{a}$, also $z_2=z_1^{-1}=\frac{1}{a} \in K$.\\
+Für den Fall $b\ne 0$ erhalten wir
+$$
+\left( \begin{array}{cc|c} a& 3b&1\\b&a&0 \end{array}\right) \sim> ... \sim> \left( \begin{array}{cc|c}1&0&\frac{-a}{3b^2-a^2}\\  0&1&\frac{b}{3b^2-a^2}\end{array}\right) 
+$$
+Damit ergibt sich $z_2=z_1^{-1}=\frac{-a}{3b^2-a^2}+\frac{b}{3b^2-a^2}\sqrt{3} \in K$.
+\item Mit der Formel aus Teil b):
+$$
+(5+2\sqrt{3})^{-1}=\frac{-5}{3\cdot 2^2 - 5^2}+\frac{2}{3\cdot 2^2 - 5^2}\sqrt{3}=\frac{5}{13}-\frac{2}{13}\sqrt{3}
+$$
+
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien $K$ ein Körper, $V$ ein $K$-Vektorraum und $U_1$ und $U_2$
+Untervektorräume von $V.$
+
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines $K$-Vektorraums an.
+\item Geben Sie die Definition eines Untervektorraums an.
+\item Zeigen Sie: $V=U_1\cup U_2  \ \Longleftrightarrow \ V=U_1\ \text{ oder }\ V=U_2.$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Ein $K$-Vektorraum ist eine Menge $V$ zusammen mit einem Körper $K$ und einer Verknüpfung $+$ auf $V$ und einer Abbildung $\cdot:K\times V \to V$, sodass
+\begin{enumerate}[i)]
+\item $(V,+)$ eine abelsche Gruppe ist,
+\item $1_K\cdot v=v$ für alle $v\in V$,
+\item $\forall a,b \in K \ \forall v \in V: a\cdot (b \cdot v)=(a\cdot_K b)\cdot v$
+\item die Distributivgesetze $(a+b)\cdot v=av+bv$ und $a\cdot (v+w)=av+aw$ gelten.
+\end{enumerate}
+\item Ein Untervektorraum eines $K$-Vektorraumes $V$ ist eine Teilmenge $U \subseteq V$, sodass $(U,+)$ eine Untergruppe von $(V,+)$ ist und für alle $a\in K$ und alle $u\in U$ gilt $au \in U$.
+\item 
+\begin{itemize}
+\item[$\Leftarrow$:] Falls $U_1=V$ oder $U_2=V$ gilt, dann ist auch $U_1\cup U_2=V$.
+\item[$\Rightarrow$:] Annahme: $U_1\ne V \ne U_2$. Dann gibt es Vektoren $u_1 \in V\setminus U_2 \subseteq U_1$ und $u_2 \in V\setminus U_1 \subseteq U_2$. Da $U_1 \cup U_2=V$ ein Vektorraum ist, folgt $u_1+u_2 \in U_1\cup U_2$.\\
+Fall 1: $u_1+u_2 \in U_1$. Dann folgt da $u_1 \in U_1$ auch $u_2=(u_1+u_2)-u_1 \in U_1$. Dies ist aber ein Widerspruch zur Definition von $u_2$.\\
+Fall 2: $u_1+u_2 \in U_2$. Dann folgt da $u_2 \in U_2$ auch $u_1=(u_1+u_2)-u_2 \in U_2$. Dies ist aber ein Widerspruch zur Definition von $u_1$.\\
+Somit muss die Annahme falsch sein und $V=U_1$ oder $V=U_2$ gelten. \hfill $\square$
+\end{itemize}
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien die Vektoren $b_1=\begin{pmatrix} 2\\1\\0\end{pmatrix}$, $b_2=\begin{pmatrix} 0\\1\\2\end{pmatrix}$ und $b_3=\begin{pmatrix} 1\\0\\1\end{pmatrix} \in \RR^3$ sowie die lineare Abbildung 
+$
+\Phi: \RR^3 \to \RR^2, v \mapsto \Phi(v)
+$
+mit 
+$$
+\Phi(b_1)=\begin{pmatrix} 4\\0\end{pmatrix}, \ \Phi(b_2)=\begin{pmatrix} 0\\4\end{pmatrix} \text{ und } \Phi(b_3)=\begin{pmatrix} 4\\4\end{pmatrix}
+$$
+gegeben.
+
+\begin{enumerate}[a)]
+
+\item Zeigen Sie, dass die Vektoren $b_1,b_2$ und $b_3$ linear unabhängig sind.
+\item Bestimmen Sie die Abbildungsmatrix $A$ von $\Phi$ bezüglich der Standardbasis.
+\item Berechnen Sie $\Phi(\begin{pmatrix} 3\\2\\1 \end{pmatrix})$.
+
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Die Vektoren $b_1,b_2,b_3$ sind genau dann linear unabhängig, wenn das homogene LGS 
+$$
+\alpha b_1 +\beta b_2 + \gamma b_3 =0
+$$
+nur die triviale Lösung $\alpha=\beta=\gamma=0$ hat.
+$$
+\left(\begin{array}{ccc|c}2&0&1&0\\1&1&0&0\\0&2&1&0 \end{array}\right) \sim> ... \sim>\left(\begin{array}{ccc|c} 1&0&\frac{1}{2}&0\\ 0&1&-\frac{1}{2}&0 \\ 0&0&1&0\end{array}\right)
+$$
+Somit hat das LGS in jeder Spalte eine Stufe und daher nur die triviale Lösung.
+\item Die Standardbasisvektoren lassen sich wie folgt durch $b_1,b_2,b_3$ darstellen:
+\begin{align*}
+e_1&=\frac{1}{4}(b_1-b_2+2b_3)\\
+e_2&=\frac{1}{2}(b_1+b_2-2b_3)\\
+e_3&=b_3-e_1=b3-(\frac{1}{4}(b_1-b_2+2b_3))=-\frac{1}{4}b_1+\frac{1}{4}b_2+\frac{1}{2}b_3
+\end{align*}
+Damit ergibt sich die Abbildungsmatrix
+$$
+A=\begin{pmatrix} \Phi(e_1)|\Phi(e_2)|\Phi(e_3) \end{pmatrix}=\begin{pmatrix} 3 & -2 &1 \\ 1&-2&3 \end{pmatrix}
+$$
+\item 
+$$
+\Phi(\begin{pmatrix} 3\\2\\1 \end{pmatrix})=A\cdot \begin{pmatrix} 3\\2\\1 \end{pmatrix}=\begin{pmatrix} 6 \\ 2 \end{pmatrix}
+$$
+
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Bestimmen Sie alle $t\in\RR$, für die das folgende lineare Gleichungssystem lösbar ist:
+\[\begin{array}{rrrrrrrrr}
+2x_1&+&4x_2&+&2x_3&=&12t\\
+2x_1&+&12x_2&+&7x_3&=&12t+7\\
+x_1&+&10x_2&+&6x_3&=&7t+8
+\end{array}\]
+\item Geben Sie die Lösungsmenge des obigen linearen Gleichungssystems für $t=-1$ an.
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Das LGS muss mit dem Gauß-Algorithmus auf Stufenform gebracht werden:
+$$
+\left( \begin{array}{ccc|c} 2&4&2 &12t\\ 2 & 12 & 7 & 12t+7\\1&10&6&7t+8 \end{array}\right) \sim> ... \sim> \left( \begin{array}{ccc|c} 1&2&1&6t\\0&1&\frac{5}{8} & \frac{7}{8} \\ 0&0&0&t+1 \end{array} \right)
+$$
+Das LGS ist also genau dann lösbar, wenn $t+1=0$ gilt, also für $t=-1$.
+\item Setzt man $t=-1$ in die Stufenform aus a) ein, so erhält man
+$$
+\left( \begin{array}{ccc|c} 1&2&1&-6\\0&1&\frac{5}{8} & \frac{7}{8} \\ 0&0&0&0 \end{array} \right) \stackrel{\sim>}{Z1-2\cdot Z2}\left( \begin{array}{ccc|c} 1&0&\frac{-1}{4}&\frac{-31}{4}\\0&1&\frac{5}{8} & \frac{7}{8} \\ 0&0&0&0 \end{array} \right)
+$$
+Mit dem $(-1)$-Trick folgt 
+$$
+\mathcal{L}=\left\{ \begin{pmatrix}-\frac{31}{4}\\\frac{7}{8}\\0 \end{pmatrix} +s \cdot \begin{pmatrix}-\frac{1}{4}\\\frac{5}{8}\\-1 \end{pmatrix} \mid s \in \RR \right\}
+$$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Berechnen Sie die Determinanten der folgenden Matrizen und geben Sie jeweils an, ob die Matrix invertierbar ist.\\
+%
+\hspace*{10mm} a) \ $A=\begin{pmatrix} 7 & 5 \\ 1 & 7 \end{pmatrix}$ \qquad
+b) \ $B=\begin{pmatrix} 1 & \frac{4}{7} & 93 \\ 0 & 2 & \frac{6}{47} \\ 0 & 0& 3 \end{pmatrix}$ \qquad
+c) \ $C=\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & 4 \\ 1 & -1 & 5 & 4 \end{pmatrix}$
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $\det(A)=7\cdot 7 - 5 \cdot 1 =49-5=44 \ne 0$, somit ist $A$ invertierbar.
+\item $\det(B)=1\cdot 2 \cdot 3=6 \ne 0$, da $B$ eine Dreiecksmatrix ist. Somit ist $B$ invertierbar.
+\item \begin{align*}
+\det(C)&=\det(\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & 4 \\ 1 & -1 & 5 & 4 \end{pmatrix})\\
+&\stackrel{(1)}{=}\det(\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & 4 \\ 0 & -2 & 3 & 3 \end{pmatrix})\\
+&\stackrel{(2)}{=}\det(\begin{pmatrix}  2 & 0 & 1 \\  0& 3 & 4 \\  -2 & 3 & 3 \end{pmatrix})\\
+&\stackrel{(3)}{=}\det(\begin{pmatrix}  2 & 0 & 1 \\  0& 3 & 4 \\  0 & 3 & 4 \end{pmatrix})\\
+&\stackrel{(4)}{=}2\cdot \det(\begin{pmatrix}     3 & 4 \\   3 & 4 \end{pmatrix})\\
+&=2\cdot (3 \cdot 4 - 4 \cdot 3)\\
+&=0
+\end{align*}
+wobei in Schritt (1) die erste Zeile von der vierten Zeile abgezogen wird, in Schritt (2) nach der ersten Spalte entwickelt wird, in Schritt (3) die erste Zeile auf die dritte Zeile addiert wird, in Schritt (4) wieder nach der ersten Spalte entwickelt wird und zuletzt die Formel für $(2\times2)$-Matrizen angewendet wird.\\
+Die Matrix $C$ ist damit nicht invertierbar.
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Sei $A=\begin{pmatrix} -\frac{1}{3} & 0 & -\frac{2}{3} \\ 0 & 3 & 0 \\ \frac{2}{3} & 0 &\frac{4}{3} \end{pmatrix}$. 
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Eigenvektors einer Matrix $B \in \RR^{n\times n}$ an.
+\item Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte von $A$.
+\item Bestimmen Sie eine invertierbare Matrix $D \in \RR^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Ein Eigenvektor einer Matrix $B$ ist ein Vektor $v \in \RR^{n}\setminus \{0\}$, sodass es ein $\lambda \in \RR$ gibt mit $Bv=\lambda v$.
+\item
+Wir bestimmen das charakteristische Polynom $CP_A(X)=\det(A-X\cdot I_3)$:\\
+\begin{align*}
+det(A-X\cdot I_3)&=\det(\begin{pmatrix} -\frac{1}{3}-X & 0 & -\frac{2}{3} \\ 0 & 3-X & 0 \\ \frac{2}{3} & 0 &\frac{4}{3}-X \end{pmatrix})\\
+&=(3-X)\cdot \det(\begin{pmatrix} -\frac{1}{3}-X &  -\frac{2}{3} \\ \frac{2}{3} &\frac{4}{3}-X \end{pmatrix})\\
+&=(3-X)\cdot ((-\frac{1}{3}-X)(\frac{4}{3}-X)-(-\frac{2}{3})(\frac{2}{3}))\\
+&=(3-X)\cdot(-\frac{4}{9}-X+X^2+\frac{4}{9})\\
+&=(3-X)\cdot(X^2-X)\\
+&=-(3-X)(1-X)X
+\end{align*}
+Die Eigenwerte von $A$ sind somit $\lambda_1=0$, $\lambda_2=1$ und $\lambda_3=3$.
+\item Wir suchen eine Basis des $\RR^3$ aus Eigenvektoren von $A$. Dazu bestimmen wie die Eigenräume zu den Eigenwerten aus Teil b).
+\begin{itemize}
+\item[$\lambda_1$:] $\left(\begin{array}{ccc|c} -\frac{1}{3}&0& -\frac{2}{3}&0\\ 0&3&0&0\\ \frac{2}{3}&0&\frac{4}{3}&0\end{array} \right) \sim>...\sim>\left(\begin{array}{ccc|c} 1&0&2&0\\ 0&1&0&0\\ 0&0&0&0\end{array}\right) \quad \Rightarrow \  Eig(A,\lambda_1)=\langle \begin{pmatrix}2\\0\\-1 \end{pmatrix} \rangle$
+\item[$\lambda_2$:]$\left(\begin{array}{ccc|c} -\frac{1}{3}-1&0& -\frac{2}{3}&0\\ 0&3-1&0&0\\ \frac{2}{3}&0&\frac{4}{3}-1&0\end{array} \right) \sim>...\sim>\left(\begin{array}{ccc|c} 1&0&\frac{1}{2}&0\\ 0&1&0&0\\ 0&0&0&0\end{array}\right) \quad \Rightarrow \ Eig(A,\lambda_1)=\langle \begin{pmatrix}\frac{1}{2}\\0\\-1 \end{pmatrix}\rangle $
+\item[$\lambda_3$:]$\left(\begin{array}{ccc|c} -\frac{1}{3}-3&0& -\frac{2}{3}&0\\ 0&3-3&0&0\\ \frac{2}{3}&0&\frac{4}{3}-3&0\end{array} \right) \sim>...\sim>\left(\begin{array}{ccc|c}1&0&0&0\\ 0&0&0&0\\ 0&0&1&0\end{array}\right) \quad \Rightarrow \  Eig(A,\lambda_1)=\langle \begin{pmatrix}0\\-1\\0 \end{pmatrix} \rangle$
+\end{itemize}\quad\\
+Damit erfüllt die Matrix
+$$
+D= \begin{pmatrix}2&\frac{1}{2}&0\\0&0&-1\\-1&-1&0 \end{pmatrix} 
+$$
+das Gewünschte.
+\end{enumerate}
+
+\end{document}

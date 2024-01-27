@@ -1,0 +1,286 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Zeigen Sie, dass die Folge $(a_n)_{n \in \N}$ mit 
+$$
+a_n=\frac{n^3+n^2-7}{5n^3+2n} \qquad \forall n \in \N
+$$
+konvergent ist und bestimmen Sie den Grenzwert $\lim \limits_{n\to \infty} a_n$.
+\item Zeigen Sie, dass die Folge $(b_n)_{n \in \N}$ mit 
+$$
+b_n=\frac{1}{\sqrt{n}} \qquad \forall n \in \N
+$$ 
+für $n \to \infty$ gegen $b=0$ konvergiert.
+\item Geben Sie eine Folge $(c_n)_{n \in \N}$ an, die \vspace{3mm}\\
+\hspace*{5mm} i) beschränkt ist \qquad und gleichzeitig \qquad ii) \underline{nicht} konvergiert. \vspace{3mm}\\
+gilt.
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Für $n>0$ gilt: 
+$$
+a_n=a_n\cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}}=\frac{1+\frac{1}{n}-\frac{7}{n^3}}{5+\frac{2}{n^2}} \to \frac{1}{5} \quad (n \to \infty)
+$$
+\item Sei $\varepsilon>0$ beliebig und $n_0 > \frac{1}{\varepsilon^2}$. Dann gilt für alle $n\ge n_0$:
+$$
+|b_n-0|=|b_n|=|\frac{1}{\sqrt{n}}|\le |\frac{1}{\sqrt{n_0}}|< \varepsilon
+$$
+Somit konvergiert $(b_n)$ gegen $0$ für $n \to \infty$.
+\item Wir setzen für alle $n \in \N: c_n:=(-1)^n$. Dann gilt:
+	\begin{enumerate}[i)]
+	\item $(c_n)$ ist beschränkt durch $C=1$.
+	\item $(c_n)$ ist nicht konvergent, denn die Folge hat 2 Häufungpunkte: $h_1=-1$ und $h_2=1$.
+	\end{enumerate}
+Somit ist $(c_n)$ eine Folge mit den gesuchten Eigenschaften.
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Entscheiden Sie, ob die folgenden Reihen konvergent sind:
+	\begin{enumerate}[i)]
+	\item $\sum \limits_{k=0}^\infty \frac{1}{k^k}$
+	\item $\sum \limits_{k=0}^\infty \frac{k+1}{k^2}$
+	\end{enumerate}
+\item Bestimmen Sie den Konvergenzradius der Potenzreihe $\sum \limits_{k=0}^\infty 2^{3k} X^k$
+\end{enumerate}
+
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)] 
+\item
+	\begin{enumerate}[i)]
+	\item $\sum \limits_{k=0}^\infty \frac{1}{k^k}$ ist konvergent:\\
+	Wurzelkriterium: $\sqrt[k]{\frac{1}{k^k}}=\frac{1}{k} \to 0<1 \quad (k \to \infty)$.
+	
+	\item $\sum \limits_{k=0}^\infty \frac{k+1}{k^2}$ ist nicht konvergent:\\
+	Majorantenkriterium: $\frac{k+1}{k^2}>\frac{k}{k^2}=\frac{1}{k}$ und somit ist die Reihe eine Majorante zur nicht-konvergenten Harmonischen Reihe und kann daher nicht konvergent sein.
+	\end{enumerate}
+\item $\rho=\lim \limits_{k \to \infty} \frac{1}{\sqrt[k]{2^{3k}}}=\lim \limits_{k \to \infty} \frac{1}{2^3}=\frac{1}{8}$
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe 
+\begin{enumerate}[a)]
+\item Es sei $I \subseteq \RR$ ein Intervall und $f:I \to \RR$ eine Funktion. Geben Sie eine der Definitionen an, dass $f$ stetig in $x_0 \in I$ ist.
+
+\item Geben Sie die Voraussetzungen und die Aussage des Zwischenwertsatzes an.
+
+\item Zeigen Sie, dass die Gleichung
+$$
+x^7+x^5+x^3+x-\cos(x)=0
+$$
+auf dem Intervall $[0,1]$ eine Lösung hat.
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item $\forall \varepsilon >0\ \exists \delta>0\ \forall x \in (x_0-\delta, x_0+\delta): |f(x)-f(x_0)|< \varepsilon$
+
+\item \underline{Zwischenwertsatz}\\ Es sei $f:[a,b] \to \RR$ stetig und $y \in \RR$ zwischen $f(a)$ und $f(b)$. Dann gibt es ein $c \in [a,b]$ mit $f(c)=y$.
+\item Man setzt $f(x):=x^7+x^5+x^3+x-\cos(x)$. Dann ist $f$ auf $[0,1]$ eine stetige Funktion. Weiter ist 
+$$f(0)=0+0+0+0-1=-1<0$$
+und
+$$f(1)=1+1+1+1-\cos(1)\ge 1+1+1+1-1=3>0$$
+Mit dem Zwischenwertsatz gibt es somit ein $c\in[0,1]$ mit $f(c)=0$, da $0$ zwischen $f(0)$ und $f(1)$ liegt.
+
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie jeweils die erste Ableitung der folgenden Funktionen
+
+\begin{enumerate}[a)]
+\item $f:(0,\infty) \to \RR, x \mapsto x^2 \cdot \log(x) $
+\item $g: \RR \to \RR, x \mapsto\frac{\sin(x)}{x+3}$
+\item $h:\RR \to \RR, x \mapsto e^{x^2+2} $
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+
+\begin{enumerate}[a)]
+\item $f'(x)\stackrel{Produktregel}{=}2x\cdot \log(x)+x^2\cdot \frac{1}{x}=2x\log(x)+x$
+\item $g'(x)\stackrel{Quotientenregel}{=}\frac{\cos(x)(x+3)-\sin(x)\cdot 1}{(x+3)^2}=\frac{\sin(x)}{x+3}-\frac{\cos(x)}{x^2+6x+9}$
+\item $h'(x)\stackrel{Kettenregel}{=}e^{x^2+2}\cdot (2x)=2xe^{x^2+2}$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei $f: [0,\pi] \to \RR, x \mapsto \sin(2x)$.
+\begin{enumerate}[a)]
+\item Bestimmen Sie die Taylor-Entwicklung $T^2_f(x,x_0)$ von $f$ bis zum Grad 2 um die Stelle $x_0=\frac{\pi}{2}$. 
+\item Bestimmen Sie alle Extrema von $f$ und entscheiden Sie jeweils, ob es sich um ein Maximum oder Minimum handelt.
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Wir benötigen die ersten beiden Ableitungen von $f$: $f'(x)=2 \cos(2x)$ und $f''(x)=-4 \sin(2x)$. Ausgewertet an der Stelle $x_0=\frac{\pi}{2}$ ergibt das $f(x_0)=\sin(\pi)=0$, $f'(x_0)=2\cos(\pi)=-2$ und $f''(x_0)=-4\sin(\pi)=0$. Damit erhalten wir
+$$
+T^2_f(x,x_0)=(x-x_0)^0f(x_0)+(x-x_0)^1\frac{f'(x_0)}{1!} + (x-x_0)^2\frac{f''(x_0)}{2!}=-2(x-\frac{\pi}{2})
+$$
+\item Die Nullstellen von $f'$ auf $[0, \pi]$ sind $x_1=\frac{\pi}{4}$ und $x_2=\frac{3\pi}{4}$. Für die zweite Ableitung gilt an diesen Stellen:
+\begin{align*}
+f''(x_1)&=-4\sin(2\cdot \frac{\pi}{4})=-4 \sin(\frac{\pi}{2})=-4 <0\\
+f''(x_2)&=-4\sin(2\cdot \frac{3\pi}{4})=-4 \sin(\frac{3\pi}{2})=-4 \cdot (-1)=4 >0
+\end{align*}
+Somit hat $f$ in $x_1=\frac{\pi}{4}$ ein Maximum (mit $f(x_1)=1$) und in $x_2=\frac{3\pi}{4}$ ein Minimum (mit $f(x_2)=-1$).\\
+Da $f$ an den Randstellen $x \in \{0,\pi\}$ den Wert $0$ annimmt, gibt es keine weiteren Extrema.
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie den Wert der folgenden Integrale
+\begin{enumerate}[a)]
+\item $\displaystyle\int \limits_{0}^1 x^4\ dx$
+\item $\displaystyle\int \limits_{0}^2 x\cdot e^{x^2} \ dx$
+\item $\displaystyle\int \limits_{1}^\infty \frac{1}{x^2}\ dx$
+\end{enumerate}
+
+\subsubsection*{Lösungsvorschlag:}
+
+\begin{enumerate}[a)]
+\item $\displaystyle\int \limits_{0}^1 x^3\ dx\stackrel{Hauptsatz}{=}\left[\frac{1}{5}x^5\right]_{0}^{1}=\frac{1}{5}$
+ \item \quad$\displaystyle\int \limits_{0}^2 x\cdot e^{x^2} \ dx \stackrel{(*)}{=} \displaystyle\int \limits_0^4 \frac{1}{2}e^y \ dy= \frac{1}{2}(e^4-e^0)= \frac{1}{2}(e^4-1)$\\
+wobei bei $(*)$ die Substitution $y=x^2$ und $dy=2xdx$ angewendet wird.
+\item $\displaystyle\int \limits_{1}^\infty \frac{1}{x^2}\ dx = \lim \limits_{t \to \infty}\displaystyle\int \limits_{1}^t \frac{1}{x^2}\ dx = \lim \limits_{t \to \infty} \left[-\frac{1}{x}\right]_1^t= \lim \limits_{t \to \infty} \left(-\frac{1}{t}+1\right)=1$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie die allgemeine Lösung der Differentialgleichung
+$$
+f'(x)=\cos(x)f(x)+\cos(x)
+$$
+
+%%%%%
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[1)]
+\item Zuerst wird die allgemeine Lösung der zugehörigen homogenen DGL 
+$$
+f'(x)=\cos(x)f(x)
+$$
+bestimmt. Da $\sin(x)$ eine Stammfunktion von $\cos(x)$ ist, ist diese gegeben durch
+$$
+f_h(x)=c\cdot e^{\sin(x)} ,\qquad c \in \RR
+$$
+\item Als nächstes wird eine spezielle Lösung der inhomogenen DGL mit Hilfe der Variation der Konstanten ermittelt. Dafür wird die Funktion $c(x)$ als Stammfunktion von $\cos(x)e^{-\sin(x)}$ gewählt. Eine solche ist $c(x)=-e^{-\sin(x)}$. Damit
+$$
+f_s(x)=-e^{-\sin(x)}e^{\sin(x)}=-1
+$$
+\item Insgesamt ergibt sich somit als allgemeine Lösung der inhomogenen DGL
+$$
+f(x)=c\cdot e^{\sin(x)}-1 ,\qquad c \in \RR
+$$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei $\gamma : [0,4\pi] \to \RR^2, t \mapsto \left(2\cos(\frac{t}{2}), 2 \sin(\frac{t}{2}) \right)$ eine Kurve in $\RR^2$.
+\begin{enumerate}[a)]
+\item Skizzieren Sie den Bogen von $\gamma$.
+\item Berechnen Sie die Länge von $\gamma$.
+\item Zeigen Sie, dass $\gamma$ nach Bogenlänge parametrisiert ist.
+\end{enumerate}
+
+%%%%%
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Kreis mit Radius 2
+\item $L(\gamma)=\int_0^{4\pi} \|\dot \gamma(t)\|dt=\int_0^{4\pi}2 \cdot \frac{1}{2} \ dt=4\pi$
+\item $\|\dot \gamma(t)\|=1$
+\end{enumerate}
+
+\end{document}

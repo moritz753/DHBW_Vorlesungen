@@ -1,0 +1,276 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Geben Sie die Definition der Kondition eines Berechnungsproblems 
+$$
+	y=f(x)
+$$
+mit $x \in \RR$ und $f:\RR \to \RR$ differenzierbar, an.
+\item  Berechnen Sie die Kondition von $y=x^3+8$ und geben Sie eine Stelle $x_g$ an, an der das Problem gut konditioniert ist, und eine Stelle $x_s$, an der das Problem schlecht konditioniert ist. Begründen Sie Ihre Wahl.
+\item Nennen Sie ein Verfahren zum numerischen Lösen einer partiellen Differentialgleichung.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $kond_x(f)=\frac{|xf'(x)|}{|f(x)|}$
+\item $kond_x(f)=\frac{|xf'(x)|}{|f(x)|}=\frac{|x(3x^2)|}{|x^3+8|}=\frac{|3x^3|}{|x^3+8|}$\\
+$x_g=0$, da $kond_0(f)=\frac{0}{8}=0$\\
+$x_s=-2$, da $kond_{-2}(f)=\frac{-24}{0}=\infty$
+\item Finite Differenzen Methode
+\end{enumerate}
+%%%%%
+\newpage
+\Aufgabe
+Berechnen Sie das Integral
+$$
+\int_0^\pi \cos(x)^2 dx
+$$
+näherungsweise unter Verwendung
+\begin{enumerate}[a)]
+\item der Trapez-Regel.
+\item der summierten Simpson-Regel mit $m=2$.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item
+$$
+\int_0^\pi \cos(x)^2 dx \approx (\pi-0)\cdot(\frac{1}{2} \cos(0)^2+\frac{1}{2}\cos(\pi)^2)=\pi\cdot (\frac{1}{2}\cdot 1^2+\frac{1}{2}\cdot(-1)^2)=\pi
+$$
+\item $h=\frac{\pi -0 }{2}=\frac{\pi}{2}$ und $x_0=0, x_1=\frac{\pi}{2}$ und $x_2=\pi$. Damit:
+\begin{align*}
+\int_0^\pi \cos(x)^2 dx &\approx \frac{h}{6}\cdot \left(\cos(x_0)^2+4\cos(\frac{x_0+x_1}{2})^2+2\cos(x_1)^2+4\cos(\frac{x_1+x_2}{2})^2+\cos(x_2)^2\right)\\
+&=\frac{\pi}{12}\left(1^2+4(\frac{1}{\sqrt{2}})^2  +2\cdot 0^2+4(-\frac{1}{\sqrt{2}})^2+(-1)^2 \right)\\
+&=\frac{\pi}{12}(1+2+0+2+1)\\
+&=\frac{\pi}{2}
+\end{align*}
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+\begin{enumerate}[a)]
+\item Bestimmen Sie näherungsweise die Nullstelle von 
+$$
+f(x)=-3x^3-x+7
+$$
+indem Sie einen Schritt des Newton-Verfahrens mit Startwert $x_0=1$ durchführen.
+\item Bestimmen Sie näherungsweise eine Nullstelle von 
+$$
+f: \RR^2 \to \RR^2, \begin{pmatrix} x \\y \end{pmatrix} \mapsto \begin{pmatrix} x+\cos(y) \\ xy-x^2 \end{pmatrix}
+$$
+indem Sie einen Schritt des mehrdimensionalen Newton-Verfahrens mit Startwert $x_0=\begin{pmatrix} 1 \\0 \end{pmatrix}$ durchführen.
+\end{enumerate}
+
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $x_1=x_0-\frac{f(x_0)}{f'(x_0)}=1-\frac{-3\cdot 1^3-1+7}{-9\cdot 1^2-1}=1-\frac{3}{-10}=\frac{13}{10}$
+\item Als erstes berechnet man die Jacobi-Matrix:
+$$
+J_f(x,y)=\begin{pmatrix}1 & - \sin(y) \\ y-2x & x \end{pmatrix}
+$$
+Und dann deren Inverse bei $(x,y)=(1,0)$:
+$$
+J_f(1,0)^{-1}=\begin{pmatrix}1 & 0 \\ -2 & 1 \end{pmatrix}^{-1}=\begin{pmatrix}1 & 0 \\ 2 & 1 \end{pmatrix}
+$$
+Damit:
+$x_1=x_0-J_f(x_0)^{-1}\cdot f(x_0)=\begin{pmatrix} 1 \\ 0 \end{pmatrix}-\begin{pmatrix}1 & 0 \\ 2 & 1 \end{pmatrix}\begin{pmatrix} 2 \\ -1 \end{pmatrix}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}-\begin{pmatrix} 2 \\ 3 \end{pmatrix}=\begin{pmatrix} -1 \\ -3 \end{pmatrix}$
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+
+
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Normalbereichs $A\subset \RR^2$ bezüglich der $x$-Achse an.
+\item Berechnen Sie das Integral
+$$
+\int_A x\cdot \sin(y)\ d(x,y)
+$$
+mit $A=[0,1]\times [0,\pi]$.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $A=\{(x,y) \mid a\le x \le b, f(x) \le y \le g(x)\}$
+\item 
+$$
+\int_A x\cdot \sin(y)\ d(x,y)= \int_0^1 \int_0^\pi x\cdot \sin(y) \ dy \ dx=\int_0^1 -x\cos(y)\mid_0^\pi dx=\int_0^1 2x\ dx = [x^2]_0^1 =1
+$$
+\end{enumerate}
+%
+%
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien 
+$$
+v_1=\begin{pmatrix}1\\1\\0 \end{pmatrix}, v_2=\begin{pmatrix}1\\-1\\0 \end{pmatrix} \text{ und }v_3=\begin{pmatrix}2\\0\\2 \end{pmatrix}
+$$
+
+\begin{enumerate}[a)]
+
+\item Berechnen Sie den Winkel zwischen $v_1$ und $v_2$.
+\item Bestimmen Sie aus den Vektoren $v_1,v_2$ und $v_3$ unter Verwendung des Gram-Schmidt-Verfahrens eine Orthonormalbasis von $\RR^3$.
+
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item  $\cos(\alpha)=\frac{\langle v_1,v_2\rangle}{\|v_1\|\|v_2\|}=\frac{0}{\sqrt{2}\sqrt{2}}=0$ und somit $\alpha=\frac{\pi}{2}$.
+\item
+\begin{align*}
+w_1&=v_1\\
+w_2&=v_2-\frac{\langle v_2,w_1 \rangle}{\langle w_1,w_1\rangle}\cdot w_1=\begin{pmatrix} 1\\-1\\0\end{pmatrix}\\
+w_2&=v_3-\frac{\langle v_3,w_1 \rangle}{\langle w_1,w_1\rangle}\cdot w_1-\frac{\langle v_3,w_2 \rangle}{\langle w_2,w_2\rangle}\cdot w_2=\begin{pmatrix} 0\\0\\2\end{pmatrix}
+\end{align*}
+Damit ist $B=\{\frac{1}{\sqrt{2}}w_1,\frac{1}{\sqrt{2}}w_2,\frac{1}{2}w_3\}$ die gesuchte ONB.
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+Bestimmen Sie eine $QR$-Zerlegung von 
+$$
+A=\begin{pmatrix}0&3&\frac{17}{5}\\ 2&3&1\\0&4&\frac{6}{5}\end{pmatrix}
+$$
+unter Verwendung von Householder-Transformationen.
+%
+%
+\subsubsection*{Lösungsvorschlag}
+Zuerst wird der Vektor $v_1$ für die erste Spiegelung bestimmt:
+$$
+v_1=\frac{\begin{pmatrix}0\\2\\0 \end{pmatrix}-2\begin{pmatrix}1\\0\\0\end{pmatrix}}{\|\begin{pmatrix}0\\2\\0 \end{pmatrix}-2\begin{pmatrix}1\\0\\0 \end{pmatrix}\|} =\frac{1}{2\sqrt{2}}\begin{pmatrix}-2\\2\\0 \end{pmatrix}
+$$
+Damit 
+$$
+H_{v_1}=I_3-2v_1v_1^T=I_3-\frac{1}{4}\begin{pmatrix} 4 & -4 & 0 \\ -4 & 4 & 0 \\ 0 &0 &0 \end{pmatrix}=\begin{pmatrix} 0&1&0\\1&0&0\\0&0&1\end{pmatrix}
+$$
+Somit
+$$
+A^{(1)}=H_{v_1}A=\begin{pmatrix} 0&1&0\\1&0&0\\0&0&1\end{pmatrix}\begin{pmatrix}0&3&\frac{17}{5}\\ 2&3&1\\0&4&\frac{6}{5}\end{pmatrix}=\begin{pmatrix}2 & 3 & 1 \\ 0 & 3 & \frac{17}{5} \\ 0 & 4 & \frac{6}{5}\end{pmatrix}
+$$
+und 
+$$
+A^{(1)}_{11}=\begin{pmatrix} 3 & \frac{17}{5} \\ 4 & \frac{6}{5} \end{pmatrix}
+$$
+Damit wird der Vektor $v_2$ für die zweite Spiegelung bestimmt:
+$$
+v_2=\frac{\begin{pmatrix}3\\4\end{pmatrix}-5\begin{pmatrix}1\\0\end{pmatrix}}{\|\begin{pmatrix}3\\4\end{pmatrix}-5\begin{pmatrix}1\\0\end{pmatrix}\|} =\frac{1}{\sqrt{5}}\begin{pmatrix}-1\\2 \end{pmatrix}
+$$
+Damit 
+$$
+H_{v_2}=I_2-2v_2v_2^T=I_2-\frac{2}{5}\begin{pmatrix}1 & -2 \\ -2 & 4 \end{pmatrix}=\begin{pmatrix} \frac{3}{5} & \frac{2}{5} \\ \frac{2}{5} & - \frac{3}{5}\end{pmatrix}
+$$
+Somit ergibt sich 
+$$
+R=\begin{pmatrix} 1&0&0\\0&\frac{3}{5} & \frac{2}{5} \\0&\frac{2}{5} & - \frac{3}{5}\end{pmatrix}\begin{pmatrix}2 & 3 & 1 \\ 0 & 3 & \frac{17}{5} \\ 0 & 4 & \frac{6}{5}\end{pmatrix}=\begin{pmatrix}2&3&1\\ 0&5 & 3 \\ 0&0&2 \end{pmatrix}
+$$
+und
+$$
+Q=\begin{pmatrix} 0&1&0\\1&0&0\\0&0&1\end{pmatrix}\begin{pmatrix} 1&0&0\\0&\frac{3}{5} & \frac{2}{5} \\0&\frac{2}{5} & - \frac{3}{5}\end{pmatrix}=\begin{pmatrix} 0&\frac{3}{5} & \frac{2}{5}\\1&0&0\\0&\frac{2}{5} & - \frac{3}{5}\end{pmatrix}
+$$
+Insgesamt ergibt das
+$$
+A=QR=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1 \end{pmatrix}\begin{pmatrix}1&0&0\\0&\frac{3}{5}& \frac{4}{5}\\0&\frac{4}{5}&-\frac{3}{5} \end{pmatrix}\begin{pmatrix}2&3&1\\ 0&5 & 3 \\ 0&0&2 \end{pmatrix}
+$$
+
+\quad\\
+
+\vfill \hfill \textbf{Viel Erfolg!}
+
+
+
+
+
+\end{document}

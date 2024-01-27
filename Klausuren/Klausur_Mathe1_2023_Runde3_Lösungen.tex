@@ -1,0 +1,376 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Seien $a$, $b$ und $c$  Aussagen. 
+Bestimmen Sie die Wahrheitstafel der Aussage
+$$
+	(\neg c) \land (b \lor a).
+$$
+\item  Negieren Sie die Aussage 
+$$
+\forall x \in \N\ \forall y \in \Z\ \exists z \in \N: (x\cdot y) < z^2
+$$
+und formen Sie das Ergebnis so um, dass kein Negationszeichen $\neg$ verwendet wird.
+\item Es seien $f=\sqrt{12}X^3+4X^2+3 \in \RR[X]$ und $g=17X^6+\frac{6}{\sqrt{3}}X^4+5X^2+7 \in \RR[X]$ Polynome mit Koeffizienten in $\RR$. Bestimmen Sie den Grad des Polynoms $f\cdot g$.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+
+\item $$\begin{array}{c|c|c||c|c||c}
+a&b&c&\neg c&b\lor a&(\neg c)\land(b\lor a)\\ \hline
+w&w&w&f&w&f\\
+w&w&f&w&w&w\\
+w&f&w&f&w&f\\
+w&f&f&w&w&w\\
+f&w&w&f&w&f\\
+f&w&f&w&w&w\\
+f&f&w&f&f&f\\
+f&f&f&w&f&f
+\end{array}$$
+\item $\neg(\forall x \in \N\ \forall y \in \Z\ \exists z \in \N: (x\cdot y) < z^2) = \exists x \in \N\ \exists y \in \Z\ \forall z \in \N: (x\cdot y) \ge z^2$ 
+\item Es gilt $deg(f)=3$ und $deg(g)=6$. Da $\RR$ eine Körper und somit nullteilerfrei ist, folgt: 
+$$
+deg(f\cdot g)=deg(f)+deg(g)=3+6=9
+$$
+\end{enumerate}
+%%%%%
+\newpage
+\Aufgabe
+Es seien die Abbildungen $$f:\RR^2 \to \RR^3, (x,y) \mapsto (x, 0, -y)$$ und $$g: \RR^3 \to \RR, (x,y,z) \mapsto x\cdot y+z$$ gegeben. 
+\begin{enumerate}[a)]
+\item Sind $f$ und $g$ injektiv? Begründen Sie Ihre Antwort.
+\item Sind $f$ und $g$ surjektiv? Begründen Sie Ihre Antwort.
+\item Bestimmen Sie $g \circ f$. 
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+
+\item $f$ ist injektiv, denn seien $(x_1,y_1),(x_2,y_2) \in \RR^2$ mit $f(x_1,y_1)=f(x_2,y_2)$, dann folgt
+$$
+(x_1,0,-y_1)=(x_2,0,-y_2) \ \Rightarrow x_1=x_2 \text{ und } y_1=y_2 \Rightarrow (x_1,y_1)=(x_2,y_2)
+$$
+$g$ ist nicht injektiv, da $g((1,1,0))=1=g((0,0,1) \quad \text{aber} \quad (1,1,0) \ne (0,0,1)$.
+\item $f$ ist nicht surjektiv, da $(0,1,0) \notin f(\RR^2) \subseteq \{(x,0,y)\mid x,y \in \RR\} $.\\
+$g$ ist surjektiv, denn für jedes $a \in \RR$ gilt
+$$
+(0,0,a) \in \RR^3 \quad \text{und} \quad g((0,0,a))=a
+$$
+\item
+\begin{align*}
+&(g\circ f)(x,y)=g(f(x,y))=g((x,0,-y))=x\cdot 0 +(-y)=-y\\
+\Rightarrow&\quad g\circ f :\RR^2 \to \RR, (x,y) \mapsto -y
+\end{align*}
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei 
+$$
+R:=\left\{\begin{pmatrix} 1&0&z\\0&1&0\\0&0&1 \end{pmatrix} \mid z \in \RR \right\} \subset \RR^{3\times 3}.
+$$
+\begin{enumerate}[a)]
+\item Geben Sie die Definition einer Gruppe an.
+
+\item Zeigen Sie, dass $R$ mit der Matrizenmultiplikation ,,$\cdot$`` eine Gruppe ist.
+
+\item Ist $(R,\cdot)$ eine abelsche Gruppe? Begründen Sie Ihre Antwort.
+
+\end{enumerate}
+
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Seien $G$ eine Menge und $\ast$ eine Verknüpfung auf $G$.
+	Dann heißt das Paar $(G,\ast)$ eine  Gruppe, wenn folgende Bedingungen erfüllt sind:
+	\begin{enumerate}[i)]
+		\item $\ast$ ist assoziativ. 
+		\item Es gibt ein Element $e\in G$, so dass
+			$$
+				\forall x\in G:\, x\ast e = e\ast x = x.
+			$$
+
+		\item Zu jedem Element $x\in G$ gibt es ein inverses Element:
+			$$
+				\forall x\in G\,\, \exists y\in G:\, x\ast y = y\ast x = e.
+			$$
+	\end{enumerate}
+\item Die Menge $H$ ist unter der Matrizenmultiplikation abgeschlossen:
+$$
+ \forall \begin{pmatrix} 1&0&z\\0&1&0\\0&0&1 \end{pmatrix}, \begin{pmatrix} 1&0&c\\0&1&0\\0&0&1 \end{pmatrix} \in R: \quad \begin{pmatrix} 1&0&z\\0&1&0\\0&0&1 \end{pmatrix} \cdot \begin{pmatrix} 1&0&c\\0&1&0\\0&0&1 \end{pmatrix} =\begin{pmatrix} 1&0&c+z\\0&1&0\\0&0&1 \end{pmatrix} \in R 
+$$
+Da $R \subseteq \RR^{3\times 3}$ und die Matrizenmultiplikation assoziativ ist, ist auch die Verknüpfung auf $R$ assoziativ.\\
+Auch das neutrale Elemente, die Einheitsmatrix $I_3=diag(1,1,1)$ liegt in $R$.\\
+Es bleibt also zu zeigen, dass jedes Element in auch ein Inverses in $R$ besitzt. Dies ist gegeben, da für 
+$$
+ \begin{pmatrix} 1&0&z\\0&1&0\\0&0&1 \end{pmatrix} \in R
+$$
+die inverse Matrix durch
+$$
+ \begin{pmatrix} 1&0&-z\\0&1&0\\0&0&1 \end{pmatrix} \in R
+$$
+geben ist.\\
+Somit ist $(H,\cdot)$ eine Gruppe.
+\item Die Gruppe $(R,\cdot)$ ist  abelsch, da isomorph zu $(\RR,+)$
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien $K$ ein Körper, $V$ ein $K$-Vektorraum und $U_1$ und $U_2$
+Untervektorräume von $V.$
+
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines $K$-Vektorraums an.
+\item Geben Sie die Definition eines Untervektorraums an.
+\item Zeigen Sie: $V=U_1\cup U_2  \ \Longleftrightarrow \ V=U_1\ \text{ oder }\ V=U_2.$
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Ein $K$-Vektorraum ist eine Menge $V$ zusammen mit einem Körper $K$ und einer Verknüpfung $+$ auf $V$ und einer Abbildung $\cdot:K\times V \to V$, sodass
+\begin{enumerate}[i)]
+\item $(V,+)$ eine abelsche Gruppe ist,
+\item $1_K\cdot v=v$ für alle $v\in V$,
+\item $\forall a,b \in K \ \forall v \in V: a\cdot (b \cdot v)=(a\cdot_K b)\cdot v$
+\item die Distributivgesetze $(a+b)\cdot v=av+bv$ und $a\cdot (v+w)=av+aw$ gelten.
+\end{enumerate}
+\item Ein Untervektorraum eines $K$-Vektorraumes $V$ ist eine Teilmenge $U \subseteq V$, sodass $(U,+)$ eine Untergruppe von $(V,+)$ ist und für alle $a\in K$ und alle $u\in U$ gilt $au \in U$.
+\item 
+\begin{itemize}
+\item[$\Leftarrow$:] Falls $U_1=V$ oder $U_2=V$ gilt, dann ist auch $U_1\cup U_2=V$.
+\item[$\Rightarrow$:] Annahme: $U_1\ne V \ne U_2$. Dann gibt es Vektoren $u_1 \in V\setminus U_2 \subseteq U_1$ und $u_2 \in V\setminus U_1 \subseteq U_2$. Da $U_1 \cup U_2=V$ ein Vektorraum ist, folgt $u_1+u_2 \in U_1\cup U_2$.\\
+Fall 1: $u_1+u_2 \in U_1$. Dann folgt da $u_1 \in U_1$ auch $u_2=(u_1+u_2)-u_1 \in U_1$. Dies ist aber ein Widerspruch zur Definition von $u_2$.\\
+Fall 2: $u_1+u_2 \in U_2$. Dann folgt da $u_2 \in U_2$ auch $u_1=(u_1+u_2)-u_2 \in U_2$. Dies ist aber ein Widerspruch zur Definition von $u_1$.\\
+Somit muss die Annahme falsch sein und $V=U_1$ oder $V=U_2$ gelten. \hfill $\square$
+\end{itemize}
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+
+Es seien die Vektoren $b_1=\begin{pmatrix} 2\\1\\0\end{pmatrix}$, $b_2=\begin{pmatrix} 0\\1\\2\end{pmatrix}$ und $b_3=\begin{pmatrix} 1\\-1\\-1\end{pmatrix} \in \RR^3$ sowie die lineare Abbildung 
+$
+\Phi: \RR^3 \to \RR^2, v \mapsto \Phi(v)
+$
+mit 
+$$
+\Phi(b_1)=\begin{pmatrix} 4\\0\end{pmatrix}, \ \Phi(b_2)=\begin{pmatrix} 4\\4\end{pmatrix} \text{ und } \Phi(b_3)=\begin{pmatrix} 4\\0\end{pmatrix}
+$$
+gegeben.
+
+\begin{enumerate}[a)]
+
+\item Zeigen Sie, dass die Vektoren $b_1,b_2$ und $b_3$ linear unabhängig sind.
+\item Bestimmen Sie die Abbildungsmatrix $A$ von $\Phi$ bezüglich der Standardbasis.
+\item Berechnen Sie $\Phi(\begin{pmatrix} 1\\2\\1 \end{pmatrix})$.
+
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Die Vektoren $b_1,b_2,b_3$ sind genau dann linear unabhängig, wenn das homogene LGS 
+$$
+\alpha b_1 +\beta b_2 + \gamma b_3 =0
+$$
+nur die triviale Lösung $\alpha=\beta=\gamma=0$ hat.
+$$
+\left(\begin{array}{ccc|c}2&0&1&0\\1&1&-1&0\\0&2&-1&0 \end{array}\right) \sim> ... \sim>\left(\begin{array}{ccc|c} 1&1&-1&0\\ 0&1&\frac{1}{2}&0 \\ 0&0&1&0\end{array}\right)
+$$
+Somit hat das LGS in jeder Spalte eine Stufe und daher nur die triviale Lösung.
+\item Die Standardbasisvektoren lassen sich wie folgt durch $b_1,b_2,b_3$ darstellen:
+\begin{align*}
+e_1&=\frac{1}{4}(b_1+b_2+2b_3)\\
+e_2&=\frac{1}{2}(b_1-b_2-2b_3)\\
+e_3&=\frac{1}{2}(b_2-e_2)=\frac{1}{2}(b_2-\frac{1}{2}(b_1-b_2-2b_3))=\frac{1}{4}(-b_1+3b_2+2b_3)
+\end{align*}
+Damit ergibt sich die Abbildungsmatrix
+$$
+A=\begin{pmatrix} \Phi(e_1)|\Phi(e_2)|\Phi(e_3) \end{pmatrix}=\begin{pmatrix} 4 & -4 &4 \\ 1&-2&3 \end{pmatrix}
+$$
+\item 
+$$
+\Phi(\begin{pmatrix} 1\\2\\1 \end{pmatrix})=A\cdot \begin{pmatrix} 1\\2\\1 \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \end{pmatrix}
+$$
+
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Bestimmen Sie alle $t\in\RR$, für die das folgende lineare Gleichungssystem lösbar ist:
+\[\begin{array}{rrrrrrrrr}
+x_1&+&x_2&-&4x_3&=&t-4\\
+&&3x_2&-&x_3&=&3t+6\\
+2x_1&+&5x_2&+&7x_3&=&4t
+\end{array}\]
+\item Geben Sie die Lösungsmenge des obigen linearen Gleichungssystems für $t=2$ an.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Das LGS muss mit dem Gauß-Algorithmus auf Stufenform gebracht werden:
+$$
+\left( \begin{array}{ccc|c} 1&1&-4&t-4\\
+0&3&-1&3t+6\\
+2&5&7&4t \end{array}\right) \sim> ... \sim> \left( \begin{array}{ccc|c} 1&1&-4&t-4\\0&3&-1 & 3t+6 \\ 0&0&16&2-t \end{array} \right)
+$$
+Das LGS ist also für alle $t \in \RR$ lösbar.
+\item Setzt man $t=2$ in die Stufenform aus a) ein, so erhält man
+\begin{align*}
+\left( \begin{array}{ccc|c} 1&1&-4&-2\\0&3&-1 & 12 \\ 0&0&16&0 \end{array}\right) &\stackrel{\sim>}{1/3\cdot Z2, Z1- Z2, 1/16Z3}\left( \begin{array}{ccc|c} 1&0&\frac{-11}{3}&-6\\0&1&\frac{-1}{3} & 4 \\ 0&0&1&0 \end{array} \right)\\
+&\stackrel{\sim>}{Z1+11/3Z3, Z2+1/3Z3}\left( \begin{array}{ccc|c} 1&0&0&-6\\0&1&0 & 4 \\ 0&0&1&0 \end{array} \right)
+\end{align*}
+Die eindeutige Lösung des LGS ist somit
+$$
+\mathcal{L}=\left\{ \begin{pmatrix}-6\\4\\0 \end{pmatrix}  \right\}
+$$
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+Berechnen Sie die Determinanten der folgenden Matrizen und geben Sie jeweils an, ob die Matrix invertierbar ist.\\
+%
+\hspace*{10mm} a) \ $A=\begin{pmatrix} 1 & 22 \\ -2 & -2 \end{pmatrix}$ \qquad
+b) \ $B=\begin{pmatrix} 1 & \frac{4}{7} & 133 \\ 0 & 2 & 2 \\1 & \frac{18}{7} & 135 \end{pmatrix}$ \qquad
+c) \ $C=\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & -1 \\ 1 & 3 & 5 & 5 \end{pmatrix}$
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item $\det(A)=1(-2)-22(-2)=-2+44=42$
+\item $\det(B)=\det(\begin{pmatrix} 1 & \frac{4}{7} & 133 \\ 0 & 2 & 2 \\1 & \frac{18}{7} & 135 \end{pmatrix})\stackrel{Z3-Z1-Z2}{=}\det(\begin{pmatrix} 1 & \frac{4}{7} & 133 \\ 0 & 2 & 2 \\0&0&0 \end{pmatrix})=0$
+\item $\det(C)\stackrel{Z4-Z2}{=}\det(\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & -1 \\ 1 & 1 & 5 & 4 \end{pmatrix})\stackrel{Z4-Z1-Z3}{=}\det(\begin{pmatrix} 1 & 1 &  2 & 1 \\ 0 & 2 & 0 & 1 \\ 0 & 0& 3 & -1 \\ 0 & 0 & 0 & 4 \end{pmatrix})=1\cdot2\cdot3\cdot4=24$
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Sei $A=\begin{pmatrix} -\frac{1}{2} & 0 & -1 \\ 0 & 8 & 0 \\ 1 & 0 &2 \end{pmatrix}$. 
+\begin{enumerate}[a)]
+\item Geben Sie die Definition eines Eigenvektors einer Matrix $B \in \RR^{n\times n}$ an.
+\item Bestimmen Sie das charakteristische Polynom $CP_A(X)$ und alle Eigenwerte von $A$.
+\item Bestimmen Sie eine invertierbare Matrix $D \in \RR^{3 \times 3}$, sodass $D^{-1}AD$ eine Diagonalmatrix ist.
+\end{enumerate}
+%
+%
+\subsubsection*{Lösungsvorschlag}
+\begin{enumerate}[a)]
+\item Es sei $B\in\RR^{n\times n}$ eine Matrix. Ein Wert $\lambda \in \RR$ heißt Eigenwert von $B$, wenn es einen Eigenvektor $v$ von $B$ gibt mit $B\cdot v = \lambda\cdot v$.
+\item $CP_A(X)=\det(A-X\cdot I_3)=...=-X(8-X)(\frac{3}{2}-X)$. \\
+Somit sind die Eigenwerte von $A$ gegeben als $\lambda_1=0$, $\lambda_2=8$ und $\lambda_3=\frac{3}{2}$.
+\item Für die invertierbare Matrix $D$ benötigen wir eine Basis aus Eigenvektoren von $A$. Dazu bestimmen wir die Eigenräume:
+\begin{enumerate}[i)]
+\item $E_0=kern(A-0I_3)=kern\begin{pmatrix} -\frac{1}{2} & 0 & -1 \\ 0 & 8 & 0 \\ 1 & 0 &2 \end{pmatrix}=kern\begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 0 \\ 0 & 0 &0 \end{pmatrix}=<\begin{pmatrix} 2\\0\\-1 \end{pmatrix}>$
+\item $E_8=kern(A-8I_3)=kern\begin{pmatrix} -\frac{17}{2} & 0 & -1 \\ 0 & 0 & 0 \\ 1 & 0 &-6 \end{pmatrix}=kern\begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 &1 \end{pmatrix}=<\begin{pmatrix} 0\\1\\0 \end{pmatrix}>$
+\item $E_\frac{3}{2}=kern(A-\frac{3}{2}I_3)=kern\begin{pmatrix} -2 & 0 & -1 \\ 0 & 4-\frac{3}{2} & 0 \\ 1 & 0 &\frac{1}{2} \end{pmatrix}=kern\begin{pmatrix} 1 & 0 & \frac{1}{2} \\ 0 & 1 & 0 \\ 0 & 0 &0 \end{pmatrix}=<\begin{pmatrix} \frac{1}{2}\\0\\-1 \end{pmatrix}>$
+\end{enumerate}
+Insgesamt ergibt sich somit die Matrix
+$$
+D=\begin{pmatrix} 2 & 0 & \frac{1}{2} \\ 0 & 1 & 0 \\ -1 & 0 &-1 \end{pmatrix}
+$$
+\end{enumerate}
+
+\quad\\
+
+\vfill \hfill \textbf{Viel Erfolg!}
+
+
+
+
+
+\end{document}

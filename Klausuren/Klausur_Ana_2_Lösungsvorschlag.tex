@@ -1,0 +1,282 @@
+\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+%\usepackage[T1]{fontenc}
+
+
+\usepackage{paralist}
+\usepackage[usenames,dvipsnames]{color} 
+
+
+
+\newcounter{auf}
+\newcommand{\Aufgabe}%
+        {\addtocounter{auf}{1} \subsubsection*{\rmfamily  Aufgabe \theauf \hspace{1em}} }
+
+
+
+
+
+
+
+
+
+\pagestyle{empty}
+
+\oddsidemargin0mm
+\parindent0mm
+\parskip2mm
+\textheight24cm
+\textwidth15.8cm
+\unitlength1mm
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Hy}{\mathbb{H}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand*\e{\mathrm{e}}
+\newcommand*\ii{\mathrm{i}}
+\newcommand*\re{\mathrm{Re}}
+\newcommand*\im{\mathrm{Im}}
+\newcommand*\id{\mathrm{id}}
+\newcommand*\glnr{\mathrm{\it GL}(n,\R)}
+\newcommand*\slnr{\mathrm{\it SL}(n,\R)}
+\newcommand*\on{\mathrm{\it O}(n)}
+\newcommand*\son{\mathrm{\it SO}(n)}
+\newcommand*\rang{\mathrm{Rang}}
+\newcommand*\grad{\mathrm{grad~}}
+\newcommand*\dive{\mathrm{div~}}
+\newcommand*\sym{\mathrm{Sym}}
+\newcommand*\spur{\mathrm{Spur}}
+\newcommand*\isom{\mathrm{Isom}}
+                  
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+\Aufgabe
+
+\begin{enumerate}[a)]
+
+\item Zeigen Sie, dass die Folge $(a_n)_{n \in \N}$ mit 
+$$
+a_n=\frac{n^3+n^2-7}{5n^3+2n} \qquad \forall n \in \N
+$$
+konvergent ist und bestimmen Sie den Grenzwert $\lim \limits_{n\to \infty} b_n$.
+\item Zeigen Sie, dass die Folge $(b_n)_{n \in \N}$ mit 
+$$
+b_n=\frac{1}{\sqrt{n}} \qquad \forall n \in \N
+$$ 
+für $n \to \infty$ gegen $b=0$ konvergiert.
+\item Geben Sie eine Folge $(c_n)_{n \in \N}$ an, die \vspace{3mm}\\
+\hspace*{5mm} i) beschränkt ist \qquad und gleichzeitig \qquad ii) \underline{nicht} konvergiert. \vspace{3mm}\\
+gilt.
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Für $n>0$ gilt: 
+$$
+a_n=a_n\cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}}=\frac{1+\frac{1}{n}-\frac{7}{n^3}}{5+\frac{2}{n^2}} \to \frac{1}{5} \quad (n \to \infty)
+$$
+\item Sei $\varepsilon>0$ beliebig und $n_0 > \frac{1}{\varepsilon^2}$. Dann gilt für alle $n\ge n_0$:
+$$
+|b_n-0|=|b_n|=|\frac{1}{\sqrt{n}}|\le |\frac{1}{\sqrt{n_0}}|< \varepsilon
+$$
+Somit konvergiert $(b_n)$ gegen $0$ für $n \to \infty$.
+\item Wir setzen für alle $n \in \N: c_n:=(-1)^n$. Dann gilt:
+	\begin{enumerate}[i)]
+	\item $(c_n)$ ist beschränkt durch $C=1$.
+	\item $(c_n)$ ist nicht konvergent, denn die Folge hat 2 Häufungpunkte: $h_1=-1$ und $h_2=1$.
+	\end{enumerate}
+Somit ist $(c_n)$ eine Folge mit den gesuchten Eigenschaften.
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Entscheiden Sie, ob die folgenden Reihen konvergent sind:
+	\begin{enumerate}[i)]
+	\item $\sum \limits_{k=0}^\infty \frac{1}{k^k}$
+	\item $\sum \limits_{k=0}^\infty \frac{k+1}{k^2}$
+	\end{enumerate}
+\item Bestimmen Sie den Konvergenzradius der Potenzreihe $\sum \limits_{k=0}^\infty 2^{3k} X^k$
+\end{enumerate}
+
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)] 
+\item
+	\begin{enumerate}[i)]
+	\item $\sum \limits_{k=0}^\infty \frac{1}{k^k}$ ist konvergent:\\
+	Wurzelkriterium: $\sqrt[k]{\frac{1}{k^k}}=\frac{1}{k} \to 0<1 \quad (k \to \infty)$.
+	
+	\item $\sum \limits_{k=0}^\infty \frac{k+1}{k^2}$ ist nicht konvergent:\\
+	Majorantenkriterium: $\frac{k+1}{k^2}>\frac{k}{k^2}=\frac{1}{k}$ und somit ist die Reihe eine Majorante zur nicht-konvergenten Harmonischen Reihe und kann daher nicht konvergent sein.
+	\end{enumerate}
+\item $\rho=\lim \limits_{k \to \infty} \frac{1}{\sqrt[k]{2^{3k}}}=\lim \limits_{k \to \infty} \frac{1}{2^3}=\frac{1}{8}$
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe 
+\begin{enumerate}[a)]
+\item Es sei $I \subseteq \RR$ ein Intervall und $f:I \to \RR$ eine Funktion. Geben Sie eine der Definitionen an, dass $f$ stetig in $x_0 \in I$ ist.
+\item Zeigen Sie, dass
+$$
+f: (-\infty, \pi) \to \RR, x \mapsto \begin{cases} 7 & \text{ für } x\le 0 \\ \frac{x^2+7x}{\sin(x)} & \text{ für } x>0 \end{cases}
+$$
+stetig ist.\\\quad\\
+\textit{Tipp: Verwenden Sie die Regeln von l'Hospital.}
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item $\forall \varepsilon >0\ \exists \delta>0\ \forall x \in (x_0-\delta, x_0+\delta): |f(x)-f(x_0)|< \varepsilon$
+\item $f$ ist steitig in allen $x<0$ und in allen $x \in (0,\pi)$, da $f$ dort eine Komposition stetiger Funktionen ist (und $\sin(x)\ne 0$ auf $(0,\pi)$).\\ 
+Es bleibt somit zu zeigen, dass $f$ stetig in $x_0=0$ ist. Es gilt:
+$$
+\lim_{x \to 0-} f(x)=\lim_{x \to 0-} 7 =7
+$$
+Für $\lim \limits_{x \to 0+} f(x)$ verwenden wir die Regeln von l'Hospital, denn:\\
+$z(x)=x^2+7x \to 0 \quad (x \to 0)$ und $n(x)=\sin(x) \to 0 \quad (x\to 0)$.\\
+Für die Ableitungen von Zähler und Nenner gilt:\\
+$z'(x)=2x+7 \to 7 \quad (x \to 0)$ und $n'(x)=\cos(x) \to 1 \quad (x\to 0)$.\\
+Damit folgt
+$$
+\lim_{x \to 0+} f(x)=\lim_{x \to 0+} \frac{z(x)}{n(x)}=\lim_{x \to 0+} \frac{z'(x)}{n'(x)}=\frac{7}{1}=7
+$$
+Insgesamt exisitert somit der Grenzwert $\lim \limits_{x \to 0} f(x)$ und stimmt mit dem Funktionswert $f(0)$ überein. Damit ist $f$ auch stetig in $x_0=0$.
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Bestimmen Sie jeweils die erste und die zweite Ableitung der folgenden Funktionen
+
+\begin{enumerate}[a)]
+\item $f:(0,\infty) \to \RR, x \mapsto x \cdot \log(x) $
+\item $h:\RR \to \RR, x \mapsto e^{x\cdot \sin(x)} $
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item $f'(x)=\log(x)+x\cdot \frac{1}{x}=\log(x)+1$\\ $f''(x)=\frac{1}{x}$
+\item $h'(x)=(\sin(x)+x\cos(x))\cdot e^{x\cdot \sin(x)}$\\ $h''(x)=\left(\cos(x)+(\cos(x)-x\sin(x))\right)e^{x\cdot \sin(x)} + (\sin(x)+x\cos(x))^2\cdot e^{x\cdot \sin(x)}$
+\end{enumerate}
+
+%%%%%
+\newpage
+\Aufgabe
+Es sei $f: [0,\pi] \to \RR, x \mapsto \sin(2x)$.
+\begin{enumerate}[a)]
+\item Bestimmen Sie die Taylor-Entwicklung $T^2_f(x,x_0)$ von $f$ bis zum Grad 2 um die Stelle $x_0=\frac{\pi}{2}$. 
+\item Bestimmen Sie alle Extrema von $f$ und entscheiden Sie jeweils, ob es sich um ein Maximum oder Minimum handelt.
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Wir benötigen die ersten beiden Ableitungen von $f$: $f'(x)=2 \cos(2x)$ und $f''(x)=-4 \sin(2x)$. Ausgewertet an der Stelle $x_0=\frac{\pi}{2}$ ergibt das $f(x_0)=\sin(\pi)=0$, $f'(x_0)=2\cos(\pi)=-2$ und $f''(x_0)=-4\sin(\pi)=0$. Damit erhalten wir
+$$
+T^2_f(x,x_0)=(x-x_0)^0f(x_0)+(x-x_0)^1\frac{f'(x_0)}{1!} + (x-x_0)^2\frac{f''(x_0)}{2!}=-2(x-\frac{\pi}{2})
+$$
+\item Die Nullstellen von $f'$ auf $[0, \pi]$ sind $x_1=\frac{\pi}{4}$ und $x_2=\frac{3\pi}{4}$. Für die zweite Ableitung gilt an diesen Stellen:
+\begin{align*}
+f''(x_1)&=-4\sin(2\cdot \frac{\pi}{4})=-4 \sin(\frac{\pi}{2})=-4 <0\\
+f''(x_2)&=-4\sin(2\cdot \frac{3\pi}{4})=-4 \sin(\frac{3\pi}{2})=-4 \cdot (-1)=4 >0
+\end{align*}
+Somit hat $f$ in $x_1=\frac{\pi}{4}$ ein Maximum (mit $f(x_1)=1$) und in $x_2=\frac{3\pi}{4}$ ein Minimum (mit $f(x_2)=-1$).\\
+Da $f$ an den Randstellen $x \in \{0,\pi\}$ den Wert $0$ annimmt, gibt es keine weiteren Extrema.
+\end{enumerate}
+
+
+%%%%%
+\newpage
+\Aufgabe
+\begin{enumerate}[a)]
+\item Geben Sie die Voraussetzungen und die Aussage des Hauptsatzes der Differential- und Integralrechnung an.
+\item Bestimmen Sie den Wert der folgenden Integrale:
+\begin{enumerate}[(i)]
+\item \quad$\displaystyle\int \limits_{0}^2 x\cdot e^{x^2} \ dx$
+\item \quad$\displaystyle\int \limits_{1}^\infty \frac{1}{x^3}\ dx$
+\end{enumerate}
+\end{enumerate}
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[a)]
+\item Es sei $I=[a,b]$ und $f: I \to \RR$ integrierbar und $F: I \to \RR$ eine Stammfunktion von $f$. \\ Dann gilt:
+$$
+\int_a^b f(x) \ dx=F(b)-F(a)
+$$
+\item Bestimmen Sie den Wert der folgenden Integrale:
+\begin{enumerate}[(i)]
+\item \quad$\displaystyle\int \limits_{0}^2 x\cdot e^{x^2} \ dx \stackrel{(*)}{=} \displaystyle\int \limits_0^4 \frac{1}{2}e^y \ dy= \frac{1}{2}(e^4-e^0)= \frac{1}{2}(e^4-1)$\\
+wobei bei $(*)$ die Substitution $y=x^2$ und $dy=2xdx$ angewendet wird.
+\item \quad$\displaystyle\int \limits_{1}^\infty \frac{1}{x^3}\ dx = \lim \limits_{k \to \infty} \displaystyle\int \limits_{1}^k \frac{1}{x^3}\ dx=\lim \limits_{k \to \infty} \left[- \frac{1}{2x^2}\right]_{x=1}^{x=k}=\lim \limits_{k \to \infty}\left( \frac{-1}{2k^2}-\frac{-1}{2}\right)=\frac{1}{2}$
+\end{enumerate}
+\end{enumerate}
+
+
+
+%%%%%
+\newpage
+\Aufgabe
+Lösen Sie das Anfangswertproblem
+$$
+\begin{cases} f'(x)=2xf(x)+x\\
+f(1)=-1 \end{cases}
+$$
+
+
+\subsubsection*{Lösungsvorschlag:}
+\begin{enumerate}[(I)]
+\item Als erstes bestimmen wir die allgemeine Lösung der homogenen DGL $f'(x)=2xf(x)$. Diese ist $f_h(x)=c\cdot e^{x^2}$ mit $c \in \RR$, da $A(x)=x^2$ eine Stammfunktion von $a(x)=2x$ ist.
+\item Dann bestimmen wir eine spezielle Lösung der inhomogenen DGL. Diese ist $f_s(x)=c(x)\cdot e^{x^2}$ wobei
+$$
+c(x)=\int s(x)e^{-A(x)}\ dx=\int x \cdot e^{-x^2}=-\frac{1}{2}e^{-x^2}
+$$
+Also ist $f_s(x)=-\frac{1}{2}e^{-x^2}\cdot e^{x^2} = -\frac{1}{2}$.
+\item Als allgemeine Lösung der inhomogenen DGL ist somit
+$$
+f(x)=f_h(x)+f_s(x)=c\cdot e^{x^2}-\frac{1}{2} \quad \text{mit } c \in \RR
+$$
+\item Um das AWP zu lösen müssen wir nun noch $c \in \RR$ so bestimmen, dass
+$$
+-1=f(1)=c\cdot e^{1^2}-\frac{1}{2}=c\cdot e - \frac{1}{2}
+$$
+gilt. Dies ist genau dann erfüllt, wenn $c=\frac{-1}{2e}$.\\
+Somit löst $f(x)=\frac{-1}{2e}\cdot e^{x^2}-\frac{1}{2}$ das AWP.
+\end{enumerate}
+%
+%%%
+%
+\end{document}
